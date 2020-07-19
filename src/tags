@@ -1,0 +1,222 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Adapter_status	DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f
+Adapter_status	TESTING_DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f
+Adapter_status	adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f
+Autoapn_xmlparse	autoapn_xmlparser.c	/^int Autoapn_xmlparse( char *docname )$/;"	f
+Autoapn_xmlparseStory	autoapn_xmlparser.c	/^void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
+BTINFO	DOT_1.1/header.h	21;"	d
+BTINFO	TESTING_DOT_1.1/header.h	20;"	d
+Biomatiques_RD_version	biomatiques.c	/^void Biomatiques_RD_version()$/;"	f
+BootTime_Status_file	create_BootTime_Status_xml.c	/^char *BootTime_Status_file="\/opt\/BootTime_Status.xml";$/;"	v
+CC	Makefile	/^CC = arm-none-linux-gnueabi-gcc -Wall$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -I ..\/include $/;"	m
+CONFIG_AUDIO	Generate_rhms_config/Generate_config.c	31;"	d	file:
+CONFIG_BarcodeSno	Generate_rhms_config/Generate_config.c	7;"	d	file:
+CONFIG_BatteryInfo	Generate_rhms_config/Generate_config.c	11;"	d	file:
+CONFIG_BiomRDVer	Generate_rhms_config/Generate_config.c	12;"	d	file:
+CONFIG_Bluetooth	Generate_rhms_config/Generate_config.c	22;"	d	file:
+CONFIG_CamType	Generate_rhms_config/Generate_config.c	16;"	d	file:
+CONFIG_Camera	Generate_rhms_config/Generate_config.c	29;"	d	file:
+CONFIG_Comm	Generate_rhms_config/Generate_config.c	9;"	d	file:
+CONFIG_DOT	Generate_rhms_config/Generate_config.c	10;"	d	file:
+CONFIG_Ethernet	Generate_rhms_config/Generate_config.c	8;"	d	file:
+CONFIG_FPSRDVer	Generate_rhms_config/Generate_config.c	21;"	d	file:
+CONFIG_FPScannerid	Generate_rhms_config/Generate_config.c	34;"	d	file:
+CONFIG_FingerPrint	Generate_rhms_config/Generate_config.c	33;"	d	file:
+CONFIG_GPS	Generate_rhms_config/Generate_config.c	20;"	d	file:
+CONFIG_HWChanged	Generate_rhms_config/Generate_config.c	32;"	d	file:
+CONFIG_IFD1	Generate_rhms_config/Generate_config.c	27;"	d	file:
+CONFIG_IFD2	Generate_rhms_config/Generate_config.c	28;"	d	file:
+CONFIG_IrisRDVer_and_SNo	Generate_rhms_config/Generate_config.c	14;"	d	file:
+CONFIG_Iris_or_Biomat	Generate_rhms_config/Generate_config.c	13;"	d	file:
+CONFIG_IritechSno	Generate_rhms_config/Generate_config.c	15;"	d	file:
+CONFIG_Pinpad	Generate_rhms_config/Generate_config.c	18;"	d	file:
+CONFIG_PinpadSN	Generate_rhms_config/Generate_config.c	19;"	d	file:
+CONFIG_Printer	Generate_rhms_config/Generate_config.c	25;"	d	file:
+CONFIG_RTC	Generate_rhms_config/Generate_config.c	30;"	d	file:
+CONFIG_SAM1	Generate_rhms_config/Generate_config.c	23;"	d	file:
+CONFIG_SAM2	Generate_rhms_config/Generate_config.c	24;"	d	file:
+CONFIG_Two_Simdetails_Autoapn	Generate_rhms_config/Generate_config.c	5;"	d	file:
+CONFIG_WIFI	Generate_rhms_config/Generate_config.c	26;"	d	file:
+CONFIG_WSSN	Generate_rhms_config/Generate_config.c	17;"	d	file:
+CONFIG_geo_location	Generate_rhms_config/Generate_config.c	6;"	d	file:
+Calculate_time_diff	DOT_1.1/Date_calculations.c	/^int Calculate_time_diff(char *file_name)$/;"	f
+Calculate_time_diff	TESTING_DOT_1.1/Date_calculations.c	/^int Calculate_time_diff(char *file_name)$/;"	f
+Camera_info	Camera_type.c	/^void Camera_info(void)$/;"	f
+Check_internet_by_hostname	check_internet_by_hostname.c	/^int Check_internet_by_hostname(char *host,char *ip)$/;"	f
+DEBUG	DOT_1.1/header.h	22;"	d
+DEBUG	TESTING_DOT_1.1/header.h	21;"	d
+DEVICE_DETAILS	POS_HEALTH_DETAILS.c	/^void 	DEVICE_DETAILS()$/;"	f
+DOT_lock	DOT_1.1/main.c	/^int DOT_lock()$/;"	f
+Day	DOT_1.1/main.c	/^}Day;$/;"	v	typeref:struct:Device
+Day	TESTING_DOT_1.1/main.c	/^}Day;$/;"	v	typeref:struct:Device
+Device	DOT_1.1/main.c	/^struct Device$/;"	s	file:
+Device	TESTING_DOT_1.1/main.c	/^struct Device$/;"	s	file:
+Device_work_records	Device_work_records.c	/^int Device_work_records()$/;"	f
+Device_working_secs	DOT_1.1/main.c	/^int Device_working_secs()$/;"	f
+Device_working_secs	TESTING_DOT_1.1/main.c	/^int Device_working_secs()$/;"	f
+Ethernet_status	ethernet_info.c	/^int Ethernet_status(void)$/;"	f
+FPS_Id_and_version	FPS_Id_and_version.c	/^void FPS_Id_and_version()$/;"	f
+FPS_RD_version	FPS_RDVersion.c	/^void FPS_RD_version()$/;"	f
+GPS_Success	main.c	/^int GPS_Success;$/;"	v
+Get_Config_Settings	parse_rhms_config.c	/^int Get_Config_Settings()$/;"	f
+Get_Ethernet_Status	ethernet_info.c	/^int Get_Ethernet_Status(void)$/;"	f
+Get_Pinpad_Serial_No	Pinpad/header.h	/^int (*Get_Pinpad_Serial_No)(unsigned char *);$/;"	v
+Get_Server_Addr	remote_update.c	/^int  Get_Server_Addr(char *Server_Addr)$/;"	f
+Get_Two_Simdetails_info	Get_Two_Simdetails_info.c	/^int Get_Two_Simdetails_info(void)$/;"	f
+Get_Wifi_Status	wifi_info.c	/^int Get_Wifi_Status(void)$/;"	f
+Get_autoapn_wrote_details	Get_autoapn_details.c	/^void Get_autoapn_wrote_details()$/;"	f
+Get_interface_name	Update_Comm_media.c	/^int Get_interface_name(char *interface,char *ip)$/;"	f
+Get_interface_name	Update_Comm_media_test.c	/^int Get_interface_name(char *interface)$/;"	f
+Give_date	Date_calculations.c	/^int Give_date(char *file_name)$/;"	f
+Hardware_Status_file	create_device_details_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v
+Hardware_changed_info	Hardware_changed_info.c	/^void Hardware_changed_info()$/;"	f
+Health_Status_file	create_Health_status_xml.c	/^char *Health_Status_file="\/opt\/Health_Status.xml";$/;"	v
+Health_response_xml_file	remote_update.c	/^char *Health_response_xml_file="\/opt\/Health_response.xml";$/;"	v
+IMAGES	os_info.c	/^void IMAGES()$/;"	f
+Iris_Scanner_Id	get_iris_scanner.c	/^void Iris_Scanner_Id(void)$/;"	f
+Iris_version	iris_version.c	/^void Iris_version()$/;"	f
+Is_Hardware_changed	parse_xml.c	/^int Is_Hardware_changed(char *docname)$/;"	f
+Location_info	Location_info.c	/^int  Location_info()$/;"	f
+MEMORY	POS_HEALTH_DETAILS.c	/^void	MEMORY(void)$/;"	f
+Node	module.c	/^struct Node $/;"	s	file:
+Non_xml_type_Autoapn_details	Non_xml_type_Autoapn_details.c	/^void Non_xml_type_Autoapn_details()$/;"	f
+OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  create_xml.o patch_info.o printer_info.o remote_update.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  parse_xml.o Hardware_changed_info.o mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o$/;"	m
+PERIPHERALS	POS_HEALTH_DETAILS.c	/^int  PERIPHERALS(void)$/;"	f
+PINPAD_Modemclose	Pinpad/header.h	/^int  (*PINPAD_Modemclose) (void);$/;"	v
+POS_HEALTH_DETAILS	POS_HEALTH_DETAILS.c	/^void	POS_HEALTH_DETAILS(void)$/;"	f
+Periodic_tags	Periodic_tags.c	/^void Periodic_tags(void)$/;"	f
+PinpadSerialNo_info_by_dev_name	Pinpad/PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f
+PinpadSerialNo_info_by_dev_name	Pinpad/Pinpad_bkp.c	/^int PinpadSerialNo_info_by_dev_name(char *port, unsigned char *serialno)$/;"	f
+PinpadSerialNo_info_by_dev_name	Pinpad/pin.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f
+PinpadSerialNo_info_by_dev_name	PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f
+RTC_info_and_Check_RHMS_run	rtc_functions.c	/^int RTC_info_and_Check_RHMS_run()$/;"	f
+Second_Time_Health_Info_sending_for_GPS	Periodic_tags.c	/^void Second_Time_Health_Info_sending_for_GPS()$/;"	f
+SerialNo_and_Version_Based_Tags	POS_HEALTH_DETAILS.c	/^void SerialNo_and_Version_Based_Tags()$/;"	f
+Total_Solt1_secs	DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	file:
+Total_Solt1_secs	TESTING_DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	file:
+Total_Solt2_secs	DOT_1.1/main.c	/^	int Total_Solt2_secs;$/;"	m	struct:Device	file:
+Total_Solt2_secs	TESTING_DOT_1.1/main.c	/^	int Total_Solt2_secs;$/;"	m	struct:Device	file:
+Total_Solt3_secs	DOT_1.1/main.c	/^	int Total_Solt3_secs;$/;"	m	struct:Device	file:
+Total_Solt3_secs	TESTING_DOT_1.1/main.c	/^	int Total_Solt3_secs;$/;"	m	struct:Device	file:
+Total_Solt4_secs	DOT_1.1/main.c	/^	int Total_Solt4_secs;$/;"	m	struct:Device	file:
+Total_Solt4_secs	TESTING_DOT_1.1/main.c	/^	int Total_Solt4_secs;$/;"	m	struct:Device	file:
+Total_adapter_secs	DOT_1.1/main.c	/^	int Total_adapter_secs;$/;"	m	struct:Device	file:
+Total_adapter_secs	TESTING_DOT_1.1/main.c	/^	int Total_adapter_secs;$/;"	m	struct:Device	file:
+Total_charging_secs	DOT_1.1/main.c	/^	int Total_charging_secs;$/;"	m	struct:Device	file:
+Total_charging_secs	TESTING_DOT_1.1/main.c	/^	int Total_charging_secs;$/;"	m	struct:Device	file:
+Total_discharging_secs	DOT_1.1/main.c	/^	int Total_discharging_secs;$/;"	m	struct:Device	file:
+Total_discharging_secs	TESTING_DOT_1.1/main.c	/^	int Total_discharging_secs;$/;"	m	struct:Device	file:
+Total_work_secs	DOT_1.1/main.c	/^	int Total_work_secs;$/;"	m	struct:Device	file:
+Total_work_secs	TESTING_DOT_1.1/main.c	/^	int Total_work_secs;$/;"	m	struct:Device	file:
+Uid_info	dev_info.c	/^void Uid_info()$/;"	f
+Update_Comm_media	Update_Comm_media.c	/^void Update_Comm_media(char *ip)$/;"	f
+Wifi_Status	wifi_info.c	/^int Wifi_Status()$/;"	f
+audio_test	audio_info.c	/^int audio_test(void)$/;"	f
+barcode_SerialNo	barcode_SerialNo.c	/^void  barcode_SerialNo()$/;"	f
+battery_status	battery_info.c	/^int battery_status(void)$/;"	f
+bluetooth_status	bt_info.c	/^int bluetooth_status()$/;"	f
+camera_status	camera.c	/^int camera_status()$/;"	f
+cap_scanner_id	fp_info.c	/^int cap_scanner_id(char *cap_id)$/;"	f
+capacitive_scanner_id	fp_info.c	/^void capacitive_scanner_id(void)$/;"	f
+check_net_connection	check_net_connection.c	/^void check_net_connection()$/;"	f
+check_presence	bt_info.c	/^int  check_presence(int times)$/;"	f
+check_status	printer_info.c	/^int check_status()$/;"	f
+config_file	Generate_rhms_config/Generate_config.c	/^char *config_file=".RHMS_config.xml";$/;"	v
+copy_file	copy_file.c	/^int copy_file (char *dest,char *src)$/;"	f
+data	module.c	/^	int data; $/;"	m	struct:Node	file:
+diff_bw_two_dates	rtc_functions.c	/^static int diff_bw_two_dates(int firstDate, int firstMonth, int firstYear, int secondDate, int secondMonth, int secondYear)$/;"	f	file:
+fp_detect_type	fpfile.c	/^int fp_detect_type(void)$/;"	f
+fp_type	fp_info.c	/^int fp_type(void)$/;"	f
+get_Usb_device_serialno	get_usbdevice_serialno.c	/^int get_Usb_device_serialno(char *Vendorid,char *ProductId,char *serialno)$/;"	f
+get_app_details	get_app_info.c	/^int  get_app_details()$/;"	f
+get_bluetooth_macid	weighing_serialid_details.c	/^void get_bluetooth_macid(char *macid)$/;"	f
+get_device_serialnumber	dev_info.c	/^void get_device_serialnumber(void)  \/\/ Updating Device serial number in RHMS health structures$/;"	f
+get_fp_details	getfp.c	/^					int get_fp_details(char *fp_type,char *fp_id)$/;"	f
+get_logname	Device_work_records.c	/^int get_logname(char *file)$/;"	f
+get_machineid	dev_info.c	/^int get_machineid(char *machineid)$/;"	f
+gl11_bluetooth_control_dlopen	dl_lib/gl11_bluetooth_control.c	/^int gl11_bluetooth_control_dlopen(int arg)$/;"	f
+gl11_bluetooth_control_dlopen	gl11_bluetooth_control_dlopen.c	/^int gl11_bluetooth_control_dlopen(int arg)$/;"	f
+gl11_wifi_rfcontrol_dlopen	dl_lib/gl11_wifi.c	/^int gl11_wifi_rfcontrol_dlopen(int arg)$/;"	f
+gprs_details	gprs_info.c	/^int gprs_details(void)$/;"	f
+handshake	Pinpad/header.h	/^int (*handshake)(void);$/;"	v
+ifd_status	ifd.c	/^int ifd_status(int card_select)$/;"	f
+iris_status	iris.c	/^int iris_status(void)$/;"	f
+is_RHMS_multiple_run	is_RHMS_multiple_run.c	/^int is_RHMS_multiple_run()$/;"	f
+library_check	biomat_check.c	/^void library_check(void)$/;"	f
+main	DOT_1.1/main.c	/^int main(int argc,char *argv[])$/;"	f
+main	Generate_rhms_config/Generate_config.c	/^int main()$/;"	f
+main	Pinpad/PinpadSerialno.c	/^int main()$/;"	f
+main	Pinpad/Pinpad_bkp.c	/^int main()$/;"	f
+main	Pinpad/pin.c	/^int main()$/;"	f
+main	TESTING_DOT_1.1/main.c	/^int main(int argc,char *argv[])$/;"	f
+main	Update_Comm_media_test.c	/^int main()$/;"	f
+main	create_BootTime_Status_xml.c	/^int main()$/;"	f
+main	create_Health_status_xml.c	/^int main()$/;"	f
+main	create_device_details_xml.c	/^int main()$/;"	f
+main	dl_lib/gl11_bluetooth_control.c	/^int main()$/;"	f
+main	dl_lib/gl11_wifi.c	/^int main()$/;"	f
+main	get_date_to_send.c	/^int main()$/;"	f
+main	getfp.c	/^int main()$/;"	f
+main	main.c	/^int main()$/;"	f
+main	module.c	/^int main() $/;"	f
+makedir_p	DOT_1.1/mkdir_p.c	/^int makedir_p(char *dirname)$/;"	f
+makedir_p	TESTING_DOT_1.1/mkdir_p.c	/^int makedir_p(char *dirname)$/;"	f
+mkdir_p	mkdir_p.c	/^int mkdir_p(char *dirname)$/;"	f
+msleep	POS_HEALTH_DETAILS.c	/^inline void msleep(int arg)$/;"	f
+next	module.c	/^	struct Node *next; $/;"	m	struct:Node	typeref:struct:Node::Node	file:
+operator_check	operator_check.c	/^void operator_check(char *operator_buff,char *operator)$/;"	f
+opt_scanner_id	fp_info.c	/^int opt_scanner_id(char *opt_id)$/;"	f
+optical_scanner_id	fp_info.c	/^void optical_scanner_id(void)$/;"	f
+paper_status	printer_info.c	/^int paper_status(void)$/;"	f
+parseDoc	xmlparser.c	/^int parseDoc(char *docname) {$/;"	f
+parseStory	xmlparser.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f
+parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
+parse_device_details	parse_xml.c	/^int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
+parse_peripherals	parse_xml.c	/^int parse_peripherals (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
+patch_name	patch_info.c	/^int patch_name(void)$/;"	f
+patch_ver	patch_info.c	/^int patch_ver()$/;"	f
+pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f
+pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f
+prev	module.c	/^	struct Node *prev;	 $/;"	m	struct:Node	typeref:struct:Node::Node	file:
+printList	module.c	/^void printList(struct Node *node) $/;"	f
+print_error_resp	Pinpad/header.h	/^int (*print_error_resp) (int );$/;"	v
+printer_status	printer_info.c	/^void printer_status()$/;"	f
+push	module.c	/^void push(struct Node** head_ref, int new_data) $/;"	f
+read_revision_operator_details	gprs_info.c	/^int read_revision_operator_details(char *operator,char *revision_buff)$/;"	f
+read_two_revision_operator_details	Get_Two_Simdetails_info.c	/^int read_two_revision_operator_details(char *operator1,char *operator2,char *revision_buff)$/;"	f
+reboot_device	reboot_device.c	/^void reboot_device(char last_digit) $/;"	f
+retrieve_nw_details	check_net_connection.c	/^static int retrieve_nw_details(void)$/;"	f	file:
+retrieve_signal_details	gprs_info.c	/^int retrieve_signal_details(char *sigval_buff,char *file)$/;"	f
+retrieve_sim_details	gprs_info.c	/^int retrieve_sim_details(char *ccid_buff,char *imei_buff)$/;"	f
+retrieve_two_signal_details	Get_Two_Simdetails_info.c	/^int retrieve_two_signal_details(char *SIM1,char *SIM2)$/;"	f
+retrieve_two_sim_details	Get_Two_Simdetails_info.c	/^int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)$/;"	f
+reverse	module.c	/^void reverse(struct Node **head_ref) $/;"	f
+reverse_list	module.c	/^void  reverse_list(struct Node **head)$/;"	f
+rhms_details_updated	rtc_functions.c	/^int rhms_details_updated (int my_date,int my_month,int my_year)$/;"	f
+sam_status	sam_info.c	/^int sam_status(int card_select)$/;"	f
+sam_thread_function	POS_HEALTH_DETAILS.c	/^void *sam_thread_function( void *ptr )$/;"	f
+sdcard_test	memory_info.c	/^int sdcard_test(int partition_flag)$/;"	f
+send_health_info_to_server	remote_update.c	/^int send_health_info_to_server (void)$/;"	f
+server_updation	remote_update.c	/^int server_updation(void)$/;"	f
+update_date_status_file	rtc_functions.c	/^int update_date_status_file(void) \/\/after rhms successfull update ,updating time stamp to \/opt\/rhms_date_update$/;"	f
+update_fp_scanner_info	fp_info.c	/^int  update_fp_scanner_info(void)$/;"	f
+update_fpfile_info	fpfile.c	/^void update_fpfile_info(void)$/;"	f
+update_internal_memory_info	memory_info.c	/^int update_internal_memory_info(void)$/;"	f
+update_macid_details	dev_info.c	/^void update_macid_details()$/;"	f
+update_pendrive_details	usb_info.c	/^int update_pendrive_details(void)$/;"	f
+update_ram_info	memory_info.c	/^int update_ram_info(void)$/;"	f
+update_sd_details	memory_info.c	/^int update_sd_details(void)$/;"	f
+update_sdcard_info	memory_info.c	/^int update_sdcard_info(void)$/;"	f
+update_usb_info	usb_info.c	/^int update_usb_info()$/;"	f
+usb_device_presence	usb_info.c	/^int usb_device_presence (char *vendor_id, char *product_id)$/;"	f
+usbgrepcmnd	usb_info.c	/^char usbgrepcmnd[80]="";$/;"	v
+var_gprs	check_net_connection.c	/^char var_gprs[30];$/;"	v
+verify_presence	camera.c	/^int  verify_presence(int times)$/;"	f
+weighing_serialid_details	weighing_serialid_details.c	/^void weighing_serialid_details()$/;"	f
+xml_type_Autoapn_details	xml_type_Autoapn_details.c	/^void xml_type_Autoapn_details()$/;"	f

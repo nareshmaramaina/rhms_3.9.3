@@ -1,0 +1,164 @@
+#include <header.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
+char *BootTime_Status_file="/opt/BootTime_Status.xml";
+
+
+/*int  create_xml_file(void)
+  {
+  short int ret=0;
+
+  char remote_xml_bkp_file[32]="";
+
+  char Path[24]="";
+
+
+  remove(remote_status_file);
+
+  xml_frame();
+
+  ret=access(remote_status_file,F_OK);
+
+  if(ret == -1)
+  {
+  fprintf(stderr," %s open failed\n",remote_status_file);
+  return -1;
+  }
+
+  mkdir_p("/var/log/Health/");
+
+//if( CONFIG.HWChanged )
+copy_file("/var/log/Health/Last_remote_status.xml",remote_status_file);//des,src
+
+
+memset(remote_xml_bkp_file,0,sizeof(remote_xml_bkp_file));
+
+memset(Path,0,sizeof(Path));
+
+sprintf(Path,"/var/log/Health/%c%c",module.Date_time[2],module.Date_time[3]);
+
+mkdir_p(Path);
+
+sprintf(remote_xml_bkp_file,"%s/day_%c%c.xml",Path,module.Date_time[0],module.Date_time[1]);
+
+copy_file(remote_xml_bkp_file,remote_status_file);
+
+return 0;
+
+}*/
+
+
+
+//int BootTime_Status_xml_frame()
+int main()
+{
+	fprintf(stdout,"\n\n BootTime_Status.xml Framing ...\n\n");
+	xmlDocPtr doc = NULL;       /* document pointer */
+	xmlNodePtr root_node = NULL, childnode = NULL,childofchildnode = NULL;/* node pointers */
+
+	LIBXML_TEST_VERSION;
+
+	doc = xmlNewDoc(BAD_CAST "1.0");
+	root_node = xmlNewNode(NULL,  "BOOT_STATUS");
+	xmlDocSetRootElement(doc, root_node);
+
+
+	xmlNewChild(root_node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);
+	xmlNewChild(root_node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
+
+	//	//if( CONFIG.DOT )
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "DOT",NULL);
+	xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.pinpad);
+	xmlNewChild(childnode, NULL, BAD_CAST "Slot1", BAD_CAST module.pinpad);
+	xmlNewChild(childnode, NULL, BAD_CAST "Slot2", BAD_CAST module.pinpad);
+	xmlNewChild(childnode, NULL, BAD_CAST "Slot3", BAD_CAST module.pinpad);
+	xmlNewChild(childnode, NULL, BAD_CAST "Slot4", BAD_CAST module.pinpad);
+
+	//	//if( CONFIG.Pinpad )
+	xmlNewChild(root_node, NULL, BAD_CAST "Pinpad", BAD_CAST module.pinpad);
+	xmlNewChild(root_node, NULL, BAD_CAST "Ethernet", BAD_CAST module.ethernet);
+	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
+	xmlNewChild(root_node, NULL, BAD_CAST "FingerPrint", BAD_CAST module.FP_TYPE);
+
+	//if( CONFIG.SAM1 )
+	xmlNewChild(root_node, NULL, BAD_CAST "SAM1", BAD_CAST module.SAM1);
+
+	//if( CONFIG.SAM2 )
+	xmlNewChild(root_node, NULL, BAD_CAST "SAM2", BAD_CAST module.SAM2);
+
+	//if( CONFIG.IFD1 )
+	xmlNewChild(root_node, NULL, BAD_CAST "IFD1", BAD_CAST module.IFD1);
+
+	//if( CONFIG.IFD2 )
+	xmlNewChild(root_node, NULL, BAD_CAST "IFD2", BAD_CAST module.IFD2);
+
+
+	//if( CONFIG.Printer )
+	{
+		xmlNewChild(root_node, NULL, BAD_CAST "Printer", BAD_CAST module.Printer);
+		//xmlNewChild(root_node, NULL, BAD_CAST "PaperStatus", BAD_CAST module.paper);
+	}
+	//if( CONFIG.Bluetooth )
+	xmlNewChild(root_node, NULL, BAD_CAST "Bluetooth", BAD_CAST module.Bluetooth);
+
+	//if( CONFIG.WIFI )
+	xmlNewChild(root_node, NULL, BAD_CAST "WIFI", BAD_CAST module.WIFI);
+	//if( CONFIG.Camera )
+	xmlNewChild(root_node, NULL, BAD_CAST "Camera", BAD_CAST module.Camera);
+	xmlNewChild(root_node, NULL, BAD_CAST "AUDIO", BAD_CAST module.AUDIO);
+
+	//if( CONFIG.BatteryInfo )
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "BatteryInfo",NULL);
+	xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.pinpad);
+	xmlNewChild(childnode, NULL, BAD_CAST "Day_worked_mins", BAD_CAST module.BatteryInfo);
+	xmlNewChild(childnode, NULL, BAD_CAST "Day_adapter_mins", BAD_CAST module.BatteryInfo);
+	xmlNewChild(childnode, NULL, BAD_CAST "Day_charged_mins", BAD_CAST module.BatteryInfo);
+	xmlNewChild(childnode, NULL, BAD_CAST "Day_discharged_mins", BAD_CAST module.BatteryInfo);
+
+
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
+	childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
+	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST module.app_type);
+	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.app_type);
+	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.app_version);
+
+	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.PatchName);
+	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.PatchVersion);
+
+	//if( CONFIG.IrisRDVer_and_SNo  )
+	xmlNewChild(root_node, NULL, BAD_CAST "IritechRDVer", BAD_CAST module.IritechRDVer);
+
+	//if( CONFIG.BiomRDVer )
+	xmlNewChild(root_node, NULL, BAD_CAST "BiomRDVer", BAD_CAST module.BiomRDVer);
+	//if( CONFIG.FPSRDVer )
+	xmlNewChild(root_node, NULL, BAD_CAST "FPSRDVer", BAD_CAST module.FPSRDVer);
+
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ExternalMem",NULL);
+	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.ExternalMem.Total);
+	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.ExternalMem.Use);
+	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.ExternalMem.Free);
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "Usbdevice",NULL);
+	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.Usbdevice.Total);
+	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.Usbdevice.Use);
+	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
+
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST "Operator");
+
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST "Operator");
+
+
+
+
+
+	xmlSaveFormatFileEnc(BootTime_Status_file,doc, "UTF-8", 1);
+
+	xmlFreeDoc(doc);
+
+	xmlCleanupParser();
+
+	return 0;
+
+}
