@@ -55,17 +55,23 @@ int Device_work_records()
 		Date[i]=ptr[i];
 	Date[i]='\0';
 	printf("DAte = %s\n",Date);
-	strcpy(DOT_FILE,filename);	
-	sprintf(module.DOT,"%s/%d/%d/%d/%d",Date,Day.Total_Solt1_secs/60,Day.Total_Solt2_secs/60,Day.Total_Solt3_secs/60,Day.Total_Solt4_secs/60);
+
+	strcpy(DOT_FILE,filename);
+
+	strcpy(module.DOT.Date,Date);
+	module.DOT.Slot1=Day.Total_Solt1_secs/60;
+	module.DOT.Slot2=Day.Total_Solt2_secs/60;
+	module.DOT.Slot3=Day.Total_Solt3_secs/60;
+	module.DOT.Slot4=Day.Total_Solt4_secs/60;	
 
 	if( CONFIG.BatteryInfo )
-		sprintf(module.BatteryInfo,"%s/%d/%d/%d/%d",Date,Day.Total_work_secs/60,Day.Total_adapter_secs/60,Day.Total_charging_secs/60,Day.Total_discharging_secs/60);
-
-#if DEBUG
-	fprintf(stdout,"module.DOT = %s \n",module.DOT);
-	if( CONFIG.BatteryInfo )
-		fprintf(stdout,"module.BatteryInfo= %s \n",module.BatteryInfo);
-#endif
+	{
+		strcpy(module.DOT.Date,Date);
+		module.BatteryInfo.Day_worked_mins=Day.Total_work_secs/60;
+		module.BatteryInfo.Day_adapter_mins=Day.Total_adapter_secs/60;
+		module.BatteryInfo.Day_charged_mins=Day.Total_charging_secs/60;
+		module.BatteryInfo.Day_discharged_mins=Day.Total_discharging_secs/60;
+	}
 	return 0;
 
 }

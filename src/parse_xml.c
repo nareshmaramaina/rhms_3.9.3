@@ -1,17 +1,14 @@
 #include <header.h>
 int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) 
 {
-	xmlChar *key;
-	cur = cur->xmlChildrenNode;
-	while (cur != NULL)
+	xmlChar *key = NULL;
+	for ( cur = cur->xmlChildrenNode; cur != NULL;key=NULL, cur = cur->next)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"SerialNo")))
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
-			printf("present module.SerialNo = %s , Last used SerialNo: %s\n", module.SerialNo,key);
-
-			if ( 	(key != NULL )	&& (strcmp((const char *)key,"ERROR") != 0 ) && ( strcmp(module.SerialNo,"ERROR") != 0 )	&&	 (strlen(module.SerialNo) != 0 ) ) 	
+		if ( 	(key != NULL )	&& (strcmp((const char *)key,"ERROR") != 0 ) && ( strcmp(module.SerialNo,"ERROR") != 0 )	&&	 (strlen(module.SerialNo) != 0 ) ) 	
 			{
 				if( strcmp(module.SerialNo,(const char *)key) != 0 )
 				{
@@ -78,8 +75,6 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			else	printf("Ignoring Hardware change on key=ERROR / NULL case, In Macid tag\n");
 		}
 
-		key=NULL;
-		cur = cur->next;
 	}
 	return 0;
 }

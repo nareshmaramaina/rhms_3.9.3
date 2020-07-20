@@ -39,10 +39,14 @@ int main()
 	}
 
 	POS_HEALTH_DETAILS();
+	
+	create_Hardware_status_xml_file();
+
+	create_BootTime_Status_xml_file();
 
 	while(1)
 	{
-		ret = create_xml_file();
+		ret = create_Health_Status_xml_file();
 		if ( ret != 0 )
 			return ret;	
 

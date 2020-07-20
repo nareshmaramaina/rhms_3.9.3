@@ -119,15 +119,29 @@ typedef struct device
  double Longitude,Latitude;
  char Captured_Time[24];
 }Location;
+struct Device_on_time 
+{
+char Date[14];
+int Slot1;
+int Slot2;
+int Slot3;
+int Slot4;
+};
 
+struct device_battery 
+{
+char Date[14];
+int Day_worked_mins;
+int Day_adapter_mins;
+int Day_charged_mins;
+int Day_discharged_mins;
+};
 struct terminal_status
 {
 	char BarcodeSno[32];
 	char GeoLocation[80];
 	char CamType[12];
 	char Comm[12];
-	char DOT[64];
-	char BatteryInfo[64];
 	char IRIS_VERSION[12];
 	char LIB_BIO[10];
 	char IRIS_ID[16]; 
@@ -183,12 +197,9 @@ struct terminal_status
 	MEMORY	Usbdevice;
 	MEMORY	System_memory;
 	Location GPS;
-	char Int_memory1[30];
-	char Int_memory2[30];
-	char Int_memory3[30];
-	char Ext_memory[30];
-	char USB_memory[30];
-	//char RAM[30];
+	struct Device_on_time DOT; 
+	struct device_battery BatteryInfo; 
+	
 	char AUDIO[20];
 	char IMEI_no[40];
 	char MachineID[50];
