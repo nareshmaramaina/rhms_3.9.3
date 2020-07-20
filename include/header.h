@@ -342,4 +342,6 @@ void Periodic_tags(void);
 void Second_Time_Health_Info_sending_for_GPS();
 void reboot_device(char last_digit); 
 int  Get_Server_Addr(char *Server_Addr);
-
+int 	create_Hardware_status_xml_file();
+int 	create_BootTime_Status_xml_file();
+int create_Health_Status_xml_file();

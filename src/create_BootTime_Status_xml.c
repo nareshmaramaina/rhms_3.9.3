@@ -1,6 +1,7 @@
 #include <header.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+int BootTime_Status_xml_frame();
 
 char *BootTime_Status_file="/opt/BootTime_Status.xml";
 

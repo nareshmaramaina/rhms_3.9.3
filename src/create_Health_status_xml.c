@@ -4,6 +4,7 @@
 
 char *Health_Status_file="/opt/Health_Status.xml";
 
+int Health_Status_xml_frame();
 
 int  create_Health_Status_xml_file(void)
 {

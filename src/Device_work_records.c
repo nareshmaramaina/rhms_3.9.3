@@ -27,9 +27,6 @@ int Device_work_records()
 
 	if( get_logname(filename) != 0 )
 	{
-		if( CONFIG.BatteryInfo )
-			strcpy(module.BatteryInfo,"ERROR");
-		strcpy(module.DOT,"ERROR");
 		fprintf(stdout," DOT file not found\n");
 		return -1;
 	}
@@ -38,10 +35,6 @@ int Device_work_records()
 
 	if ( fp == NULL )
 	{
-		if( CONFIG.BatteryInfo )
-			strcpy(module.BatteryInfo,"ERROR");
-		strcpy(module.DOT,"ERROR");
-
 		fprintf(stderr,"Error in  opening  %s\n",filename);
 
 		return -1;

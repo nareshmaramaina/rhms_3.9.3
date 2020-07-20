@@ -1,8 +1,8 @@
-CC =/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-none-linux-gnueabi-gcc -Wall
+CC =arm-none-linux-gnueabi-gcc -Wall
 
 CFLAGS = -I ../include 
 
-OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  create_xml.o patch_info.o printer_info.o remote_update.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  parse_xml.o Hardware_changed_info.o mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o
+OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o remote_update.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  parse_xml.o Hardware_changed_info.o mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o
 
 app:$(OBJS)
 	$(CC) -g -o rhms_update_binary  $(OBJS) -L ../lib/ -lgl11pos -ltfm -lpcsclite -lxml2 -lz -lpthread   $(CFLAGS) 
@@ -63,8 +63,6 @@ patch_info.o:patch_info.c
 remote_update.o:remote_update.c
 	$(CC) -c remote_update.c $(CFLAGS)
 
-create_xml.o:create_xml.c
-	$(CC) -c create_xml.c $(CFLAGS) 
 
 usb_info.o:usb_info.c
 	$(CC) -c usb_info.c $(CFLAGS)

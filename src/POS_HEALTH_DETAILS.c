@@ -14,7 +14,6 @@ void	POS_HEALTH_DETAILS(void)
 
 	PERIPHERALS();
 
-	MEMORY();
 
 	check_net_connection(); //Blocking For autoapn details
 
