@@ -202,7 +202,7 @@ struct terminal_status
 	
 	char AUDIO[20];
 	char IMEI_no[40];
-	char MachineID[50];
+	char TerminalID[30];
 	char SerialNo[50];
 	char Uid_no[40];
 	char UbootVersion[50];
@@ -345,3 +345,4 @@ int  Get_Server_Addr(char *Server_Addr);
 int 	create_Hardware_status_xml_file();
 int 	create_BootTime_Status_xml_file();
 int create_Health_Status_xml_file();
+int Is_Hardware_Status_changed();

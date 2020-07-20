@@ -63,7 +63,7 @@ int Hardware_xml_frame()
 
 	xmlNewChild(node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);
 	xmlNewChild(node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
-	xmlNewChild(node, NULL, BAD_CAST "TerminalID",BAD_CAST module.MachineID);
+	xmlNewChild(node, NULL, BAD_CAST "TerminalID",BAD_CAST module.TerminalID);
 	xmlNewChild(node, NULL, BAD_CAST "Macid", BAD_CAST module.macid);
 	xmlNewChild(node, NULL, BAD_CAST "UbootImageName", BAD_CAST module.UbootVersion);
 	xmlNewChild(node, NULL, BAD_CAST "KernelImageName", BAD_CAST module.KernelVersion);

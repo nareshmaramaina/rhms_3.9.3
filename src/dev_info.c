@@ -33,12 +33,12 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 	{
 		fprintf(stdout,"MachineID Error\n");
 		strcpy(module.SerialNo,"ERROR");
-		strcpy(module.MachineID,"ERROR");
+		strcpy(module.TerminalID,"ERROR");
 	}
 
 	else 
 	{
-		strcpy(module.MachineID,machineid);
+		strcpy(module.TerminalID,machineid);
 
 		if(machineid[0]=='1' && machineid[1]=='1')
 			sprintf(module.SerialNo,"1%s",machineid);
@@ -61,7 +61,7 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 		sprintf(module.SerialNo,"%c%c%c%c%c%c%c%c%c%c%c%c",module.macid[0],module.macid[1],module.macid[3],module.macid[4],module.macid[6],module.macid[7],module.macid[9],module.macid[10],module.macid[12],module.macid[13],module.macid[15],module.macid[16]);
 
 	}	
-	fprintf(stdout,"module.MachineID = %s\tmodule.SerialNo = %s\n",module.MachineID,module.SerialNo);
+	fprintf(stdout,"module.TerminalID = %s\tmodule.SerialNo = %s\n",module.TerminalID,module.SerialNo);
 	return;
 }
 

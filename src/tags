@@ -14,7 +14,8 @@ BTINFO	DOT_1.1/header.h	/^#define BTINFO /;"	d
 BTINFO	TESTING_DOT_1.1/header.h	/^#define BTINFO /;"	d
 Biomatiques_RD_version	biomatiques.c	/^void Biomatiques_RD_version()$/;"	f	typeref:typename:void
 BootTime_Status_file	create_BootTime_Status_xml.c	/^char *BootTime_Status_file="\/opt\/BootTime_Status.xml";$/;"	v	typeref:typename:char *
-CC	Makefile	/^CC = arm-none-linux-gnueabi-gcc -Wall$/;"	m
+BootTime_Status_xml_frame	create_BootTime_Status_xml.c	/^int BootTime_Status_xml_frame()$/;"	f	typeref:typename:int
+CC	Makefile	/^CC =arm-none-linux-gnueabi-gcc -Wall$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -I ..\/include $/;"	m
 CONFIG_AUDIO	Generate_rhms_config/Generate_config.c	/^#define CONFIG_AUDIO	/;"	d	file:
 CONFIG_BarcodeSno	Generate_rhms_config/Generate_config.c	/^#define CONFIG_BarcodeSno	/;"	d	file:
@@ -82,10 +83,14 @@ Get_autoapn_wrote_details	Get_autoapn_details.c	/^void Get_autoapn_wrote_details
 Get_interface_name	Update_Comm_media.c	/^int Get_interface_name(char *interface,char *ip)$/;"	f	typeref:typename:int
 Get_interface_name	Update_Comm_media_test.c	/^int Get_interface_name(char *interface)$/;"	f	typeref:typename:int
 Give_date	Date_calculations.c	/^int Give_date(char *file_name)$/;"	f	typeref:typename:int
-Hardware_Status_file	create_device_details_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
+Hardware_Status_file	create_Hardware_status.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
+Hardware_Status_file	create_Hardware_status_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
 Hardware_changed_info	Hardware_changed_info.c	/^void Hardware_changed_info()$/;"	f	typeref:typename:void
 Hardware_changed_info.o	Makefile	/^Hardware_changed_info.o:Hardware_changed_info.c$/;"	t
+Hardware_xml_frame	create_Hardware_status.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
+Hardware_xml_frame	create_Hardware_status_xml.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
 Health_Status_file	create_Health_status_xml.c	/^char *Health_Status_file="\/opt\/Health_Status.xml";$/;"	v	typeref:typename:char *
+Health_Status_xml_frame	create_Health_status_xml.c	/^int Health_Status_xml_frame()$/;"	f	typeref:typename:int
 Health_response_xml_file	remote_update.c	/^char *Health_response_xml_file="\/opt\/Health_response.xml";$/;"	v	typeref:typename:char *
 IMAGES	os_info.c	/^void IMAGES()$/;"	f	typeref:typename:void
 Iris_Scanner_Id	get_iris_scanner.c	/^void Iris_Scanner_Id(void)$/;"	f	typeref:typename:void
@@ -96,7 +101,7 @@ Location_info.o	Makefile	/^Location_info.o:Location_info.c$/;"	t
 Node	module.c	/^struct Node $/;"	s	file:
 Non_xml_type_Autoapn_details	Non_xml_type_Autoapn_details.c	/^void Non_xml_type_Autoapn_details()$/;"	f	typeref:typename:void
 Non_xml_type_Autoapn_details.o	Makefile	/^Non_xml_type_Autoapn_details.o:Non_xml_type_Autoapn_details.c$/;"	t
-OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  create_xml.o patch_info.o prin/;"	m
+OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o re/;"	m
 PERIPHERALS	POS_HEALTH_DETAILS.c	/^int  PERIPHERALS(void)$/;"	f	typeref:typename:int
 PINPAD_Modemclose	Pinpad/header.h	/^int  (*PINPAD_Modemclose) (void);$/;"	v	typeref:typename:int (*)(void)
 POS_HEALTH_DETAILS	POS_HEALTH_DETAILS.c	/^void	POS_HEALTH_DETAILS(void)$/;"	f	typeref:typename:void
@@ -162,7 +167,13 @@ clean	Makefile	/^clean:$/;"	t
 config_file	Generate_rhms_config/Generate_config.c	/^char *config_file=".RHMS_config.xml";$/;"	v	typeref:typename:char *
 copy_file	copy_file.c	/^int copy_file (char *dest,char *src)$/;"	f	typeref:typename:int
 copy_file.o	Makefile	/^copy_file.o:copy_file.c$/;"	t
-create_xml.o	Makefile	/^create_xml.o:create_xml.c$/;"	t
+create_BootTime_Status_xml.o	Makefile	/^create_BootTime_Status_xml.o:create_BootTime_Status_xml.c $/;"	t
+create_BootTime_Status_xml_file	create_BootTime_Status_xml.c	/^int  create_BootTime_Status_xml_file(void)$/;"	f	typeref:typename:int
+create_Hardware_status_xml.o	Makefile	/^create_Hardware_status_xml.o:create_Hardware_status_xml.c$/;"	t
+create_Hardware_status_xml_file	create_Hardware_status.c	/^int  create_Hardware_status_xml_file(void)$/;"	f	typeref:typename:int
+create_Hardware_status_xml_file	create_Hardware_status_xml.c	/^int  create_Hardware_status_xml_file(void)$/;"	f	typeref:typename:int
+create_Health_Status_xml_file	create_Health_status_xml.c	/^int  create_Health_Status_xml_file(void)$/;"	f	typeref:typename:int
+create_Health_status_xml.o	Makefile	/^create_Health_status_xml.o:create_Health_status_xml.c$/;"	t
 data	module.c	/^	int data; $/;"	m	struct:Node	typeref:typename:int	file:
 dev_info.o	Makefile	/^dev_info.o:dev_info.c$/;"	t
 diff_bw_two_dates	rtc_functions.c	/^static int diff_bw_two_dates(int firstDate, int firstMonth, int firstYear, int secondDate, int s/;"	f	typeref:typename:int	file:
@@ -202,15 +213,11 @@ main	Pinpad/Pinpad_bkp.c	/^int main()$/;"	f	typeref:typename:int
 main	Pinpad/pin.c	/^int main()$/;"	f	typeref:typename:int
 main	TESTING_DOT_1.1/main.c	/^int main(int argc,char *argv[])$/;"	f	typeref:typename:int
 main	Update_Comm_media_test.c	/^int main()$/;"	f	typeref:typename:int
-main	create_BootTime_Status_xml.c	/^int main()$/;"	f	typeref:typename:int
-main	create_Health_status_xml.c	/^int main()$/;"	f	typeref:typename:int
-main	create_device_details_xml.c	/^int main()$/;"	f	typeref:typename:int
 main	dl_lib/gl11_bluetooth_control.c	/^int main()$/;"	f	typeref:typename:int
 main	dl_lib/gl11_wifi.c	/^int main()$/;"	f	typeref:typename:int
 main	get_date_to_send.c	/^int main()$/;"	f	typeref:typename:int
 main	getfp.c	/^int main()$/;"	f	typeref:typename:int
 main	main.c	/^int main()$/;"	f	typeref:typename:int
-main	memory_info.c	/^int main()$/;"	f	typeref:typename:int
 main	module.c	/^int main() $/;"	f	typeref:typename:int
 main.o	Makefile	/^main.o:main.c$/;"	t
 makedir_p	DOT_1.1/mkdir_p.c	/^int makedir_p(char *dirname)$/;"	f	typeref:typename:int
@@ -226,7 +233,13 @@ opt_scanner_id	fp_info.c	/^int opt_scanner_id(char *opt_id)$/;"	f	typeref:typena
 optical_scanner_id	fp_info.c	/^void optical_scanner_id(void)$/;"	f	typeref:typename:void
 os_info.o	Makefile	/^os_info.o:os_info.c$/;"	t
 paper_status	printer_info.c	/^int paper_status(void)$/;"	f	typeref:typename:int
+parseDoc	parse_BootTime_status_xml.c	/^int parseDoc(char *docname) {$/;"	f	typeref:typename:int
+parseDoc	parse_Hardware_status_xml.c	/^int parseDoc(char *docname) {$/;"	f	typeref:typename:int
+parseDoc	parse_Health_status_xml.c	/^int parseDoc(char *docname) {$/;"	f	typeref:typename:int
 parseDoc	xmlparser.c	/^int parseDoc(char *docname) {$/;"	f	typeref:typename:int
+parseStory	parse_BootTime_status_xml.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f	typeref:typename:int
+parseStory	parse_Hardware_status_xml.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f	typeref:typename:int
+parseStory	parse_Health_status_xml.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f	typeref:typename:int
 parseStory	xmlparser.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f	typeref:typename:int
 parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int
 parse_device_details	parse_xml.c	/^int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int

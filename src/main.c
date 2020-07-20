@@ -39,10 +39,24 @@ int main()
 	}
 
 	POS_HEALTH_DETAILS();
-	
-	create_Hardware_status_xml_file();
+
+	ret = 	Is_Hardware_Status_changed();
+
+	if ( ret != 0)
+	{
+		create_Hardware_status_xml_file();
+		ret =  send_health_info_to_server(); 
+		if ( ret == -2 )
+		{
+			fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);
+			return ret;
+		}
+
+	}
+
 
 	create_BootTime_Status_xml_file();
+
 
 	while(1)
 	{
@@ -66,7 +80,7 @@ int main()
 
 		run_time = is_RHMS_multiple_run();
 
-	
+
 		if ( run_time == 100   ||  run_time == 200 )
 		{
 			if ( CONFIG.GPS && GPS_Success == 0 )
