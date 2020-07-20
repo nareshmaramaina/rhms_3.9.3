@@ -69,14 +69,15 @@ int main()
 	
 	//if( CONFIG.GPS || CONFIG.geo_location )
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
-		xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS);
-		xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS);
-		xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS);
+		xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST &module.GPS.Latitude);
+		xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST &module.GPS.Longitude);
+		xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
 		xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
 	//if( CONFIG.Printer )
 		xmlNewChild(root_node, NULL, BAD_CAST "PaperStatus", BAD_CAST module.paper);
 	
 	xmlNewChild(root_node, NULL, BAD_CAST "RTC", BAD_CAST module.RTC);
+	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "Battery", BAD_CAST module.Battery_status);
 	xmlNewChild(root_node, NULL, BAD_CAST "Comm", BAD_CAST module.Comm);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Comm);
@@ -84,6 +85,12 @@ int main()
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1SignalMode", BAD_CAST module.Comm);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.Comm);
 	
+	
+	childnode = xmlNewChild(root_node, NULL, BAD_CAST "System_memory",NULL);
+	  xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.System_memory.Total);
+        xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.System_memory.Use);
+        xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.System_memory.Free);
+
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "InternalMem_Sysuser",NULL);
 	  xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.InternalMem_Sysuser.Total);
         xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.InternalMem_Sysuser.Use);

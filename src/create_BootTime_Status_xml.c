@@ -78,7 +78,6 @@ int main()
 	//	//if( CONFIG.Pinpad )
 	xmlNewChild(root_node, NULL, BAD_CAST "Pinpad", BAD_CAST module.pinpad);
 	xmlNewChild(root_node, NULL, BAD_CAST "Ethernet", BAD_CAST module.ethernet);
-	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "FingerPrint", BAD_CAST module.FP_TYPE);
 
 	//if( CONFIG.SAM1 )

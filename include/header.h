@@ -181,6 +181,7 @@ struct terminal_status
 	MEMORY	RAM;
 	MEMORY	ExternalMem;
 	MEMORY	Usbdevice;
+	MEMORY	System_memory;
 	Location GPS;
 	char Int_memory1[30];
 	char Int_memory2[30];

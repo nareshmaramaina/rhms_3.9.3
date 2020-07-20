@@ -183,9 +183,10 @@ int update_internal_memory_info(void)
 	size_t len=0;
 	FILE *fp;
 	char Partition[24],*str=NULL;
-	short int ret,sysuser=0,jffs2=0;
+	short int ret,sysuser=0,jffs2=0,System_memory=0;
 	ret = system ("df -h | grep /dev/mmcblk0p > /tmp/.emmc_details");
 
+	memset(&module.System_memory,0,sizeof(module.System_memory));
 	memset(&module.InternalMem_Sysuser,0,sizeof(module.InternalMem_Sysuser));
 	memset(&module.InternalMem_Jffs2,0,sizeof(module.InternalMem_Jffs2));
 	if (ret != 0)
@@ -202,7 +203,16 @@ int update_internal_memory_info(void)
 	while((getline(&str,&len,fp)) != -1)
 	{
 		memset(Partition,0,sizeof(Partition));
+
 		if  (strstr(str,"sysuser") != NULL )
+		{
+
+			sscanf(str,"%s%s%s%s",Partition,module.System_memory.Total,module.System_memory.Use,module.System_memory.Free);
+
+			System_memory=1;
+		}
+
+		else if  (strstr(str,"sysuser") != NULL )
 		{
 			sscanf(str,"%s%s%s%s",Partition,module.InternalMem_Sysuser.Total,module.InternalMem_Sysuser.Use,module.InternalMem_Sysuser.Free);
 			sysuser =1;
@@ -217,6 +227,13 @@ int update_internal_memory_info(void)
 
 	fclose(fp);
 
+	if ( System_memory == 0 )
+	{
+		strcpy(module.System_memory.Total,"Not Found");
+		strcpy(module.System_memory.Use,"Not Found");
+		strcpy(module.System_memory.Free,"Not Found");
+
+	}
 	if ( sysuser == 0 )
 	{
 		strcpy(module.InternalMem_Sysuser.Total,"Not Found");
@@ -232,6 +249,7 @@ int update_internal_memory_info(void)
 		strcpy(module.InternalMem_Jffs2.Free,"Not Found");
 	}
 
+	fprintf(stdout,"System  Memory Total= %s Use= %s Free=%s\n",module.System_memory.Total,module.System_memory.Use,module.System_memory.Free);
 	fprintf(stdout,"sysuser Memory Total= %s Use= %s Free=%s\n",module.InternalMem_Sysuser.Total,module.InternalMem_Sysuser.Use,module.InternalMem_Sysuser.Free);
 	fprintf(stdout,"jffs2  Memory Total= %s Use= %s Free=%s\n",module.InternalMem_Jffs2.Total,module.InternalMem_Jffs2.Use,module.InternalMem_Jffs2.Free);
 
@@ -240,10 +258,10 @@ int update_internal_memory_info(void)
 	return 0;
 }
 /*int main()
-{
-	update_internal_memory_info();
-	update_sdcard_info();
-	update_ram_info();
-	return;
-}*/
+  {
+  update_internal_memory_info();
+  update_sdcard_info();
+  update_ram_info();
+  return;
+  }*/
 
