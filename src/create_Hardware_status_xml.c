@@ -1,6 +1,7 @@
 #include <header.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+int Hardware_xml_frame();
 
 char *Hardware_Status_file="/opt/Hardware_status.xml";
 

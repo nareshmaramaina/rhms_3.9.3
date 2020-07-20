@@ -1,6 +1,6 @@
 #include <header.h>
 char *Health_response_xml_file="/opt/Health_response.xml";
-extern char *remote_status_file;
+extern char *Health_Status_file;
 	int parseDoc(char *);
 int send_health_info_to_server (void)
 {
@@ -56,7 +56,7 @@ int server_updation(void)
 
 	memset(cmd,0,sizeof(cmd));
 
-	sprintf(cmd,"curl -k -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s > %s",Server_Addr,remote_status_file,Health_response_xml_file);
+	sprintf(cmd,"curl -k -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s > %s",Server_Addr,Health_Status_file,Health_response_xml_file);
 
 	system(cmd);
 

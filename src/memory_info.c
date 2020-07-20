@@ -256,11 +256,11 @@ int update_internal_memory_info(void)
 
 	return 0;
 }
-int main()
+/*int main()
 {
 	update_internal_memory_info();
 	update_sdcard_info();
 	update_ram_info();
 	return;
-}
+} */
 
