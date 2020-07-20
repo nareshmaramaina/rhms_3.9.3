@@ -184,7 +184,7 @@ int update_internal_memory_info(void)
 	FILE *fp;
 	char Partition[24],*str=NULL;
 	short int ret,sysuser=0,jffs2=0,System_memory=0;
-	ret = system ("df -h | grep /dev/mmcblk0p > /tmp/.emmc_details");
+	ret = system ("df -h | grep /dev/ > /tmp/.emmc_details");
 
 	memset(&module.System_memory,0,sizeof(module.System_memory));
 	memset(&module.InternalMem_Sysuser,0,sizeof(module.InternalMem_Sysuser));
@@ -203,8 +203,7 @@ int update_internal_memory_info(void)
 	while((getline(&str,&len,fp)) != -1)
 	{
 		memset(Partition,0,sizeof(Partition));
-
-		if  (strstr(str,"sysuser") != NULL )
+		if  (strstr(str,"/dev/root") != NULL )
 		{
 
 			sscanf(str,"%s%s%s%s",Partition,module.System_memory.Total,module.System_memory.Use,module.System_memory.Free);
@@ -257,11 +256,11 @@ int update_internal_memory_info(void)
 
 	return 0;
 }
-/*int main()
-  {
-  update_internal_memory_info();
-  update_sdcard_info();
-  update_ram_info();
-  return;
-  }*/
+int main()
+{
+	update_internal_memory_info();
+	update_sdcard_info();
+	update_ram_info();
+	return;
+}
 
