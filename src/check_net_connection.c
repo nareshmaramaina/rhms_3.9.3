@@ -68,7 +68,7 @@ void check_net_connection()
 			printf("Network Details sucess\n");
 			break;
 		}
-		else if ( (count > 18 )		&&	( Check_internet_by_hostname("google.co.in", ip) == 0 )  )
+		else if ( (count > 9 )		&&	( Check_internet_by_hostname("google.co.in", ip) == 0 )  )
 		{
 			fprintf(stdout,"Internet Found by hostname api\n");
 			Update_Comm_media(ip);

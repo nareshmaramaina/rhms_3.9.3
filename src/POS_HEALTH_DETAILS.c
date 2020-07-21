@@ -50,6 +50,7 @@ void	POS_HEALTH_DETAILS(void)
 		sleep(1);
 		Location_info();
 	}
+
 	return;
 }
 
@@ -166,7 +167,6 @@ int  PERIPHERALS(void)
 
 	audio_test();
 
-	battery_status();
 
 	if( CONFIG.Printer )
 		printer_status();
@@ -227,7 +227,7 @@ int  PERIPHERALS(void)
 
 void SerialNo_and_Version_Based_Tags()
 {
-	get_app_details();
+	Applications_Details();
 
 	FirmwareDetails();
 

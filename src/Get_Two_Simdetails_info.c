@@ -1,12 +1,8 @@
 #include <header.h>
-extern char var_gprs[30];
-
 int Get_Two_Simdetails_info(void)
 {
 
 	short int i=0,sim_details_ret=0,gprs_update_ret=0,operator_details_ret=0;
-	char SIM1_SignalStrength[10]="";
-	char SIM2_SignalStrength[10]="";
 	char op_buff[80]="";
 	char op1_buff[80]="";
 	int imei_ccid=0;
@@ -15,7 +11,6 @@ int Get_Two_Simdetails_info(void)
 	char gsm_version[50]="";
 	char CCID_NUM[80]="";
 	char CCID1_NUM[80]="";
-	int NWType=0;
 
 	for ( i=0 ; i <  2 ; i++ )
 	{
@@ -33,9 +28,9 @@ int Get_Two_Simdetails_info(void)
 	if(sim_details_ret != 0)
 	{
 
-		strcpy(module.IMEI_no,"ERROR");
-		strcpy(module.CCID,"ERROR");
-		strcpy(module.Sim2CCID,"ERROR");
+		strcpy(module.IMEI_no,"Not Found");
+		strcpy(module.CCID,"Not Found");
+		strcpy(module.Sim2CCID,"Not Found");
 
 		printf("module.IMEI_no:%s\n",module.IMEI_no);
 		printf("module.CCID_no:%s\n",module.CCID);
@@ -56,7 +51,7 @@ int Get_Two_Simdetails_info(void)
 
 	for ( i=0 ; i <  2 ; i++ )
 	{
-		gprs_update_ret = retrieve_two_signal_details(SIM1_SignalStrength,SIM2_SignalStrength);
+		gprs_update_ret = retrieve_two_signal_details(module.Sim1_db,module.Sim2_db);
 		if ( gprs_update_ret == -1)
 			sleep(1);
 		else 
@@ -64,21 +59,6 @@ int Get_Two_Simdetails_info(void)
 
 	}
 
-#if DEBUG
-	printf("SIGNALL STRENGTHHH SIM1 = %s\t SIM2 %s\n",SIM1_SignalStrength,SIM2_SignalStrength);
-#endif
-
-	if((gprs_update_ret == -1))
-	{
-		strcpy(SIM1_SignalStrength,"ERROR");	
-		strcpy(SIM2_SignalStrength,"ERROR");	
-	}
-
-	else if(strlen(SIM1_SignalStrength) == 0)
-		strcpy(SIM1_SignalStrength,"ERROR");	
-
-	else if(strlen(SIM2_SignalStrength) == 0)
-		strcpy(SIM2_SignalStrength,"ERROR");	
 
 	operator_details_ret = read_two_revision_operator_details(op_buff,op1_buff,gsm_version);
 
@@ -88,12 +68,12 @@ int Get_Two_Simdetails_info(void)
 
 	if( operator_details_ret != 0)
 	{
-		strcpy(module.operator1_name,"ERROR");
+		strcpy(module.operator1_name,"Not Found");
 		printf("Operator1 Name %s\n",module.operator1_name);
-		strcpy(module.operator2_name,"ERROR");
+		strcpy(module.operator2_name,"Not Found");
 		printf("Operator2 Name %s\n",module.operator2_name);
 
-		strcpy(module.GSM_Version,"ERROR");
+		strcpy(module.GSM_Version,"Not Found");
 		printf("GSM Firmware Version %s\n",module.GSM_Version);
 		op_rev=1;
 	}
@@ -109,48 +89,6 @@ int Get_Two_Simdetails_info(void)
 		op_rev=0;
 
 	}
-
-#if DEBUG
-	printf("Nw Status %s\n" );
-#endif
-
-	memset(module.Sim1_Details,0,sizeof(module.Sim1_Details));
-	memset(module.Sim2_Details,0,sizeof(module.Sim2_Details));
-
-
-	if(strstr(module.operator1_name,"ERROR"))
-		sprintf(module.Sim1_Details,"SIM1/ERROR/%s/G",module.operator1_name);
-	else 
-		sprintf(module.Sim1_Details,"SIM1/%sdb/%s/G",SIM1_SignalStrength,module.operator1_name);
-	if(strstr(module.operator2_name,"ERROR"))
-		sprintf(module.Sim2_Details,"SIM2/ERROR/%s/G",module.operator2_name );
-	else 
-		sprintf(module.Sim2_Details,"SIM2/%sdb/%s/G",SIM2_SignalStrength,module.operator2_name );
-#if DEBUG
-	printf("module.Sim1_Details=%s\n",module.Sim1_Details);
-	printf("module.Sim2_Details=%s\n",module.Sim2_Details);
-#endif
-
-	if ( strcmp(module.Comm,"GSM") == 0)
-	{
-		if( var_gprs[2]  == 'E')
-			NWType=2;
-		else if( var_gprs[2]  == 'H')
-			NWType=3;
-		else if( var_gprs[2]  == 'L')
-			NWType=4;
-	
-
-
-		if( var_gprs[0] == '1' ) 
-			sprintf(module.Sim1_Details,"SIM1/%sdb/%s/%dG",SIM1_SignalStrength,module.operator1_name,NWType );
-
-		else if( var_gprs[0] == '2' ) 
-			sprintf(module.Sim2_Details,"SIM2/%sdb/%s/%dG",SIM2_SignalStrength,module.operator2_name,NWType );
-
-		fprintf(stdout," %s %s %s\n",var_gprs,module.Sim1_Details,module.Sim2_Details);
-	}
-
 
 	printf("Flags op_rev **%d**\n,imei_ccid **%d**\n",op_rev,imei_ccid);
 	if( sim_details_ret != 0 || gprs_update_ret != 0 || operator_details_ret != 0)
@@ -228,7 +166,7 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 	operator_check(operator2_buff,operator2);
 
 	if(strlen(revision_buff)==0)
-		strcpy(revision_buff,"ERROR");
+		strcpy(revision_buff,"Not Found");
 #if DEBUG
 
 	printf("Operator1 %s : ****buff = %s**** \t Operator2:%s *****buff= %s ***** Revision:****%s*** \n",operator1,operator1_buff,operator2,operator2_buff,revision_buff);
@@ -346,13 +284,13 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 	}
 
 	if(strlen(ccid_buff) == 0)
-		strcpy(ccid_buff,"ERROR");
+		strcpy(ccid_buff,"Not Found");
 
 	if(strlen(imei_buff) == 0)
-		strcpy(imei_buff,"ERROR");
+		strcpy(imei_buff,"Not Found");
 
 	if(strlen(ccid1_buff) == 0)
-		strcpy(ccid1_buff,"ERROR");
+		strcpy(ccid1_buff,"Not Found");
 	printf("IMEI:****%s****\t CCID:****%s***\t CCID1:%s \n",imei_buff,ccid_buff,ccid1_buff);
 	return 0;
 

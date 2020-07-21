@@ -5,10 +5,7 @@ extern char var_gprs[30];
 int gprs_details(void)
 {
 	short int i=0,rev_operator_ret,SimDetails_ret=0,GPRS_update_ret=0;
-	int sim_num=0,bars=0,Sig_Strength=0;
 	char operator[16]="";
-	char Sig_status='0';
-	char signal_strength[30]="";
 	char IMEI_NUM[80]="";
 	char gsm_version[50]="";
 	char CCID_NUM[60]="";
@@ -28,8 +25,8 @@ int gprs_details(void)
 
 	if(SimDetails_ret != 0)
 	{
-		strcpy(module.IMEI_no,"ERROR");
-		strcpy(module.CCID,"ERROR");
+		strcpy(module.IMEI_no,"Not Found");
+		strcpy(module.CCID,"Not Found");
 
 		printf("\nmodule.IMEI_no:%s\n",module.IMEI_no);
 		printf("module.CCID_no:%s\n",module.CCID);
@@ -46,53 +43,13 @@ int gprs_details(void)
 	}
 
 
-	for ( i=0 ; i <  2 ; i++ )
-	{
-
-		if( strcmp(module.Comm,"GSM") == 0 )
-		{
-			strcpy(signal_strength,var_gprs);
-			GPRS_update_ret = 0;
-
-		}
-
-		else
-			GPRS_update_ret = retrieve_signal_details(signal_strength,"/tmp/gprs_update");
-
-		if ( GPRS_update_ret == -1)
-			sleep(1);
-		else 
-			break;	
-
-	}
-
-	if(GPRS_update_ret == 0 )	
-	{
-		sscanf(signal_strength,"%d,%c,%d,%d,",&sim_num,&Sig_status,&bars,&Sig_Strength);
-		if( Sig_status != 'E' && Sig_status != 'H' && Sig_status != 'L')	
-		{
-			Sig_status='0';
-			sim_num =0;
-			Sig_Strength=0;
-			printf("Sim not found\n");
-		}	
-		( Sig_status  == 'E') ?  (Sig_status ='2') : (( Sig_status  == 'H') ? ( Sig_status ='3') : (( Sig_status  == 'L')  ? Sig_status ='4':1));
-	}
-	else 
-	{
-		sim_num =0;
-		Sig_status='0';
-		Sig_Strength=0;
-		printf("Getting Signal Details Failed\n");
-	}
-
 	rev_operator_ret = read_revision_operator_details(operator,gsm_version);
 
 	memset(module.GSM_Version,0,sizeof(module.GSM_Version));
 	if( rev_operator_ret != 0)
 	{
-		strcpy(module.GSM_Version,"ERROR");
-		strcpy(operator,"ERROR");
+		strcpy(module.GSM_Version,"Not Found");
+		strcpy(operator,"Not Found");
 		printf("module.GSM_Version:%s\n",module.GSM_Version);
 	}
 	else
@@ -102,17 +59,6 @@ int gprs_details(void)
 
 	}
 
-
-	memset(module.Sim_Details,0,sizeof(module.Sim_Details));
-	if( strcmp(module.Comm,"GSM") == 0 )
-		sprintf(module.Sim_Details,"SIM%d/%ddb/%s/%cG",sim_num,Sig_Strength,operator,Sig_status);
-	else 
-		sprintf(module.Sim_Details,"SIM%d/%ddb/%s/G",sim_num,Sig_Strength,operator);
-	printf("module.Sim_Details:%s\n",module.Sim_Details);
-
-#if DEBUG
-	printf("sim_num = %01d, Sig_status = %c,bars = %01d,Sig_Strength= %02d\n",sim_num,Sig_status,bars,Sig_Strength);
-#endif
 
 	if((rev_operator_ret != 0) || (GPRS_update_ret != 0 ) || (SimDetails_ret != 0 ))
 	{
@@ -183,7 +129,7 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	}
 
 	if(strlen(revision_buff)==0)
-		strcpy(revision_buff,"ERROR");
+		strcpy(revision_buff,"Not Found");
 
 	for(i=0;operator_buff[i];i++)
 		if(isupper(operator_buff[i]))
@@ -197,31 +143,6 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	return 0;
 }
 
-int retrieve_signal_details(char *sigval_buff,char *file)
-{
-	FILE *fp;
-	char buff[30]="";
-
-	fp=fopen(file,"r");
-
-	if(fp == NULL)
-	{
-		fprintf(stderr,"%s file not found\n",file);
-		return -1;
-	}
-
-	fread(buff,12,1,fp);
-
-#if DEBUG
-	printf("GPRS INFO:***%s***\n",buff);
-#endif	
-	strcpy(sigval_buff,buff);
-
-	fclose(fp);
-	if(strlen(sigval_buff) == 0 )
-		return -1;
-	return 0; 
-}
 
 int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 {
@@ -281,10 +202,10 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 	}
 
 	if(strlen(ccid_buff) == 0)
-		strcpy(ccid_buff,"ERROR");
+		strcpy(ccid_buff,"Not Found");
 
 	if(strlen(imei_buff) == 0)
-		strcpy(imei_buff,"ERROR");
+		strcpy(imei_buff,"Not Found");
 
 #if DEBUG
 	printf("IMEI:****%s****\t CCID:****%s***\n",imei_buff,ccid_buff);

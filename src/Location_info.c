@@ -45,14 +45,14 @@ int  Location_info()
 
 	if ( flag )
 	{
-		module.GPS.Latitude=Latitude;
-		module.GPS.Longitude=Longitude;
+		sprintf(module.GPS.Latitude,"%lf",Latitude);
+		sprintf(module.GPS.Longitude,"%lf",Longitude);
 		strcpy(module.GPS.Captured_Time,Date);
 	}
 	else
 		strcpy(module.GPS.Captured_Time,"Error");
 
-	fprintf(stdout,"Latitude = %lf , Longitude = %lf module.GPS = %s  \n", module.GPS.Latitude,module.GPS.Longitude,module.GPS.Captured_Time);
+	fprintf(stdout,"Latitude = %s , Longitude = %s module.GPS = %s  \n", module.GPS.Latitude,module.GPS.Longitude,module.GPS.Captured_Time);
 	free(line);
 	fclose(fp);
 	line=NULL;

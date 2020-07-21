@@ -1,31 +1,12 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<malloc.h>
-int App_updates();
-int main()
-{
-	App_updates();	
-	return 0;
-}
-
-int App_updates()
+#include<header.h>
+int Total_Device_Apps=0;
+int Applications_Details()
 {
 	FILE *fp = NULL;
 
 	char *line=NULL,*str=NULL;
-	int Update_count,Update_flag;
 	size_t len=20;
-	int i,j,check=0,  Total_Device_Apps=0,  Total_Server_Apps=0;
-
-	char DeviceApplicationType[50][128];
-	char DeviceApplicationName[50][128];
-	float DeviceApplicationVersion[50];
-
-
-	memset(DeviceApplicationType,0,sizeof(DeviceApplicationType));
-	memset(DeviceApplicationName,0,sizeof(DeviceApplicationName));
-	memset(DeviceApplicationVersion,0,sizeof(DeviceApplicationVersion));
+	int i,j;
 
 	fp = fopen("/etc/visiontek_Application_release","r");
 	if(fp == NULL)
@@ -38,23 +19,26 @@ int App_updates()
 	{
 		if((str = (char *)strstr(line,"ApplicationType:")) != NULL)
 		{
-			strcpy(DeviceApplicationType[i],str+16);
-			if(DeviceApplicationType[i][ strlen(DeviceApplicationType[i]) -1 ] == '\n')
-				DeviceApplicationType[i][ strlen(DeviceApplicationType[i]) - 1 ]='\0';
+			strcpy(module.Application[i].Type,str+16);
+			if(module.Application[i].Type[ strlen(module.Application[i].Type) -1 ] == '\n')
+				module.Application[i].Type[ strlen(module.Application[i].Type) - 1 ]='\0';
 			i++;
 		}
 		else if((str = (char *)strstr(line,"ApplicationName:")) != NULL)
 		{
-			strcpy(DeviceApplicationName[j],str+16);
-			if(DeviceApplicationName[j][strlen(DeviceApplicationName[j])-1] == '\n')
-				DeviceApplicationName[j][strlen(DeviceApplicationName[j])-1]='\0';
+			strcpy(module.Application[j].Name,str+16);
+			if(module.Application[j].Name[strlen(module.Application[j].Name)-1] == '\n')
+				module.Application[j].Name[strlen(module.Application[j].Name)-1]='\0';
 			j++;
 		}
 		else if((str = (char *)strstr(line,"Version:")) != NULL)
 		{
 			if( i > 0 && i == j )
-				DeviceApplicationVersion[j-1]  = atof(str+8);
-
+			{
+				strcpy(module.Application[j-1].Version,str+8);
+				if(module.Application[j-1].Version[strlen(module.Application[j-1].Version)-1] == '\n')
+					module.Application[j-1].Version[strlen(module.Application[j-1].Version)-1]='\0';
+			}
 			else 
 			{	
 				fprintf(stdout," %d  %d \n", i,j);
@@ -83,7 +67,7 @@ int App_updates()
 
 	for(i=0;i<Total_Device_Apps;i++)
 
-		fprintf(stdout,"ApplicationType =%s ,ApplicationName=%s,ApplicationVersion= %.1f \n",DeviceApplicationType[i],DeviceApplicationName[i],DeviceApplicationVersion[i]);
+		fprintf(stdout,"ApplicationType =%s ,ApplicationName=%s,ApplicationVersion= %s\n",module.Application[i].Type,module.Application[i].Name,module.Application[i].Version);
 
 
 	return 0;

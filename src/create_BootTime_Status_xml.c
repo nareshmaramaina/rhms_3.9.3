@@ -2,6 +2,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 int BootTime_Status_xml_frame();
+extern int Total_Device_Apps;
 
 char *BootTime_Status_file="/opt/BootTime_Status.xml";
 
@@ -50,9 +51,10 @@ int  create_BootTime_Status_xml_file(void)
 }
 
 
-
 int BootTime_Status_xml_frame()
 {
+	Applications_Details();
+	int i=0;
 	fprintf(stdout,"\n\n BootTime_Status.xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
 	xmlNodePtr root_node = NULL, childnode = NULL,childofchildnode = NULL;/* node pointers */
@@ -71,10 +73,10 @@ int BootTime_Status_xml_frame()
 	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "DOT",NULL);
 		xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.DOT.Date);
-		xmlNewChild(childnode, NULL, BAD_CAST "Slot1", BAD_CAST &module.DOT.Slot1);
-		xmlNewChild(childnode, NULL, BAD_CAST "Slot2", BAD_CAST &module.DOT.Slot2);
-		xmlNewChild(childnode, NULL, BAD_CAST "Slot3", BAD_CAST &module.DOT.Slot3);
-		xmlNewChild(childnode, NULL, BAD_CAST "Slot4", BAD_CAST &module.DOT.Slot4);
+		xmlNewChild(childnode, NULL, BAD_CAST "Slot1", BAD_CAST module.DOT.Slot1);
+		xmlNewChild(childnode, NULL, BAD_CAST "Slot2", BAD_CAST module.DOT.Slot2);
+		xmlNewChild(childnode, NULL, BAD_CAST "Slot3", BAD_CAST module.DOT.Slot3);
+		xmlNewChild(childnode, NULL, BAD_CAST "Slot4", BAD_CAST module.DOT.Slot4);
 	}
 
 
@@ -108,22 +110,25 @@ int BootTime_Status_xml_frame()
 	if( CONFIG.Camera )
 		xmlNewChild(root_node, NULL, BAD_CAST "Camera", BAD_CAST module.Camera);
 	xmlNewChild(root_node, NULL, BAD_CAST "AUDIO", BAD_CAST module.AUDIO);
-
 	if( CONFIG.BatteryInfo )
 	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "BatteryInfo",NULL);
 		xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.BatteryInfo.Date);
-		xmlNewChild(childnode, NULL, BAD_CAST "Day_worked_mins", BAD_CAST &module.BatteryInfo.Day_worked_mins);
-		xmlNewChild(childnode, NULL, BAD_CAST "Day_adapter_mins", BAD_CAST &module.BatteryInfo.Day_adapter_mins);
-		xmlNewChild(childnode, NULL, BAD_CAST "Day_charged_mins", BAD_CAST &module.BatteryInfo.Day_charged_mins);
-		xmlNewChild(childnode, NULL, BAD_CAST "Day_discharged_mins", BAD_CAST &module.BatteryInfo.Day_discharged_mins);
+		xmlNewChild(childnode, NULL, BAD_CAST "Day_worked_mins", BAD_CAST module.BatteryInfo.Day_worked_mins);
+		xmlNewChild(childnode, NULL, BAD_CAST "Day_adapter_mins", BAD_CAST module.BatteryInfo.Day_adapter_mins);
+		xmlNewChild(childnode, NULL, BAD_CAST "Day_charged_mins", BAD_CAST module.BatteryInfo.Day_charged_mins);
+		xmlNewChild(childnode, NULL, BAD_CAST "Day_discharged_mins", BAD_CAST module.BatteryInfo.Day_discharged_mins);
 	}
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
-	childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
-	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST module.app_type);
-	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.app_type);
-	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.app_version);
+
+	for ( i=0;i<Total_Device_Apps;i++)
+	{
+		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
+		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST module.Application[i].Type);
+		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.Application[i].Name);
+		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.Application[i].Version);
+	}
 
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);

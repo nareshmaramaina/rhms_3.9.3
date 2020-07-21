@@ -67,8 +67,8 @@ int Health_Status_xml_frame()
 
 	//if( CONFIG.GPS || CONFIG.geo_location )
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
-	xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST &module.GPS.Latitude);
-	xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST &module.GPS.Longitude);
+	xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
+	xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
 	xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
 	xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
 	//if( CONFIG.Printer )

@@ -8,6 +8,7 @@
 Adapter_status	DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Adapter_status	TESTING_DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Adapter_status	adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
+Applications_Details	get_app_info.c	/^int Applications_Details()$/;"	f	typeref:typename:int
 Autoapn_xmlparse	autoapn_xmlparser.c	/^int Autoapn_xmlparse( char *docname )$/;"	f	typeref:typename:int
 Autoapn_xmlparseStory	autoapn_xmlparser.c	/^void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:void
 BTINFO	DOT_1.1/header.h	/^#define BTINFO /;"	d
@@ -70,6 +71,7 @@ FPS_Id_and_version	FPS_Id_and_version.c	/^void FPS_Id_and_version()$/;"	f	typere
 FPS_Id_and_version.o	Makefile	/^FPS_Id_and_version.o:FPS_Id_and_version.c$/;"	t
 FPS_RDVersion.o	Makefile	/^FPS_RDVersion.o:FPS_RDVersion.c$/;"	t
 FPS_RD_version	FPS_RDVersion.c	/^void FPS_RD_version()$/;"	f	typeref:typename:void
+FirmwareDetails	patch_info.c	/^int FirmwareDetails()$/;"	f	typeref:typename:int
 GPS_Success	main.c	/^int GPS_Success;$/;"	v	typeref:typename:int
 Get_Config_Settings	parse_rhms_config.c	/^int Get_Config_Settings()$/;"	f	typeref:typename:int
 Get_Ethernet_Status	ethernet_info.c	/^int Get_Ethernet_Status(void)$/;"	f	typeref:typename:int
@@ -85,8 +87,6 @@ Get_interface_name	Update_Comm_media_test.c	/^int Get_interface_name(char *inter
 Give_date	Date_calculations.c	/^int Give_date(char *file_name)$/;"	f	typeref:typename:int
 Hardware_Status_file	create_Hardware_status.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
 Hardware_Status_file	create_Hardware_status_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
-Hardware_changed_info	Hardware_changed_info.c	/^void Hardware_changed_info()$/;"	f	typeref:typename:void
-Hardware_changed_info.o	Makefile	/^Hardware_changed_info.o:Hardware_changed_info.c$/;"	t
 Hardware_xml_frame	create_Hardware_status.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
 Hardware_xml_frame	create_Hardware_status_xml.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
 Health_Status_file	create_Health_status_xml.c	/^char *Health_Status_file="\/opt\/Health_Status.xml";$/;"	v	typeref:typename:char *
@@ -95,7 +95,7 @@ Health_response_xml_file	remote_update.c	/^char *Health_response_xml_file="\/opt
 IMAGES	os_info.c	/^void IMAGES()$/;"	f	typeref:typename:void
 Iris_Scanner_Id	get_iris_scanner.c	/^void Iris_Scanner_Id(void)$/;"	f	typeref:typename:void
 Iris_version	iris_version.c	/^void Iris_version()$/;"	f	typeref:typename:void
-Is_Hardware_changed	parse_xml.c	/^int Is_Hardware_changed(char *docname)$/;"	f	typeref:typename:int
+Is_Hardware_Status_changed	parse_xml.c	/^int Is_Hardware_Status_changed()$/;"	f	typeref:typename:int
 Location_info	Location_info.c	/^int  Location_info()$/;"	f	typeref:typename:int
 Location_info.o	Makefile	/^Location_info.o:Location_info.c$/;"	t
 Node	module.c	/^struct Node $/;"	s	file:
@@ -114,7 +114,9 @@ PinpadSerialNo_info_by_dev_name	Pinpad/pin.c	/^int PinpadSerialNo_info_by_dev_na
 PinpadSerialNo_info_by_dev_name	PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f	typeref:typename:int
 RTC_info_and_Check_RHMS_run	rtc_functions.c	/^int RTC_info_and_Check_RHMS_run()$/;"	f	typeref:typename:int
 Second_Time_Health_Info_sending_for_GPS	Periodic_tags.c	/^void Second_Time_Health_Info_sending_for_GPS()$/;"	f	typeref:typename:void
+Send_Hardware_status_to_server	remote_update.c	/^int Send_Hardware_status_to_server (void)$/;"	f	typeref:typename:int
 SerialNo_and_Version_Based_Tags	POS_HEALTH_DETAILS.c	/^void SerialNo_and_Version_Based_Tags()$/;"	f	typeref:typename:void
+Total_Device_Apps	get_app_info.c	/^int Total_Device_Apps=0;$/;"	v	typeref:typename:int
 Total_Solt1_secs	DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	typeref:typename:int	file:
 Total_Solt1_secs	Device_work_records.c	/^		int Total_Solt1_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
 Total_Solt1_secs	TESTING_DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	typeref:typename:int	file:
@@ -183,7 +185,6 @@ fp_info.o	Makefile	/^fp_info.o:fp_info.c$/;"	t
 fp_type	fp_info.c	/^int fp_type(void)$/;"	f	typeref:typename:int
 fpfile.o	Makefile	/^fpfile.o :fpfile.c$/;"	t
 get_Usb_device_serialno	get_usbdevice_serialno.c	/^int get_Usb_device_serialno(char *Vendorid,char *ProductId,char *serialno)$/;"	f	typeref:typename:int
-get_app_details	get_app_info.c	/^int  get_app_details()$/;"	f	typeref:typename:int
 get_app_info.o	Makefile	/^get_app_info.o:get_app_info.c$/;"	t
 get_bluetooth_macid	weighing_serialid_details.c	/^void get_bluetooth_macid(char *macid)$/;"	f	typeref:typename:void
 get_device_serialnumber	dev_info.c	/^void get_device_serialnumber(void)  \/\/ Updating Device serial number in RHMS health structures$/;"	f	typeref:typename:void
@@ -243,12 +244,9 @@ parseStory	parse_Health_status_xml.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr
 parseStory	xmlparser.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f	typeref:typename:int
 parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int
 parse_device_details	parse_xml.c	/^int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int
-parse_peripherals	parse_xml.c	/^int parse_peripherals (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int
 parse_rhms_config.o	Makefile	/^parse_rhms_config.o:parse_rhms_config.c$/;"	t
 parse_xml.o	Makefile	/^parse_xml.o:parse_xml.c$/;"	t
 patch_info.o	Makefile	/^patch_info.o:patch_info.c$/;"	t
-patch_name	patch_info.c	/^int patch_name(void)$/;"	f	typeref:typename:int
-patch_ver	patch_info.c	/^int patch_ver()$/;"	f	typeref:typename:int
 pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f	typeref:typename:int
 pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f	typeref:typename:void
 pinpad_status.o	Makefile	/^pinpad_status.o:pinpad_status.c$/;"	t
@@ -276,7 +274,6 @@ sam_info.o	Makefile	/^sam_info.o:sam_info.c$/;"	t
 sam_status	sam_info.c	/^int sam_status(int card_select)$/;"	f	typeref:typename:int
 sam_thread_function	POS_HEALTH_DETAILS.c	/^void *sam_thread_function( void *ptr )$/;"	f	typeref:typename:void *
 sdcard_test	memory_info.c	/^int sdcard_test(int partition_flag)$/;"	f	typeref:typename:int
-send_health_info_to_server	remote_update.c	/^int send_health_info_to_server (void)$/;"	f	typeref:typename:int
 server_updation	remote_update.c	/^int server_updation(void)$/;"	f	typeref:typename:int
 update_date_status_file	rtc_functions.c	/^int update_date_status_file(void) \/\/after rhms successfull update ,updating time stamp to \/op/;"	f	typeref:typename:int
 update_fp_scanner_info	fp_info.c	/^int  update_fp_scanner_info(void)$/;"	f	typeref:typename:int
@@ -286,7 +283,6 @@ update_macid_details	dev_info.c	/^void update_macid_details()$/;"	f	typeref:type
 update_pendrive_details	usb_info.c	/^int update_pendrive_details(void)$/;"	f	typeref:typename:int
 update_ram_info	memory_info.c	/^int update_ram_info(void)$/;"	f	typeref:typename:int
 update_sd_details	memory_info.c	/^int update_sd_details(void)$/;"	f	typeref:typename:int
-update_sd_details	naresh.c	/^int update_sd_details(void)$/;"	f	typeref:typename:int
 update_sdcard_info	memory_info.c	/^int update_sdcard_info(void)$/;"	f	typeref:typename:int
 update_usb_info	usb_info.c	/^int update_usb_info()$/;"	f	typeref:typename:int
 usb_device_presence	usb_info.c	/^int usb_device_presence (char *vendor_id, char *product_id)$/;"	f	typeref:typename:int

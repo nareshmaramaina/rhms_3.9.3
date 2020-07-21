@@ -131,7 +131,7 @@ int RTC_info_and_Check_RHMS_run()
 	if( gl11_getrtc (intim) == -1 )
 	{
 		fprintf(stderr,"RTC Read Error\n");
-		sprintf(module.RTC,"ERROR");
+		sprintf(module.RTC,"Failure");
 	}
 
 	gettimeofday (&tv,NULL);
@@ -151,11 +151,11 @@ int RTC_info_and_Check_RHMS_run()
 	if ( intim->tm_year+1900 < 2020 )
 	{
 		fprintf(stderr,"Date Wrong set - Year Error\n");
-		sprintf(module.RTC,"ERROR");
+		sprintf(module.RTC,"Failure");
 		return -1;
 
 	}
-	sprintf(module.RTC,"OK");
+		sprintf(module.RTC,"Success");
 
 
 	if ( access("/opt/rhms_date_update", F_OK) == 0 )

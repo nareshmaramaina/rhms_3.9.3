@@ -77,25 +77,32 @@ typedef struct Memory
 
 typedef struct device 
 {
-	double Longitude,Latitude;
+	char Longitude[24];
+	char Latitude[24];
 	char Captured_Time[24];
 }Location;
 struct Device_on_time 
 {
 	char Date[14];
-	int Slot1;
-	int Slot2;
-	int Slot3;
-	int Slot4;
+	char Slot1[12];
+	char Slot2[12];
+	char Slot3[12];
+	char Slot4[12];
 };
 
 struct device_battery 
 {
 	char Date[14];
-	int Day_worked_mins;
-	int Day_adapter_mins;
-	int Day_charged_mins;
-	int Day_discharged_mins;
+	char Day_worked_mins[12];
+	char Day_adapter_mins[12];
+	char Day_charged_mins[12];
+	char Day_discharged_mins[12];
+};
+struct Device
+{
+        char Version[12];
+        char Type[128];
+        char Name[128];
 };
 struct terminal_status
 {
@@ -103,9 +110,10 @@ struct terminal_status
 	char GeoLocation[80];
 	char CamType[12];
 	char Comm[12];
-	char IRIS_VERSION[12];
-	char LIB_BIO[10];
-	char IRIS_ID[16]; 
+	//char IRIS_VERSION[12];
+//	char LIB_BIO[10];
+//	char IRIS_ID[16]; 
+//	char HWChanged[12];
 	char IRIS[32];
 	char IritechRDVer[10];
 	char IritechSno[24];
@@ -114,7 +122,6 @@ struct terminal_status
 	char pinpad[32];
 	char PinpadSN[64];
 	char FPSRDVer[10];
-	char HWChanged[12];
 	char IFD1[10];
 	char IFD2[10];
 	char SAM1[10];
@@ -142,10 +149,10 @@ struct terminal_status
 	char Sim2CCID[50];
 	char operator1_name[50];
 	char operator2_name[50];
-	char Sim1_Details[120];
-	char Sim2_Details[120];
-	char Sim1_db[32];
-	char Sim2_db[32];
+	char Sim1_db[12];
+	char Sim2_db[12];
+        char SIM1SignalMode[12];
+        char SIM2SignalMode[12];
 
 	char GSM_Module[64];
 	char CCID[50];
@@ -160,6 +167,7 @@ struct terminal_status
 	Location GPS;
 	struct Device_on_time DOT; 
 	struct device_battery BatteryInfo; 
+	struct Device Application[50];
 
 	char AUDIO[20];
 	char IMEI_no[40];
@@ -307,3 +315,6 @@ int 	create_Hardware_status_xml_file();
 int 	create_BootTime_Status_xml_file();
 int create_Health_Status_xml_file();
 int Is_Hardware_Status_changed();
+int Applications_Details();
+void Update_Simdb_and_Signalmode();
+

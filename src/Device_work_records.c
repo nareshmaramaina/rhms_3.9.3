@@ -52,18 +52,18 @@ int Device_work_records()
 	strcpy(DOT_FILE,filename);
 
 	strcpy(module.DOT.Date,Date);
-	module.DOT.Slot1=Day.Total_Solt1_secs/60;
-	module.DOT.Slot2=Day.Total_Solt2_secs/60;
-	module.DOT.Slot3=Day.Total_Solt3_secs/60;
-	module.DOT.Slot4=Day.Total_Solt4_secs/60;	
+	sprintf(module.DOT.Slot1,"%d",Day.Total_Solt1_secs/60);
+	sprintf(module.DOT.Slot2,"%d",Day.Total_Solt2_secs/60);
+	sprintf(module.DOT.Slot3,"%d",Day.Total_Solt3_secs/60);
+	sprintf(module.DOT.Slot4,"%d",Day.Total_Solt4_secs/60);
 
 	if( CONFIG.BatteryInfo )
 	{
 		strcpy(module.DOT.Date,Date);
-		module.BatteryInfo.Day_worked_mins=Day.Total_work_secs/60;
-		module.BatteryInfo.Day_adapter_mins=Day.Total_adapter_secs/60;
-		module.BatteryInfo.Day_charged_mins=Day.Total_charging_secs/60;
-		module.BatteryInfo.Day_discharged_mins=Day.Total_discharging_secs/60;
+		sprintf(module.BatteryInfo.Day_worked_mins,"%d",Day.Total_work_secs/60);
+		sprintf(module.BatteryInfo.Day_adapter_mins,"%d",Day.Total_adapter_secs/60);
+		sprintf(module.BatteryInfo.Day_charged_mins,"%d",Day.Total_charging_secs/60);
+		sprintf(module.BatteryInfo.Day_discharged_mins,"%d",Day.Total_discharging_secs/60);
 	}
 	return 0;
 
