@@ -1,0 +1,1 @@
+<ArrayOfApplicationStatusResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ApplicationStatusResponse><ProjectName>APPDS</ProjectName><ApplicationType>testing_</ApplicationType><ApplicationName>test1</ApplicationName><Version /><ApplicationURL /></ApplicationStatusResponse></ArrayOfApplicationStatusResponse>

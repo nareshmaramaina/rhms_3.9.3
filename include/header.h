@@ -32,7 +32,6 @@
 #include <libxml/parser.h>
 #include <dlfcn.h>
 
-
 #define TEST_REAL 0
 #define OPTICAL 1
 #define CAPACITIVE 2
@@ -40,101 +39,63 @@
 
 struct rhms
 {
-//short int Comm;
-short int DOT;
-short int BatteryInfo;
-short int Iris_or_Biomat;
-short int IrisRDVer_and_SNo;
-short int geo_location;
-short int CamType;
-short int WSSN;
-short int Pinpad;
-short int PinpadSN;
-short int FPSRDVer;
-short int GPS;
-short int BarcodeSno;
-short int BiomRDVer;
-//short int BiomSno;
-short int HWChanged;
-//short int FingerPrint;
-//short int FPScannerid;
-short int Bluetooth;
-short int SAM1;
-short int SAM2;
-//short int Ethernet;
-short int Printer;
-short int WIFI;
-short int IFD1;
-short int IFD2;
-short int Camera;
-//short int RTC;
-//short int AUDIO;
-short int Two_Simdetails_Autoapn;
+	short int DOT;
+	short int BatteryInfo;
+	short int Iris_or_Biomat;
+	short int IrisRDVer_and_SNo;
+	short int geo_location;
+	short int CamType;
+	short int WSSN;
+	short int Pinpad;
+	short int PinpadSN;
+	short int FPSRDVer;
+	short int GPS;
+	short int BarcodeSno;
+	short int BiomRDVer;
+	short int HWChanged;
+	short int Bluetooth;
+	short int SAM1;
+	short int SAM2;
+	short int Printer;
+	short int WIFI;
+	short int IFD1;
+	short int IFD2;
+	short int Camera;
+	short int Two_Simdetails_Autoapn;
 
 }CONFIG;
 
 
-struct struct_Day
-{
-	char date[9];
-	char time[5];
-	char weekday[5];
-
-}Date_Time;
-
 char DOT_FILE[64];
-
-  //char Date_Time[64]
-
-/*struct POS
-{
-  char SerialNo[50]
-  char TerminalID[64]
-  char Macid[64]
-  char UbootImageName[64]
-  char KernelImageName[64]
-  char RootfsImageName[64]
-  char IMEInumber[64]
-  char UID[64]
-  char IritechSno[24]
-  char PinpadSN[64]
-  char BarcodeSno[32]
-  char GSMVersion[64]
-  char GSM_Module[64]
-  char WSSN[32]
-  char CamType[12]
-  char FPScannerid[64]
-
-}Hardware; */
 
 typedef struct Memory
 {
-char Total[16];
-char Use[16];
-char Free[16];
+	char Total[16];
+	char Use[16];
+	char Free[16];
 }MEMORY;
 
 typedef struct device 
 {
- double Longitude,Latitude;
- char Captured_Time[24];
+	double Longitude,Latitude;
+	char Captured_Time[24];
 }Location;
 struct Device_on_time 
 {
-char Date[14];
-int Slot1;
-int Slot2;
-int Slot3;
-int Slot4;
+	char Date[14];
+	int Slot1;
+	int Slot2;
+	int Slot3;
+	int Slot4;
 };
 
 struct device_battery 
 {
-char Date[14];
-int Day_worked_mins;
-int Day_adapter_mins;
-int Day_charged_mins;
-int Day_discharged_mins;
+	char Date[14];
+	int Day_worked_mins;
+	int Day_adapter_mins;
+	int Day_charged_mins;
+	int Day_discharged_mins;
 };
 struct terminal_status
 {
@@ -177,7 +138,7 @@ struct terminal_status
 	char Adapter[30];
 	char fingerprint[10];
 	char ethernet[20];
-	
+
 	char Sim2CCID[50];
 	char operator1_name[50];
 	char operator2_name[50];
@@ -185,11 +146,11 @@ struct terminal_status
 	char Sim2_Details[120];
 	char Sim1_db[32];
 	char Sim2_db[32];
-	
+
 	char GSM_Module[64];
 	char CCID[50];
 	char Sim_Details[120];
-	
+
 	MEMORY	InternalMem_Sysuser;
 	MEMORY	InternalMem_Jffs2;
 	MEMORY	RAM;
@@ -199,7 +160,7 @@ struct terminal_status
 	Location GPS;
 	struct Device_on_time DOT; 
 	struct device_battery BatteryInfo; 
-	
+
 	char AUDIO[20];
 	char IMEI_no[40];
 	char TerminalID[30];
@@ -208,8 +169,8 @@ struct terminal_status
 	char UbootVersion[50];
 	char KernelVersion[50];
 	char rootfs_details[50];
-	char PatchVersion[10];
-	char PatchName[50];
+	char FirmwareVersion[10];
+	char FirmwareName[128];
 }module;
 
 
@@ -237,7 +198,7 @@ int sam_status(int);
 int Wifi_Status(void);
 int dev_details(void);
 int OS_Details(void);
-int patch_ver(void);
+int FirmwareDetails(void);
 int patch_name(void);
 int internal_memory_status(void);
 int update_sdcard_info(void);
@@ -277,7 +238,7 @@ int cap_scanner_id(char *);
 int Check_Physical_Existence(void);
 inline void msleep(int arg);
 int update_fp_scanner_info(void);
-int send_health_info_to_server (void);
+int Send_Hardware_status_to_server (void);
 int copy_file (char *dest,char *src);
 int update_internal_memory_info(void);
 int Get_Ethernet_Status(void);

@@ -42,10 +42,10 @@ int main()
 
 	ret = 	Is_Hardware_Status_changed();
 
-	if ( ret != 0)
+	if ( ret != 0) // on return 0 No Change, return non zero  Changes happened
 	{
 		create_Hardware_status_xml_file();
-		ret =  send_health_info_to_server(); 
+		ret =  Send_Hardware_status_to_server(); 
 		if ( ret == -2 )
 		{
 			fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);
@@ -64,7 +64,7 @@ int main()
 		if ( ret != 0 )
 			return ret;	
 
-		ret =  send_health_info_to_server(); 
+		ret =  Send_Hardware_status_to_server(); 
 
 		if ( ret == -2 )
 		{

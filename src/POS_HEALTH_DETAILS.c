@@ -229,11 +229,7 @@ void SerialNo_and_Version_Based_Tags()
 {
 	get_app_details();
 
-	patch_ver();
-
-	patch_name();
-
-
+	FirmwareDetails();
 
 	if( CONFIG.IrisRDVer_and_SNo ) 
 	{

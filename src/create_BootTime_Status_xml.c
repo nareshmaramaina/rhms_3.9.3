@@ -125,8 +125,8 @@ int BootTime_Status_xml_frame()
 	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.app_type);
 	xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.app_version);
 
-	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.PatchName);
-	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.PatchVersion);
+	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
+	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);
 
 	if( CONFIG.IrisRDVer_and_SNo  )
 		xmlNewChild(root_node, NULL, BAD_CAST "IritechRDVer", BAD_CAST module.IritechRDVer);

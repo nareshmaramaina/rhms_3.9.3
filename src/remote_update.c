@@ -2,7 +2,7 @@
 char *Health_response_xml_file="/opt/Health_response.xml";
 extern char *Health_Status_file;
 int parseDoc(char *);
-int send_health_info_to_server (void)
+int Send_Hardware_status_to_server (void)
 {
 	int ret = 0;
 	int i=0;
