@@ -26,7 +26,7 @@ int iris_status(void)
 		else
 		{ 
 			fprintf(stderr,"%d IRITECH/BIOMATIQUES not found usb_device_presence = %d\n",i,iris_check);	
-			strcpy(module.IRIS,"ERROR");
+			strcpy(module.IRIS,"Not connected");
 		}
 		sleep(1);
 	}

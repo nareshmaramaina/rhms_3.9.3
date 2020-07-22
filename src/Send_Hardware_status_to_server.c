@@ -2,6 +2,7 @@
 char *Health_response_xml_file="/opt/Health_response.xml";
 extern char *Health_Status_file;
 int parseDoc(char *);
+extern char Server_Addr[128];
 int Send_Hardware_status_to_server (void)
 {
 	int ret = 0;
@@ -39,18 +40,11 @@ int server_updation(void)
 {
 
 	int ret;
-	char Server_Addr[512];
 	FILE    *fp;
 	char    cmd[1024];
 	size_t len=0;
 	char *str=NULL;
 
-	memset(Server_Addr,0,sizeof(Server_Addr));
-
-	ret = Get_Server_Addr(Server_Addr);
-
-	if( ret != 0 )
-		strcpy(Server_Addr,"https://rhms2.callippus.co.uk");
 
 	remove(Health_response_xml_file);
 
@@ -105,35 +99,3 @@ int server_updation(void)
 	return ret;
 }
 
-int  Get_Server_Addr(char *Server_Addr)
-{
-	FILE *fp;
-	size_t len=0;
-	char *str=NULL; 
-
-
-	fp = fopen("/etc/.RHMS_Server.config","r");
-
-	if (fp == NULL)
-	{
-		fprintf(stderr," /etc/.RHMS_Server.config open error\n");
-		return -1;
-	}
-
-	while((getline(&str,&len,fp)) != -1)
-	{
-		if  (strstr(str,"ServerAddress:") != NULL )
-		{
-			strcpy(Server_Addr,str+14);
-			break;
-		}
-	}
-	free(str);
-	str=NULL;	
-	fclose(fp);
-
-	if(Server_Addr[strlen(Server_Addr)-1] == '\n')
-		Server_Addr[strlen(Server_Addr)-1]='\0';
-
-	return 0;
-}

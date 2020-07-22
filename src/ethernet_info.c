@@ -14,32 +14,10 @@ int Ethernet_status(void)
 	printf("check cable presence%d\n",check_cable);
 #endif
 	if(check_cable == 1)
-	{
-
-#if DEBUG
-		fprintf(stdout,"Ethernet is ALive\n");
-#endif
-		strcpy(module.ethernet,"Alive");
-		fprintf(stdout,"Ethernet Status:%s\n",module.ethernet);
-
-	}
-	else if(check_cable == 0)
-	{
-
-#if DEBUG
-		fprintf(stdout,"Ethernet is Not ALive\n");
-
-#endif
-
-		strcpy(module.ethernet,"Not Alive");
-
-	}
-	else
-	{
-		strcpy(module.ethernet,"ERROR");
-		fprintf(stdout,"Ethernet Status: %s\n",module.ethernet);
-		return -1;
-	}	
+		strcpy(module.ethernet,"Connected");
+	else 
+		strcpy(module.ethernet,"Not Connected");
+	fprintf(stdout,"Ethernet Status: %s\n",module.ethernet);
 
 
 	return 0;

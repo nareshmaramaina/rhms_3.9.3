@@ -28,7 +28,7 @@ void operator_check(char *operator_buff,char *operator)
 	else if(strstr(operator_buff,"jio")!=0)
 		strcpy(operator,"jio");
 
-	else strcpy(operator,"ERROR");
+	else strcpy(operator,"Not Found");
 
 	return ;
 }
