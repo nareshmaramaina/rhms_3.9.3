@@ -8,7 +8,7 @@ void Biomatiques_RD_version()
 	fp = fopen("/etc/Biomatiques_rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
-		strcpy(module.BiomRDVer,"ERROR");
+		strcpy(module.BiomRDVer,"Not Found");
 		fprintf(stderr,"/etc/Biomatiques_rd_info.txt file not found\n");
 		return;
 	}
@@ -22,7 +22,7 @@ void Biomatiques_RD_version()
 		}
 	}
 	if(strlen(module.BiomRDVer) == 0)	
-		strcpy(module.BiomRDVer,"ERROR");
+		strcpy(module.BiomRDVer,"Not Found");
 
 	fprintf(stdout," BiomRDVer_BUFF = %s\tmodule.BiomRDVer = %s \n",line,module.BiomRDVer);
 	free(line);

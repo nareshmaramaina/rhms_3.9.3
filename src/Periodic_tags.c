@@ -32,11 +32,11 @@ void Periodic_tags(void)
 
 	if ( CONFIG.geo_location || CONFIG.GPS )
 		Location_info();
-	
+
 	if( CONFIG.Iris_or_Biomat )
 		iris_status();
-	
-	
+
+
 	ret = gl11_iodev_open();
 	if ( ret != 0)
 	{
@@ -46,12 +46,12 @@ void Periodic_tags(void)
 
 	else 
 	{
-	     if( CONFIG.Printer )
-                paper_status();
+		if( CONFIG.Printer )
+			printer_status();
 
 		battery_status();
 
-		
+
 		gl11_iodev_close();
 
 	}
@@ -59,7 +59,7 @@ void Periodic_tags(void)
 	Update_Simdb_and_Signalmode();	
 	update_internal_memory_info();
 	update_ram_info();
-	
+
 	return;
 }
 void Update_Simdb_and_Signalmode()
@@ -68,7 +68,7 @@ void Update_Simdb_and_Signalmode()
 	char Sig_status='0';
 	memset(module.SIM1SignalMode,0,sizeof(module.SIM1SignalMode));
 	memset(module.SIM2SignalMode,0,sizeof(module.SIM2SignalMode));
-	
+
 	if(strlen(module.Sim1_db) == 0 )
 		strcpy(module.Sim1_db,"Not Found");
 	else 
@@ -98,7 +98,7 @@ void Update_Simdb_and_Signalmode()
 			Sig_status = var_gprs[2];
 		}
 		( Sig_status  == 'E') ?  (Sig_status ='2') : (( Sig_status  == 'H') ? ( Sig_status ='3') : (( Sig_status  == 'L')  ? Sig_status ='4':1));
-		
+
 		Sig_Strength = (Sig_Strength*2)-113;
 		if ( sim_num == 1 )
 		{	

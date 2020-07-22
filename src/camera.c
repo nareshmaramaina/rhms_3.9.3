@@ -12,14 +12,14 @@ int  verify_presence(int times)
 		if( cam_check == 0)
 		{
 			printf("Cam found \n");
-			strcpy(module.Camera,"OK");
+			strcpy(module.Camera,"YES");
 			printf("module.Camera is OK\n");
 			return 0;
 		}
 		else
 			printf("Camera not found usb_device_presence = %d\n",cam_check);	
 
-			strcpy(module.Camera,"ERROR");
+			strcpy(module.Camera,"NO");
 
 	}	
 	return -1;
@@ -44,7 +44,7 @@ int camera_status()
 	if(ret < 0)
 	{
 		fprintf(stderr,"Camera Poweron Failed\n");
-		strcpy(module.Camera,"ERROR");
+		strcpy(module.Camera,"NO");
 		return -1;
 
 	}

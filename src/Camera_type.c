@@ -42,7 +42,7 @@ void Camera_info(void)
 	if(flag)
 		sprintf(module.CamType,"%s:%s",VendorID,ProductID);
 	else
-		strcpy(module.CamType,"ERROR");
+		strcpy(module.CamType,"Not connected");
 	fprintf(stdout," %s \n",module.CamType);
 	free(line);
 	line=NULL;

@@ -18,7 +18,7 @@ void  barcode_SerialNo()
 			return;
 		}
 
-		strcpy(module.BarcodeSno,"ERROR");
+		strcpy(module.BarcodeSno,"Not connected");
 	
 		sleep(2);
 		fprintf(stdout,"Barcode not found, retrying\n");

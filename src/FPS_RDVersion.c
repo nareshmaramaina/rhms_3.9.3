@@ -8,7 +8,7 @@ void FPS_RD_version()
 	fp = fopen("/etc/rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
-		strcpy(module.FPSRDVer,"ERROR");
+		strcpy(module.FPSRDVer,"Not Found");
 		fprintf(stderr,"/etc/rd_info.txt file not found\n");
 		return;
 	}
@@ -22,7 +22,7 @@ void FPS_RD_version()
 		}
 	}
 	if(strlen(module.FPSRDVer) == 0)	
-		strcpy(module.FPSRDVer,"ERROR");
+		strcpy(module.FPSRDVer,"Not Found");
 
 	fprintf(stdout," FPSRDVer_BUFF = %s\tmodule.FPSRDVer = %s \n",line,module.FPSRDVer);
 	free(line);

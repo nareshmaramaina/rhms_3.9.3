@@ -19,7 +19,7 @@ void optical_scanner_id(void)
 	else
 	{
 		fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
-		strcpy(module.scanner_id,"ERROR");
+		strcpy(module.scanner_id,"Not-Detected");
 	}
 	return;
 }
@@ -86,7 +86,7 @@ void capacitive_scanner_id(void)
 	else
 	{
 		fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
-		strcpy(module.scanner_id,"ERROR");
+		strcpy(module.scanner_id,"Not-Detected");
 	}
 	return;
 }
@@ -112,7 +112,7 @@ int cap_scanner_id(char *cap_id)
 	Status = PTExtendedInfo (handle,&pExtInfo);
 	if(Status != 0)
 	{
-		sprintf(module.scanner_id,"ERROR");
+		sprintf(module.scanner_id,"Not-Detected");
 		fprintf(stderr,"ret of PTExtendedInfo : %d\n",Status);
 		return -1;
 	}
@@ -202,7 +202,7 @@ int  update_fp_scanner_info(void)
 	{
 		fprintf(stdout,"Optical Scanner Detected\n");
 
-		sprintf(module.FP_TYPE,"OK/Optical");
+		sprintf(module.FP_TYPE,"Optical");
 
 		optical_scanner_id();
 
@@ -212,7 +212,7 @@ int  update_fp_scanner_info(void)
 	{
 		fprintf(stdout,"Capacitive Scanner detected\n");
 
-		sprintf(module.FP_TYPE,"OK/Capacitive");
+		sprintf(module.FP_TYPE,"Capacitive");
 
 		capacitive_scanner_id();
 
@@ -224,7 +224,7 @@ int  update_fp_scanner_info(void)
 	{
 		fprintf(stdout,"Scanner Not Detected\n");
 	
-		sprintf(module.FP_TYPE,"ERROR/ERROR");
+		sprintf(module.FP_TYPE,"Not-Detected");
 	
 		return -1;
 	}

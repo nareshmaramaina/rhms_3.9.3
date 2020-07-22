@@ -8,8 +8,8 @@ void FPS_Id_and_version()
 	fp = fopen("/etc/scanner_type","r");
 	if ( fp == NULL ) 
 	{
-		strcpy(module.scanner_id,"ERROR");
-		sprintf(module.FP_TYPE,"ERROR");
+		strcpy(module.scanner_id,"Not-Detected");
+		sprintf(module.FP_TYPE,"Not-Detected");
 		fprintf(stderr,"/etc/scanner_type file not found\n");
 		return;
 	}
@@ -17,9 +17,9 @@ void FPS_Id_and_version()
 	while( getline(&line,&len,fp) != -1 )
 	{
 		if( strstr(line,"ScannerType:OPTICAL") != NULL)
-			sprintf(module.FP_TYPE,"OK/Optical");
+			sprintf(module.FP_TYPE,"Optical");
 		else if( strstr(line,"ScannerType:CAPACITIVE") != NULL)
-			sprintf(module.FP_TYPE,"OK/Capacitive");
+			sprintf(module.FP_TYPE,"Capacitive");
 		if( strstr(line,"ScannerID:") != NULL)
 		{
 			sscanf(line+10,"%s",module.scanner_id);
@@ -27,9 +27,9 @@ void FPS_Id_and_version()
 		}
 	}
 	if(strlen(module.scanner_id) == 0)	
-		strcpy(module.scanner_id,"ERROR");
+		strcpy(module.scanner_id,"Not-Detected");
 	if(strlen(module.FP_TYPE) == 0)	
-		strcpy(module.FP_TYPE,"ERROR");
+		strcpy(module.FP_TYPE,"Not-Detected");
 
 	fprintf(stdout," module.FP_TYPE= %s\tmodule.scanner_id = %s.. \n",module.FP_TYPE,module.scanner_id);
 	free(line);

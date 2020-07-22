@@ -9,9 +9,9 @@ int sam_status(int card_select)
 	{
 		fprintf(stderr,"SAM Open Error\n");
 		if( CONFIG.SAM1 )
-			strcpy(module.SAM1,"ERROR");
+			strcpy(module.SAM1,"Not Inserted");
 		if( CONFIG.SAM2 )
-			strcpy(module.SAM2,"ERROR");
+			strcpy(module.SAM2,"Not Inserted");
 
 		return -1;
 	}
@@ -30,7 +30,7 @@ int sam_status(int card_select)
 #endif
 
 			memset(module.SAM1,0,sizeof(module.SAM1));	
-			strcpy(module.SAM1,"ERROR");
+			strcpy(module.SAM1,"Not Inserted");
 			fprintf(stdout,"SAM Card1 Status:%s\n",module.SAM1);
 
 			SAM_Close();
@@ -41,7 +41,7 @@ int sam_status(int card_select)
 		else if(ret==0)
 		{
 			memset(module.SAM1,0,sizeof(module.SAM1));	
-			strcpy(module.SAM1,"OK");
+			strcpy(module.SAM1,"Inserted");
 
 		}
 
@@ -61,7 +61,7 @@ int sam_status(int card_select)
 #endif
 
 			memset(module.SAM2,0,sizeof(module.SAM2));	
-			strcpy(module.SAM2,"ERROR");
+			strcpy(module.SAM2,"Not Inserted");
 			fprintf(stdout,"SAM Card2 Status:%s\n",module.SAM2);
 			SAM_Close();
 			return -1;
@@ -71,7 +71,7 @@ int sam_status(int card_select)
 		{
 
 			memset(module.SAM2,0,sizeof(module.SAM2));
-			strcpy(module.SAM2,"OK");
+			strcpy(module.SAM2,"Inserted");
 
 
 #if DEBUG

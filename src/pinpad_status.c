@@ -24,7 +24,7 @@ void pinpad_status()
 	}
 	if( ret == 0)
 	{
-		strcpy(module.pinpad,"OK");
+		strcpy(module.pinpad,"Connected");
 
 		if( CONFIG.PinpadSN )
 		{
@@ -34,7 +34,7 @@ void pinpad_status()
 			if(fp == NULL)
 			{
 				fprintf(stderr,"/vision/Pinpad_SerialNo app Not found\n");
-				strcpy(module.PinpadSN,"ERROR");
+				strcpy(module.PinpadSN,"Not connected");
 			}
 
 			else
@@ -51,7 +51,7 @@ void pinpad_status()
 				if ( strlen(module.PinpadSN) == 0 )
 				{
 					fprintf(stderr,"Pinpad_SerialNo: Not found\n");
-					strcpy(module.PinpadSN,"ERROR");
+					strcpy(module.PinpadSN,"Not connected");
 				}
 				fclose(fp);
 			}	
@@ -63,10 +63,10 @@ void pinpad_status()
 
 	else	
 	{	
-		strcpy(module.pinpad,"ERROR");
+		strcpy(module.pinpad,"Not connected");
 
 		if ( CONFIG.PinpadSN )
-			strcpy(module.PinpadSN,"ERROR");
+			strcpy(module.PinpadSN,"Not connected");
 		fprintf(stdout,"module.pinpad = %s\n",module.pinpad);
 	}
 	return;

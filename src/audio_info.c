@@ -10,7 +10,7 @@ int audio_test(void)
 	if(ret!=0)
 	{
 		fprintf(stderr,"Unable to Poweron Audio Section\n");
-		strcpy(module.AUDIO,"ERROR");
+		strcpy(module.AUDIO,"Failure");
 		return -1;
 	}
 
@@ -21,7 +21,7 @@ int audio_test(void)
 
 	if( ret  != 0 )
 	{
-		strcpy(module.AUDIO,"OK");
+		strcpy(module.AUDIO,"Success");
 		return 0;
 
 	}
@@ -33,13 +33,13 @@ int audio_test(void)
 
 	if(ret!=0)
 	{
-		strcpy(module.AUDIO,"ERROR");
+		strcpy(module.AUDIO,"Failure");
 		printf("Audio test Failed\n");
 		return -1;
 	}
 	else
 	{
-		strcpy(module.AUDIO,"OK");
+		strcpy(module.AUDIO,"Success");
 		printf("Audio test success\n");
 		return 0;
 	}

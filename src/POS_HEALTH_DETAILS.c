@@ -129,8 +129,8 @@ int  PERIPHERALS(void)
 		if(ret!=0)
 		{
 
-			strcpy(module.IFD1,"ERROR");
-			strcpy(module.IFD2,"ERROR");
+			strcpy(module.IFD1,"Not Inserted");
+			strcpy(module.IFD2,"Not Inserted");
 			fprintf(stderr,"IFD power on Failure\n");
 		}
 		else 
@@ -204,7 +204,7 @@ int  PERIPHERALS(void)
 
 	}
 
-	if ( strlen(module.scanner_id) == 0 || strstr(module.scanner_id,"ERROR") != NULL  )
+	if ( strlen(module.scanner_id) == 0 || strstr(module.scanner_id,"Not-Detected") != NULL  )
 	{
 		fprintf(stdout,"Fetching Details From /etc/scanner_type file \n");
 		FPS_Id_and_version();

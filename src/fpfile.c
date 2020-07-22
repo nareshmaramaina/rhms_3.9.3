@@ -14,19 +14,19 @@ void update_fpfile_info(void)
 
 	if(ret == CAPACITIVE)
 	{
-		sprintf(module.FP_TYPE,"OK/Capacitive");
+		sprintf(module.FP_TYPE,"Capacitive");
 		capacitive_scanner_id();	
 
 	}
 	else if(ret == OPTICAL)
 	{
-		sprintf(module.FP_TYPE,"OK/Optical");
+		sprintf(module.FP_TYPE,"Optical");
 		optical_scanner_id();
 	}
 	else
 	{
 		fprintf(stderr,"Scanner Not Found\n");
-		sprintf(module.FP_TYPE,"ERROR/ERROR");
+		sprintf(module.FP_TYPE,"Not-Detected");
 	}
 
 	return;

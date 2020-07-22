@@ -9,13 +9,13 @@ void printer_status()
 
 	if(ther_ret > 1250 && ther_ret < 4070)
 	{
-		strcpy(module.Printer,"OK");
+		strcpy(module.Printer,"YES");
 		paper_status();
 	}
 	else
 	{
-		strcpy(module.Printer,"ERROR");
-		strcpy(module.paper,"ERROR");
+		strcpy(module.Printer,"NO");
+		strcpy(module.paper,"NO");
 	}
 
 	fprintf(stdout,"module.Printer = %s\tmodule.paper = %s\n",module.Printer,module.paper);
