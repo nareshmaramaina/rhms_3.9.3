@@ -9,7 +9,7 @@ int FirmwareDetails()
 
 	size_t len=20;
 	char buff[128]="";
-	fp = fopen("/etc/Firmware_release","r");
+	fp = fopen("/etc/visiontek_Firmware_release","r");
 	if(fp == NULL)
 	{
 		fprintf(stdout,"Firmware Details Unavailable\n");

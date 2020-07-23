@@ -98,12 +98,6 @@ struct device_battery
 	char Day_charged_mins[12];
 	char Day_discharged_mins[12];
 };
-struct Device
-{
-        char Version[12];
-        char Type[128];
-        char Name[128];
-};
 struct terminal_status
 {
 	char BarcodeSno[32];
@@ -167,7 +161,7 @@ struct terminal_status
 	Location GPS;
 	struct Device_on_time DOT; 
 	struct device_battery BatteryInfo; 
-	struct Device Application[50];
+	//struct Device Application[50];
 
 	char AUDIO[20];
 	char IMEI_no[40];
@@ -317,4 +311,4 @@ int create_Health_Status_xml_file();
 int Is_Hardware_Status_changed();
 int Applications_Details();
 void Update_Simdb_and_Signalmode();
-
+int Get_Device_Applications_Count();

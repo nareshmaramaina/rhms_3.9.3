@@ -2,13 +2,13 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 int BootTime_Status_xml_frame();
-extern int Total_Device_Apps;
 
 char *BootTime_Status_file="/opt/BootTime_Status.xml";
 
-
+//int main()
 int  create_BootTime_Status_xml_file(void)
 {
+	
 	short int ret=0;
 
 	char remote_xml_bkp_file[64]="";
@@ -53,11 +53,10 @@ int  create_BootTime_Status_xml_file(void)
 
 int BootTime_Status_xml_frame()
 {
-	Applications_Details();
-	int i=0;
+	int Total_Device_Apps=0;
 	fprintf(stdout,"\n\n BootTime_Status.xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
-	xmlNodePtr root_node = NULL, childnode = NULL,childofchildnode = NULL;/* node pointers */
+	xmlNodePtr root_node = NULL, childnode = NULL;/* node pointers */
 
 	LIBXML_TEST_VERSION;
 
@@ -121,14 +120,16 @@ int BootTime_Status_xml_frame()
 	}
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
-
-	for ( i=0;i<Total_Device_Apps;i++)
+	Total_Device_Apps = Get_Device_Applications_Count();
+	if ( Total_Device_Apps > 0 )
+	Applications_Details(Total_Device_Apps,childnode);
+	/*for ( i=0 ; i < Total_Device_Apps ; i++)
 	{
 		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST module.Application[i].Type);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.Application[i].Name);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.Application[i].Version);
-	}
+	}*/
 
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);
