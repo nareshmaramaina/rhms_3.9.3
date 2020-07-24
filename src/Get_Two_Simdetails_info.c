@@ -28,9 +28,9 @@ int Get_Two_Simdetails_info(void)
 	if(sim_details_ret != 0)
 	{
 
-		strcpy(module.IMEI_no,"Not Found");
-		strcpy(module.CCID,"Not Found");
-		strcpy(module.Sim2CCID,"Not Found");
+		strcpy(module.IMEI_no,"NotFound");
+		strcpy(module.CCID,"NotFound");
+		strcpy(module.Sim2CCID,"NotFound");
 
 		printf("module.IMEI_no:%s\n",module.IMEI_no);
 		printf("module.CCID_no:%s\n",module.CCID);
@@ -68,12 +68,12 @@ int Get_Two_Simdetails_info(void)
 
 	if( operator_details_ret != 0)
 	{
-		strcpy(module.operator1_name,"Not Found");
+		strcpy(module.operator1_name,"NotFound");
 		printf("Operator1 Name %s\n",module.operator1_name);
-		strcpy(module.operator2_name,"Not Found");
+		strcpy(module.operator2_name,"NotFound");
 		printf("Operator2 Name %s\n",module.operator2_name);
 
-		strcpy(module.GSM_Version,"Not Found");
+		strcpy(module.GSM_Version,"NotFound");
 		printf("GSM Firmware Version %s\n",module.GSM_Version);
 		op_rev=1;
 	}
@@ -166,7 +166,7 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 	operator_check(operator2_buff,operator2);
 
 	if(strlen(revision_buff)==0)
-		strcpy(revision_buff,"Not Found");
+		strcpy(revision_buff,"NotFound");
 #if DEBUG
 
 	printf("Operator1 %s : ****buff = %s**** \t Operator2:%s *****buff= %s ***** Revision:****%s*** \n",operator1,operator1_buff,operator2,operator2_buff,revision_buff);
@@ -284,13 +284,13 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 	}
 
 	if(strlen(ccid_buff) == 0)
-		strcpy(ccid_buff,"Not Found");
+		strcpy(ccid_buff,"NotFound");
 
 	if(strlen(imei_buff) == 0)
-		strcpy(imei_buff,"Not Found");
+		strcpy(imei_buff,"NotFound");
 
 	if(strlen(ccid1_buff) == 0)
-		strcpy(ccid1_buff,"Not Found");
+		strcpy(ccid1_buff,"NotFound");
 	printf("IMEI:****%s****\t CCID:****%s***\t CCID1:%s \n",imei_buff,ccid_buff,ccid1_buff);
 	return 0;
 

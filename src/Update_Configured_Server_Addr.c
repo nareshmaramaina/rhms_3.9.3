@@ -1,6 +1,6 @@
 #include <header.h>
-char Server_Addr[128]="https://rhms2.callippus.co.uk";
-int  Update_Configured_Server_Addr(char *Server_Addr)
+char Server_Addr[512]="https://rhms2.callippus.co.uk";
+int  Update_Configured_Server_Addr()
 {
 	FILE *fp;
 	size_t len=0;

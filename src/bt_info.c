@@ -9,7 +9,7 @@ int bluetooth_status()
 	if(ret < 0)
 	{
 		fprintf(stderr,"Bluetooth Poweron Failed\n");
-		strcpy(module.Bluetooth,"NO");
+		strcpy(module.Bluetooth,"No");
 		return -1;
 	}
 
@@ -17,7 +17,7 @@ int bluetooth_status()
 	ret = check_presence(3);
 	if(ret == 0)
 	{
-		strcpy(module.Bluetooth,"YES");
+		strcpy(module.Bluetooth,"Yes");
 		printf("module.Bluetooth = %s\n",module.Bluetooth);
 		return 0;
 	}
@@ -25,7 +25,7 @@ int bluetooth_status()
 	else
 	{
 		fprintf(stderr,"Bluetooth not found After power on \n");
-		strcpy(module.Bluetooth,"NO");
+		strcpy(module.Bluetooth,"No");
 		return -1;
 	}
 

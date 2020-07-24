@@ -79,19 +79,7 @@ int get_logname(char *file)
 	memset(today,0,sizeof(today));
 	memset(file,0,sizeof(file));
 
-	struct tm *intim;
-	struct tm my_tm;
-	struct timeval tv;
-
-	intim = &my_tm;
-
-	memset(intim,0,sizeof(struct tm));
-
-	gettimeofday (&tv,NULL);
-
-	intim = localtime (&tv.tv_sec) ;
-
-	sprintf(today,"%02d%02d%04d",intim->tm_mday,intim->tm_mon+1,intim->tm_year+1900);
+	Get_Current_Date(today);
 
 	dp = opendir("/var/log/DOT");
 

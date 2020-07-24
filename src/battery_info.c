@@ -44,7 +44,7 @@ int battery_status(void)
 	}
 	else
 	{
-		strcpy(module.Adapter,"Not Connected");
+		strcpy(module.Adapter,"NotConnected");
 	}
 	fprintf(stdout,"Adaptor Status:%s\n",module.Adapter);
 
@@ -58,25 +58,25 @@ int battery_status(void)
 		if(battery_status && adapter_status)
 		{
 			fprintf(stdout,"Battery is Charging\n");
-			sprintf(module.Battery_status,"%0.2fV-Charging",filter_voltage);
+			sprintf(module.Battery_status,"Charging-%0.2fV",filter_voltage);
 		}
 		else  if( !battery_status && adapter_status )
 		{
 
 			fprintf(stdout,"Battery is Fully charged\n");
-			sprintf(module.Battery_status,"%0.2fV-Charged",filter_voltage);
+			sprintf(module.Battery_status,"Charged-%0.2fV",filter_voltage);
 		}
 		else if (!battery_status && !adapter_status )
 		{
 			fprintf(stdout,"Battery is Discharging\n");
-			sprintf(module.Battery_status,"%0.2fV-Discharging",filter_voltage);
+			sprintf(module.Battery_status,"Discharging-%0.2fV",filter_voltage);
 		}
 
 	}
 	else
 	{
 		fprintf(stdout,"Battery is Not Connected\n");
-		sprintf(module.Battery_status,"0.00V-Not Connected");
+		sprintf(module.Battery_status,"NotConnected-0.00V");
 	}
 	return 0;
 }

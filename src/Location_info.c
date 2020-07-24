@@ -16,7 +16,7 @@ int  Location_info()
 
 	if(fp == NULL)
 	{
-		strcpy(module.GPS.Captured_Time,"Not Found");
+		strcpy(module.GPS.Captured_Time,"NotFound");
 		fprintf(stderr,"%s file not found\n",file);
 		return -1;
 	}

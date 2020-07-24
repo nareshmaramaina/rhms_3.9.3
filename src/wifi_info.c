@@ -10,13 +10,13 @@ int Wifi_Status()
 	if(ret==1)
 	{
 		memset(module.WIFI,0,sizeof(module.WIFI));
-		strcpy(module.WIFI,"YES");
+		strcpy(module.WIFI,"Yes");
 	}
 	else
 	{
 
 		memset(module.WIFI,0,sizeof(module.WIFI));
-		strcpy(module.WIFI,"NO");
+		strcpy(module.WIFI,"No");
 	}
 
 	return ret;

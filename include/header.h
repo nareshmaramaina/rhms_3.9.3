@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include <sys/file.h>
 #include<stdlib.h>
 #include<string.h>
 #include<ctype.h>
@@ -105,9 +105,9 @@ struct terminal_status
 	char CamType[12];
 	char Comm[12];
 	//char IRIS_VERSION[12];
-//	char LIB_BIO[10];
-//	char IRIS_ID[16]; 
-//	char HWChanged[12];
+	//	char LIB_BIO[10];
+	//	char IRIS_ID[16]; 
+	//	char HWChanged[12];
 	char IRIS[32];
 	char IritechRDVer[10];
 	char IritechSno[24];
@@ -145,8 +145,8 @@ struct terminal_status
 	char operator2_name[50];
 	char Sim1_db[12];
 	char Sim2_db[12];
-        char SIM1SignalMode[12];
-        char SIM2SignalMode[12];
+	char SIM1SignalMode[12];
+	char SIM2SignalMode[12];
 
 	char GSM_Module[64];
 	char CCID[50];
@@ -312,3 +312,17 @@ int Is_Hardware_Status_changed();
 int Applications_Details();
 void Update_Simdb_and_Signalmode();
 int Get_Device_Applications_Count();
+int server_BootTime_updation();
+int  server_Hardware_Status_updation();
+int  server_Periodic_Health_updation();
+void update_Periodic_Health_status_date_file();
+void update_BootTime_status_date_file();
+void update_Hardware_status_date_file();
+void RTC_info();
+void Update_Current_Date_with_Time();
+void Get_Current_Date(char *Date);
+int rhms_lock();
+int Update_request(int request); // arg 1 For Hardware request,arg 2 For BootTime request, arg 3 For Periodic Health request
+int parseDoc(char *docname) ;
+
+int  Update_Configured_Server_Addr();

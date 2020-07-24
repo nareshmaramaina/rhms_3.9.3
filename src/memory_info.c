@@ -35,18 +35,18 @@ int update_sdcard_info(void)
 
 	if (flag == 0)
 	{
-		strcpy(module.ExternalMem.Total,"Not Found");
-		strcpy(module.ExternalMem.Use,"Not Found");
-		strcpy(module.ExternalMem.Free,"Not Found");
+		strcpy(module.ExternalMem.Total,"NotFound");
+		strcpy(module.ExternalMem.Use,"NotFound");
+		strcpy(module.ExternalMem.Free,"NotFound");
 	}
 	else
 	{
 		ret = sdcard_test(flag);
 		if( ret != 0 )
 		{
-			strcpy(module.ExternalMem.Total,"Not Mounting");
-			strcpy(module.ExternalMem.Use,"Not Mounting");
-			strcpy(module.ExternalMem.Free,"Not Mounting");
+			strcpy(module.ExternalMem.Total,"NotMounting");
+			strcpy(module.ExternalMem.Use,"NotMounting");
+			strcpy(module.ExternalMem.Free,"NotMounting");
 		}
 	}
 
@@ -228,24 +228,24 @@ int update_internal_memory_info(void)
 
 	if ( System_memory == 0 )
 	{
-		strcpy(module.System_memory.Total,"Not Found");
-		strcpy(module.System_memory.Use,"Not Found");
-		strcpy(module.System_memory.Free,"Not Found");
+		strcpy(module.System_memory.Total,"NotFound");
+		strcpy(module.System_memory.Use,"NotFound");
+		strcpy(module.System_memory.Free,"NotFound");
 
 	}
 	if ( sysuser == 0 )
 	{
-		strcpy(module.InternalMem_Sysuser.Total,"Not Found");
-		strcpy(module.InternalMem_Sysuser.Use,"Not Found");
-		strcpy(module.InternalMem_Sysuser.Free,"Not Found");
+		strcpy(module.InternalMem_Sysuser.Total,"NotFound");
+		strcpy(module.InternalMem_Sysuser.Use,"NotFound");
+		strcpy(module.InternalMem_Sysuser.Free,"NotFound");
 
 	}
 
 	if ( jffs2 == 0 )
 	{
-		strcpy(module.InternalMem_Jffs2.Total,"Not Found");
-		strcpy(module.InternalMem_Jffs2.Use,"Not Found");
-		strcpy(module.InternalMem_Jffs2.Free,"Not Found");
+		strcpy(module.InternalMem_Jffs2.Total,"NotFound");
+		strcpy(module.InternalMem_Jffs2.Use,"NotFound");
+		strcpy(module.InternalMem_Jffs2.Free,"NotFound");
 	}
 
 	fprintf(stdout,"System  Memory Total= %s Use= %s Free=%s\n",module.System_memory.Total,module.System_memory.Use,module.System_memory.Free);

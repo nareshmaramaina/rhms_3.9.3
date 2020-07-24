@@ -8,7 +8,7 @@ void Iris_version()
 	fp = fopen("/etc/iritech_rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
-		strcpy(module.IritechRDVer,"Not Found");
+		strcpy(module.IritechRDVer,"NotFound");
 		fprintf(stderr,"/etc/iritech_rd_info.txt file not found\n");
 		return;
 	}
@@ -22,7 +22,7 @@ void Iris_version()
 		}
 	}
 	if(strlen(module.IritechRDVer) == 0)	
-		strcpy(module.IritechRDVer,"Not Found");
+		strcpy(module.IritechRDVer,"NotFound");
 
 	fprintf(stdout," RD_VERSION_BUFF = %s\tmodule.IritechRDVer = %s \n",line,module.IritechRDVer);
 	free(line);

@@ -8,9 +8,9 @@ int ifd_status(int card_select)
 	{
 		fprintf(stderr,"SCR Open Error\n");
 		if( CONFIG.IFD1 )
-			strcpy(module.IFD1,"Not Inserted");
+			strcpy(module.IFD1,"NotInserted");
 		if( CONFIG.IFD2 )
-			strcpy(module.IFD2,"Not Inserted");
+			strcpy(module.IFD2,"NotInserted");
 		return -1;
 	}
 
@@ -30,10 +30,10 @@ int ifd_status(int card_select)
 	{
 		fprintf(stderr,"powerup_5v failed for IFD%d\n",card_select);
 		if ( CONFIG.IFD1 &&  card_select == 1 )
-			strcpy(module.IFD1,"Not Inserted");
+			strcpy(module.IFD1,"NotInserted");
 
 		else if ( CONFIG.IFD2 &&  card_select == 2 )
-			strcpy(module.IFD2,"Not Inserted");
+			strcpy(module.IFD2,"NotInserted");
 	}
 	scr_close();
 	return ret;

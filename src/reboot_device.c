@@ -22,11 +22,11 @@ void reboot_device(char last_digit)
 #if DEBUG
 	fprintf(stdout,"%02d:%02d:%02d\n",current->tm_hour,current->tm_min,current->tm_sec);
 #endif
-	if ( current->tm_year+1900 < 2018 )
-        {
-                fprintf(stderr,"Date Wrong set - Year Error, RHMS Exiting \n");
-                return ;
-        }
+	if ( current->tm_year+1900 < 2020 )
+	{
+		fprintf(stderr,"Date Wrong set - Year Error, RHMS Exiting \n");
+		return ;
+	}
 
 
 	mid_sleep_secs =  (  (23 - current->tm_hour) * 3600 ) + ( (59 - current->tm_min) * 60 ) + ( (59 - current->tm_sec) + 1 );

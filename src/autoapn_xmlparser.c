@@ -108,8 +108,8 @@ void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur)
 			fprintf(stdout,"WIFI : %s\n", key);
 
 			if(key && strcmp((const char *)key,"0") != 0 )
-				strcpy(module.WIFI,"YES");
-			else strcpy(module.WIFI,"NO");
+				strcpy(module.WIFI,"Yes");
+			else strcpy(module.WIFI,"No");
 
 
 			xmlFree(key);
@@ -121,7 +121,7 @@ void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur)
 			if(key && strcmp((const char *)key,"0") != 0 )
 				strcpy(module.ethernet,"Connected");
 			else 	
-				strcpy(module.ethernet,"Not connected");
+				strcpy(module.ethernet,"NotConnected");
 			fprintf(stdout,"ETHERNET : %s\n", key);
 			xmlFree(key);
 		}

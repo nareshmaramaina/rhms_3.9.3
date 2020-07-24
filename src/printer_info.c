@@ -9,13 +9,13 @@ void printer_status()
 
 	if(ther_ret > 1250 && ther_ret < 4070)
 	{
-		strcpy(module.Printer,"YES");
+		strcpy(module.Printer,"Yes");
 		paper_status();
 	}
 	else
 	{
-		strcpy(module.Printer,"NO");
-		strcpy(module.paper,"NO");
+		strcpy(module.Printer,"No");
+		strcpy(module.paper,"No");
 	}
 
 	fprintf(stdout,"module.Printer = %s\tmodule.paper = %s\n",module.Printer,module.paper);
@@ -64,7 +64,7 @@ int paper_status(void)
 
 	if(ret != 0)
 	{
-		strcpy(module.paper,"Not Present");
+		strcpy(module.paper,"NotPresent");
 		prn_close();
 		return -1;
 	}

@@ -39,9 +39,9 @@ int update_usb_info()
 
 	if (flag == 0)
 	{	
-		strcpy(module.Usbdevice.Total,"Not Found");
-		strcpy(module.Usbdevice.Use,"Not Found");
-		strcpy(module.Usbdevice.Free,"Not Found");
+		strcpy(module.Usbdevice.Total,"NotFound");
+		strcpy(module.Usbdevice.Use,"NotFound");
+		strcpy(module.Usbdevice.Free,"NotFound");
 	}
 	else 
 	{
@@ -51,9 +51,9 @@ int update_usb_info()
 
 		if( ret != 0 )
 		{	
-			strcpy(module.Usbdevice.Total,"Not Mounting");
-			strcpy(module.Usbdevice.Use,"Not Mounting");
-			strcpy(module.Usbdevice.Free,"Not Mounting");
+			strcpy(module.Usbdevice.Total,"NotMounting");
+			strcpy(module.Usbdevice.Use,"NotMounting");
+			strcpy(module.Usbdevice.Free,"NotMounting");
 		}
 	}
 

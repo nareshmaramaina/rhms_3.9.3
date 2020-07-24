@@ -25,8 +25,8 @@ int gprs_details(void)
 
 	if(SimDetails_ret != 0)
 	{
-		strcpy(module.IMEI_no,"Not Found");
-		strcpy(module.CCID,"Not Found");
+		strcpy(module.IMEI_no,"NotFound");
+		strcpy(module.CCID,"NotFound");
 
 		printf("\nmodule.IMEI_no:%s\n",module.IMEI_no);
 		printf("module.CCID_no:%s\n",module.CCID);
@@ -48,8 +48,8 @@ int gprs_details(void)
 	memset(module.GSM_Version,0,sizeof(module.GSM_Version));
 	if( rev_operator_ret != 0)
 	{
-		strcpy(module.GSM_Version,"Not Found");
-		strcpy(operator,"Not Found");
+		strcpy(module.GSM_Version,"NotFound");
+		strcpy(operator,"NotFound");
 		printf("module.GSM_Version:%s\n",module.GSM_Version);
 	}
 	else
@@ -129,7 +129,7 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	}
 
 	if(strlen(revision_buff)==0)
-		strcpy(revision_buff,"Not Found");
+		strcpy(revision_buff,"NotFound");
 
 	for(i=0;operator_buff[i];i++)
 		if(isupper(operator_buff[i]))
@@ -202,10 +202,10 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 	}
 
 	if(strlen(ccid_buff) == 0)
-		strcpy(ccid_buff,"Not Found");
+		strcpy(ccid_buff,"NotFound");
 
 	if(strlen(imei_buff) == 0)
-		strcpy(imei_buff,"Not Found");
+		strcpy(imei_buff,"NotFound");
 
 #if DEBUG
 	printf("IMEI:****%s****\t CCID:****%s***\n",imei_buff,ccid_buff);

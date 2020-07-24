@@ -5,7 +5,6 @@ int BootTime_Status_xml_frame();
 
 char *BootTime_Status_file="/opt/BootTime_Status.xml";
 
-//int main()
 int  create_BootTime_Status_xml_file(void)
 {
 	
@@ -61,7 +60,7 @@ int BootTime_Status_xml_frame()
 	LIBXML_TEST_VERSION;
 
 	doc = xmlNewDoc(BAD_CAST "1.0");
-	root_node = xmlNewNode(NULL,  "BOOT_STATUS");
+	root_node = xmlNewNode(NULL,  "BootStatus");
 	xmlDocSetRootElement(doc, root_node);
 
 

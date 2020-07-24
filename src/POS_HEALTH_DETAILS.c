@@ -129,8 +129,8 @@ int  PERIPHERALS(void)
 		if(ret!=0)
 		{
 
-			strcpy(module.IFD1,"Not Inserted");
-			strcpy(module.IFD2,"Not Inserted");
+			strcpy(module.IFD1,"NotInserted");
+			strcpy(module.IFD2,"NotInserted");
 			fprintf(stderr,"IFD power on Failure\n");
 		}
 		else 

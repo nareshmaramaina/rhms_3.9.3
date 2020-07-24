@@ -48,7 +48,9 @@ void Periodic_tags(void)
 	{
 		if( CONFIG.Printer )
 			printer_status();
-
+		
+		RTC_info();
+		Update_Current_Date_with_Time();
 		battery_status();
 
 
@@ -70,7 +72,7 @@ void Update_Simdb_and_Signalmode()
 	memset(module.SIM2SignalMode,0,sizeof(module.SIM2SignalMode));
 
 	if(strlen(module.Sim1_db) == 0 )
-		strcpy(module.Sim1_db,"Not Found");
+		strcpy(module.Sim1_db,"NotFound");
 	else 
 	{
 		Sig_Strength=atoi(module.Sim1_db);
@@ -79,7 +81,7 @@ void Update_Simdb_and_Signalmode()
 	}
 
 	if(strlen(module.Sim2_db) == 0 )
-		strcpy(module.Sim2_db,"Not Found");
+		strcpy(module.Sim2_db,"NotFound");
 	else 
 	{
 		Sig_Strength=atoi(module.Sim2_db);

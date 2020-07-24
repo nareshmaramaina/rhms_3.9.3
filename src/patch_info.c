@@ -13,8 +13,8 @@ int FirmwareDetails()
 	if(fp == NULL)
 	{
 		fprintf(stdout,"Firmware Details Unavailable\n");
-		strcpy(module.FirmwareVersion,"Not Found");
-		strcpy(module.FirmwareName,"Not Found");
+		strcpy(module.FirmwareVersion,"NotFound");
+		strcpy(module.FirmwareName,"NotFound");
 		return -1;
 	}
 	while((getline(&line, &len, fp)) > 0)

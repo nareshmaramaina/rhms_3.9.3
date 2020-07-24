@@ -57,7 +57,7 @@ int Hardware_xml_frame()
 	LIBXML_TEST_VERSION;
 
 	doc = xmlNewDoc(BAD_CAST "1.0");
-	node = xmlNewNode(NULL,  "DEVICE_DETAILS");
+	node = xmlNewNode(NULL,  "DeviceDetails");
 	xmlDocSetRootElement(doc, node);
 
 	xmlNewChild(node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);

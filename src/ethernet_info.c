@@ -16,7 +16,7 @@ int Ethernet_status(void)
 	if(check_cable == 1)
 		strcpy(module.ethernet,"Connected");
 	else 
-		strcpy(module.ethernet,"Not Connected");
+		strcpy(module.ethernet,"NotConnected");
 	fprintf(stdout,"Ethernet Status: %s\n",module.ethernet);
 
 

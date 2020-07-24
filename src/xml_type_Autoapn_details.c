@@ -13,32 +13,32 @@ void xml_type_Autoapn_details()
 
 
 	if(strlen(module.GSM_Module) == 0 )
-		strcpy(module.GSM_Module,"Not Found");
+		strcpy(module.GSM_Module,"NotFound");
 
 	if(strlen(module.GSM_Version) == 0 )
-		strcpy(module.GSM_Version,"Not Found");
+		strcpy(module.GSM_Version,"NotFound");
 
 	if(strlen(module.IMEI_no) == 0 )
-		strcpy(module.IMEI_no,"Not Found");
+		strcpy(module.IMEI_no,"NotFound");
 
 	if(strlen(module.CCID) == 0 )
-		strcpy(module.CCID,"Not Found");
+		strcpy(module.CCID,"NotFound");
 
 	if(strlen(module.Sim2CCID) == 0 )
-		strcpy(module.Sim2CCID,"Not Found");
+		strcpy(module.Sim2CCID,"NotFound");
 
 
 	if(strlen(module.operator1_name) == 0 )
-		strcpy(module.operator1_name,"Not Found");
+		strcpy(module.operator1_name,"NotFound");
 
 	if(strlen(module.operator2_name) == 0 )
-		strcpy(module.operator2_name,"Not Found");
+		strcpy(module.operator2_name,"NotFound");
 
 	if(strlen(module.WIFI) == 0 )
-		strcpy(module.WIFI,"Not Found");       
+		strcpy(module.WIFI,"NotFound");       
 
 	if(strlen(module.ethernet) == 0 )
-		strcpy(module.ethernet,"Not Found");   
+		strcpy(module.ethernet,"NotFound");   
 
 	memset(operator1,0,sizeof(operator1));
 	memset(operator2,0,sizeof(operator2));

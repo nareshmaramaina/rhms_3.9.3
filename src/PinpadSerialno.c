@@ -12,7 +12,7 @@ int PinpadSerialNo_info_by_dev_name(char *port)
 	if (ret < 0)
 	{
 		printf ("%s modem open failed \n",port);
-		strcpy(module.PinpadSN,"Not connected");
+		strcpy(module.PinpadSN,"NotConnected");
 		return -1;
 	}
 
@@ -21,7 +21,7 @@ int PinpadSerialNo_info_by_dev_name(char *port)
 	ret = print_error_resp (resp);
 	if (ret < 0)
 	{
-		strcpy(module.PinpadSN,"Not connected");
+		strcpy(module.PinpadSN,"NotConnected");
 		printf ("%s modem open failed While handshake \n",port);
 		PINPAD_Modemclose ();
 		return -1;
@@ -30,7 +30,7 @@ int PinpadSerialNo_info_by_dev_name(char *port)
 	Get_Pinpad_Serial_No((unsigned char *)serialno);
 	
 	if( strlen(serialno) == 0 )
-		strcpy(module.PinpadSN,"Not connected");
+		strcpy(module.PinpadSN,"NotConnected");
 	else 
 		strcpy(module.PinpadSN,serialno);
 	

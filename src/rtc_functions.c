@@ -1,40 +1,8 @@
 #include <header.h>
+char *Hardware_filename = "/opt/.rhms_Hardware_status_date_update";
+char *BootTime_filename = "/opt/.rhms_BootTime_status_date_update";
+char *Periodic_filename = "/opt/.rhms_Periodic_Health_status_date_update";
 
-int update_date_status_file(void) //after rhms successfull update ,updating time stamp to /opt/rhms_date_update
-{
-	struct tm *intim;
-	struct tm my_tm;
-	struct timeval tv;
-
-	char date_str[100]="";
-	FILE *fp;
-
-	fp=fopen("/opt/rhms_date_update","w");
-
-	if(fp == NULL)
-	{
-		fprintf(stderr,"Date File Not created\n");
-		return -1;
-	}
-
-	intim = &my_tm;
-
-	memset(intim,0,sizeof(struct tm));
-
-	gettimeofday (&tv,NULL);
-
-	intim = localtime (&tv.tv_sec) ;
-
-	sprintf(date_str,"%02d%02d%04d",intim->tm_mday,intim->tm_mon+1,intim->tm_year+1900);
-
-	fprintf(fp,"Date:%s",date_str);
-
-	fprintf(stdout,"Date:%s\n",date_str);
-
-	fclose(fp);
-
-	return 0;
-}
 
 static int diff_bw_two_dates(int firstDate, int firstMonth, int firstYear, int secondDate, int secondMonth, int secondYear)
 {
@@ -52,23 +20,20 @@ static int diff_bw_two_dates(int firstDate, int firstMonth, int firstYear, int s
 	return FirstNoOfDays - SecondNoOfDays; /* uses absolute if the first date is smaller so it wont give negative number */
 }
 
-int rhms_details_updated (int my_date,int my_month,int my_year)
+int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_date,int my_month,int my_year)
 {
 	FILE *fp;
 
 	char str[80]="";
 
-
-	char temp[8];
-
 	int no_days=0;
 
 	int pre_date=0,pre_month=0,pre_year=0;
 
-	fp = fopen("/opt/rhms_date_update","r");
+	fp = fopen(filename,"r");
 	if (fp == NULL)
 	{
-		fprintf(stderr,"/opt/rhms_date_update File not Found\n");
+		fprintf(stderr,"%s File not Found\n",filename);
 		return -1;
 	}
 
@@ -84,25 +49,8 @@ int rhms_details_updated (int my_date,int my_month,int my_year)
 		return -1;
 	}
 
-	temp[0]=str[5];
-	temp[1]=str[6];
-	temp[2]=0x00;
-
-	pre_date = atoi(temp);
-
-	temp[0]=str[7];
-	temp[1]=str[8];
-	temp[2]=0x00;
-
-	pre_month = atoi (temp);
-
-	temp[0]=str[9];
-	temp[1]=str[10];
-	temp[2]=str[11];
-	temp[3]=str[12];
-	temp[4]=0x00;
-
-	pre_year = atoi(temp);
+	sscanf(str+5,"%02d%02d%4d",&pre_date,&pre_month,&pre_year);
+	fprintf(stdout," pre_date = %d, pre_month = %d,pre_year =%d\n", pre_date, pre_month,pre_year);
 
 	no_days = diff_bw_two_dates(my_date,my_month,my_year, pre_date, pre_month,pre_year);
 
@@ -112,59 +60,94 @@ int rhms_details_updated (int my_date,int my_month,int my_year)
 
 }
 
-int RTC_info_and_Check_RHMS_run()
+int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodic_run)
+{
+	char CurrentDate[15]="";
+
+	int CurrentDay=0, CurrentMonth=0, CurrentYear=0;	
+
+
+	Get_Current_Date(CurrentDate);
+
+	sscanf(CurrentDate,"%02d%02d%4d",&CurrentDay, &CurrentMonth, &CurrentYear);
+	fprintf(stdout,"Curernt = %02d%02d%4d\n",CurrentDay, CurrentMonth, CurrentYear);
+
+	if ( CurrentYear < 2020 )
+	{
+		fprintf(stderr,"Date Wrong set - Year Error\n");
+		return -1;
+
+	}
+
+
+	if ( access(Hardware_filename, F_OK) == 0 )
+		*Hardware_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Hardware_filename,CurrentDay, CurrentMonth, CurrentYear);
+	else *Hardware_run = -1;
+
+	if ( access(Periodic_filename, F_OK) == 0 )
+		*BootTime_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Periodic_filename,CurrentDay, CurrentMonth, CurrentYear);
+
+	else *BootTime_run = -1;
+
+	if ( access(BootTime_filename, F_OK) == 0 )
+		*Periodic_run =	Get_Difference_Days_of_Today_with_Last_updated_day (BootTime_filename,CurrentDay, CurrentMonth, CurrentYear);
+	else *Periodic_run = -1;
+
+
+	if ( *Hardware_run == 0 &&  *BootTime_run == 0 && *Periodic_run ==  0 )
+		return 0;
+
+	else return -2;
+}
+void RTC_info()
 {
 	struct tm my_tm;
 	struct tm *intim;
-	char str[100]="";
-
-	struct timeval tv;
-
 	memset(&my_tm,0,sizeof(struct tm));
 
 	intim = &my_tm;
 
-	printf("\nChecking... RHMS Last Success Date\n");
-
-
-
 	if( gl11_getrtc (intim) == -1 )
-	{
-		fprintf(stderr,"RTC Read Error\n");
 		sprintf(module.RTC,"Failure");
-	}
+
+	else 	sprintf(module.RTC,"Success");
+
+	fprintf(stderr,"module.RTC = %s \n",module.RTC);
+
+	return;
+}
+
+void Get_Current_Date(char *Date)
+{
+	struct tm *Today=NULL;
+	struct timeval tv;
 
 	gettimeofday (&tv,NULL);
 
-	intim = localtime (&tv.tv_sec) ;
+	Today = localtime (&tv.tv_sec) ;
 
+	sprintf(Date,"%02d%02d%04d",Today->tm_mday,Today->tm_mon+1,Today->tm_year+1900);
 
-	sprintf(str,"%02d%02d%04d%02d%02d%02d",intim->tm_mday,intim->tm_mon+1,intim->tm_year+1900,intim->tm_hour,intim->tm_min,intim->tm_sec);
+	fprintf(stdout,"Today Date (DDMMYYYY): %s \n",Date);
 
-#if DEBUG	
-	fprintf(stdout,"\nlocal time = %s str\n",str);
-#endif
+	return;
+}
+
+void Update_Current_Date_with_Time()
+{
+	struct tm *Today=NULL;
+	struct timeval tv;
+
 	memset(module.Date_time,0,sizeof(module.Date_time));
 
-	sprintf(module.Date_time,"%s",str);
+	gettimeofday (&tv,NULL);
 
-	if ( intim->tm_year+1900 < 2020 )
-	{
-		fprintf(stderr,"Date Wrong set - Year Error\n");
-		sprintf(module.RTC,"Failure");
-		return -1;
+	Today = localtime (&tv.tv_sec) ;
 
-	}
-		sprintf(module.RTC,"Success");
+	sprintf(module.Date_time,"%02d%02d%04d%02d%02d%02d",Today->tm_mday,Today->tm_mon+1,Today->tm_year+1900,Today->tm_hour,Today->tm_min,Today->tm_sec);
 
+	fprintf(stdout,"Today Date and Time (DDMMYYYYHrMnSc): %s \n",module.Date_time);
 
-	if ( access("/opt/rhms_date_update", F_OK) == 0 )
-		return rhms_details_updated (intim->tm_mday,intim->tm_mon+1,intim->tm_year+1900);
-
-	else 
-	{
-		printf("/opt/rhms_date_update file not found\n");	
-		return 1;
-	}
-
+	return;
 }
+
