@@ -77,8 +77,10 @@ int Hardware_xml_frame()
 
 	if( CONFIG.BarcodeSno )
 		xmlNewChild(node, NULL, BAD_CAST "BarcodeSno", BAD_CAST module.BarcodeSno);
-	if( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 )
-		xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
+	
+	xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
+	
+		if( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 )
 	xmlNewChild(node, NULL, BAD_CAST "GSM_Module",BAD_CAST module.GSM_Module);
 
 	if( CONFIG.WSSN )

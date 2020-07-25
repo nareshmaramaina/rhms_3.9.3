@@ -19,7 +19,8 @@ int rhms_lock()
 
 int main()
 {
-	short int run_time = 0,Server_ret=0,ret=0,Second_Time_For_GPS = 0;
+	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0;
+	int run_time = -1;
 	char machineid[15];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
@@ -54,7 +55,6 @@ int main()
 
 	ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 
-
 	run_time = is_RHMS_multiple_run();
 
 	if ( ret ==  0 && run_time == 100 ) // Updated for the day when 100 ( Run every day ince flag)
@@ -66,13 +66,10 @@ int main()
 
 	POS_HEALTH_DETAILS();
 
-	create_Hardware_status_xml_file();
-	create_BootTime_Status_xml_file();
-	Periodic_tags();
-	create_Health_Status_xml_file();
 
 	while(1)
 	{
+		fprintf(stdout," Hardware_run = %d, BootTime_run = %d, Periodic_run = %d\n",Hardware_run,BootTime_run,Periodic_run);
 		if ( Hardware_run != 0 )
 		{	
 			ret = 	Is_Hardware_Status_changed();
@@ -89,15 +86,17 @@ int main()
 				}
 
 			}
+			else 
+				update_Hardware_status_date_file();
 		}
 		if ( BootTime_run != 0 )
 		{
 			Update_Current_Date_with_Time();
 			ret = create_BootTime_Status_xml_file();
-			if ( ret == 0 )
+			if ( ret != 0 )
 				return -1;
 
-			Server_ret =  Send_Periodic_Health_status_to_server();
+			Server_ret =  Send_BootTime_status_to_server();
 			if ( Server_ret == -2 )
 			{
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	
@@ -105,8 +104,14 @@ int main()
 			}
 
 		}
-		if (  Periodic_run != 0 || Second_Time_For_GPS == 1  )
+		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
 		{
+			sleep(3600); // Sleep 1hr
+			continue;
+		}
+		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
+		{
+
 			Periodic_tags();
 			ret = create_Health_Status_xml_file();
 			if ( ret != 0 )
@@ -117,14 +122,16 @@ int main()
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	
 				return Server_ret;
 			}
-			else if ( ret == 0 )
+			else if ( Server_ret == 0 )
 			{
+				if ( Periodic_run > 0 && Can_i_reboot() == 0 )
+				{
+					system("reboot");
+					return 0;
+				}
 				Second_Time_For_GPS = 0;
-				Periodic_run = 0;
 
 			}
-
-
 		}
 		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
 		{
@@ -155,15 +162,19 @@ int main()
 		}
 
 
-		else	if ( ret == 0 && run_time >= 60 && run_time <= 86400)
+		else	if ( ret == 0 && run_time % 60 == 0)
 		{
-			Periodic_run = 1;
 			fprintf(stdout,"RHMS: Sleep run_time = %d\n",run_time);
 			sleep(run_time);
 			printf("Posting the Health updation details again\n");
 		}
 
-		else break;
+		else
+		{
+			fprintf(stdout,"Exiting, run_time = %d\n",run_time);
+			break;
+
+		}
 
 	}
 

@@ -4,7 +4,6 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 	xmlChar *key = NULL;
 	for ( cur = cur->xmlChildrenNode; cur != NULL;key=NULL, cur = cur->next)
 	{
-		printf(" cur->name = %s\n",cur->name);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"SerialNo")))
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -239,21 +238,21 @@ int Is_Hardware_Status_changed()
 		xmlFreeDoc(doc);
 		return -1;
 	}
-
-	if (xmlStrcmp(cur->name, (const xmlChar *) "DEVICE_DETAILS")) 
+	if (xmlStrcmp(cur->name, (const xmlChar *) "DeviceDetails")) 
 	{
-		fprintf(stderr,"document of the wrong type, root node != story");
+		fprintf(stderr,"%s document of the wrong type, root node != story\n",docname);
 		xmlFreeDoc(doc);
 		return -1;
 	}
+
 
 	ret = parse_device_details(doc,cur); 
 
 	xmlFreeDoc(doc);
 	
 	if ( ret == 0 )
-		fprintf(stdout,"No changes\n");
+		fprintf(stdout,"No changes in Hardware info \n");
 	else 
-		fprintf(stdout,"changed\n");
+		fprintf(stdout,"changed in Hardware info\n");
 	return ret;
 }

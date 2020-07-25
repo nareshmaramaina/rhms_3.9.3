@@ -23,7 +23,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"Hardware Status requesting\n");
 		strcpy(Response_xml_file,Hardware_response_xml_file);
 		strcpy(Upload_Status_file,Hardware_Status_file);
-	sprintf(cmd,"curl  --cacert /vision/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareChangeStatus -d @%s > %s",Server_Addr,Upload_Status_file,Response_xml_file);
+	sprintf(cmd,"curl  --cacert /vision/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareStatus -d @%s > %s",Server_Addr,Upload_Status_file,Response_xml_file);
 
 
 	}
@@ -32,7 +32,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"BootTime Status requesting\n");
 		strcpy(Response_xml_file,BootTime_response_xml_file);
 		strcpy(Upload_Status_file,BootTime_Status_file);
-	sprintf(cmd,"curl --cacert /vision/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/FirstBootStatus -d @%s > %s",Server_Addr,Upload_Status_file,Response_xml_file);
+	sprintf(cmd,"curl --cacert /vision/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/BootTimeStatus -d @%s > %s",Server_Addr,Upload_Status_file,Response_xml_file);
 
 	}
 	else if ( request == 3)

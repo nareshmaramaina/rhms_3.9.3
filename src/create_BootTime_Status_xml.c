@@ -23,14 +23,13 @@ int  create_BootTime_Status_xml_file(void)
 
 	if(ret == -1)
 	{
-		fprintf(stderr," %s open failed\n",BootTime_Status_file);
+		fprintf(stderr," %s file not created\n",BootTime_Status_file);
 		return -1;
 	}
 
 	mkdir_p("/var/log/Health/");
 
-	if( CONFIG.HWChanged )
-		copy_file("/var/log/Health/Last_BootTime_Status.xml",BootTime_Status_file);//des,src
+	copy_file("/var/log/Health/Last_BootTime_Status.xml",BootTime_Status_file);//des,src
 
 
 	memset(remote_xml_bkp_file,0,sizeof(remote_xml_bkp_file));

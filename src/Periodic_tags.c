@@ -3,8 +3,8 @@ extern char var_gprs[30];
 extern int GPS_Success;
 void Second_Time_Health_Info_sending_for_GPS()
 {
+	fprintf(stdout,"Second Time Running For GPS Value \n");
 	short int i,ret;
-
 	for ( i = 0 ; i < 15 ; i++ )
 	{
 

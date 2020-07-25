@@ -12,7 +12,7 @@ int is_RHMS_multiple_run()
 	if ( fp == NULL )
 	{
 		fprintf(stderr,"/etc/Health_response open error\n");
-		return time;	
+		return -1;	
 	}	
 
 	while((getline(&str,&len,fp)) != -1)
@@ -28,11 +28,16 @@ int is_RHMS_multiple_run()
 		else if (      strstr(str,"Units:Hours") != NULL )
 			time = time*60*60;
 
-		fprintf(stdout,"%s\n",str);
+//		fprintf(stdout,"%s\n",str);
 	}
 	free(str);
 	str=NULL;	
 	fclose(fp);
+
+	if ( time < 60 || time  > 82800)
+		time =-1;
+
 	fprintf(stdout,"Final UpdateFrequency in secs = %d\n",time);
+
 	return time;
 }

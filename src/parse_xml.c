@@ -51,7 +51,7 @@ int parseDoc(char *docname) {
 		return -1;
 	}
 	if (xmlStrcmp(cur->name, (const xmlChar *) "POSHealthDetailsResponse")) {
-		fprintf(stderr,"document of the wrong type, root node != story");
+		fprintf(stderr,"%s document of the wrong type, root node != story",docname);
 		xmlFreeDoc(doc);
 		return -1;
 	}

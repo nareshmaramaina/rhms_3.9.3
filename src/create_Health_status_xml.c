@@ -65,18 +65,20 @@ int Health_Status_xml_frame()
 	xmlNewChild(root_node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);
 	xmlNewChild(root_node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
 
-	//if( CONFIG.GPS || CONFIG.geo_location )
-	childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
+	if( CONFIG.GPS || CONFIG.geo_location )
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
 	xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
 	xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
 	xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
-	xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
-	//if( CONFIG.Printer )
-	xmlNewChild(root_node, NULL, BAD_CAST "PaperStatus", BAD_CAST module.paper);
+	if( CONFIG.Iris_or_Biomat )
+		xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
+	if( CONFIG.Printer )
+		xmlNewChild(root_node, NULL, BAD_CAST "PaperStatus", BAD_CAST module.paper);
 
 	xmlNewChild(root_node, NULL, BAD_CAST "RTC", BAD_CAST module.RTC);
 	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "Battery", BAD_CAST module.Battery_status);
+	xmlNewChild(root_node, NULL, BAD_CAST "BatteryVoltage", BAD_CAST module.BatteryVoltage);
 	xmlNewChild(root_node, NULL, BAD_CAST "Comm", BAD_CAST module.Comm);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Sim1_db);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM2db", BAD_CAST module.Sim2_db);

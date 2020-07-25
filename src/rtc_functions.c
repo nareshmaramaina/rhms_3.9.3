@@ -50,7 +50,6 @@ int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_da
 	}
 
 	sscanf(str+5,"%02d%02d%4d",&pre_date,&pre_month,&pre_year);
-	fprintf(stdout," pre_date = %d, pre_month = %d,pre_year =%d\n", pre_date, pre_month,pre_year);
 
 	no_days = diff_bw_two_dates(my_date,my_month,my_year, pre_date, pre_month,pre_year);
 
@@ -84,13 +83,13 @@ int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodi
 		*Hardware_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Hardware_filename,CurrentDay, CurrentMonth, CurrentYear);
 	else *Hardware_run = -1;
 
-	if ( access(Periodic_filename, F_OK) == 0 )
-		*BootTime_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Periodic_filename,CurrentDay, CurrentMonth, CurrentYear);
-
-	else *BootTime_run = -1;
 
 	if ( access(BootTime_filename, F_OK) == 0 )
-		*Periodic_run =	Get_Difference_Days_of_Today_with_Last_updated_day (BootTime_filename,CurrentDay, CurrentMonth, CurrentYear);
+		*BootTime_run =	Get_Difference_Days_of_Today_with_Last_updated_day (BootTime_filename,CurrentDay, CurrentMonth, CurrentYear);
+	else *BootTime_run = -1;
+
+	if ( access(Periodic_filename, F_OK) == 0 )
+		*Periodic_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Periodic_filename,CurrentDay, CurrentMonth, CurrentYear);
 	else *Periodic_run = -1;
 
 
@@ -150,4 +149,21 @@ void Update_Current_Date_with_Time()
 
 	return;
 }
+int Can_i_reboot()
+{
+	int DD,MM,YYYY,Hr=9;
+	Update_Current_Date_with_Time();
+	sscanf(module.Date_time,"%02d%02d%04d%02d",&DD,&MM,&YYYY,&Hr);
 
+	fprintf(stdout,"%d %d %d %d\n",DD,MM,YYYY,Hr);
+
+	if( YYYY < 2020 )
+		fprintf(stdout," Wrong Date Set, So We Can't decide to reboot\n");
+	else if( Hr >= 0 && Hr <=4 )
+	{
+		fprintf(stdout," Reboot the device: Date Changed and Valid time(12:00AM to 04:00AM) to reboot\n");
+		return 0;	
+	}
+	else fprintf(stdout,"Not Valid Time for Reboot\n");
+	return -1;
+}

@@ -52,7 +52,6 @@ struct rhms
 	short int GPS;
 	short int BarcodeSno;
 	short int BiomRDVer;
-	short int HWChanged;
 	short int Bluetooth;
 	short int SAM1;
 	short int SAM2;
@@ -132,7 +131,8 @@ struct terminal_status
 	char RTC[10];
 	char Date[40];
 	char GSM_Version[50];
-	char Battery_status[30];
+	char Battery_status[20];
+	char BatteryVoltage[10];
 	char Adapter[30];
 	char ethernet[20];
 
@@ -312,3 +312,9 @@ int Update_request(int request); // arg 1 For Hardware request,arg 2 For BootTim
 int parseDoc(char *docname) ;
 
 int  Update_Configured_Server_Addr();
+int Send_BootTime_status_to_server (void);
+int Send_Periodic_Health_status_to_server (void);
+int Get_Sim_num();
+void Check_and_Set_Operator_name(char *operator_buff);
+int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodic_run);
+int Can_i_reboot();

@@ -42,7 +42,7 @@ void	POS_HEALTH_DETAILS(void)
 			else 
 			{
 				fprintf(stdout,"Location file not found, /var/.gps_data.txt or /var/.geo_cell.txt Waiting for geo cell id locations\n");
-				sleep(10);
+				sleep(5);
 			}
 
 		}
@@ -230,6 +230,11 @@ void SerialNo_and_Version_Based_Tags()
 	Applications_Details();
 
 	FirmwareDetails();
+        if( CONFIG.Iris_or_Biomat )
+        {
+                iris_status();
+        }
+
 
 	if( CONFIG.IrisRDVer_and_SNo ) 
 	{

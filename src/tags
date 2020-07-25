@@ -51,6 +51,7 @@ CONFIG_geo_location	Generate_rhms_config/Generate_config.c	/^#define	CONFIG_geo_
 Calculate_time_diff	DOT_1.1/Date_calculations.c	/^int Calculate_time_diff(char *file_name)$/;"	f	typeref:typename:int
 Camera_info	Camera_type.c	/^void Camera_info(void)$/;"	f	typeref:typename:void
 Camera_type.o	Makefile	/^Camera_type.o:Camera_type.c$/;"	t
+Can_i_reboot	rtc_functions.c	/^int Can_i_reboot()$/;"	f	typeref:typename:int
 Check_RHMS_All_requests_run	rtc_functions.c	/^int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodic_run)$/;"	f	typeref:typename:int
 Check_and_Set_Operator_name	operator_check.c	/^void Check_and_Set_Operator_name(char *operator_buff)$/;"	f	typeref:typename:void
 Check_internet_by_hostname	check_internet_by_hostname.c	/^int Check_internet_by_hostname(char *host,char *ip)$/;"	f	typeref:typename:int

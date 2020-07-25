@@ -135,14 +135,6 @@ int parse_config_file (xmlDocPtr doc, xmlNodePtr cur)
 			fprintf(stdout,"BarcodeSno:%d\n", CONFIG.BarcodeSno);
 			xmlFree(key);
 		}
-		else  if ((!xmlStrcmp(cur->name, (const xmlChar *)"HWChanged"))) 
-		{
-			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-			if(key)	
-			CONFIG.HWChanged =atoi((char*)key);
-			fprintf(stdout,"HWChanged:%d\n", CONFIG.HWChanged);
-			xmlFree(key);
-		}
 		else  if ((!xmlStrcmp(cur->name, (const xmlChar *)"Bluetooth"))) 
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
