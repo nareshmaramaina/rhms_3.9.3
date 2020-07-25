@@ -1,5 +1,4 @@
 #include<header.h>
-extern char var_gprs[30];
 void Get_autoapn_wrote_details()
 {
 

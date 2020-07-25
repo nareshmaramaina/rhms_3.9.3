@@ -1,7 +1,9 @@
 #include<header.h>
-void operator_check(char *operator_buff,char *operator)
+void Check_and_Set_Operator_name(char *operator_buff)
 {
 	int i;
+	char operator[20];
+	memset(operator,0,sizeof(operator));
 
 	for(i=0;operator_buff[i];i++)
 		if(isupper(operator_buff[i]))
@@ -29,6 +31,8 @@ void operator_check(char *operator_buff,char *operator)
 		strcpy(operator,"jio");
 
 	else strcpy(operator,"NotFound");
-
+	
+	strcpy(operator_buff,operator);
+		
 	return ;
 }

@@ -19,8 +19,7 @@ int rhms_lock()
 
 int main()
 {
-	short int run_time = 0,ret=0,Second_Time_For_GPS = 0;
-;	
+	short int run_time = 0,Server_ret=0,ret=0,Second_Time_For_GPS = 0;
 	char machineid[15];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
@@ -67,6 +66,10 @@ int main()
 
 	POS_HEALTH_DETAILS();
 
+	create_Hardware_status_xml_file();
+	create_BootTime_Status_xml_file();
+	Periodic_tags();
+	create_Health_Status_xml_file();
 
 	while(1)
 	{
@@ -78,11 +81,11 @@ int main()
 			{
 				Update_Current_Date_with_Time();
 				create_Hardware_status_xml_file();
-				ret =  Send_Hardware_status_to_server(); 
-				if ( ret == -2 )
+				Server_ret =  Send_Hardware_status_to_server(); 
+				if ( Server_ret == -2 )
 				{
 					fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);
-					return ret;
+					return Server_ret;
 				}
 
 			}
@@ -94,11 +97,11 @@ int main()
 			if ( ret == 0 )
 				return -1;
 
-			ret = Send_Periodic_Health_status_to_server();
-			if ( ret == -2 )
+			Server_ret =  Send_Periodic_Health_status_to_server();
+			if ( Server_ret == -2 )
 			{
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	
-				return ret;
+				return Server_ret;
 			}
 
 		}
@@ -108,22 +111,22 @@ int main()
 			ret = create_Health_Status_xml_file();
 			if ( ret != 0 )
 				return ret;	
-			ret = Send_Periodic_Health_status_to_server();
-			if ( ret == -2 )
+			Server_ret =  Send_Periodic_Health_status_to_server();
+			if ( Server_ret == -2 )
 			{
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	
-				return ret;
+				return Server_ret;
 			}
 			else if ( ret == 0 )
 			{
 				Second_Time_For_GPS = 0;
 				Periodic_run = 0;
-			
+
 			}
 
 
 		}
-		if ( ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
+		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
 		{
 			sleep(3600); // Sleep 1hr
 			continue;
@@ -144,14 +147,14 @@ int main()
 					continue;
 				}
 			}
-			
+
 			if ( ret == 0)
-			reboot_device(machineid[9]);
+				reboot_device(machineid[9]);
 
 			return 0;
 		}
 
-	
+
 		else	if ( ret == 0 && run_time >= 60 && run_time <= 86400)
 		{
 			Periodic_run = 1;

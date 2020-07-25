@@ -4,10 +4,6 @@ void xml_type_Autoapn_details()
 
 	char *docname="/tmp/rhms_details.xml";
 
-	char operator1[64]="";
-
-	char operator2[64]="";
-
 
 	Autoapn_xmlparse(docname);
 
@@ -31,8 +27,12 @@ void xml_type_Autoapn_details()
 	if(strlen(module.operator1_name) == 0 )
 		strcpy(module.operator1_name,"NotFound");
 
+	else 	Check_and_Set_Operator_name(module.operator1_name);
+
 	if(strlen(module.operator2_name) == 0 )
 		strcpy(module.operator2_name,"NotFound");
+
+	else Check_and_Set_Operator_name(module.operator2_name);
 
 	if(strlen(module.WIFI) == 0 )
 		strcpy(module.WIFI,"NotFound");       
@@ -40,11 +40,7 @@ void xml_type_Autoapn_details()
 	if(strlen(module.ethernet) == 0 )
 		strcpy(module.ethernet,"NotFound");   
 
-	memset(operator1,0,sizeof(operator1));
-	memset(operator2,0,sizeof(operator2));
 
-	operator_check(module.operator1_name,operator1);
-	operator_check(module.operator2_name,operator2);
 
 
 	fprintf(stdout,"module.GSM_Version= %s\nmodule.IMEI_no= %s\nmodule.CCID= %s\nmodule.Sim2CCID= %s\nmodule.Sim1_db= %s\nmodule.Sim2_db= %s\nmodule.operator1_name= %s\nmodule.operator2_name= %s\nmodule.WIFI= %s\nmodule.ethernet = %s\n",module.GSM_Version,module.IMEI_no,module.CCID,module.Sim2CCID,module.Sim1_db,module.Sim2_db,module.operator1_name,module.operator2_name,module.WIFI,module.ethernet);	

@@ -151,10 +151,10 @@ int BootTime_Status_xml_frame()
 	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
 
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST "Operator");
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
 
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST "Operator");
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST module.operator2_name);
 
 
 

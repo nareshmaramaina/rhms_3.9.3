@@ -101,9 +101,9 @@ struct device_battery
 struct terminal_status
 {
 	char BarcodeSno[32];
-	char GeoLocation[80];
-	char CamType[12];
+	char CamType[20];
 	char Comm[12];
+	//	char GeoLocation[80];
 	//char IRIS_VERSION[12];
 	//	char LIB_BIO[10];
 	//	char IRIS_ID[16]; 
@@ -116,33 +116,29 @@ struct terminal_status
 	char pinpad[32];
 	char PinpadSN[64];
 	char FPSRDVer[10];
-	char IFD1[10];
-	char IFD2[10];
-	char SAM1[10];
-	char SAM2[10];
+	char IFD1[20];
+	char IFD2[20];
+	char SAM1[20];
+	char SAM2[20];
 	char Bluetooth[15];
 	char Printer[10];
 	char paper[15];
-	char scanner_id[80];
-	char FP_TYPE[80];
+	char scanner_id[40];
+	char FP_TYPE[20];
 	char Camera[10];
 	char WIFI[10];
-	char Date_time[40];
+	char Date_time[20];
 	char macid[20];
 	char RTC[10];
 	char Date[40];
-	char app_type[40];
-	char app_version[40];
 	char GSM_Version[50];
-	char Battery_status[80];
-	char Battery[30];
+	char Battery_status[30];
 	char Adapter[30];
-	char fingerprint[10];
 	char ethernet[20];
 
 	char Sim2CCID[50];
-	char operator1_name[50];
-	char operator2_name[50];
+	char operator1_name[20];
+	char operator2_name[20];
 	char Sim1_db[12];
 	char Sim2_db[12];
 	char SIM1SignalMode[12];
@@ -150,7 +146,6 @@ struct terminal_status
 
 	char GSM_Module[64];
 	char CCID[50];
-	char Sim_Details[120];
 
 	MEMORY	InternalMem_Sysuser;
 	MEMORY	InternalMem_Jffs2;
@@ -161,7 +156,6 @@ struct terminal_status
 	Location GPS;
 	struct Device_on_time DOT; 
 	struct device_battery BatteryInfo; 
-	//struct Device Application[50];
 
 	char AUDIO[20];
 	char IMEI_no[40];
@@ -176,14 +170,6 @@ struct terminal_status
 }module;
 
 
-struct Details1{
-
-	char Server_IP1[25];
-	char Port_Num1[10];
-};
-
-
-struct Details1 SMS_Details1;
 int Pos_Details( void );
 
 
@@ -220,7 +206,7 @@ int server_updation(void);
 int sim_operator_name(void);
 int read_revision_operator_details(char *,char*);
 int retrieve_signal_details(char *,char *);
-void operator_check(char *,char *);
+void Check_and_Set_Operator_name(char *);
 int create_xml_file(void);
 int is_rhms_details_updated(void);
 int update_date_status_file(void);

@@ -78,10 +78,10 @@ int Health_Status_xml_frame()
 	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "Battery", BAD_CAST module.Battery_status);
 	xmlNewChild(root_node, NULL, BAD_CAST "Comm", BAD_CAST module.Comm);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Comm);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2db", BAD_CAST module.Comm);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1SignalMode", BAD_CAST module.Comm);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.Comm);
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Sim1_db);
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2db", BAD_CAST module.Sim2_db);
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1SignalMode", BAD_CAST module.SIM1SignalMode);
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.SIM2SignalMode);
 
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "System_memory",NULL);

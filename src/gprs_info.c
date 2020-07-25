@@ -1,14 +1,15 @@
 #include <header.h>
 
-extern char var_gprs[30];
 
 int gprs_details(void)
 {
 	short int i=0,rev_operator_ret,SimDetails_ret=0,GPRS_update_ret=0;
-	char operator[16]="";
 	char IMEI_NUM[80]="";
 	char gsm_version[50]="";
 	char CCID_NUM[60]="";
+	char operator_buff[30]="";
+	int sim=0;
+	memset(operator_buff,0,sizeof(operator_buff));
 
 	for ( i=0 ; i <  2 ; i++ )
 	{	
@@ -43,21 +44,29 @@ int gprs_details(void)
 	}
 
 
-	rev_operator_ret = read_revision_operator_details(operator,gsm_version);
+	rev_operator_ret = read_revision_operator_details(operator_buff,gsm_version);
 
 	memset(module.GSM_Version,0,sizeof(module.GSM_Version));
 	if( rev_operator_ret != 0)
 	{
 		strcpy(module.GSM_Version,"NotFound");
-		strcpy(operator,"NotFound");
+		strcpy(operator_buff,"NotFound");
 		printf("module.GSM_Version:%s\n",module.GSM_Version);
 	}
 	else
 	{
+		Check_and_Set_Operator_name(operator_buff);
 		strcpy(module.GSM_Version,gsm_version);
 		printf("module.GSM_Version:%s\n",module.GSM_Version);
 
 	}
+
+	sim = Get_Sim_num();
+	if ( sim == 1)
+		strcpy(module.operator1_name,operator_buff);	
+	else if( sim == 2)
+		strcpy(module.operator2_name,operator_buff);	
+
 
 
 	if((rev_operator_ret != 0) || (GPRS_update_ret != 0 ) || (SimDetails_ret != 0 ))
@@ -70,13 +79,12 @@ int gprs_details(void)
 }
 
 
-int read_revision_operator_details(char *operator,char *revision_buff)
+int read_revision_operator_details(char *operator_buff,char *revision_buff)
 {
 	FILE *fp;
 	int i=0;
 	int j=0;
 	char *tmpbuf=NULL;
-	char operator_buff[30]="";
 	char file_buff[50]="";
 	memset(file_buff,0,sizeof(file_buff));
 
@@ -89,13 +97,7 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	}
 
 	fread(file_buff,1,50,fp);
-#if DEBUG
-	printf("Revision_Operator_Details buff = %s\n",file_buff);
-#endif
 	fclose(fp);
-
-
-
 
 
 	for(j=0;file_buff[j];j++)
@@ -108,7 +110,6 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	}
 	tmpbuf = file_buff;
 
-	memset(operator_buff,0,sizeof(operator_buff));
 	for(i=0;i<25;i++)
 	{
 		if (tmpbuf[i]!=',')
@@ -131,18 +132,31 @@ int read_revision_operator_details(char *operator,char *revision_buff)
 	if(strlen(revision_buff)==0)
 		strcpy(revision_buff,"NotFound");
 
-	for(i=0;operator_buff[i];i++)
-		if(isupper(operator_buff[i]))
-			operator_buff[i]+=32;
 
-	operator_check(operator_buff,operator);
-#if DEBUG
-	printf("operator_buff = %s, Operator:****%s****\t Revision:****%s***\n",operator_buff,operator,revision_buff);
-#endif
+
 
 	return 0;
 }
+int Get_Sim_num()
+{
+	FILE *fp;
+	char buff[30]="";
 
+
+	fp=fopen("/tmp/gprs_update","r");
+
+	if(fp == NULL)
+	{
+		fprintf(stderr," /tmp/gprs_update file not found\n");
+		return -1;
+	}
+
+	fread(buff,12,1,fp);
+
+	fclose(fp);
+
+	return atoi(buff);
+}
 
 int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 {

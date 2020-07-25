@@ -162,8 +162,8 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 		else
 			break;
 	}
-	operator_check(operator1_buff,operator1);
-	operator_check(operator2_buff,operator2);
+	Check_and_Set_Operator_name(operator1_buff);
+	Check_and_Set_Operator_name(operator2_buff);
 
 	if(strlen(revision_buff)==0)
 		strcpy(revision_buff,"NotFound");

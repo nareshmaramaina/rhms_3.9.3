@@ -15,8 +15,6 @@ int battery_status(void)
 
 	memset(module.Adapter,0,sizeof(module.Adapter));  // memset all rhms battery varibles	
 
-	memset(module.Battery,0,sizeof(module.Battery));
-
 	memset(module.Battery_status,0,sizeof(module.Battery_status));
 
 	for (i=0;i<5;i++)
@@ -52,7 +50,6 @@ int battery_status(void)
 
 	if(battery_ADC > 400)
 	{
-		sprintf(module.Battery,"%0.2fV",filter_voltage);
 		fprintf(stdout,"Battery is Connected\n");
 
 		if(battery_status && adapter_status)
