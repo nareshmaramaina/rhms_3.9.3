@@ -121,13 +121,6 @@ int BootTime_Status_xml_frame()
 	Total_Device_Apps = Get_Device_Applications_Count();
 	if ( Total_Device_Apps > 0 )
 	Applications_Details(Total_Device_Apps,childnode);
-	/*for ( i=0 ; i < Total_Device_Apps ; i++)
-	{
-		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
-		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST module.Application[i].Type);
-		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST module.Application[i].Name);
-		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST module.Application[i].Version);
-	}*/
 
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);

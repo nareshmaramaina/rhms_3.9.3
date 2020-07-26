@@ -51,6 +51,7 @@ int  create_Health_Status_xml_file(void)
 
 int Health_Status_xml_frame()
 {
+	int sim_num =0;
 	fprintf(stdout,"\n\n Health_Status.xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
 	xmlNodePtr root_node = NULL, childnode = NULL;/* node pointers */
@@ -66,10 +67,12 @@ int Health_Status_xml_frame()
 	xmlNewChild(root_node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
 
 	if( CONFIG.GPS || CONFIG.geo_location )
+	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
-	xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
-	xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
-	xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
+		xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
+		xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
+		xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
+	}
 	if( CONFIG.Iris_or_Biomat )
 		xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
 	if( CONFIG.Printer )
@@ -79,12 +82,23 @@ int Health_Status_xml_frame()
 	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "Battery", BAD_CAST module.Battery_status);
 	xmlNewChild(root_node, NULL, BAD_CAST "BatteryVoltage", BAD_CAST module.BatteryVoltage);
-	xmlNewChild(root_node, NULL, BAD_CAST "Comm", BAD_CAST module.Comm);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Sim1_db);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2db", BAD_CAST module.Sim2_db);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1SignalMode", BAD_CAST module.SIM1SignalMode);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.SIM2SignalMode);
 
+	xmlNewChild(root_node, NULL, BAD_CAST "Comm", BAD_CAST module.Comm);
+
+	if( strcmp(module.Comm,"GSM") == 0 )
+	{
+		sim_num = Update_Simdb_and_Signalmode();	
+		if ( sim_num == 1)
+		{
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM1db", BAD_CAST module.Sim1_db);
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM1SignalMode", BAD_CAST module.SIM1SignalMode);
+		}
+		else if ( sim_num == 2)
+		{
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM2db", BAD_CAST module.Sim2_db);
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.SIM2SignalMode);
+		}
+	}
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "System_memory",NULL);
 	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.System_memory.Total);

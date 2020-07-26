@@ -296,7 +296,7 @@ int 	create_BootTime_Status_xml_file();
 int create_Health_Status_xml_file();
 int Is_Hardware_Status_changed();
 int Applications_Details();
-void Update_Simdb_and_Signalmode();
+int Update_Simdb_and_Signalmode();
 int Get_Device_Applications_Count();
 int server_BootTime_updation();
 int  server_Hardware_Status_updation();

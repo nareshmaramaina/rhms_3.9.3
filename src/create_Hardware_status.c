@@ -50,7 +50,7 @@ int  create_Hardware_status_xml_file(void)
 
 int Hardware_xml_frame()
 {
-	fprintf(stdout,"\n\nxml Framing ...\n\n");
+	fprintf(stdout,"\n\nHardware xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
 	xmlNodePtr node = NULL;/* node pointers */
 

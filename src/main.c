@@ -19,7 +19,7 @@ int rhms_lock()
 
 int main()
 {
-	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0;
+	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0,BootTimeSentSuccess=0;
 	int run_time = -1;
 	char machineid[15];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
@@ -70,7 +70,7 @@ int main()
 	while(1)
 	{
 		fprintf(stdout," Hardware_run = %d, BootTime_run = %d, Periodic_run = %d\n",Hardware_run,BootTime_run,Periodic_run);
-		if ( Hardware_run != 0 )
+		if ( Hardware_run != 0 || run_time != 100 )
 		{	
 			ret = 	Is_Hardware_Status_changed();
 
@@ -89,7 +89,7 @@ int main()
 			else 
 				update_Hardware_status_date_file();
 		}
-		if ( BootTime_run != 0 )
+		if ( ( BootTime_run != 0 || run_time != 100 ) && BootTimeSentSuccess == 0 )
 		{
 			Update_Current_Date_with_Time();
 			ret = create_BootTime_Status_xml_file();
@@ -102,8 +102,12 @@ int main()
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	
 				return Server_ret;
 			}
+			else if ( Server_ret == 0 )
+				BootTimeSentSuccess = 1;
 
 		}
+		else fprintf(stdout," Boot Time request Already Successed \n");
+
 		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
 		{
 			sleep(3600); // Sleep 1hr
@@ -111,8 +115,10 @@ int main()
 		}
 		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
 		{
+			check_net_connection(); //Blocking For autoapn details
 
 			Periodic_tags();
+
 			ret = create_Health_Status_xml_file();
 			if ( ret != 0 )
 				return ret;	

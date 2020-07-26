@@ -58,13 +58,12 @@ void Periodic_tags(void)
 
 	}
 
-	Update_Simdb_and_Signalmode();	
 	update_internal_memory_info();
 	update_ram_info();
 
 	return;
 }
-void Update_Simdb_and_Signalmode()
+int Update_Simdb_and_Signalmode()
 {
 	int sim_num=0,bars=0,Sig_Strength=0;
 	char Sig_status='0';
@@ -127,5 +126,5 @@ void Update_Simdb_and_Signalmode()
 		strcpy(module.SIM2SignalMode,"No");
 	}
 	fprintf(stdout,"module.Sim1_db = %s,module.SIM1SignalMode, = %s, module.Sim2_db = %s,module.SIM2SignalMode, = %s\n",module.Sim1_db,module.SIM1SignalMode,module.Sim2_db,module.SIM2SignalMode);
-	return;
+	return sim_num;
 }	
