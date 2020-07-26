@@ -106,7 +106,7 @@ int main()
 				BootTimeSentSuccess = 1;
 
 		}
-		else fprintf(stdout," Boot Time request Already Successed \n");
+		else fprintf(stdout," Boot Time request Already Success \n");
 
 		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
 		{
