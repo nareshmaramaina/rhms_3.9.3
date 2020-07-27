@@ -9,7 +9,7 @@ char *Health_response_xml_file="/opt/Health_response.xml";
 int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime request, arg 3 For Periodic Health request 
 {
 	char Response_xml_file[128];
-	int ret;
+	int ret=-1;
 	FILE    *fp;
 	char    cmd[1024];
 	size_t len=0;

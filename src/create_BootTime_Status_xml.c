@@ -66,7 +66,7 @@ int BootTime_Status_xml_frame()
 	xmlNewChild(root_node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);
 	xmlNewChild(root_node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
 
-	if( CONFIG.DOT )
+	if( CONFIG.DOT && strlen(module.DOT.Date) > 5)
 	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "DOT",NULL);
 		xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.DOT.Date);
@@ -107,7 +107,7 @@ int BootTime_Status_xml_frame()
 	if( CONFIG.Camera )
 		xmlNewChild(root_node, NULL, BAD_CAST "Camera", BAD_CAST module.Camera);
 	xmlNewChild(root_node, NULL, BAD_CAST "AUDIO", BAD_CAST module.AUDIO);
-	if( CONFIG.BatteryInfo )
+	if( CONFIG.BatteryInfo && strlen(module.BatteryInfo.Date) > 5 ) 
 	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "BatteryInfo",NULL);
 		xmlNewChild(childnode, NULL, BAD_CAST "Date", BAD_CAST module.BatteryInfo.Date);

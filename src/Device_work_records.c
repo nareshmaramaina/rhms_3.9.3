@@ -47,7 +47,6 @@ int Device_work_records()
 	for ( i =0; i<8; i++)
 		Date[i]=ptr[i];
 	Date[i]='\0';
-	printf("DAte = %s\n",Date);
 
 	strcpy(DOT_FILE,filename);
 
@@ -59,7 +58,7 @@ int Device_work_records()
 
 	if( CONFIG.BatteryInfo )
 	{
-		strcpy(module.DOT.Date,Date);
+		strcpy(module.BatteryInfo.Date,Date);
 		sprintf(module.BatteryInfo.Day_worked_mins,"%d",Day.Total_work_secs/60);
 		sprintf(module.BatteryInfo.Day_adapter_mins,"%d",Day.Total_adapter_secs/60);
 		sprintf(module.BatteryInfo.Day_charged_mins,"%d",Day.Total_charging_secs/60);
@@ -77,7 +76,6 @@ int get_logname(char *file)
 	char today[14];
 
 	memset(today,0,sizeof(today));
-	memset(file,0,sizeof(file));
 
 	Get_Current_Date(today);
 

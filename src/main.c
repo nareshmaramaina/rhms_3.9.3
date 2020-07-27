@@ -172,6 +172,7 @@ int main()
 		{
 			fprintf(stdout,"RHMS: Sleep run_time = %d\n",run_time);
 			sleep(run_time);
+			ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 			printf("Posting the Health updation details again\n");
 		}
 
