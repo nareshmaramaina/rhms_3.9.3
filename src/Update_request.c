@@ -74,7 +74,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 
 	while((getline(&str,&len,fp)) != -1)
 	{
-		if  (strstr(str,"<Units>") != NULL )
+		if  (strstr(str,"POSHealthDetailsResponse") != NULL )
 		{
 			ret = 0 ;
 			break;
