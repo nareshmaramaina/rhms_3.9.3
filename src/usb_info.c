@@ -2,7 +2,7 @@
 
 int pendrive_test(int);
 int usb_details(void);
-	//int main()
+//int main()
 int update_usb_info()
 {
 
@@ -14,8 +14,10 @@ int update_usb_info()
 
 	fp4=fopen("/proc/partitions","r");
 	if ( fp4 == NULL )
+	{
+		strcpy(module.UsbdeviceExists,"No");
 		return -1;
-
+	}
 	while((fgets(str,80,fp4))!=NULL)
 	{
 		if((strstr(str,"sda1")) != NULL)
@@ -38,26 +40,23 @@ int update_usb_info()
 	fclose(fp4);
 
 	if (flag == 0)
-	{	
-		strcpy(module.Usbdevice.Total,"NotFound");
-		strcpy(module.Usbdevice.Use,"NotFound");
-		strcpy(module.Usbdevice.Free,"NotFound");
-	}
+		strcpy(module.UsbdeviceExists,"No");
 	else 
 	{
 		mkdir_p("/mnt/usb_test");	
 		ret = pendrive_test(flag);
 
 
-		if( ret != 0 )
-		{	
-			strcpy(module.Usbdevice.Total,"NotMounting");
-			strcpy(module.Usbdevice.Use,"NotMounting");
-			strcpy(module.Usbdevice.Free,"NotMounting");
-		}
+		if( ret == 0 )
+			strcpy(module.UsbdeviceExists,"Yes");
+
+		else 
+			strcpy(module.UsbdeviceExists,"No");
+		fprintf(stdout,"USB Memory Total= %s Use= %s Free=%s\n",module.Usbdevice.Total,module.Usbdevice.Use,module.Usbdevice.Free);
 	}
 
-	fprintf(stdout,"USB Memory Total= %s Use= %s Free=%s\n",module.Usbdevice.Total,module.Usbdevice.Use,module.Usbdevice.Free);
+	fprintf(stdout," module.UsbdeviceExists  = %s\n",module.UsbdeviceExists);
+
 	return 0;
 }
 

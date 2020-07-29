@@ -15,8 +15,12 @@ int update_sdcard_info(void)
 	memset(str,0x00,100);
 
 	fpr=fopen("/proc/partitions","r");
-	if ( fpr == NULL) 
+	if ( fpr == NULL)
+	{	
+		strcpy(module.ExternalMemExists,"No");
 		return -1;
+
+	}
 
 	while((fgets(str,80,fpr))!=NULL)
 	{
@@ -34,23 +38,17 @@ int update_sdcard_info(void)
 
 
 	if (flag == 0)
-	{
-		strcpy(module.ExternalMem.Total,"NotFound");
-		strcpy(module.ExternalMem.Use,"NotFound");
-		strcpy(module.ExternalMem.Free,"NotFound");
-	}
+		strcpy(module.ExternalMemExists,"No");
 	else
 	{
 		ret = sdcard_test(flag);
-		if( ret != 0 )
-		{
-			strcpy(module.ExternalMem.Total,"NotMounting");
-			strcpy(module.ExternalMem.Use,"NotMounting");
-			strcpy(module.ExternalMem.Free,"NotMounting");
-		}
+		if( ret == 0 )
+			strcpy(module.ExternalMemExists,"Yes");
+		else 
+			strcpy(module.ExternalMemExists,"No");
+		fprintf(stdout,"Externel Memory Total= %s Use= %s Free=%s\n",module.ExternalMem.Total,module.ExternalMem.Use,module.ExternalMem.Free);
 	}
-
-	fprintf(stdout,"Externel Memory Total= %s Use= %s Free=%s\n",module.ExternalMem.Total,module.ExternalMem.Use,module.ExternalMem.Free);
+	fprintf(stdout," ExternalMemExists = %s \n",module.ExternalMemExists);
 
 	return 0;
 
@@ -257,10 +255,10 @@ int update_internal_memory_info(void)
 	return 0;
 }
 /*int main()
-{
-	update_internal_memory_info();
-	update_sdcard_info();
-	update_ram_info();
-	return;
-} */
+  {
+  update_internal_memory_info();
+  update_sdcard_info();
+  update_ram_info();
+  return;
+  } */
 

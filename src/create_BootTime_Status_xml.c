@@ -7,7 +7,7 @@ char *BootTime_Status_file="/opt/BootTime_Status.xml";
 
 int  create_BootTime_Status_xml_file(void)
 {
-	
+
 	short int ret=0;
 
 	char remote_xml_bkp_file[64]="";
@@ -120,7 +120,7 @@ int BootTime_Status_xml_frame()
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
 	Total_Device_Apps = Get_Device_Applications_Count();
 	if ( Total_Device_Apps > 0 )
-	Applications_Details(Total_Device_Apps,childnode);
+		Applications_Details(Total_Device_Apps,childnode);
 
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);
@@ -133,15 +133,23 @@ int BootTime_Status_xml_frame()
 	if( CONFIG.FPSRDVer )
 		xmlNewChild(root_node, NULL, BAD_CAST "FPSRDVer", BAD_CAST module.FPSRDVer);
 
-	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ExternalMem",NULL);
-	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.ExternalMem.Total);
-	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.ExternalMem.Use);
-	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.ExternalMem.Free);
-	childnode = xmlNewChild(root_node, NULL, BAD_CAST "Usbdevice",NULL);
-	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.Usbdevice.Total);
-	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.Usbdevice.Use);
-	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
 
+	xmlNewChild(root_node, NULL, BAD_CAST "ExternalMemExists", BAD_CAST module.ExternalMemExists);
+	if ( strcmp(module.ExternalMemExists,"Yes") == 0 )
+	{
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "ExternalMem",NULL);
+		xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.ExternalMem.Total);
+		xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.ExternalMem.Use);
+		xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.ExternalMem.Free);
+	}
+	xmlNewChild(root_node, NULL, BAD_CAST "UsbdeviceExists", BAD_CAST module.UsbdeviceExists);
+	if ( strcmp(module.UsbdeviceExists,"Yes") == 0 )
+	{
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "Usbdevice",NULL);
+		xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.Usbdevice.Total);
+		xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.Usbdevice.Use);
+		xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
+	}
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
 

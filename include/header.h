@@ -146,7 +146,8 @@ struct terminal_status
 
 	char GSM_Module[64];
 	char CCID[50];
-
+	char UsbdeviceExists[10];
+	char ExternalMemExists[10];
 	MEMORY	InternalMem_Sysuser;
 	MEMORY	InternalMem_Jffs2;
 	MEMORY	RAM;
