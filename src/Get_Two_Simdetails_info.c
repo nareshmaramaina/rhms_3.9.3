@@ -27,18 +27,15 @@ int Get_Two_Simdetails_info(void)
 
 	if(sim_details_ret != 0)
 	{
-
-		strcpy(module.IMEI_no,"NotFound");
-		strcpy(module.CCID,"NotFound");
-		strcpy(module.Sim2CCID,"NotFound");
-
-		printf("module.IMEI_no:%s\n",module.IMEI_no);
-		printf("module.CCID_no:%s\n",module.CCID);
-		printf("module.Sim2CCID_no:%s\n",module.Sim2CCID);
+		strcpy(module.IMEInumberExists,"Error");
+		strcpy(module.SIM1CCIDnumberExists,"NO_SIM");
+		strcpy(module.SIM2CCIDnumberExists,"NO_SIM");
 
 	}
 	else
 	{
+		strcpy(module.IMEInumberExists,"Yes");
+		strcpy(module.SIM1CCIDnumberExists,"Yes");
 		strcpy(module.IMEI_no,IMEI_NUM);
 		strcpy(module.CCID,CCID_NUM);
 		strcpy(module.Sim2CCID,CCID1_NUM);
@@ -72,13 +69,13 @@ int Get_Two_Simdetails_info(void)
 		printf("Operator1 Name %s\n",module.operator1_name);
 		strcpy(module.operator2_name,"NotFound");
 		printf("Operator2 Name %s\n",module.operator2_name);
-
-		strcpy(module.GSM_Version,"NotFound");
-		printf("GSM Firmware Version %s\n",module.GSM_Version);
+		strcpy(module.GSMVersionExists,"Error");
 		op_rev=1;
 	}
 	else
 	{
+		strcpy(module.GSMVersionExists,"Yes");
+
 		strcpy(module.operator1_name,op_buff);
 		strcpy(module.operator2_name,op1_buff);
 		strcpy(module.GSM_Version,gsm_version);
@@ -165,8 +162,6 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 	Check_and_Set_Operator_name(operator1_buff);
 	Check_and_Set_Operator_name(operator2_buff);
 
-	if(strlen(revision_buff)==0)
-		strcpy(revision_buff,"NotFound");
 #if DEBUG
 
 	printf("Operator1 %s : ****buff = %s**** \t Operator2:%s *****buff= %s ***** Revision:****%s*** \n",operator1,operator1_buff,operator2,operator2_buff,revision_buff);
@@ -283,14 +278,6 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 			break;
 	}
 
-	if(strlen(ccid_buff) == 0)
-		strcpy(ccid_buff,"NotFound");
-
-	if(strlen(imei_buff) == 0)
-		strcpy(imei_buff,"NotFound");
-
-	if(strlen(ccid1_buff) == 0)
-		strcpy(ccid1_buff,"NotFound");
 	printf("IMEI:****%s****\t CCID:****%s***\t CCID1:%s \n",imei_buff,ccid_buff,ccid1_buff);
 	return 0;
 

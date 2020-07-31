@@ -25,6 +25,7 @@ void update_fpfile_info(void)
 	}
 	else
 	{
+		strcpy(module.FPScanneridExists,"Error");
 		fprintf(stderr,"Scanner Not Found\n");
 		sprintf(module.FP_TYPE,"Not-Detected");
 	}

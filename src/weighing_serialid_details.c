@@ -19,7 +19,7 @@ void weighing_serialid_details()
 	if ( ret != 0 )
 	{
 		fprintf(stderr," /etc/rc.d/init.d/bluetooth start command failed\n");
-		strcpy(module.WSSN,"NotFound");	
+		strcpy(module.WSSNExists,"NotFound");
 		return;
 	}
 
@@ -32,6 +32,7 @@ void weighing_serialid_details()
 		if( strlen(macid) != 0)
 		{
 			strcpy(module.WSSN,macid);
+			strcpy(module.WSSNExists,"Found");
 #if DEBUG
 			fprintf(stdout,"Macid of APPDS_VNTK@2015 BT device  = %s\nmodule.WSSN = %s\n",macid,module.WSSN);
 #endif 
@@ -40,7 +41,7 @@ void weighing_serialid_details()
 
 		else 
 		{
-			strcpy(module.WSSN,"NotFound");
+			strcpy(module.WSSNExists,"NotFound");
 			sleep(30);	
 
 			fprintf(stderr,"%d Macid of APPDS_VNTK@2015 BT device  = %s\nmodule.WSSN = %s\n",i,macid,module.WSSN);

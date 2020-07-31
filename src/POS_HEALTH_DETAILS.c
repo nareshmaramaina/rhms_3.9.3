@@ -227,7 +227,8 @@ int  PERIPHERALS(void)
 
 void SerialNo_and_Version_Based_Tags()
 {
-	Applications_Details();
+
+	AutoapnAppVersionDetails();
 
 	FirmwareDetails();
         if( CONFIG.Iris_or_Biomat )

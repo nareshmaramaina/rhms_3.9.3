@@ -12,6 +12,7 @@ void Camera_info(void)
 	fp = popen("udevadm info --name=/dev/video2 --attribute-walk | grep ATTRS{id | head -2","r");
 	if(fp == NULL)
 	{
+		strcpy(module.CamTypeExists,"NotFound");
 		return;
 	}
 	while(getline(&line, &len, fp) != -1)
@@ -40,10 +41,13 @@ void Camera_info(void)
 	}
 
 	if(flag)
+	{
 		sprintf(module.CamType,"%s:%s",VendorID,ProductID);
+		strcpy(module.CamTypeExists,"Found");
+	}
 	else
-		strcpy(module.CamType,"NotConnected");
-	fprintf(stdout," %s \n",module.CamType);
+		strcpy(module.CamTypeExists,"NotFound");
+	fprintf(stdout," ,module.CamType %s \n",module.CamType);
 	free(line);
 	line=NULL;
 	pclose(fp);

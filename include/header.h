@@ -99,6 +99,24 @@ struct device_battery
 };
 struct terminal_status
 {
+	char TerminalIDExists[12];
+	char MacidExists[12];
+	char IMEInumberExists[12];
+	char UIDExists[12];
+	char IritechSnoExists[12];
+	char PinpadSNExists[12];
+	char BarcodeSnoExists[12];
+	char GSMVersionExists[12];
+	char GSM_ModuleExists[12];
+	char WSSNExists[12];
+	char CamTypeExists[12];
+	char FPScanneridExists[12];
+	char SIM1CCIDnumberExists[12];
+	char SIM2CCIDnumberExists[12];
+	char RHMSClientVersion[12];
+	char AutoapnAppVersion[12];
+	char FingerRDServiceStatus[12];
+
 	char BarcodeSno[32];
 	char CamType[20];
 	char Comm[12];
@@ -160,7 +178,7 @@ struct terminal_status
 
 	char AUDIO[20];
 	char IMEI_no[40];
-	char TerminalID[30];
+	char TerminalID[50];
 	char SerialNo[50];
 	char Uid_no[40];
 	char UbootVersion[50];
@@ -319,3 +337,5 @@ int Get_Sim_num();
 void Check_and_Set_Operator_name(char *operator_buff);
 int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodic_run);
 int Can_i_reboot();
+void FingerRDServiceStatus();
+void AutoapnAppVersionDetails();

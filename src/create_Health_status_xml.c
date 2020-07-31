@@ -99,6 +99,7 @@ int Health_Status_xml_frame()
 			xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.SIM2SignalMode);
 		}
 	}
+	xmlNewChild(root_node, NULL, BAD_CAST "FingerRDServiceStatus", BAD_CAST module.FingerRDServiceStatus);
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "System_memory",NULL);
 	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.System_memory.Total);

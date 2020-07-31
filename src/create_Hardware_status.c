@@ -62,32 +62,70 @@ int Hardware_xml_frame()
 
 	xmlNewChild(node, NULL, BAD_CAST "SerialNo",BAD_CAST module.SerialNo);
 	xmlNewChild(node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
-	xmlNewChild(node, NULL, BAD_CAST "TerminalID",BAD_CAST module.MachineID);
-	xmlNewChild(node, NULL, BAD_CAST "Macid", BAD_CAST module.macid);
+	
+	xmlNewChild(node, NULL, BAD_CAST "TerminalIDExists",BAD_CAST module.TerminalIDExists);
+	if( strcmp(module.TerminalIDExists,"Found") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "TerminalID",BAD_CAST module.MachineID);
+
+	xmlNewChild(node, NULL, BAD_CAST "MacidExists", BAD_CAST module.MacidExists);
+	if( strcmp(module.MacidExists,"Yes") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "Macid", BAD_CAST module.macid);
+
 	xmlNewChild(node, NULL, BAD_CAST "UbootImageName", BAD_CAST module.UbootVersion);
 	xmlNewChild(node, NULL, BAD_CAST "KernelImageName", BAD_CAST module.KernelVersion);
 	xmlNewChild(node, NULL, BAD_CAST "RootfsImageName", BAD_CAST module.rootfs_details);
-	xmlNewChild(node, NULL, BAD_CAST "IMEInumber", BAD_CAST module.IMEI_no);
-	xmlNewChild(node, NULL, BAD_CAST "UID", BAD_CAST module.Uid_no);
-	if( CONFIG.IrisRDVer_and_SNo  )
-		xmlNewChild(node, NULL, BAD_CAST "IritechSno", BAD_CAST module.IritechSno);
 
+	xmlNewChild(node, NULL, BAD_CAST "IMEInumberExists", BAD_CAST module.IMEInumberExists);
+	if( strcmp(module.IMEInumberExists,"Yes") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "IMEInumber", BAD_CAST module.IMEI_no);
+
+	xmlNewChild(node, NULL, BAD_CAST "UIDExists", BAD_CAST module.UIDExists);
+	if( strcmp(module.UIDExists,"Yes") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "UID", BAD_CAST module.Uid_no);
+
+	if( CONFIG.IrisRDVer_and_SNo )
+	{
+		xmlNewChild(node, NULL, BAD_CAST "IritechSnoExists", BAD_CAST module.IritechSnoExists);
+		if(  strcmp(module.IritechSnoExists,"Found") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "IritechSno", BAD_CAST module.IritechSno);
+	}
 	if( CONFIG.PinpadSN )
-		xmlNewChild(node, NULL, BAD_CAST "PinpadSN", BAD_CAST module.PinpadSN);    
-
+	{
+		xmlNewChild(node, NULL, BAD_CAST "PinpadSNExists", BAD_CAST module.PinpadSNExists);    
+		if(  strcmp(module.PinpadSNExists,"Found") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "PinpadSN", BAD_CAST module.PinpadSN);    
+	}
 	if( CONFIG.BarcodeSno )
-		xmlNewChild(node, NULL, BAD_CAST "BarcodeSno", BAD_CAST module.BarcodeSno);
-	
-	xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
-	
-		if( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 )
-	xmlNewChild(node, NULL, BAD_CAST "GSM_Module",BAD_CAST module.GSM_Module);
+	{
+		xmlNewChild(node, NULL, BAD_CAST "BarcodeSnoExists", BAD_CAST module.BarcodeSnoExists);
+		if(  strcmp(module.BarcodeSnoExists,"Found") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "BarcodeSno", BAD_CAST module.BarcodeSno);
+	}
+	xmlNewChild(node, NULL, BAD_CAST "GSMVersionExists",BAD_CAST module.GSMVersionExists);
+	if( strcmp(module.GSMVersionExists,"Yes") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
 
-	if( CONFIG.WSSN )
-		xmlNewChild(node, NULL, BAD_CAST "WSSN", BAD_CAST module.WSSN);
+	if( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 )
+	{
+		xmlNewChild(node, NULL, BAD_CAST "GSM_ModuleExists",BAD_CAST module.GSM_ModuleExists);
+		if(  strcmp(module.GSM_ModuleExists,"Yes") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "GSM_Module",BAD_CAST module.GSM_Module);
+	}
+	if( CONFIG.WSSN)
+	{
+		xmlNewChild(node, NULL, BAD_CAST "WSSNExists", BAD_CAST module.WSSNExists);
+		if( strcmp(module.WSSNExists,"Found") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "WSSN", BAD_CAST module.WSSN);
+	}
 	if( CONFIG.CamType )
-		xmlNewChild(node, NULL, BAD_CAST "CamType", BAD_CAST module.CamType);
-	xmlNewChild(node, NULL, BAD_CAST "FPScannerid", BAD_CAST module.scanner_id);
+	{
+		xmlNewChild(node, NULL, BAD_CAST "CamTypeExists", BAD_CAST module.CamTypeExists);
+		if(strcmp(module.CamTypeExists,"Found") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "CamType", BAD_CAST module.CamType);
+	}
+	xmlNewChild(node, NULL, BAD_CAST "FPScanneridExists", BAD_CAST module.FPScanneridExists);
+	if( strcmp(module.FPScanneridExists,"Yes") == 0 )
+		xmlNewChild(node, NULL, BAD_CAST "FPScannerid", BAD_CAST module.scanner_id);
 
 	xmlSaveFormatFileEnc(Hardware_Status_file, doc, "UTF-8", 1);
 

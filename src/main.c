@@ -32,17 +32,19 @@ int main()
 	}
 
 
-	fprintf(stdout,"\n****************************\n");
-	fprintf(stdout,"Application	: %s\n", "RHMS Client");
-	fprintf(stdout,"Version 	: %s\n", "3.9.1");
-	fprintf(stdout,"***************************\n");
-
 	mkdir_p("/opt/");
 
 	memset(&module,0x00,sizeof(struct terminal_status));
 	memset(&CONFIG,0x00,sizeof(struct rhms));
 	memset(machineid, 0 ,sizeof(machineid));
 
+	strcpy(module.RHMSClientVersion,"1.0");
+	fprintf(stdout,"\n****************************\n");
+	fprintf(stdout,"Application	: %s\n", "RHMS Client");
+	fprintf(stdout,"Version 	: %s\n", module.RHMSClientVersion);
+	fprintf(stdout,"***************************\n");
+	
+	
 	Get_Config_Settings(); // Get Settings for enble or disable each Tag 
 
 	Update_Configured_Server_Addr();

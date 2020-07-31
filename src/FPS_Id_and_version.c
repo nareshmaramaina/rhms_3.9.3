@@ -8,7 +8,7 @@ void FPS_Id_and_version()
 	fp = fopen("/etc/scanner_type","r");
 	if ( fp == NULL ) 
 	{
-		strcpy(module.scanner_id,"Not-Detected");
+		strcpy(module.FPScanneridExists,"Error");
 		sprintf(module.FP_TYPE,"Not-Detected");
 		fprintf(stderr,"/etc/scanner_type file not found\n");
 		return;
@@ -22,12 +22,13 @@ void FPS_Id_and_version()
 			sprintf(module.FP_TYPE,"Capacitive");
 		if( strstr(line,"ScannerID:") != NULL)
 		{
+			strcpy(module.FPScanneridExists,"Yes");
 			sscanf(line+10,"%s",module.scanner_id);
 			break;
 		}
 	}
 	if(strlen(module.scanner_id) == 0)	
-		strcpy(module.scanner_id,"Not-Detected");
+		strcpy(module.FPScanneridExists,"Error");
 	if(strlen(module.FP_TYPE) == 0)	
 		strcpy(module.FP_TYPE,"Not-Detected");
 

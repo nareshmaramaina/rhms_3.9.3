@@ -8,10 +8,15 @@ void Uid_info()
 	ret = gl11_getuid(uid_buff);
 
 	if(ret!=0)
-		strcpy(module.Uid_no,"ERROR");
+		strcpy(module.UIDExists,"Error");
+
 	else
+	{
 		strcpy(module.Uid_no,uid_buff);
-	fprintf(stdout,"module.Uid_no = %s\n",module.Uid_no);	
+		strcpy(module.UIDExists,"Yes");
+	}
+	fprintf(stdout," UIDExists =%s\tmodule.Uid_no = %s\n",module.UIDExists,module.Uid_no);	
+
 	return;
 }
 
@@ -21,24 +26,31 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 {
 	short int ret=0;
 
-	char machineid[30];
+	char machineid[50];
 
 	memset(machineid,0x00,sizeof(machineid));
 
 	memset(module.SerialNo,0,sizeof(module.SerialNo));
 
 	ret = get_machineid(machineid);
+	strcpy(module.TerminalID,machineid);
 
-	if(ret != 0 || strlen(machineid) != 10)
+	if(ret != 0 )
 	{
 		fprintf(stdout,"MachineID Error\n");
-		strcpy(module.SerialNo,"ERROR");
-		strcpy(module.TerminalID,"ERROR");
+		strcpy(module.SerialNo,"Error");
+		strcpy(module.TerminalIDExists,"NotFound");
+	}
+	else if ( strlen(machineid) != 10)
+	{
+		fprintf(stdout,"MachineID Invalid\n");
+		strcpy(module.SerialNo,"Error");
+		strcpy(module.TerminalIDExists,"Invalid");
 	}
 
 	else 
 	{
-		strcpy(module.TerminalID,machineid);
+		strcpy(module.TerminalIDExists,"Found");
 
 		if(machineid[0]=='1' && machineid[1]=='1')
 			sprintf(module.SerialNo,"1%s",machineid);
@@ -50,18 +62,18 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 			sprintf(module.SerialNo,"111%s",machineid);
 
 		else
-			sprintf(module.SerialNo,"ERROR");
+			sprintf(module.SerialNo,"Error");
 	}
 
 
-	if ( (strcmp(module.SerialNo,"ERROR") ) == 0 || strlen(module.SerialNo) == 0 )
+	if ( (strcmp(module.SerialNo,"Error") ) == 0 || strlen(module.SerialNo) == 0 )
 	{
 		memset(module.SerialNo,0,sizeof(module.SerialNo));
 
 		sprintf(module.SerialNo,"%c%c%c%c%c%c%c%c%c%c%c%c",module.macid[0],module.macid[1],module.macid[3],module.macid[4],module.macid[6],module.macid[7],module.macid[9],module.macid[10],module.macid[12],module.macid[13],module.macid[15],module.macid[16]);
 
 	}	
-	fprintf(stdout,"module.TerminalID = %s\tmodule.SerialNo = %s\n",module.TerminalID,module.SerialNo);
+	fprintf(stdout,"module.TerminalIDExists =%s\tmodule.TerminalID = %s\tmodule.SerialNo = %s\n",module.TerminalIDExists,module.TerminalID,module.SerialNo);
 	return;
 }
 
@@ -110,11 +122,15 @@ void update_macid_details()
 	ret = gl11_getmacid(mac_buff);
 
 	if(ret == 0)
+	{
 		strcpy(module.macid,mac_buff);
-	else
-		strcpy(module.macid,"ERROR");
+		strcpy(module.MacidExists,"Yes");
 
-	fprintf(stdout,"module.macid = %s\n",module.macid);
+	}
+	else
+		strcpy(module.MacidExists,"Error");
+
+	fprintf(stdout,"module.MacidExists, = %s\tmodule.macid = %s\n",module.MacidExists,module.macid);
 
 	return;
 }

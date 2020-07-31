@@ -60,7 +60,7 @@ void Periodic_tags(void)
 
 	update_internal_memory_info();
 	update_ram_info();
-
+	FingerRDServiceStatus();
 	return;
 }
 int Update_Simdb_and_Signalmode()

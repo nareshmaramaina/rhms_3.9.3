@@ -13,12 +13,13 @@ void  barcode_SerialNo()
 
 		if( ret == 0)
 		{
+			strcpy(module.BarcodeSnoExists,"Found");
 			strcpy(module.BarcodeSno,serialno);
 			printf("Barcode Scanner found, Serial No %s \n",module.BarcodeSno);
 			return;
 		}
 
-		strcpy(module.BarcodeSno,"NotConnected");
+		else strcpy(module.BarcodeSnoExists,"NotFound");
 	
 		sleep(2);
 		fprintf(stdout,"Barcode not found, retrying\n");

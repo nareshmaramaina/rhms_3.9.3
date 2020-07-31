@@ -119,6 +119,7 @@ int BootTime_Status_xml_frame()
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
 	Total_Device_Apps = Get_Device_Applications_Count();
+	fprintf(stdout," Getting Device Count = %d\n",Total_Device_Apps);
 	if ( Total_Device_Apps > 0 )
 		Applications_Details(Total_Device_Apps,childnode);
 
@@ -150,11 +151,18 @@ int BootTime_Status_xml_frame()
 		xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.Usbdevice.Use);
 		xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
 	}
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
+
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumberExists", BAD_CAST module.SIM1CCIDnumberExists);
+	if( strcmp(module.SIM1CCIDnumberExists,"Yes") == 0 )
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
 
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
+	xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumberExists", BAD_CAST module.SIM2CCIDnumberExists);
+	if( strcmp(module.SIM2CCIDnumberExists,"Yes") == 0 )
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
 	xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST module.operator2_name);
+	xmlNewChild(root_node, NULL, BAD_CAST "RHMSClientVersion", BAD_CAST module.RHMSClientVersion);
+	xmlNewChild(root_node, NULL, BAD_CAST "AutoapnAppVersion", BAD_CAST module.AutoapnAppVersion);
 
 
 

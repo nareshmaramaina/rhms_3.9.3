@@ -19,7 +19,7 @@ void Iris_Scanner_Id(void)
 		fp = popen("tac /var/log/mk2120ul-mgmtserv.log","r");
 		if(fp == NULL)
 		{
-		strcpy(module.IritechSno,"NotFound");
+		strcpy(module.IritechSnoExists,"NotFound");
 			printf("/var/log/mk2120ul-mgmtserv.log Error in open a file\n");
 			return;
 		}
@@ -32,6 +32,7 @@ void Iris_Scanner_Id(void)
 				fprintf(stdout,"Iritech Scanner Id = %s\n",scanner_id);
 				if(strlen(scanner_id) == 14)
 				{
+					strcpy(module.IritechSnoExists,"Found");
 					strcpy(module.IritechSno,scanner_id);
 					free(line);
 					line=NULL;
@@ -45,7 +46,8 @@ void Iris_Scanner_Id(void)
 	}
 	free(line);
 	line=NULL;
-	strcpy(module.IritechSno,"NotFound");
+
+	strcpy(module.IritechSnoExists,"NotFound");
 	fprintf(stderr,"module.IritechSno = %s, Iris Scanner Not connected\n",module.IritechSno);
 	return;
 }

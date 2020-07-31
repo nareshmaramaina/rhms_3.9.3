@@ -19,19 +19,19 @@ int FirmwareDetails()
 	}
 	while((getline(&line, &len, fp)) > 0)
 	{
-		if((str = (char *)strstr(line,"FirmwareName")) != NULL)
+		if((str = (char *)strstr(line,"FirmwareName:")) != NULL)
 		{
 			memset(buff,0,sizeof(buff));	
-			strcpy(buff,str+12);
+			strcpy(buff,str+13);
 			if(buff[strlen(buff)-1] == '\n')
 				buff[strlen(buff)-1]='\0';
 
 			strcpy(module.FirmwareName,buff);
 		}
-		else if((str = (char *)strstr(line,"Version")) != NULL)
+		else if((str = (char *)strstr(line,"Version:")) != NULL)
 		{
 			memset(buff,0,sizeof(buff));	
-			strcpy(buff,str+7);
+			strcpy(buff,str+8);
 			if(buff[strlen(buff)-1] == '\n')
 				buff[strlen(buff)-1]='\0';
 

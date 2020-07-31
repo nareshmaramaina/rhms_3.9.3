@@ -15,12 +15,13 @@ void optical_scanner_id(void)
 
 	memset(module.scanner_id,0x00,sizeof(module.scanner_id));
 	if(ret == 0)
-		strcpy(module.scanner_id,buffer);
-	else
 	{
-		fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
-		strcpy(module.scanner_id,"Not-Detected");
+		strcpy(module.scanner_id,buffer);
+		strcpy(module.FPScanneridExists,"Yes");
 	}
+	else
+		strcpy(module.FPScanneridExists,"Error");
+	fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
 	return;
 }
 
@@ -82,12 +83,13 @@ void capacitive_scanner_id(void)
 
 
 	if(ret == 0)
-		strcpy(module.scanner_id,buffer);
-	else
 	{
-		fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
-		strcpy(module.scanner_id,"Not-Detected");
+		strcpy(module.FPScanneridExists,"Yes");
+		strcpy(module.scanner_id,buffer);
 	}
+	else
+		strcpy(module.FPScanneridExists,"Error");
+		fprintf(stderr,"optical_scanner_id (module.scanner_id ) is %s\n",module.scanner_id);
 	return;
 }
 

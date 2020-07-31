@@ -9,20 +9,29 @@ void xml_type_Autoapn_details()
 
 
 	if(strlen(module.GSM_Module) == 0 )
-		strcpy(module.GSM_Module,"NotFound");
+		strcpy(module.GSM_ModuleExists,"Error");
+	else 	
+		strcpy(module.GSM_ModuleExists,"Yes");
 
 	if(strlen(module.GSM_Version) == 0 )
-		strcpy(module.GSM_Version,"NotFound");
+		strcpy(module.GSMVersionExists,"Error");
+	
+	else strcpy(module.GSMVersionExists,"Yes");
 
 	if(strlen(module.IMEI_no) == 0 )
-		strcpy(module.IMEI_no,"NotFound");
+		strcpy(module.IMEInumberExists,"Error");
+	else 	
+		strcpy(module.IMEInumberExists,"Yes");
 
-	if(strlen(module.CCID) == 0 )
-		strcpy(module.CCID,"NotFound");
+	if(strlen(module.CCID) == 0 || strcmp(module.CCID,"NO_SIM") == 0  )
+		strcpy(module.SIM1CCIDnumberExists,"NO_SIM");
+	else
+		strcpy(module.SIM1CCIDnumberExists,"Yes");
 
-	if(strlen(module.Sim2CCID) == 0 )
-		strcpy(module.Sim2CCID,"NotFound");
-
+	if(strlen(module.Sim2CCID) == 0 || strcmp(module.Sim2CCID,"NO_SIM") == 0 )
+		strcpy(module.SIM2CCIDnumberExists,"NO_SIM");
+	else
+		strcpy(module.SIM2CCIDnumberExists,"Yes");
 
 	if(strlen(module.operator1_name) == 0 )
 		strcpy(module.operator1_name,"NotFound");
@@ -35,10 +44,10 @@ void xml_type_Autoapn_details()
 	else Check_and_Set_Operator_name(module.operator2_name);
 
 	if(strlen(module.WIFI) == 0 )
-		strcpy(module.WIFI,"NotFound");       
+		strcpy(module.WIFI,"No");       
 
 	if(strlen(module.ethernet) == 0 )
-		strcpy(module.ethernet,"NotFound");   
+		strcpy(module.ethernet,"NotConnected");   
 
 
 
