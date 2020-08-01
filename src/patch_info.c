@@ -1,6 +1,5 @@
 #include <header.h>
 
-
 int FirmwareDetails()
 {
 	FILE *fp = NULL;
@@ -9,7 +8,7 @@ int FirmwareDetails()
 
 	size_t len=20;
 	char buff[128]="";
-	fp = fopen("/etc/visiontek_Firmware_release","r");
+	fp = fopen("/etc/vision/RHMS/Firmware/FirmwareUpdated.info","r");
 	if(fp == NULL)
 	{
 		fprintf(stdout,"Firmware Details Unavailable\n");
