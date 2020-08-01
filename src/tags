@@ -8,6 +8,8 @@
 Adapter_status	DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Adapter_status	adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Applications_Details	get_app_info.c	/^int Applications_Details(int Total_Device_Apps,xmlNodePtr childnode)$/;"	f	typeref:typename:int
+AutoapnAppVersionDetails	AutoapnAppVersionDetails.c	/^void AutoapnAppVersionDetails()$/;"	f	typeref:typename:void
+AutoapnAppVersionDetails.o	Makefile	/^AutoapnAppVersionDetails.o:AutoapnAppVersionDetails.c  $/;"	t
 Autoapn_xmlparse	autoapn_xmlparser.c	/^int Autoapn_xmlparse( char *docname )$/;"	f	typeref:typename:int
 Autoapn_xmlparseStory	autoapn_xmlparser.c	/^void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:void
 BTINFO	DOT_1.1/header.h	/^#define BTINFO /;"	d
@@ -70,6 +72,8 @@ FPS_Id_and_version	FPS_Id_and_version.c	/^void FPS_Id_and_version()$/;"	f	typere
 FPS_Id_and_version.o	Makefile	/^FPS_Id_and_version.o:FPS_Id_and_version.c$/;"	t
 FPS_RDVersion.o	Makefile	/^FPS_RDVersion.o:FPS_RDVersion.c$/;"	t
 FPS_RD_version	FPS_RDVersion.c	/^void FPS_RD_version()$/;"	f	typeref:typename:void
+FingerRDServiceStatus	FingerRDServiceStatus.c	/^void FingerRDServiceStatus()$/;"	f	typeref:typename:void
+FingerRDServiceStatus.o	Makefile	/^FingerRDServiceStatus.o:FingerRDServiceStatus.c$/;"	t
 FirmwareDetails	patch_info.c	/^int FirmwareDetails()$/;"	f	typeref:typename:int
 GPS_Success	main.c	/^int GPS_Success;$/;"	v	typeref:typename:int
 Get_Config_Settings	parse_rhms_config.c	/^int Get_Config_Settings()$/;"	f	typeref:typename:int
@@ -86,7 +90,6 @@ Get_Wifi_Status	wifi_info.c	/^int Get_Wifi_Status(void)$/;"	f	typeref:typename:i
 Get_autoapn_details.o	Makefile	/^Get_autoapn_details.o:Get_autoapn_details.c$/;"	t
 Get_autoapn_wrote_details	Get_autoapn_details.c	/^void Get_autoapn_wrote_details()$/;"	f	typeref:typename:void
 Get_interface_name	Update_Comm_media.c	/^int Get_interface_name(char *interface,char *ip)$/;"	f	typeref:typename:int
-Get_interface_name	Update_Comm_media_test.c	/^int Get_interface_name(char *interface)$/;"	f	typeref:typename:int
 Hardware_Status_file	create_Hardware_status.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
 Hardware_Status_file	create_Hardware_status_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
 Hardware_filename	rtc_functions.c	/^char *Hardware_filename = "\/opt\/.rhms_Hardware_status_date_update";$/;"	v	typeref:typename:char *
@@ -105,7 +108,6 @@ Is_Hardware_Status_changed.o	Makefile	/^Is_Hardware_Status_changed.o:Is_Hardware
 Location_info	Location_info.c	/^int  Location_info()$/;"	f	typeref:typename:int
 Location_info.o	Makefile	/^Location_info.o:Location_info.c$/;"	t
 Name	get_app_info.c	/^		char Name[128];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[128]	file:
-Node	module.c	/^struct Node $/;"	s	file:
 Non_xml_type_Autoapn_details	Non_xml_type_Autoapn_details.c	/^void Non_xml_type_Autoapn_details()$/;"	f	typeref:typename:void
 Non_xml_type_Autoapn_details.o	Makefile	/^Non_xml_type_Autoapn_details.o:Non_xml_type_Autoapn_details.c$/;"	t
 OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Up/;"	m
@@ -155,7 +157,7 @@ Update_Configured_Server_Addr	Update_Configured_Server_Addr.c	/^int  Update_Conf
 Update_Configured_Server_Addr.o	Makefile	/^Update_Configured_Server_Addr.o:Update_Configured_Server_Addr.c$/;"	t
 Update_Current_Date_with_Time	rtc_functions.c	/^void Update_Current_Date_with_Time()$/;"	f	typeref:typename:void
 Update_Health_Statuses_dates.o	Makefile	/^Update_Health_Statuses_dates.o:Update_Health_Statuses_dates.c$/;"	t
-Update_Simdb_and_Signalmode	Periodic_tags.c	/^void Update_Simdb_and_Signalmode()$/;"	f	typeref:typename:void
+Update_Simdb_and_Signalmode	Periodic_tags.c	/^int Update_Simdb_and_Signalmode()$/;"	f	typeref:typename:int
 Update_request	Update_request.c	/^int Update_request(int request) \/\/ arg 1 For Hardware request,arg 2 For BootTime request, arg /;"	f	typeref:typename:int
 Update_request.o	Makefile	/^Update_request.o:Update_request.c$/;"	t
 Version	get_app_info.c	/^		char Version[12];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[12]	file:
@@ -191,7 +193,6 @@ create_Hardware_status_xml_file	create_Hardware_status.c	/^int  create_Hardware_
 create_Hardware_status_xml_file	create_Hardware_status_xml.c	/^int  create_Hardware_status_xml_file(void)$/;"	f	typeref:typename:int
 create_Health_Status_xml_file	create_Health_status_xml.c	/^int  create_Health_Status_xml_file(void)$/;"	f	typeref:typename:int
 create_Health_status_xml.o	Makefile	/^create_Health_status_xml.o:create_Health_status_xml.c$/;"	t
-data	module.c	/^	int data; $/;"	m	struct:Node	typeref:typename:int	file:
 dev_info.o	Makefile	/^dev_info.o:dev_info.c$/;"	t
 diff_bw_two_dates	rtc_functions.c	/^static int diff_bw_two_dates(int firstDate, int firstMonth, int firstYear, int secondDate, int s/;"	f	typeref:typename:int	file:
 ethernet_info.o	Makefile	/^ethernet_info.o:ethernet_info.c$/;"	t
@@ -226,16 +227,13 @@ main	Generate_rhms_config/Generate_config.c	/^int main()$/;"	f	typeref:typename:
 main	Pinpad/PinpadSerialno.c	/^int main()$/;"	f	typeref:typename:int
 main	Pinpad/Pinpad_bkp.c	/^int main()$/;"	f	typeref:typename:int
 main	Pinpad/pin.c	/^int main()$/;"	f	typeref:typename:int
-main	Update_Comm_media_test.c	/^int main()$/;"	f	typeref:typename:int
 main	main.c	/^int main()$/;"	f	typeref:typename:int
-main	module.c	/^int main() $/;"	f	typeref:typename:int
 main.o	Makefile	/^main.o:main.c$/;"	t
 makedir_p	DOT_1.1/mkdir_p.c	/^int makedir_p(char *dirname)$/;"	f	typeref:typename:int
 memory_info.o	Makefile	/^memory_info.o:memory_info.c$/;"	t
 mkdir_p	mkdir_p.c	/^int mkdir_p(char *dirname)$/;"	f	typeref:typename:int
 mkdir_p.o	Makefile	/^mkdir_p.o:mkdir_p.c$/;"	t
 msleep	POS_HEALTH_DETAILS.c	/^inline void msleep(int arg)$/;"	f	typeref:typename:void
-next	module.c	/^	struct Node *next; $/;"	m	struct:Node	typeref:struct:Node *	file:
 operator_check.o	Makefile	/^operator_check.o:operator_check.c  $/;"	t
 opt_scanner_id	fp_info.c	/^int opt_scanner_id(char *opt_id)$/;"	f	typeref:typename:int
 optical_scanner_id	fp_info.c	/^void optical_scanner_id(void)$/;"	f	typeref:typename:void
@@ -256,12 +254,9 @@ patch_info.o	Makefile	/^patch_info.o:patch_info.c$/;"	t
 pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f	typeref:typename:int
 pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f	typeref:typename:void
 pinpad_status.o	Makefile	/^pinpad_status.o:pinpad_status.c$/;"	t
-prev	module.c	/^	struct Node *prev;	 $/;"	m	struct:Node	typeref:struct:Node *	file:
-printList	module.c	/^void printList(struct Node *node) $/;"	f	typeref:typename:void
 print_error_resp	Pinpad/header.h	/^int (*print_error_resp) (int );$/;"	v	typeref:typename:int (*)(int)
 printer_info.o	Makefile	/^printer_info.o:printer_info.c$/;"	t
 printer_status	printer_info.c	/^void printer_status()$/;"	f	typeref:typename:void
-push	module.c	/^void push(struct Node** head_ref, int new_data) $/;"	f	typeref:typename:void
 read_revision_operator_details	gprs_info.c	/^int read_revision_operator_details(char *operator_buff,char *revision_buff)$/;"	f	typeref:typename:int
 read_two_revision_operator_details	Get_Two_Simdetails_info.c	/^int read_two_revision_operator_details(char *operator1,char *operator2,char *revision_buff)$/;"	f	typeref:typename:int
 reboot_device	reboot_device.c	/^void reboot_device(char last_digit) $/;"	f	typeref:typename:void
@@ -270,8 +265,6 @@ retrieve_nw_details	check_net_connection.c	/^static int retrieve_nw_details(void
 retrieve_sim_details	gprs_info.c	/^int retrieve_sim_details(char *ccid_buff,char *imei_buff)$/;"	f	typeref:typename:int
 retrieve_two_signal_details	Get_Two_Simdetails_info.c	/^int retrieve_two_signal_details(char *SIM1,char *SIM2)$/;"	f	typeref:typename:int
 retrieve_two_sim_details	Get_Two_Simdetails_info.c	/^int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)$/;"	f	typeref:typename:int
-reverse	module.c	/^void reverse(struct Node **head_ref) $/;"	f	typeref:typename:void
-reverse_list	module.c	/^void  reverse_list(struct Node **head)$/;"	f	typeref:typename:void
 rhms_lock	main.c	/^int rhms_lock()$/;"	f	typeref:typename:int
 rtc_functions.o	Makefile	/^rtc_functions.o:rtc_functions.c$/;"	t
 sam_info.o	Makefile	/^sam_info.o:sam_info.c$/;"	t
