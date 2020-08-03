@@ -154,7 +154,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode, xml
 		{
 			strcpy(Application[DeviceApps].Type,DeviceApplication.Type);
 			strcpy(Application[DeviceApps].Name,DeviceApplication.Name);
-			sprintf(Application[DeviceApps].Version,"%1.f",DeviceApplication.Version);
+			sprintf(Application[DeviceApps].Version,"%.1f",DeviceApplication.Version);
 			DeviceApps++;
 		}
 		else
@@ -169,7 +169,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode, xml
 		{
 			strcpy(RunningApplication[Running_apps].Type,DeviceApplication.Type);
 			strcpy(RunningApplication[Running_apps].Name,DeviceApplication.Name);
-			sprintf(RunningApplication[Running_apps].Version,"%1.f",DeviceApplication.Version);
+			sprintf(RunningApplication[Running_apps].Version,"%.1f",DeviceApplication.Version);
 			Running_apps++;
 		}
 		else

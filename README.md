@@ -343,3 +343,7 @@ taking too much for registering 24000 thousand devices
 taking too much time for deregistration
 
 Device Info -- EXPORT TO EXCEL NOT WORKING 
+
+
+
+If we do Refresh it will automatically 
