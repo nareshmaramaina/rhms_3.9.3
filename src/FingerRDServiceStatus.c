@@ -2,7 +2,6 @@
 void FingerRDServiceStatus()
 {
 	DIR *dp;
-	FILE *fp = NULL;
 	int ret = 0;
 	dp=opendir("/home/rdservice/");
 	if(dp == NULL)

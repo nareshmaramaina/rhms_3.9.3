@@ -241,3 +241,105 @@ In Health Status  / Periodic tags
 			<Free>937MB</Free>
 		</RAM>
 	</HealthStatus>
+IN hardware status details
+
+1) date and time are not showing server side
+2) GSM_MODULE tag is coming twice	extra tags are added Sim2 CCID CCID nmber 
+3) WSSN Tag Not Found 
+4) imei number it is not taking more than 15 digits or less than 15 digits // Decision pending // When Application release First can i send  
+
+
+
+
+in boot status 
+
+ 
+1) Battery Info If iam not Sent any tag thing it is showing Defautly wrong timing 
+
+2) usb device devices data not showing in GB's
+
+3) firmware name and version tags are not showing 
+
+4) Application Type, Name, Version not showing 
+
+
+Sam Ifd Rtc looking not well in small letters 
+
+
+in periodic
+
+1) Iris Tag showing IRIS even if iam not sent also 
+ 
+2) ID column coming 2 times 
+
+ram jffs2 ... not showing GB values
+
+Yesterday Details Not Showing
+SIM1 SIM2 DB ( - Values are Giving wrong repsonse)  due to negative sign
+
+
+
+ <UsbdeviceExists>No</UsbDeviceExists>
+  <ExternalMemExists>No</ExternalMemExists>
+
+Battery Info If Not getting Date giving return 
+1 ) <Usbdevice>
+    <Total>NotFound</Total>
+    <Use>NotFound</Use>
+    <Free>NotFound</Free>
+  </Usbdevice>
+
+
+2) APPDS Project Not Downloaded
+
+ 187	2020-07-23T11:13:32.367988	pds	pds1	2.0	prophecy.zip	Prophecy	naresh.m
+
+wget  https://rhms2.callippus.co.uk/FilePath/ed078dd1-3222-4cc2-a387-61758de1c6fc_prophecy.zip
+--2020-07-27 22:36:10--  https://rhms2.callippus.co.uk/FilePath/ed078dd1-3222-4cc2-a387-61758de1c6fc_prophecy.zip
+Resolving rhms2.callippus.co.uk (rhms2.callippus.co.uk)... 13.233.240.252
+Connecting to rhms2.callippus.co.uk (rhms2.callippus.co.uk)|13.233.240.252|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2020-07-27 22:36:10 ERROR 404: Not Found. 
+
+
+wget https://rhms2.callippus.co.uk/FilePath/b3b73db4-76a9-48ba-81b7-51996f96ac00_prophecy.zip
+--2020-07-27 22:37:38--  https://rhms2.callippus.co.uk/FilePath/b3b73db4-76a9-48ba-81b7-51996f96ac00_prophecy.zip
+Resolving rhms2.callippus.co.uk (rhms2.callippus.co.uk)... 13.233.240.252
+Connecting to rhms2.callippus.co.uk (rhms2.callippus.co.uk)|13.233.240.252|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2020-07-27 22:37:38 ERROR 404: Not Found.
+
+
+
+
+curl https://rhms2.callippus.co.uk/api/FirmwareStatus?serialNo=111817161519  // Getting Error
+
+
+Downloads not happening in APPDS 
+Single Degregisteration not found 
+Fileloading showing on wrong format 
+
+IF one click it is not taking again for upload
+
+Decesion Pending  Project tag
+
+
+created 5 projects not able to see in the company admin
+
+project name is not allowing special characters ( allowing only under score)
+
+for example if i create a project name with the name newproject and again one more project with name NEW PROJECT is allowing
+
+creating firmware not allowing special characters (allowing only under score)
+
+in application creation 300app and 300APP both are allowing (this is not happening in firmware creation)
+
+creating appliaction not allowing special characters ( allowing only under score)
+
+firmware patches are not uploading
+
+taking too much for registering 24000 thousand devices
+
+taking too much time for deregistration
+
+Device Info -- EXPORT TO EXCEL NOT WORKING 

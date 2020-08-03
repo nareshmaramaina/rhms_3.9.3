@@ -339,3 +339,5 @@ int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodi
 int Can_i_reboot();
 void FingerRDServiceStatus();
 void AutoapnAppVersionDetails();
+int Get_Total_Server_Apps();
+int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,float *DeviceApplicationVersion );
