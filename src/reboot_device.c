@@ -19,9 +19,7 @@ void reboot_device(char last_digit)
 	gettimeofday (&tv,NULL);
 
 	current = localtime (&tv.tv_sec) ;
-#if DEBUG
 	fprintf(stdout,"%02d:%02d:%02d\n",current->tm_hour,current->tm_min,current->tm_sec);
-#endif
 	if ( current->tm_year+1900 < 2020 )
 	{
 		fprintf(stderr,"Date Wrong set - Year Error, RHMS Exiting \n");
@@ -36,9 +34,7 @@ void reboot_device(char last_digit)
 	Total_sleep_secs = mid_sleep_secs + machine_secs;
 
 	printf( "\nRHMS: sleep %d secs to reboot\n",Total_sleep_secs);
-#if DEBUG
 	printf("midnight sleep secs   = %d\tmachine_secs = %d \nTotal Sleep secs = %d\n", mid_sleep_secs , machine_secs,Total_sleep_secs); 
-#endif
 
 	sleep( mid_sleep_secs + machine_secs );		
 

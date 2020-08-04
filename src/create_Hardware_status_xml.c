@@ -5,13 +5,10 @@
 char *Hardware_Status_file="/opt/Hardware_status.xml";
 
 
+int Hardware_xml_frame();
 int  create_Hardware_status_xml_file(void)
 {
 	short int ret=0;
-
-	char remote_xml_bkp_file[64]="";
-
-	char Path[24]="";
 
 	remove(Hardware_Status_file);
 
@@ -24,23 +21,6 @@ int  create_Hardware_status_xml_file(void)
 		fprintf(stderr," %s open failed\n",Hardware_Status_file);
 		return -1;
 	}
-
-	mkdir_p("/var/log/Health/");
-
-	copy_file("/var/log/Health/Last_Hardware_status.xml",Hardware_Status_file);//des,src
-
-
-	memset(remote_xml_bkp_file,0,sizeof(remote_xml_bkp_file));
-
-	memset(Path,0,sizeof(Path));
-
-	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[2],module.Date_time[3]);
-
-	mkdir_p(Path);
-
-	sprintf(remote_xml_bkp_file,"%s/day_%c%c_Hardware_status.xml",Path,module.Date_time[0],module.Date_time[1]);
-
-	copy_file(remote_xml_bkp_file,Hardware_Status_file);
 
 	return 0;
 
