@@ -69,8 +69,9 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 	if ( (strcmp(module.SerialNo,"Error") ) == 0 || strlen(module.SerialNo) == 0 )
 	{
 		memset(module.SerialNo,0,sizeof(module.SerialNo));
-
-		sprintf(module.SerialNo,"%c%c%c%c%c%c%c%c%c%c%c%c",module.macid[0],module.macid[1],module.macid[3],module.macid[4],module.macid[6],module.macid[7],module.macid[9],module.macid[10],module.macid[12],module.macid[13],module.macid[15],module.macid[16]);
+		
+		strcpy(module.SerialNo,module.macid);
+		//sprintf(module.SerialNo,"%c%c%c%c%c%c%c%c%c%c%c%c",module.macid[0],module.macid[1],module.macid[3],module.macid[4],module.macid[6],module.macid[7],module.macid[9],module.macid[10],module.macid[12],module.macid[13],module.macid[15],module.macid[16]);
 
 	}	
 	fprintf(stdout,"module.TerminalIDExists =%s\tmodule.TerminalID = %s\tmodule.SerialNo = %s\n",module.TerminalIDExists,module.TerminalID,module.SerialNo);

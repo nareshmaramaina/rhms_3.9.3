@@ -64,6 +64,7 @@ void 	DEVICE_DETAILS()
 
 	Uid_info();
 
+	HardwareID_Details();
 	return;
 }
 

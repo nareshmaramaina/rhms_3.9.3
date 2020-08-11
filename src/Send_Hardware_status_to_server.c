@@ -4,7 +4,7 @@ int Send_Hardware_status_to_server (void)
 	int ret = 0;
 	int i=0;
 
-	for (i=0; i<8; i++)
+	for (i=0; i<5; i++)
 	{
 		check_net_connection(); //Blocking For autoapn details
 
@@ -22,8 +22,8 @@ int Send_Hardware_status_to_server (void)
 
 		else   
 		{
-			fprintf(stdout,"***** Hardware Updation Failure, retrying = %d, Waiting for 3mins****\n",i);
-			sleep(180);
+			fprintf(stdout,"***** Hardware Updation Failure, retrying = %d, Waiting for 60secs ****\n",i+1);
+			sleep(60);
 		}
 	}
 

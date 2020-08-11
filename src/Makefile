@@ -2,12 +2,11 @@ CC =arm-none-linux-gnueabi-gcc -Wall
 
 CFLAGS = -I ../include 
 
-OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o AutoapnAppVersionDetails.o  FingerRDServiceStatus.o
-
+OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o AutoapnAppVersionDetails.o  FingerRDServiceStatus.o Running_Apps_Details.o hwid.o ApplicationDownloadsDetails.o FirmwareDownloadsDetails.o  Get_Total_Downloaded_count.o Downloaded_DateAndTime_Version_Details.o Get_Tokens_of_Patchfile.o
 
 app:$(OBJS)
-	$(CC) -g -o rhms_update_binary  $(OBJS) -L ../lib/ -lgl11pos -ltfm -lpcsclite -lxml2 -lz -lpthread   $(CFLAGS) 
-	arm-none-linux-gnueabi-strip rhms_update_binary
+	$(CC) -g -o RHMSClientApp  $(OBJS) -L ../lib/ -lgl11pos -ltfm -lpcsclite -lxml2 -lz -lpthread   $(CFLAGS) 
+	arm-none-linux-gnueabi-strip RHMSClientApp
 	rm -rf *.o
 
 main.o:main.c
@@ -16,9 +15,9 @@ main.o:main.c
 dev_info.o:dev_info.c
 	$(CC) -c dev_info.c $(CFLAGS)
 
-ifd.o :ifd.c
+ifd.o:ifd.c
 	$(CC) -c ifd.c $(CFLAGS)
-fpfile.o :fpfile.c
+fpfile.o:fpfile.c
 	$(CC) -c fpfile.c $(CFLAGS)
 
 bt_info.o:bt_info.c
@@ -158,5 +157,19 @@ AutoapnAppVersionDetails.o:AutoapnAppVersionDetails.c
 	$(CC) -c AutoapnAppVersionDetails.c $(CFLAGS)
 FingerRDServiceStatus.o:FingerRDServiceStatus.c
 	$(CC) -c FingerRDServiceStatus.c $(CFLAGS)
+Running_Apps_Details.o:Running_Apps_Details.c
+	$(CC) -c Running_Apps_Details.c $(CFLAGS)
+hwid.o:hwid.c
+	$(CC) -c hwid.c $(CFLAGS)
+ApplicationDownloadsDetails.o:ApplicationDownloadsDetails.c
+	$(CC) -c ApplicationDownloadsDetails.c $(CFLAGS)
+FirmwareDownloadsDetails.o:FirmwareDownloadsDetails.c
+	$(CC) -c FirmwareDownloadsDetails.c $(CFLAGS)
+Get_Total_Downloaded_count.o:Get_Total_Downloaded_count.c
+	$(CC) -c Get_Total_Downloaded_count.c $(CFLAGS)
+Downloaded_DateAndTime_Version_Details.o:Downloaded_DateAndTime_Version_Details.c
+	$(CC) -c Downloaded_DateAndTime_Version_Details.c $(CFLAGS)
+Get_Tokens_of_Patchfile.o:Get_Tokens_of_Patchfile.c
+	$(CC) -c Get_Tokens_of_Patchfile.c $(CFLAGS)
 clean:
-	rm -rf *.o rhms_update_binary
+	rm -rf *.o RHMSClientApp

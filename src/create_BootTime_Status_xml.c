@@ -36,11 +36,11 @@ int  create_BootTime_Status_xml_file(void)
 
 	memset(Path,0,sizeof(Path));
 
-	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[2],module.Date_time[3]);
+	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[5],module.Date_time[6]);
 
 	mkdir_p(Path);
 
-	sprintf(remote_xml_bkp_file,"%s/day_%c%c_BootTime_Status.xml",Path,module.Date_time[0],module.Date_time[1]);
+	sprintf(remote_xml_bkp_file,"%s/day_%c%c_BootTime_Status.xml",Path,module.Date_time[8],module.Date_time[9]);
 
 	copy_file(remote_xml_bkp_file,BootTime_Status_file);
 
@@ -51,7 +51,7 @@ int  create_BootTime_Status_xml_file(void)
 
 int BootTime_Status_xml_frame()
 {
-	int Total_Server_Apps=0;
+	int Total_Server_Apps=0,Total_Running_apps=0;
 	fprintf(stdout,"\n\n BootTime_Status.xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
 	xmlNodePtr root_node = NULL, childnode = NULL, Runningchildnode = NULL;/* node pointers */
@@ -118,13 +118,25 @@ int BootTime_Status_xml_frame()
 	}
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
+	
 	Runningchildnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofRunningApplications",NULL);
+
 	Total_Server_Apps = Get_Total_Server_Apps();
+
 	fprintf(stdout," Total Server Apps = %d\n",Total_Server_Apps);
+
 	if ( Total_Server_Apps > 0 )
-		Applications_Details(Total_Server_Apps,childnode,Runningchildnode);
+		Applications_Details(Total_Server_Apps,Runningchildnode);
+
+	Total_Running_apps = Get_Total_Device_Apps();
+
+	fprintf(stdout," Total_Running_apps = %d\n",Total_Running_apps);
+
+	if ( Total_Running_apps > 0 )
+		Running_Apps_Details(Total_Running_apps,Runningchildnode);
 
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareName", BAD_CAST module.FirmwareName);
+
 	xmlNewChild(root_node, NULL, BAD_CAST "FirmwareVersion", BAD_CAST module.FirmwareVersion);
 
 	if( CONFIG.IrisRDVer_and_SNo  )
@@ -152,20 +164,40 @@ int BootTime_Status_xml_frame()
 		xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.Usbdevice.Use);
 		xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.Usbdevice.Free);
 	}
+	if( CONFIG.Two_Simdetails_Autoapn )
+	{
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumberExists", BAD_CAST module.SIM1CCIDnumberExists);
+		if( strcmp(module.SIM1CCIDnumberExists,"Yes") == 0 )
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
 
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumberExists", BAD_CAST module.SIM1CCIDnumberExists);
-	if( strcmp(module.SIM1CCIDnumberExists,"Yes") == 0 )
-		xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumberExists", BAD_CAST module.SIM2CCIDnumberExists);
+		if( strcmp(module.SIM2CCIDnumberExists,"Yes") == 0 )
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
+		xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST module.operator2_name);
+	}
+	else 
+	{
+		if ( strcmp(module.SIM2CCIDnumberExists,"Yes") == 0 )
+		{
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumberExists", BAD_CAST module.SIM2CCIDnumberExists);
+			if( strcmp(module.SIM2CCIDnumberExists,"Yes") == 0 )
+				xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST module.operator2_name);
 
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumberExists", BAD_CAST module.SIM2CCIDnumberExists);
-	if( strcmp(module.SIM2CCIDnumberExists,"Yes") == 0 )
-		xmlNewChild(root_node, NULL, BAD_CAST "SIM2CCIDnumber", BAD_CAST module.Sim2CCID); /* New ccid1 tag */
-	xmlNewChild(root_node, NULL, BAD_CAST "SIM2Operator", BAD_CAST module.operator2_name);
+		}	
+		else 
+		{
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumberExists", BAD_CAST module.SIM1CCIDnumberExists);
+			if( strcmp(module.SIM1CCIDnumberExists,"Yes") == 0 )
+				xmlNewChild(root_node, NULL, BAD_CAST "SIM1CCIDnumber", BAD_CAST module.CCID);
+			xmlNewChild(root_node, NULL, BAD_CAST "SIM1Operator", BAD_CAST module.operator1_name);
+
+		}
+
+	}
 	xmlNewChild(root_node, NULL, BAD_CAST "RHMSClientVersion", BAD_CAST module.RHMSClientVersion);
 	xmlNewChild(root_node, NULL, BAD_CAST "AutoapnAppVersion", BAD_CAST module.AutoapnAppVersion);
-
-
 
 
 

@@ -15,9 +15,9 @@
   }*/
 
 char *Server_Application_release_file="/etc/vision/RHMS/Apps/ServerApplicationsRelease.info";
-int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
+int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode, xmlNodePtr Runningchildnode)
 {
-	xmlNodePtr childofchildnode = NULL;
+	xmlNodePtr childofchildnode = NULL,Runningchildofchildnode = NULL;/* node pointers */
 	struct RHMSApplication
 	{
 		char Type[128];
@@ -142,8 +142,8 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	//	for(i=0;i<j;i++)
 	//		fprintf(stdout,"ApplicationType =%s ,ApplicationName=%s,ApplicationVersion= %.1f ApplicationURL = %s\n",ServerApplication[i].Type,ServerApplication[i].Name,ServerApplication[i].Version,ServerApplication[i].URL);
 
-	int DeviceApps=0;
-	for(i=0,DeviceApps=0;i<Total_Server_Apps;i++)
+	int DeviceApps=0,Running_apps=0;
+	for(i=0,DeviceApps=0,Running_apps=0;i<Total_Server_Apps;i++)
 	{
 
 		memset(Device_Application_release_file,0,sizeof(Device_Application_release_file));
@@ -159,8 +159,22 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		}
 		else
 		{
-			
 			fprintf(stdout,"\033[1;31m Application Management Not installed / No intial Patch Found,  ApplicationType = %s, ApplicationName = %s ServerApplicationVersion = %f \n\033[0m",ServerApplication[i].Type,ServerApplication[i].Name,ServerApplication[i].Version );
+		}
+		memset(Device_Application_release_file,0,sizeof(Device_Application_release_file));
+		sprintf(Device_Application_release_file,"/etc/vision/RHMS/Apps/%s/%s/app.info",ServerApplication[i].Type,ServerApplication[i].Name);
+		memset(&DeviceApplication,0,sizeof(struct POSApplication));
+		ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,&DeviceApplication.Version );
+		if ( ret == 0 )
+		{
+			strcpy(RunningApplication[Running_apps].Type,DeviceApplication.Type);
+			strcpy(RunningApplication[Running_apps].Name,DeviceApplication.Name);
+			sprintf(RunningApplication[Running_apps].Version,"%.1f",DeviceApplication.Version);
+			Running_apps++;
+		}
+		else
+		{
+			fprintf(stdout,"\033[1;31m Running Application not Found,  ApplicationType = %s, ApplicationName = %s ServerApplicationVersion = %f \n\033[0m",ServerApplication[i].Type,ServerApplication[i].Name,ServerApplication[i].Version );
 		}
 	}
 
@@ -172,6 +186,14 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST Application[i].Name);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST Application[i].Version);
 	}
+	for(i=0;i<Running_apps;i++)
+	{       
+		fprintf(stdout,"Running ApplicationType =%s ,ApplicationName=%s,ApplicationVersion= %s\n",RunningApplication[i].Type,RunningApplication[i].Name,RunningApplication[i].Version);
+		Runningchildofchildnode = xmlNewChild(Runningchildnode, NULL, BAD_CAST "Application",NULL);
+		xmlNewChild(Runningchildofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST RunningApplication[i].Type);
+		xmlNewChild(Runningchildofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST RunningApplication[i].Name);
+		xmlNewChild(Runningchildofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST RunningApplication[i].Version);
+	} 
 
 	return 0;
 }

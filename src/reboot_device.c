@@ -38,9 +38,11 @@ void reboot_device(char last_digit)
 
 	sleep( mid_sleep_secs + machine_secs );		
 
-	printf("\n****** Rebooting the Device  for RHMS Daily Run ... ******\n\n"); 	
-
-	system("reboot");
+	if ( Can_i_reboot() == 0 )
+	{
+		printf("\n****** Rebooting the Device  for RHMS Daily Run ... ******\n\n"); 	
+		system("reboot");
+	}
 
 	return;
 }

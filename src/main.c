@@ -43,8 +43,8 @@ int main()
 	fprintf(stdout,"Application	: %s\n", "RHMS Client");
 	fprintf(stdout,"Version 	: %s\n", module.RHMSClientVersion);
 	fprintf(stdout,"***************************\n");
-	
-	
+
+
 	Get_Config_Settings(); // Get Settings for enble or disable each Tag 
 
 	Update_Configured_Server_Addr();
@@ -91,6 +91,7 @@ int main()
 			else 
 				update_Hardware_status_date_file();
 		}
+
 		if ( ( BootTime_run != 0 || run_time != 100 ) && BootTimeSentSuccess == 0 )
 		{
 			Update_Current_Date_with_Time();
@@ -110,11 +111,11 @@ int main()
 		}
 		else fprintf(stdout," Boot Time request Already Success \n");
 
-		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
-		{
-			sleep(3600); // Sleep 1hr
-			continue;
-		}
+		/*		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
+				{
+				sleep(3600); // Sleep 1hr
+				continue;
+				}*/
 		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
 		{
 			check_net_connection(); //Blocking For autoapn details
@@ -172,7 +173,7 @@ int main()
 
 		else	if ( ret == 0 && run_time % 60 == 0)
 		{
-			fprintf(stdout,"RHMS: Sleep run_time = %d\n",run_time);
+			fprintf(stdout,"RHMS: Next Health request run_time = %d\n",run_time);
 			sleep(run_time);
 			ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 			printf("Posting the Health updation details again\n");

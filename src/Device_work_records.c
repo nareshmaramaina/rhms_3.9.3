@@ -13,13 +13,13 @@ int Device_work_records()
 		int Total_charging_secs;
 		int Total_discharging_secs;
 	}Day;
-	int i;
 
 
 	FILE *fp=NULL;
 
 	char filename[248];
-	char Date[14];
+	//	char Date[14];
+	int File_day=0,File_month=0,File_year=0;
 
 	memset(filename,0x00,sizeof(filename));
 	memset(&Day,0x00,sizeof(Day));
@@ -43,14 +43,19 @@ int Device_work_records()
 	fread(&Day,sizeof(struct Device),1,fp);
 
 	fclose(fp);
-	char *ptr=filename+14;
-	for ( i =0; i<8; i++)
-		Date[i]=ptr[i];
-	Date[i]='\0';
+	sscanf(filename+14,"%02d%02d%04d",&File_day,&File_month,&File_year);
 
+
+	/*	char *ptr=filename+14;
+		for ( i =0; i<8; i++)
+		Date[i]=ptr[i];
+		Date[i]='\0'; */
+
+	sprintf(module.DOT.Date,"%04d-%02d-%02d",File_year,File_month,File_day);
+	printf("module.DOT.Date = %s\n",module.DOT.Date);
 	strcpy(DOT_FILE,filename);
 
-	strcpy(module.DOT.Date,Date);
+	//	strcpy(module.DOT.Date,Date);
 	sprintf(module.DOT.Slot1,"%d",Day.Total_Solt1_secs/60);
 	sprintf(module.DOT.Slot2,"%d",Day.Total_Solt2_secs/60);
 	sprintf(module.DOT.Slot3,"%d",Day.Total_Solt3_secs/60);
@@ -58,7 +63,9 @@ int Device_work_records()
 
 	if( CONFIG.BatteryInfo )
 	{
-		strcpy(module.BatteryInfo.Date,Date);
+		sprintf(module.BatteryInfo.Date,"%04d-%02d-%02d",File_year,File_month,File_day);
+		printf("module.BatteryInfo.Date = %s\n",module.BatteryInfo.Date);
+		//		strcpy(module.BatteryInfo.Date,Date);
 		sprintf(module.BatteryInfo.Day_worked_mins,"%d",Day.Total_work_secs/60);
 		sprintf(module.BatteryInfo.Day_adapter_mins,"%d",Day.Total_adapter_secs/60);
 		sprintf(module.BatteryInfo.Day_charged_mins,"%d",Day.Total_charging_secs/60);

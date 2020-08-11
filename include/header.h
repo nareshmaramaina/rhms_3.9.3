@@ -36,7 +36,8 @@
 #define OPTICAL 1
 #define CAPACITIVE 2
 #define NO_DEVICE 3
-
+#define FIRMWARE 1
+#define APPLICATION 2
 struct rhms
 {
 	short int DOT;
@@ -99,6 +100,8 @@ struct device_battery
 };
 struct terminal_status
 {
+	char HardwareID[30];
+	char HardwareIDExists[12];
 	char TerminalIDExists[12];
 	char MacidExists[12];
 	char IMEInumberExists[12];
@@ -341,3 +344,14 @@ void FingerRDServiceStatus();
 void AutoapnAppVersionDetails();
 int Get_Total_Server_Apps();
 int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,float *DeviceApplicationVersion );
+int Check_apps(const char *file);
+void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchildnode);
+int Get_Total_Device_Apps();
+void HardwareID_Details();
+int Get_Tokens_of_FirmwarePatchfile(char *file,char *FirmwareName,float *Version);
+int Get_Tokens_of_ApplicationPatchfile(char *file,char *ApplicationType,char *ApplicationName,float *Version);
+
+int Downloaded_DateAndTime_Version_Details(char *DownloadCompletedFile,float *DownloadedVersion,char *Downloaded_DateAndTime);
+int Get_Total_Downloaded_Updates(int type);
+int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode);
+int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode);

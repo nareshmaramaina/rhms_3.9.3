@@ -24,15 +24,16 @@ void update_Hardware_status_date_file(void) //after rhms successfull update ,upd
 
 	memset(Path,0,sizeof(Path));
 
-	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[2],module.Date_time[3]);
+	Get_Current_Date(Date);
+	
+	sprintf(Path,"/var/log/Health/%c%c",Date[2],Date[3]);
 
 	mkdir_p(Path);
 
-	sprintf(remote_xml_bkp_file,"%s/day_%c%c_Hardware_Status.xml",Path,module.Date_time[0],module.Date_time[1]);
+	sprintf(remote_xml_bkp_file,"%s/day_%c%c_Hardware_Status.xml",Path,Date[0],Date[1]);
 
 	copy_file(remote_xml_bkp_file,Hardware_Status_file);
 
-	Get_Current_Date(Date);
 
 	fp=fopen(Hardware_filename,"w");
 

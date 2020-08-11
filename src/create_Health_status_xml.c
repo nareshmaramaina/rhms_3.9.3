@@ -35,12 +35,12 @@ int  create_Health_Status_xml_file(void)
 
 	memset(Path,0,sizeof(Path));
 
-	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[2],module.Date_time[3]);
+	sprintf(Path,"/var/log/Health/%c%c",module.Date_time[5],module.Date_time[6]);
 
 	mkdir_p(Path);
 
-	sprintf(remote_xml_bkp_file,"%s/day_%c%c_Health_Status.xml",Path,module.Date_time[0],module.Date_time[1]);
-
+	sprintf(remote_xml_bkp_file,"%s/day_%c%c_Health_Status.xml",Path,module.Date_time[8],module.Date_time[9]);
+	
 	copy_file(remote_xml_bkp_file,Health_Status_file);
 
 	return 0;
@@ -52,6 +52,8 @@ int  create_Health_Status_xml_file(void)
 int Health_Status_xml_frame()
 {
 	int sim_num =0;
+	int Apps_Downloads=0,Firmware_Downloads=0;
+
 	fprintf(stdout,"\n\n Health_Status.xml Framing ...\n\n");
 	xmlDocPtr doc = NULL;       /* document pointer */
 	xmlNodePtr root_node = NULL, childnode = NULL;/* node pointers */
@@ -68,11 +70,41 @@ int Health_Status_xml_frame()
 
 	if( CONFIG.GPS || CONFIG.geo_location )
 	{
-		childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
-		xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
-		xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
-		xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
+		if ( strcmp(module.GPS.Captured_Time,"NotFound") == 0 )
+			fprintf(stderr," GPS File not found, module.GPS.Captured_Time = %s\n",module.GPS.Captured_Time);
+		else 
+		{
+			childnode = xmlNewChild(root_node, NULL, BAD_CAST "GPS",NULL);
+			xmlNewChild(childnode, NULL, BAD_CAST "Latitude", BAD_CAST module.GPS.Latitude);
+			xmlNewChild(childnode, NULL, BAD_CAST "Longitude", BAD_CAST module.GPS.Longitude);
+			if ( strstr(module.GPS.Captured_Time,"0000-00-00") != NULL )
+				fprintf(stdout,"Date Not found, module.GPS.Captured_Time = %s\n",module.GPS.Captured_Time);
+			else 
+				xmlNewChild(childnode, NULL, BAD_CAST "Captured_Time", BAD_CAST module.GPS.Captured_Time);
+		}
 	}
+	Firmware_Downloads = Get_Total_Downloaded_Updates(FIRMWARE);
+	if ( Firmware_Downloads > 0 )
+	{
+		fprintf(stdout,"%d Firmware Downloads are Found \n",Firmware_Downloads);
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofFirmwareDownloads",NULL);
+		FirmwareDownloadsDetails(Firmware_Downloads,childnode);		
+	}
+	else
+	{
+		fprintf(stdout,"No Firmware Downloads Found\n");
+	}
+	Apps_Downloads = Get_Total_Downloaded_Updates(APPLICATION);
+	if ( Apps_Downloads > 0 )
+	{
+		fprintf(stdout,"%d Application Downloads are Found \n",Apps_Downloads);
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplicationDownloads",NULL);
+		ApplicationDownloadsDetails(Apps_Downloads,childnode);
+
+	}
+	else
+		fprintf(stdout,"No Application Downloads Found\n");
+
 	if( CONFIG.Iris_or_Biomat )
 		xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
 	if( CONFIG.Printer )
@@ -99,6 +131,7 @@ int Health_Status_xml_frame()
 			xmlNewChild(root_node, NULL, BAD_CAST "SIM2SignalMode", BAD_CAST module.SIM2SignalMode);
 		}
 	}
+
 	xmlNewChild(root_node, NULL, BAD_CAST "FingerRDServiceStatus", BAD_CAST module.FingerRDServiceStatus);
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "System_memory",NULL);

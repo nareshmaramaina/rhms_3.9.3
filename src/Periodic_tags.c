@@ -50,7 +50,6 @@ void Periodic_tags(void)
 			printer_status();
 		
 		RTC_info();
-		Update_Current_Date_with_Time();
 		battery_status();
 
 
@@ -58,6 +57,7 @@ void Periodic_tags(void)
 
 	}
 
+	Update_Current_Date_with_Time();
 	update_internal_memory_info();
 	update_ram_info();
 	FingerRDServiceStatus();
@@ -106,14 +106,14 @@ int Update_Simdb_and_Signalmode()
 			memset(module.Sim1_db,0,sizeof(module.Sim1_db));
 			sprintf(module.Sim1_db,"%dDB",Sig_Strength);
 			sprintf(module.SIM1SignalMode,"%cG",Sig_status);	
-			strcpy(module.SIM2SignalMode,"No");
+		//	strcpy(module.SIM2SignalMode,"No");
 		}
 		else if ( sim_num == 2 )
 		{
 			memset(module.Sim2_db,0,sizeof(module.Sim2_db));
 			sprintf(module.Sim2_db,"%dDB",Sig_Strength);
 			sprintf(module.SIM2SignalMode,"%cG",Sig_status);	
-			strcpy(module.SIM1SignalMode,"No");
+		//	strcpy(module.SIM1SignalMode,"No");
 
 		}
 		else fprintf(stderr," var_gprs data error %s\n",var_gprs);

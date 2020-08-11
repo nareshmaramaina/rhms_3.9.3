@@ -143,9 +143,8 @@ void Update_Current_Date_with_Time()
 
 	Today = localtime (&tv.tv_sec) ;
 
-	sprintf(module.Date_time,"%02d%02d%04d%02d%02d%02d",Today->tm_mday,Today->tm_mon+1,Today->tm_year+1900,Today->tm_hour,Today->tm_min,Today->tm_sec);
-
-	fprintf(stdout,"Today Date and Time (DDMMYYYYHrMnSc): %s \n",module.Date_time);
+	sprintf(module.Date_time,"%04d-%02d-%02dT%02d:%02d:%02d",Today->tm_year+1900,Today->tm_mon+1,Today->tm_mday,Today->tm_hour,Today->tm_min,Today->tm_sec);
+	fprintf(stdout,"Today Date and Time, %s \n",module.Date_time);
 
 	return;
 }

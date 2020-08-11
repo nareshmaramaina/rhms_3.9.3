@@ -7,7 +7,7 @@
 !_TAG_PROGRAM_VERSION	0.0.0	//
 Adapter_status	DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Adapter_status	adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
-Applications_Details	get_app_info.c	/^int Applications_Details(int Total_Device_Apps,xmlNodePtr childnode)$/;"	f	typeref:typename:int
+Applications_Details	get_app_info.c	/^int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode, xmlNodePtr Runningc/;"	f	typeref:typename:int
 AutoapnAppVersionDetails	AutoapnAppVersionDetails.c	/^void AutoapnAppVersionDetails()$/;"	f	typeref:typename:void
 AutoapnAppVersionDetails.o	Makefile	/^AutoapnAppVersionDetails.o:AutoapnAppVersionDetails.c  $/;"	t
 Autoapn_xmlparse	autoapn_xmlparser.c	/^int Autoapn_xmlparse( char *docname )$/;"	f	typeref:typename:int
@@ -56,6 +56,7 @@ Camera_type.o	Makefile	/^Camera_type.o:Camera_type.c$/;"	t
 Can_i_reboot	rtc_functions.c	/^int Can_i_reboot()$/;"	f	typeref:typename:int
 Check_RHMS_All_requests_run	rtc_functions.c	/^int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodic_run)$/;"	f	typeref:typename:int
 Check_and_Set_Operator_name	operator_check.c	/^void Check_and_Set_Operator_name(char *operator_buff)$/;"	f	typeref:typename:void
+Check_apps	Running_Apps_Details.c	/^int Check_apps(const char *file)$/;"	f	typeref:typename:int
 Check_internet_by_hostname	check_internet_by_hostname.c	/^int Check_internet_by_hostname(char *host,char *ip)$/;"	f	typeref:typename:int
 DEBUG	DOT_1.1/header.h	/^#define DEBUG /;"	d
 DEVICE_DETAILS	POS_HEALTH_DETAILS.c	/^void 	DEVICE_DETAILS()$/;"	f	typeref:typename:void
@@ -63,7 +64,9 @@ DOT_lock	DOT_1.1/main.c	/^int DOT_lock()$/;"	f	typeref:typename:int
 Day	DOT_1.1/main.c	/^}Day;$/;"	v	typeref:struct:Device
 Device	DOT_1.1/main.c	/^struct Device$/;"	s	file:
 Device	Device_work_records.c	/^	struct Device$/;"	s	function:Device_work_records	file:
+Device	Running_Apps_Details.c	/^	struct Device$/;"	s	function:Running_Apps_Details	file:
 Device	get_app_info.c	/^	struct Device$/;"	s	function:Applications_Details	file:
+Device_App_info_Details	get_app_info.c	/^int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,ch/;"	f	typeref:typename:int
 Device_work_records	Device_work_records.c	/^int Device_work_records()$/;"	f	typeref:typename:int
 Device_work_records.o	Makefile	/^Device_work_records.o:Device_work_records.c$/;"	t
 Device_working_secs	DOT_1.1/main.c	/^int Device_working_secs()$/;"	f	typeref:typename:int
@@ -78,23 +81,23 @@ FirmwareDetails	patch_info.c	/^int FirmwareDetails()$/;"	f	typeref:typename:int
 GPS_Success	main.c	/^int GPS_Success;$/;"	v	typeref:typename:int
 Get_Config_Settings	parse_rhms_config.c	/^int Get_Config_Settings()$/;"	f	typeref:typename:int
 Get_Current_Date	rtc_functions.c	/^void Get_Current_Date(char *Date)$/;"	f	typeref:typename:void
-Get_Device_Applications_Count	get_app_info.c	/^int Get_Device_Applications_Count()$/;"	f	typeref:typename:int
 Get_Device_Applications_Count	version_check.c	/^int Get_Device_Applications_Count()$/;"	f	typeref:typename:int
 Get_Difference_Days_of_Today_with_Last_updated_day	rtc_functions.c	/^int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_date,int my_month,/;"	f	typeref:typename:int
 Get_Ethernet_Status	ethernet_info.c	/^int Get_Ethernet_Status(void)$/;"	f	typeref:typename:int
 Get_Pinpad_Serial_No	Pinpad/header.h	/^int (*Get_Pinpad_Serial_No)(unsigned char *);$/;"	v	typeref:typename:int (*)(unsigned char *)
 Get_Sim_num	gprs_info.c	/^int Get_Sim_num()$/;"	f	typeref:typename:int
+Get_Total_Device_Apps	Running_Apps_Details.c	/^int Get_Total_Device_Apps()$/;"	f	typeref:typename:int
+Get_Total_Server_Apps	get_app_info.c	/^int Get_Total_Server_Apps()$/;"	f	typeref:typename:int
 Get_Two_Simdetails_info	Get_Two_Simdetails_info.c	/^int Get_Two_Simdetails_info(void)$/;"	f	typeref:typename:int
 Get_Two_Simdetails_info.o	Makefile	/^Get_Two_Simdetails_info.o:Get_Two_Simdetails_info.c$/;"	t
 Get_Wifi_Status	wifi_info.c	/^int Get_Wifi_Status(void)$/;"	f	typeref:typename:int
 Get_autoapn_details.o	Makefile	/^Get_autoapn_details.o:Get_autoapn_details.c$/;"	t
 Get_autoapn_wrote_details	Get_autoapn_details.c	/^void Get_autoapn_wrote_details()$/;"	f	typeref:typename:void
 Get_interface_name	Update_Comm_media.c	/^int Get_interface_name(char *interface,char *ip)$/;"	f	typeref:typename:int
-Hardware_Status_file	create_Hardware_status.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
-Hardware_Status_file	create_Hardware_status_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_status.xml";$/;"	v	typeref:typename:char *
+HardwareID_Details	hwid.c	/^void HardwareID_Details()$/;"	f	typeref:typename:void
+Hardware_Status_file	create_Hardware_status_xml.c	/^char *Hardware_Status_file="\/opt\/Hardware_Status.xml";$/;"	v	typeref:typename:char *
 Hardware_filename	rtc_functions.c	/^char *Hardware_filename = "\/opt\/.rhms_Hardware_status_date_update";$/;"	v	typeref:typename:char *
 Hardware_response_xml_file	Update_request.c	/^char *Hardware_response_xml_file="\/opt\/Hardware_response.xml";$/;"	v	typeref:typename:char *
-Hardware_xml_frame	create_Hardware_status.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
 Hardware_xml_frame	create_Hardware_status_xml.c	/^int Hardware_xml_frame()$/;"	f	typeref:typename:int
 Health_Status_file	create_Health_status_xml.c	/^char *Health_Status_file="\/opt\/Health_Status.xml";$/;"	v	typeref:typename:char *
 Health_Status_xml_frame	create_Health_status_xml.c	/^int Health_Status_xml_frame()$/;"	f	typeref:typename:int
@@ -107,12 +110,18 @@ Is_Hardware_Status_changed	Is_Hardware_Status_changed.c	/^int Is_Hardware_Status
 Is_Hardware_Status_changed.o	Makefile	/^Is_Hardware_Status_changed.o:Is_Hardware_Status_changed.c	$/;"	t
 Location_info	Location_info.c	/^int  Location_info()$/;"	f	typeref:typename:int
 Location_info.o	Makefile	/^Location_info.o:Location_info.c$/;"	t
+Name	Running_Apps_Details.c	/^		char Name[128];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[128]	file:
+Name	Running_Apps_Details.c	/^		char Name[128];$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:char[128]	file:
 Name	get_app_info.c	/^		char Name[128];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[128]	file:
+Name	get_app_info.c	/^		char Name[128];$/;"	m	struct:Applications_Details::POSApplication	typeref:typename:char[128]	file:
+Name	get_app_info.c	/^		char Name[128];$/;"	m	struct:Applications_Details::RHMSApplication	typeref:typename:char[128]	file:
 Non_xml_type_Autoapn_details	Non_xml_type_Autoapn_details.c	/^void Non_xml_type_Autoapn_details()$/;"	f	typeref:typename:void
 Non_xml_type_Autoapn_details.o	Makefile	/^Non_xml_type_Autoapn_details.o:Non_xml_type_Autoapn_details.c$/;"	t
 OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Up/;"	m
 PERIPHERALS	POS_HEALTH_DETAILS.c	/^int  PERIPHERALS(void)$/;"	f	typeref:typename:int
 PINPAD_Modemclose	Pinpad/header.h	/^int  (*PINPAD_Modemclose) (void);$/;"	v	typeref:typename:int (*)(void)
+POSApplication	Running_Apps_Details.c	/^	struct POSApplication$/;"	s	function:Running_Apps_Details	file:
+POSApplication	get_app_info.c	/^	struct POSApplication$/;"	s	function:Applications_Details	file:
 POS_HEALTH_DETAILS	POS_HEALTH_DETAILS.c	/^void	POS_HEALTH_DETAILS(void)$/;"	f	typeref:typename:void
 POS_HEALTH_DETAILS.o	Makefile	/^POS_HEALTH_DETAILS.o:POS_HEALTH_DETAILS.c$/;"	t
 Periodic_filename	rtc_functions.c	/^char *Periodic_filename = "\/opt\/.rhms_Periodic_Health_status_date_update";$/;"	v	typeref:typename:char *
@@ -122,7 +131,10 @@ PinpadSerialNo_info_by_dev_name	Pinpad/PinpadSerialno.c	/^int PinpadSerialNo_inf
 PinpadSerialNo_info_by_dev_name	Pinpad/Pinpad_bkp.c	/^int PinpadSerialNo_info_by_dev_name(char *port, unsigned char *serialno)$/;"	f	typeref:typename:int
 PinpadSerialNo_info_by_dev_name	Pinpad/pin.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f	typeref:typename:int
 PinpadSerialNo_info_by_dev_name	PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f	typeref:typename:int
+RHMSApplication	get_app_info.c	/^	struct RHMSApplication$/;"	s	function:Applications_Details	file:
 RTC_info	rtc_functions.c	/^void RTC_info()$/;"	f	typeref:typename:void
+Running_Apps_Details	Running_Apps_Details.c	/^void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchildnode)$/;"	f	typeref:typename:void
+Running_Apps_Details.o	Makefile	/^Running_Apps_Details.o:Running_Apps_Details.c$/;"	t
 Second_Time_Health_Info_sending_for_GPS	Periodic_tags.c	/^void Second_Time_Health_Info_sending_for_GPS()$/;"	f	typeref:typename:void
 Send_BootTime_Helath_status_to_server.o	Makefile	/^Send_BootTime_Helath_status_to_server.o:Send_BootTime_Helath_status_to_server.c$/;"	t
 Send_BootTime_status_to_server	Send_BootTime_Helath_status_to_server.c	/^int Send_BootTime_status_to_server (void)$/;"	f	typeref:typename:int
@@ -133,6 +145,7 @@ Send_Periodic_Health_status_to_server	Send_Periodic_Helath_status_to_server.c	/^
 Send_Periodic_Helath_status_to_server.o	Makefile	/^Send_Periodic_Helath_status_to_server.o:Send_Periodic_Helath_status_to_server.c$/;"	t
 SerialNo_and_Version_Based_Tags	POS_HEALTH_DETAILS.c	/^void SerialNo_and_Version_Based_Tags()$/;"	f	typeref:typename:void
 Server_Addr	Update_Configured_Server_Addr.c	/^char Server_Addr[512]="https:\/\/rhms2.callippus.co.uk";$/;"	v	typeref:typename:char[512]
+Server_Application_release_file	get_app_info.c	/^char *Server_Application_release_file="\/etc\/vision\/RHMS\/Apps\/ServerApplicationsRelease.info/;"	v	typeref:typename:char *
 Total_Solt1_secs	DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	typeref:typename:int	file:
 Total_Solt1_secs	Device_work_records.c	/^		int Total_Solt1_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
 Total_Solt2_secs	DOT_1.1/main.c	/^	int Total_Solt2_secs;$/;"	m	struct:Device	typeref:typename:int	file:
@@ -149,7 +162,12 @@ Total_discharging_secs	DOT_1.1/main.c	/^	int Total_discharging_secs;$/;"	m	struc
 Total_discharging_secs	Device_work_records.c	/^		int Total_discharging_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
 Total_work_secs	DOT_1.1/main.c	/^	int Total_work_secs;$/;"	m	struct:Device	typeref:typename:int	file:
 Total_work_secs	Device_work_records.c	/^		int Total_work_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
+Type	Running_Apps_Details.c	/^		char Type[128];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[128]	file:
+Type	Running_Apps_Details.c	/^		char Type[128];$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:char[128]	file:
 Type	get_app_info.c	/^		char Type[128];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[128]	file:
+Type	get_app_info.c	/^		char Type[128];$/;"	m	struct:Applications_Details::POSApplication	typeref:typename:char[128]	file:
+Type	get_app_info.c	/^		char Type[128];$/;"	m	struct:Applications_Details::RHMSApplication	typeref:typename:char[128]	file:
+URL	get_app_info.c	/^		char URL[512];$/;"	m	struct:Applications_Details::RHMSApplication	typeref:typename:char[512]	file:
 Uid_info	dev_info.c	/^void Uid_info()$/;"	f	typeref:typename:void
 Update_Comm_media	Update_Comm_media.c	/^void Update_Comm_media(char *ip)$/;"	f	typeref:typename:void
 Update_Comm_media.o	Makefile	/^Update_Comm_media.o:Update_Comm_media.c$/;"	t
@@ -160,7 +178,11 @@ Update_Health_Statuses_dates.o	Makefile	/^Update_Health_Statuses_dates.o:Update_
 Update_Simdb_and_Signalmode	Periodic_tags.c	/^int Update_Simdb_and_Signalmode()$/;"	f	typeref:typename:int
 Update_request	Update_request.c	/^int Update_request(int request) \/\/ arg 1 For Hardware request,arg 2 For BootTime request, arg /;"	f	typeref:typename:int
 Update_request.o	Makefile	/^Update_request.o:Update_request.c$/;"	t
+Version	Running_Apps_Details.c	/^		char Version[12];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[12]	file:
+Version	Running_Apps_Details.c	/^		float Version;$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:float	file:
 Version	get_app_info.c	/^		char Version[12];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[12]	file:
+Version	get_app_info.c	/^		float Version;$/;"	m	struct:Applications_Details::POSApplication	typeref:typename:float	file:
+Version	get_app_info.c	/^		float Version;$/;"	m	struct:Applications_Details::RHMSApplication	typeref:typename:float	file:
 Wifi_Status	wifi_info.c	/^int Wifi_Status()$/;"	f	typeref:typename:int
 app	Makefile	/^app:$(OBJS)$/;"	t
 audio_info.o	Makefile	/^audio_info.o:audio_info.c$/;"	t
@@ -189,7 +211,6 @@ copy_file.o	Makefile	/^copy_file.o:copy_file.c$/;"	t
 create_BootTime_Status_xml.o	Makefile	/^create_BootTime_Status_xml.o:create_BootTime_Status_xml.c $/;"	t
 create_BootTime_Status_xml_file	create_BootTime_Status_xml.c	/^int  create_BootTime_Status_xml_file(void)$/;"	f	typeref:typename:int
 create_Hardware_status_xml.o	Makefile	/^create_Hardware_status_xml.o:create_Hardware_status_xml.c$/;"	t
-create_Hardware_status_xml_file	create_Hardware_status.c	/^int  create_Hardware_status_xml_file(void)$/;"	f	typeref:typename:int
 create_Hardware_status_xml_file	create_Hardware_status_xml.c	/^int  create_Hardware_status_xml_file(void)$/;"	f	typeref:typename:int
 create_Health_Status_xml_file	create_Health_status_xml.c	/^int  create_Health_Status_xml_file(void)$/;"	f	typeref:typename:int
 create_Health_status_xml.o	Makefile	/^create_Health_status_xml.o:create_Health_status_xml.c$/;"	t
@@ -200,7 +221,7 @@ fp	server_Addr.c	/^	FILE *fp;$/;"	v	typeref:typename:FILE *
 fp_detect_type	fpfile.c	/^int fp_detect_type(void)$/;"	f	typeref:typename:int
 fp_info.o	Makefile	/^fp_info.o:fp_info.c$/;"	t
 fp_type	fp_info.c	/^int fp_type(void)$/;"	f	typeref:typename:int
-fpfile.o	Makefile	/^fpfile.o :fpfile.c$/;"	t
+fpfile.o	Makefile	/^fpfile.o:fpfile.c$/;"	t
 get_Usb_device_serialno	get_usbdevice_serialno.c	/^int get_Usb_device_serialno(char *Vendorid,char *ProductId,char *serialno)$/;"	f	typeref:typename:int
 get_app_info.o	Makefile	/^get_app_info.o:get_app_info.c$/;"	t
 get_bluetooth_macid	weighing_serialid_details.c	/^void get_bluetooth_macid(char *macid)$/;"	f	typeref:typename:void
@@ -214,7 +235,8 @@ gl11_bluetooth_control_dlopen.o	Makefile	/^gl11_bluetooth_control_dlopen.o:gl11_
 gprs_details	gprs_info.c	/^int gprs_details(void)$/;"	f	typeref:typename:int
 gprs_info.o	Makefile	/^gprs_info.o:gprs_info.c$/;"	t
 handshake	Pinpad/header.h	/^int (*handshake)(void);$/;"	v	typeref:typename:int (*)(void)
-ifd.o	Makefile	/^ifd.o :ifd.c$/;"	t
+hwid.o	Makefile	/^hwid.o:hwid.c$/;"	t
+ifd.o	Makefile	/^ifd.o:ifd.c$/;"	t
 ifd_status	ifd.c	/^int ifd_status(int card_select)$/;"	f	typeref:typename:int
 iris.o	Makefile	/^iris.o:iris.c$/;"	t
 iris_status	iris.c	/^int iris_status(void)$/;"	f	typeref:typename:int
@@ -251,6 +273,7 @@ parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xm
 parse_device_details	Is_Hardware_Status_changed.c	/^int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) $/;"	f	typeref:typename:int
 parse_rhms_config.o	Makefile	/^parse_rhms_config.o:parse_rhms_config.c$/;"	t
 patch_info.o	Makefile	/^patch_info.o:patch_info.c$/;"	t
+path	Running_Apps_Details.c	/^char *path="\/etc\/vision\/RHMS\/Apps\/";$/;"	v	typeref:typename:char *
 pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f	typeref:typename:int
 pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f	typeref:typename:void
 pinpad_status.o	Makefile	/^pinpad_status.o:pinpad_status.c$/;"	t

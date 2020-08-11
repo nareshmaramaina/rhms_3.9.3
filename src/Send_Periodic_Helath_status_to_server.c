@@ -22,8 +22,8 @@ int Send_Periodic_Health_status_to_server (void)
 
 		else   
 		{
-			fprintf(stdout,"***** Health Updation Failure, retrying = %d, Waiting for 3mins****\n",i);
-			sleep(180);
+			fprintf(stdout,"***** Health Updation Failure, retrying = %d, Waiting for 60secs ****\n",i+1);
+			sleep(60);
 		}
 	}
 
