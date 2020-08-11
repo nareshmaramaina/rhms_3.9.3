@@ -52,7 +52,6 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 			}
 			strcpy(FirmwarePatchFileName[DownloadCount],line);
 			DownloadCount++;
-			break;
 		}
 	}
 	free(line);
@@ -88,6 +87,7 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 			fprintf(stderr,"Firmware Downloaded Date and Time /Version Error, file %s\n",FirmwareDownloadCompletedFile);
 		}
 	}
+	fprintf(stdout,"Download Complete TotalFirmwaresCount = %d\n",TotalFirmwareCount);
 
 	for(i=0;i< TotalFirmwareCount ;i++)
 	{

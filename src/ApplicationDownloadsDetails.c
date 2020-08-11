@@ -54,7 +54,6 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 			}
 			strcpy(ApplicationPatchFileName[DownloadCount],line);
 			DownloadCount++;
-			break;
 		}
 	}
 	free(line);
@@ -73,7 +72,6 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 		printf("S.No %d, ApplicationName = %s  Version= %.1f\n" ,i+1,ApplicationName,Version);
 		if( ret  != 0 )
 			continue;
-
 		memset(ApplicationDownloadCompletedFile,0,sizeof(ApplicationDownloadCompletedFile));
 		sprintf(ApplicationDownloadCompletedFile,"%s/%s/%s/DownloadCompleted",Standard_Apps_path,ApplicationType,ApplicationName);
 		memset(Downloaded_DateAndTime,0,sizeof(Downloaded_DateAndTime));
@@ -92,10 +90,10 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 			fprintf(stderr,"Application Downloaded Date and Time /Version Error, file %s\n",ApplicationDownloadCompletedFile);
 		}
 	}
-
+	fprintf(stdout,"Download Complete TotalApplicationsCount = %d\n",TotalApplicationCount);
 	for(i=0;i< TotalApplicationCount ;i++)
 	{
-		fprintf(stdout,"Application[%d].Name = %s, Application[%d].Downloaded_DateAndTime = %s ,Application[%d].Version = %s",i,Application[i].Name,i,Application[i].Downloaded_DateAndTime,i,Application[i].Version);
+		fprintf(stdout,"Application[%d].Name = %s, Application[%d].Downloaded_DateAndTime = %s ,Application[%d].Version = %s\n",i,Application[i].Name,i,Application[i].Downloaded_DateAndTime,i,Application[i].Version);
 		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType ", BAD_CAST Application[i].Type);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST Application[i].Name);
