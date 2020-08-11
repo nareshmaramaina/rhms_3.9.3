@@ -152,10 +152,9 @@ int Can_i_reboot()
 {
 	int DD,MM,YYYY,Hr=9;
 	Update_Current_Date_with_Time();
-	sscanf(module.Date_time,"%02d%02d%04d%02d",&DD,&MM,&YYYY,&Hr);
-
-	fprintf(stdout,"%d %d %d %d\n",DD,MM,YYYY,Hr);
-
+	
+        sscanf(module.Date_time,"%04d-%02d-%02dT%02d",&YYYY,&MM,&DD,&Hr);
+	fprintf(stdout,"YYYY = %d,MM= %d,DD =%d,Hr= %d",YYYY,MM,DD,Hr);
 	if( YYYY < 2020 )
 		fprintf(stdout," Wrong Date Set, So We Can't decide to reboot\n");
 	else if( Hr >= 0 && Hr <=4 )
