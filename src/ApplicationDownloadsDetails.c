@@ -95,7 +95,7 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 	{
 		fprintf(stdout,"Application[%d].Name = %s, Application[%d].Downloaded_DateAndTime = %s ,Application[%d].Version = %s\n",i,Application[i].Name,i,Application[i].Downloaded_DateAndTime,i,Application[i].Version);
 		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
-		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType ", BAD_CAST Application[i].Type);
+		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST Application[i].Type);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST Application[i].Name);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST Application[i].Version);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "Date_Time", BAD_CAST Application[i].Downloaded_DateAndTime);

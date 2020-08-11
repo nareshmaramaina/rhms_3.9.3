@@ -7,7 +7,10 @@
 !_TAG_PROGRAM_VERSION	0.0.0	//
 Adapter_status	DOT_1.1/adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
 Adapter_status	adapter_log.c	/^int Adapter_status(int *adapter, int *Charging, int *Discharging)$/;"	f	typeref:typename:int
-Applications_Details	get_app_info.c	/^int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode, xmlNodePtr Runningc/;"	f	typeref:typename:int
+ApplicationDownloadsDetails	ApplicationDownloadsDetails.c	/^int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode)$/;"	f	typeref:typename:int
+ApplicationDownloadsDetails.o	Makefile	/^ApplicationDownloadsDetails.o:ApplicationDownloadsDetails.c$/;"	t
+Applications	ApplicationDownloadsDetails.c	/^	struct Applications$/;"	s	function:ApplicationDownloadsDetails	file:
+Applications_Details	get_app_info.c	/^int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)$/;"	f	typeref:typename:int
 AutoapnAppVersionDetails	AutoapnAppVersionDetails.c	/^void AutoapnAppVersionDetails()$/;"	f	typeref:typename:void
 AutoapnAppVersionDetails.o	Makefile	/^AutoapnAppVersionDetails.o:AutoapnAppVersionDetails.c  $/;"	t
 Autoapn_xmlparse	autoapn_xmlparser.c	/^int Autoapn_xmlparse( char *docname )$/;"	f	typeref:typename:int
@@ -70,6 +73,10 @@ Device_App_info_Details	get_app_info.c	/^int Device_App_info_Details(char *Devic
 Device_work_records	Device_work_records.c	/^int Device_work_records()$/;"	f	typeref:typename:int
 Device_work_records.o	Makefile	/^Device_work_records.o:Device_work_records.c$/;"	t
 Device_working_secs	DOT_1.1/main.c	/^int Device_working_secs()$/;"	f	typeref:typename:int
+Downloaded_DateAndTime	ApplicationDownloadsDetails.c	/^		char Downloaded_DateAndTime[34]; $/;"	m	struct:ApplicationDownloadsDetails::Applications	typeref:typename:char[34]	file:
+Downloaded_DateAndTime	FirmwareDownloadsDetails.c	/^		char Downloaded_DateAndTime[34]; $/;"	m	struct:FirmwareDownloadsDetails::Firmwares	typeref:typename:char[34]	file:
+Downloaded_DateAndTime_Version_Details	Downloaded_DateAndTime_Version_Details.c	/^int Downloaded_DateAndTime_Version_Details(char *DownloadCompletedFile,float *DownloadedVersion,/;"	f	typeref:typename:int
+Downloaded_DateAndTime_Version_Details.o	Makefile	/^Downloaded_DateAndTime_Version_Details.o:Downloaded_DateAndTime_Version_Details.c$/;"	t
 Ethernet_status	ethernet_info.c	/^int Ethernet_status(void)$/;"	f	typeref:typename:int
 FPS_Id_and_version	FPS_Id_and_version.c	/^void FPS_Id_and_version()$/;"	f	typeref:typename:void
 FPS_Id_and_version.o	Makefile	/^FPS_Id_and_version.o:FPS_Id_and_version.c$/;"	t
@@ -78,6 +85,9 @@ FPS_RD_version	FPS_RDVersion.c	/^void FPS_RD_version()$/;"	f	typeref:typename:vo
 FingerRDServiceStatus	FingerRDServiceStatus.c	/^void FingerRDServiceStatus()$/;"	f	typeref:typename:void
 FingerRDServiceStatus.o	Makefile	/^FingerRDServiceStatus.o:FingerRDServiceStatus.c$/;"	t
 FirmwareDetails	patch_info.c	/^int FirmwareDetails()$/;"	f	typeref:typename:int
+FirmwareDownloadsDetails	FirmwareDownloadsDetails.c	/^int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)$/;"	f	typeref:typename:int
+FirmwareDownloadsDetails.o	Makefile	/^FirmwareDownloadsDetails.o:FirmwareDownloadsDetails.c$/;"	t
+Firmwares	FirmwareDownloadsDetails.c	/^	struct Firmwares$/;"	s	function:FirmwareDownloadsDetails	file:
 GPS_Success	main.c	/^int GPS_Success;$/;"	v	typeref:typename:int
 Get_Config_Settings	parse_rhms_config.c	/^int Get_Config_Settings()$/;"	f	typeref:typename:int
 Get_Current_Date	rtc_functions.c	/^void Get_Current_Date(char *Date)$/;"	f	typeref:typename:void
@@ -86,7 +96,12 @@ Get_Difference_Days_of_Today_with_Last_updated_day	rtc_functions.c	/^int Get_Dif
 Get_Ethernet_Status	ethernet_info.c	/^int Get_Ethernet_Status(void)$/;"	f	typeref:typename:int
 Get_Pinpad_Serial_No	Pinpad/header.h	/^int (*Get_Pinpad_Serial_No)(unsigned char *);$/;"	v	typeref:typename:int (*)(unsigned char *)
 Get_Sim_num	gprs_info.c	/^int Get_Sim_num()$/;"	f	typeref:typename:int
+Get_Tokens_of_ApplicationPatchfile	Get_Tokens_of_Patchfile.c	/^int Get_Tokens_of_ApplicationPatchfile(char *file,char *ApplicationType,char *ApplicationName,fl/;"	f	typeref:typename:int
+Get_Tokens_of_FirmwarePatchfile	Get_Tokens_of_Patchfile.c	/^int Get_Tokens_of_FirmwarePatchfile(char *file,char *FirmwareName,float *Version)$/;"	f	typeref:typename:int
+Get_Tokens_of_Patchfile.o	Makefile	/^Get_Tokens_of_Patchfile.o:Get_Tokens_of_Patchfile.c$/;"	t
 Get_Total_Device_Apps	Running_Apps_Details.c	/^int Get_Total_Device_Apps()$/;"	f	typeref:typename:int
+Get_Total_Downloaded_Updates	Get_Total_Downloaded_count.c	/^int Get_Total_Downloaded_Updates(int type)$/;"	f	typeref:typename:int
+Get_Total_Downloaded_count.o	Makefile	/^Get_Total_Downloaded_count.o:Get_Total_Downloaded_count.c$/;"	t
 Get_Total_Server_Apps	get_app_info.c	/^int Get_Total_Server_Apps()$/;"	f	typeref:typename:int
 Get_Two_Simdetails_info	Get_Two_Simdetails_info.c	/^int Get_Two_Simdetails_info(void)$/;"	f	typeref:typename:int
 Get_Two_Simdetails_info.o	Makefile	/^Get_Two_Simdetails_info.o:Get_Two_Simdetails_info.c$/;"	t
@@ -104,12 +119,16 @@ Health_Status_xml_frame	create_Health_status_xml.c	/^int Health_Status_xml_frame
 Health_response_xml_file	Update_request.c	/^char *Health_response_xml_file="\/opt\/Health_response.xml";$/;"	v	typeref:typename:char *
 Health_response_xml_file	request.c	/^char *Health_response_xml_file="\/opt\/Health_response.xml";$/;"	v	typeref:typename:char *
 IMAGES	os_info.c	/^void IMAGES()$/;"	f	typeref:typename:void
+Install_Applications_file	Get_Total_Downloaded_count.c	/^char *Install_Applications_file="\/mnt\/sysuser\/Software-Upgrade\/Applications_Downloads\/Insta/;"	v	typeref:typename:char *
+Install_Firmwares_file	Get_Total_Downloaded_count.c	/^char *Install_Firmwares_file="\/mnt\/sysuser\/Software-Upgrade\/Firmware_Downloads\/Install_Firm/;"	v	typeref:typename:char *
 Iris_Scanner_Id	get_iris_scanner.c	/^void Iris_Scanner_Id(void)$/;"	f	typeref:typename:void
 Iris_version	iris_version.c	/^void Iris_version()$/;"	f	typeref:typename:void
 Is_Hardware_Status_changed	Is_Hardware_Status_changed.c	/^int Is_Hardware_Status_changed()$/;"	f	typeref:typename:int
 Is_Hardware_Status_changed.o	Makefile	/^Is_Hardware_Status_changed.o:Is_Hardware_Status_changed.c	$/;"	t
 Location_info	Location_info.c	/^int  Location_info()$/;"	f	typeref:typename:int
 Location_info.o	Makefile	/^Location_info.o:Location_info.c$/;"	t
+Name	ApplicationDownloadsDetails.c	/^		char Name[128];$/;"	m	struct:ApplicationDownloadsDetails::Applications	typeref:typename:char[128]	file:
+Name	FirmwareDownloadsDetails.c	/^		char Name[128];$/;"	m	struct:FirmwareDownloadsDetails::Firmwares	typeref:typename:char[128]	file:
 Name	Running_Apps_Details.c	/^		char Name[128];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[128]	file:
 Name	Running_Apps_Details.c	/^		char Name[128];$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:char[128]	file:
 Name	get_app_info.c	/^		char Name[128];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[128]	file:
@@ -146,6 +165,8 @@ Send_Periodic_Helath_status_to_server.o	Makefile	/^Send_Periodic_Helath_status_t
 SerialNo_and_Version_Based_Tags	POS_HEALTH_DETAILS.c	/^void SerialNo_and_Version_Based_Tags()$/;"	f	typeref:typename:void
 Server_Addr	Update_Configured_Server_Addr.c	/^char Server_Addr[512]="https:\/\/rhms2.callippus.co.uk";$/;"	v	typeref:typename:char[512]
 Server_Application_release_file	get_app_info.c	/^char *Server_Application_release_file="\/etc\/vision\/RHMS\/Apps\/ServerApplicationsRelease.info/;"	v	typeref:typename:char *
+Standard_Apps_path	Get_Tokens_of_Patchfile.c	/^char *Standard_Apps_path="\/mnt\/sysuser\/Software-Upgrade\/Applications_Downloads\/";$/;"	v	typeref:typename:char *
+Standard_Firmwares_path	Get_Tokens_of_Patchfile.c	/^char *Standard_Firmwares_path="\/mnt\/sysuser\/Software-Upgrade\/Firmware_Downloads\/";$/;"	v	typeref:typename:char *
 Total_Solt1_secs	DOT_1.1/main.c	/^	int Total_Solt1_secs;$/;"	m	struct:Device	typeref:typename:int	file:
 Total_Solt1_secs	Device_work_records.c	/^		int Total_Solt1_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
 Total_Solt2_secs	DOT_1.1/main.c	/^	int Total_Solt2_secs;$/;"	m	struct:Device	typeref:typename:int	file:
@@ -162,6 +183,7 @@ Total_discharging_secs	DOT_1.1/main.c	/^	int Total_discharging_secs;$/;"	m	struc
 Total_discharging_secs	Device_work_records.c	/^		int Total_discharging_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
 Total_work_secs	DOT_1.1/main.c	/^	int Total_work_secs;$/;"	m	struct:Device	typeref:typename:int	file:
 Total_work_secs	Device_work_records.c	/^		int Total_work_secs;$/;"	m	struct:Device_work_records::Device	typeref:typename:int	file:
+Type	ApplicationDownloadsDetails.c	/^		char Type[128];$/;"	m	struct:ApplicationDownloadsDetails::Applications	typeref:typename:char[128]	file:
 Type	Running_Apps_Details.c	/^		char Type[128];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[128]	file:
 Type	Running_Apps_Details.c	/^		char Type[128];$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:char[128]	file:
 Type	get_app_info.c	/^		char Type[128];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[128]	file:
@@ -178,6 +200,8 @@ Update_Health_Statuses_dates.o	Makefile	/^Update_Health_Statuses_dates.o:Update_
 Update_Simdb_and_Signalmode	Periodic_tags.c	/^int Update_Simdb_and_Signalmode()$/;"	f	typeref:typename:int
 Update_request	Update_request.c	/^int Update_request(int request) \/\/ arg 1 For Hardware request,arg 2 For BootTime request, arg /;"	f	typeref:typename:int
 Update_request.o	Makefile	/^Update_request.o:Update_request.c$/;"	t
+Version	ApplicationDownloadsDetails.c	/^		char Version[12];$/;"	m	struct:ApplicationDownloadsDetails::Applications	typeref:typename:char[12]	file:
+Version	FirmwareDownloadsDetails.c	/^		char Version[12];$/;"	m	struct:FirmwareDownloadsDetails::Firmwares	typeref:typename:char[12]	file:
 Version	Running_Apps_Details.c	/^		char Version[12];$/;"	m	struct:Running_Apps_Details::Device	typeref:typename:char[12]	file:
 Version	Running_Apps_Details.c	/^		float Version;$/;"	m	struct:Running_Apps_Details::POSApplication	typeref:typename:float	file:
 Version	get_app_info.c	/^		char Version[12];$/;"	m	struct:Applications_Details::Device	typeref:typename:char[12]	file:

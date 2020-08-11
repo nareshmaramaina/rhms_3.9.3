@@ -119,15 +119,15 @@ int BootTime_Status_xml_frame()
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofApplications",NULL);
 	
-	Runningchildnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofRunningApplications",NULL);
 
 	Total_Server_Apps = Get_Total_Server_Apps();
 
 	fprintf(stdout," Total Server Apps = %d\n",Total_Server_Apps);
 
 	if ( Total_Server_Apps > 0 )
-		Applications_Details(Total_Server_Apps,Runningchildnode);
+		Applications_Details(Total_Server_Apps,childnode);
 
+	Runningchildnode = xmlNewChild(root_node, NULL, BAD_CAST "ArrayofRunningApplications",NULL);
 	Total_Running_apps = Get_Total_Device_Apps();
 
 	fprintf(stdout," Total_Running_apps = %d\n",Total_Running_apps);
