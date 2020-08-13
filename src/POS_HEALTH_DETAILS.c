@@ -228,7 +228,7 @@ int  PERIPHERALS(void)
 
 void SerialNo_and_Version_Based_Tags()
 {
-
+	RHMSAppVersionDetails();
 	AutoapnAppVersionDetails();
 
 	FirmwareDetails();

@@ -116,7 +116,7 @@ struct terminal_status
 	char FPScanneridExists[12];
 	char SIM1CCIDnumberExists[12];
 	char SIM2CCIDnumberExists[12];
-	char RHMSClientVersion[12];
+	char RHMSClientVersion[22];
 	char AutoapnAppVersion[12];
 	char FingerRDServiceStatus[12];
 
@@ -355,3 +355,4 @@ int Downloaded_DateAndTime_Version_Details(char *DownloadCompletedFile,float *Do
 int Get_Total_Downloaded_Updates(int type);
 int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode);
 int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode);
+void RHMSAppVersionDetails();

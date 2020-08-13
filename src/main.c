@@ -38,10 +38,9 @@ int main()
 	memset(&CONFIG,0x00,sizeof(struct rhms));
 	memset(machineid, 0 ,sizeof(machineid));
 
-	strcpy(module.RHMSClientVersion,"1.0");
 	fprintf(stdout,"\n****************************\n");
 	fprintf(stdout,"Application	: %s\n", "RHMS Client");
-	fprintf(stdout,"Version 	: %s\n", module.RHMSClientVersion);
+	fprintf(stdout,"Version 	: 1.0\n");
 	fprintf(stdout,"***************************\n");
 
 

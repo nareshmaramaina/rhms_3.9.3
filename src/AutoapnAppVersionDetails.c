@@ -18,6 +18,9 @@ void AutoapnAppVersionDetails()
 		if( strstr(line,"Version:") != NULL)
 		{
 			strcpy(module.AutoapnAppVersion,line+8);
+			if(module.AutoapnAppVersion[strlen(module.AutoapnAppVersion)-1] == '\n')
+				module.AutoapnAppVersion[strlen(module.AutoapnAppVersion)-1]='\0';
+
 			break;
 		}
 	}
