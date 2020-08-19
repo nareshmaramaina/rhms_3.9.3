@@ -4,7 +4,7 @@ void FPS_RD_version()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	fp = fopen("/etc/rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
@@ -17,8 +17,13 @@ void FPS_RD_version()
 	{
 		if( strstr(line,"RD-SDK") != NULL)
 		{
-
-			sscanf(line+8,"%s",module.FPSRDVer);
+			sizeofBuffer = sizeof(module.FPSRDVer); 
+			if( strlen(line+8) > sizeofBuffer ) 
+			{
+				fprintf(stderr,"Invalid: FPSRDVer Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
+			 sscanf(line+8,"%s",module.FPSRDVer);
 		}
 	}
 	if(strlen(module.FPSRDVer) == 0)	

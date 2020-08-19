@@ -68,12 +68,15 @@ void get_bluetooth_macid(char *macid)
 	}
 
 	memset(macid,0,sizeof(macid)); 
-
-	fscanf(fp,"%s",macid);
-
-	remove("/tmp/BT_MACID.txt");
+	
+	fread(macid,20,1,fp);
 
 	fclose(fp);
+        if(macid[strlen(macid)-1] == '\n')
+                macid[strlen(macid)-1]='\0';
+	
+
+	remove("/tmp/BT_MACID.txt");
 
 	return;
 }

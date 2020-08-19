@@ -2,7 +2,6 @@
 
 int Wifi_Status()
 {
-		
 	
 	int ret=0;
 	ret = Get_Wifi_Status();	

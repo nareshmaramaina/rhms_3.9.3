@@ -4,7 +4,7 @@ void FPS_Id_and_version()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer;
 	fp = fopen("/etc/scanner_type","r");
 	if ( fp == NULL ) 
 	{
@@ -22,6 +22,13 @@ void FPS_Id_and_version()
 			sprintf(module.FP_TYPE,"Capacitive");
 		if( strstr(line,"ScannerID:") != NULL)
 		{
+			sizeofBuffer = sizeof(module.scanner_id);
+			if( strlen(line+10) > sizeofBuffer )
+			{
+				fprintf(stderr,"Invalid: scanner_id Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
+
 			strcpy(module.FPScanneridExists,"Yes");
 			sscanf(line+10,"%s",module.scanner_id);
 			break;

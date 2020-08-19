@@ -106,7 +106,7 @@ int BootTime_Status_xml_frame()
 		xmlNewChild(root_node, NULL, BAD_CAST "WIFI", BAD_CAST module.WIFI);
 	if( CONFIG.Camera )
 		xmlNewChild(root_node, NULL, BAD_CAST "Camera", BAD_CAST module.Camera);
-	xmlNewChild(root_node, NULL, BAD_CAST "AUDIO", BAD_CAST module.AUDIO);
+	xmlNewChild(root_node, NULL, BAD_CAST "Audio", BAD_CAST module.AUDIO);
 	if( CONFIG.BatteryInfo && strlen(module.BatteryInfo.Date) > 5 ) 
 	{
 		childnode = xmlNewChild(root_node, NULL, BAD_CAST "BatteryInfo",NULL);

@@ -22,7 +22,6 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	{
 		char Type[128];
 		char Name[128];
-		char URL[512];
 		float Version;
 	}ServerApplication[Total_Current_Server_Apps];
 
@@ -43,7 +42,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	char Device_Application_release_file[300];
 	FILE *fp = NULL;
 	char *line=NULL,*str=NULL;
-	size_t len=20;
+	size_t len=20,sizeofBuffer=0;
 	int ret, i,j,check=0,  Total_Server_Apps=0;
 	memset(ServerApplication,0,sizeof(ServerApplication));
 	memset(Application,0,sizeof(Application));
@@ -62,6 +61,13 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 			if( check == 0 || check == 2 || check == 4 )
 			{
 
+				sizeofBuffer = sizeof(ServerApplication[i].Type);
+				if( strlen(str+16) > sizeofBuffer )
+				{
+					fprintf(stderr,"Invalid: ServerApplication[%d].Type Length More than %d bytes \n",i,sizeofBuffer);
+					continue;
+				}
+
 				strcpy(ServerApplication[i].Type,str+16);
 				if(ServerApplication[i].Type[ strlen(ServerApplication[i].Type) -1 ] == '\n')
 					ServerApplication[i].Type[ strlen(ServerApplication[i].Type) - 1 ]='\0';
@@ -78,6 +84,12 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		{
 			if ( check == 1 )
 			{
+				sizeofBuffer = sizeof(ServerApplication[j].Name);
+				if( strlen(str+16) > sizeofBuffer )
+				{
+					fprintf(stderr,"Invalid: ServerApplication[%d].Name Length More than %d bytes \n",j,sizeofBuffer);
+					continue;
+				}
 				strcpy(ServerApplication[j].Name,str+16);
 				if(ServerApplication[j].Name[strlen(ServerApplication[j].Name)-1] == '\n')
 					ServerApplication[j].Name[strlen(ServerApplication[j].Name)-1]='\0';
@@ -100,7 +112,6 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 			}
 			else 
 			{	
-				fprintf(stdout," %d  %d \n", i,j);
 				fprintf(stdout,"Version Error: Wrong Application Response in %s\n",Server_Application_release_file);
 				return 0;
 			}
@@ -109,15 +120,9 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		else if((str = (char *)strstr(line,"ApplicationURL:")) != NULL)
 		{
 			if( check == 3  && i == j )
-			{
-				strcpy(ServerApplication[j-1].URL,str+15);
-				if(ServerApplication[j-1].URL[strlen(ServerApplication[j-1].URL)-1] == '\n')
-					ServerApplication[j-1].URL[strlen(ServerApplication[j-1].URL)-1]='\0';
 				check=4;
-			}
 			else
 			{
-				fprintf(stdout," %d  %d \n", i,j);
 				fprintf(stdout,"ApplicationURL Error: Wrong Application Response in %s\n",Server_Application_release_file);
 				return 0;
 			}
@@ -159,7 +164,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		}
 		else
 		{
-			
+
 			fprintf(stdout,"\033[1;31m Application Management Not installed / No intial Patch Found,  ApplicationType = %s, ApplicationName = %s ServerApplicationVersion = %f \n\033[0m",ServerApplication[i].Type,ServerApplication[i].Name,ServerApplication[i].Version );
 		}
 	}
@@ -223,12 +228,24 @@ int Device_App_info_Details(char *Device_Application_release_file,char *DeviceAp
 		{
 			if((str = (char *)strstr(line,"ApplicationType:")) != NULL)
 			{
+				if( strlen(str+16) > 128 )
+				{
+					fprintf(stderr,"Invalid: DeviceApplicationType Length More than 128 bytes \n");
+					continue;
+				}
+
 				strcpy(DeviceApplicationType,str+16);
 				if(DeviceApplicationType[ strlen(DeviceApplicationType) -1 ] == '\n')
 					DeviceApplicationType[ strlen(DeviceApplicationType) - 1 ]='\0';
 			}
 			else if((str = (char *)strstr(line,"ApplicationName:")) != NULL)
 			{
+				if( strlen(str+16) > 128 )
+				{
+					fprintf(stderr,"Invalid: DeviceApplicationName Length More than 128 bytes \n");
+					continue;
+				}
+
 				strcpy(DeviceApplicationName,str+16);
 				if(DeviceApplicationName[strlen(DeviceApplicationName)-1] == '\n')
 					DeviceApplicationName[strlen(DeviceApplicationName)-1]='\0';

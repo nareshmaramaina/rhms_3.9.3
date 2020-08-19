@@ -82,7 +82,6 @@ int read_revision_operator_details(char *operator_buff,char *revision_buff)
 {
 	FILE *fp;
 	int i=0;
-	int j=0;
 	char *tmpbuf=NULL;
 	char file_buff[50]="";
 	memset(file_buff,0,sizeof(file_buff));
@@ -95,18 +94,12 @@ int read_revision_operator_details(char *operator_buff,char *revision_buff)
 		return -1;
 	}
 
-	fread(file_buff,1,50,fp);
+	fread(file_buff,sizeof(file_buff),1,fp);
 	fclose(fp);
 
+	if( file_buff[strlen(file_buff)-1] == '\n')
+		file_buff[strlen(file_buff)-1] = '\0';
 
-	for(j=0;file_buff[j];j++)
-	{
-		if(file_buff[j]==' '||file_buff[j]=='\n'||file_buff[j]=='\t')
-		{
-			memmove(file_buff+j,file_buff+j+1,strlen(file_buff+j+1)+1);
-			j--;
-		}
-	}
 	tmpbuf = file_buff;
 
 	for(i=0;i<25;i++)
@@ -145,7 +138,6 @@ int Get_Sim_num()
 	}
 
 	fread(buff,12,1,fp);
-
 	fclose(fp);
 
 	return atoi(buff);
@@ -154,7 +146,7 @@ int Get_Sim_num()
 int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 {
 	FILE *fp;
-	short int i=0,j;
+	short int i=0;
 	char *tmpbuf=NULL;
 	char sim_details_buff[128]="";
 
@@ -167,21 +159,12 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 		return -1;
 	}
 
-	fgets(sim_details_buff,80,fp);
+	fread(sim_details_buff,sizeof(sim_details_buff),1,fp);
+
+	fclose(fp);
 
 	if(sim_details_buff[strlen(sim_details_buff)-1]=='\n')
 		sim_details_buff[strlen(sim_details_buff)-1]='\0';
-
-	for(j=0;sim_details_buff[j];j++)
-	{
-		if(sim_details_buff[j]==' ')
-		{
-			memmove(sim_details_buff+j,sim_details_buff+j+1,strlen(sim_details_buff+j+1)+1);
-			j--;
-		}
-	}
-
-	fclose(fp);
 
 	tmpbuf = sim_details_buff;
 

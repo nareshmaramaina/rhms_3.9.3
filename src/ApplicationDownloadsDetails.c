@@ -19,7 +19,7 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 	}Application[TotalApplicationDownloads];
 	FILE *fp = NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	int ret,i, DownloadCount=0,TotalApplicationCount=0;
 	char ApplicationName[128];
 	char ApplicationType[128];
@@ -52,6 +52,13 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 				fprintf(stderr,"%s file not found\n",line);
 				continue;
 			}
+			sizeofBuffer = sizeof(ApplicationPatchFileName[DownloadCount]);
+                        if( strlen(line) > sizeofBuffer )
+                        {
+                                fprintf(stderr,"Invalid: ApplicationPatchFileName[%d] Length More than %d bytes \n",DownloadCount,sizeofBuffer);
+                                continue;
+                        }
+
 			strcpy(ApplicationPatchFileName[DownloadCount],line);
 			DownloadCount++;
 		}
@@ -94,7 +101,7 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 	for(i=0;i< TotalApplicationCount ;i++)
 	{
 		fprintf(stdout,"Application[%d].Name = %s, Application[%d].Downloaded_DateAndTime = %s ,Application[%d].Version = %s\n",i,Application[i].Name,i,Application[i].Downloaded_DateAndTime,i,Application[i].Version);
-		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Application",NULL);
+		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "ApplicationDownload",NULL);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationType", BAD_CAST Application[i].Type);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationName", BAD_CAST Application[i].Name);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST Application[i].Version);

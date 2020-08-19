@@ -4,7 +4,7 @@ void RHMSAppVersionDetails()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	fp = fopen("/etc/vision/RHMS/RHMSClientversion.info","r");
 	if ( fp == NULL )
 	{
@@ -17,6 +17,13 @@ void RHMSAppVersionDetails()
 	{
 		if( strstr(line,"Version:") != NULL)
 		{
+			 sizeofBuffer = sizeof(module.RHMSClientVersion);
+                        if( strlen(line+8) > sizeofBuffer )
+                        {
+                                fprintf(stderr,"Invalid: RHMSClientVersion Length More than %d bytes \n",sizeofBuffer);
+                                continue;
+                        }
+
 			strcpy(module.RHMSClientVersion,line+8);
 			if(module.RHMSClientVersion[strlen(module.RHMSClientVersion)-1] == '\n')
 				module.RHMSClientVersion[strlen(module.RHMSClientVersion)-1]='\0';

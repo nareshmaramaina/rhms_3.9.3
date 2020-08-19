@@ -21,7 +21,7 @@ int main()
 {
 	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0,BootTimeSentSuccess=0;
 	int run_time = -1;
-	char machineid[15];
+	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
 
@@ -52,7 +52,6 @@ int main()
 		system("/vision/DOT &> /dev/null &"); // If DOT tag enble, it should run all boot times
 
 
-	get_machineid(machineid);
 
 	ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 
@@ -61,6 +60,7 @@ int main()
 	if ( ret ==  0 && run_time == 100 ) // Updated for the day when 100 ( Run every day ince flag)
 	{
 		fprintf(stderr,"RHMS Details are Updated for the Day\n");
+		get_machineid(machineid);
 		reboot_device(machineid[9]);
 		return 0;
 	}
@@ -74,11 +74,11 @@ int main()
 		if ( Hardware_run != 0 || run_time != 100 )
 		{	
 			ret = 	Is_Hardware_Status_changed();
+			Update_Current_Date_with_Time();
+			create_Hardware_status_xml_file();
 
 			if ( ret != 0) // on return 0 No Change, return non zero  Changes happened
 			{
-				Update_Current_Date_with_Time();
-				create_Hardware_status_xml_file();
 				Server_ret =  Send_Hardware_status_to_server(); 
 				if ( Server_ret == -2 )
 				{
@@ -164,8 +164,10 @@ int main()
 			}
 
 			if ( ret == 0)
+			{
+				get_machineid(machineid);
 				reboot_device(machineid[9]);
-
+			}
 			return 0;
 		}
 

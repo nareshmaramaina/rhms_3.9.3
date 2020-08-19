@@ -38,8 +38,8 @@ int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_da
 	}
 
 	memset(str,0x00,80);
-
-	fscanf(fp, "%s",str);
+	
+	fread(str,sizeof(str),1,fp);
 
 	fclose(fp);
 

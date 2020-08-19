@@ -11,7 +11,7 @@ void	POS_HEALTH_DETAILS(void)
 	short int i;
 
 	DEVICE_DETAILS();
-
+	
 	PERIPHERALS();
 
 

@@ -116,7 +116,7 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 		return -1;
 	}
 
-	fread(other_details_buff,1,150,fd);
+	fread(other_details_buff,sizeof(other_details_buff),1,fd);
 #if DEBUG
 	printf("Revision_Operator_Details---->%s\n",other_details_buff);
 #endif
@@ -217,7 +217,7 @@ int retrieve_two_signal_details(char *SIM1,char *SIM2)
 int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 {
 	FILE *fp;
-	int i=0,j;
+	int i=0;
 	char *tmpbuf="";
 	char sim_details_buff[256]="";
 
@@ -230,21 +230,12 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 		return -1;
 	}
 
-	fgets(sim_details_buff,sizeof(sim_details_buff),fp);
-
-	if(	sim_details_buff[strlen(sim_details_buff)-1] == '\n')
-		sim_details_buff[strlen(sim_details_buff)-1]='\0';
-
-	for(j=0;sim_details_buff[j];j++)
-	{
-		if(sim_details_buff[j] == ' ')
-		{
-			memmove(sim_details_buff+j,sim_details_buff+j+1,strlen(sim_details_buff+j+1)+1);
-			j--;
-		}
-	}
+	fread(sim_details_buff,sizeof(sim_details_buff),1,fp);
 
 	fclose(fp);
+
+	if( sim_details_buff[strlen(sim_details_buff)-1] == '\n')
+		sim_details_buff[strlen(sim_details_buff)-1]='\0';
 	tmpbuf=sim_details_buff;
 
 	memset(ccid_buff,0,sizeof(ccid_buff));

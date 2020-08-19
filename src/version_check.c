@@ -27,7 +27,6 @@ int Get_Device_Applications_Count()
                 {
                         fprintf(stdout,"Wrong Format in /etc/visiontek_Application_release, moving /etc/visiontek_Application_release to bkp apply All application patches \n");
 			
-                        system("mv /etc/visiontek_Application_release /etc/.__Rejected_visiontek_Application_release_wrong_");
                 	return -1;
 		}
                 fclose(fp);

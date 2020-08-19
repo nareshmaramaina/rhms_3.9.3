@@ -6,7 +6,7 @@ int FirmwareDetails()
 
 	char *line=NULL,*str=NULL;
 
-	size_t len=20;
+	size_t len=20,sizeofBuffer=0;
 	char buff[128]="";
 	fp = fopen("/etc/vision/RHMS/Firmware/FirmwareUpdated.info","r");
 	if(fp == NULL)
@@ -20,6 +20,12 @@ int FirmwareDetails()
 	{
 		if((str = (char *)strstr(line,"FirmwareName:")) != NULL)
 		{
+			sizeofBuffer = sizeof(module.FirmwareName); 
+			if( strlen(str+13) > sizeofBuffer ) 
+			{
+				fprintf(stderr,"Invalid: FirmwareName Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
 			memset(buff,0,sizeof(buff));	
 			strcpy(buff,str+13);
 			if(buff[strlen(buff)-1] == '\n')
@@ -29,6 +35,12 @@ int FirmwareDetails()
 		}
 		else if((str = (char *)strstr(line,"Version:")) != NULL)
 		{
+			sizeofBuffer = sizeof(module.FirmwareVersion); 
+			if( strlen(str+8) > sizeofBuffer ) 
+			{
+				fprintf(stderr,"Invalid: Firmware Version Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
 			memset(buff,0,sizeof(buff));	
 			strcpy(buff,str+8);
 			if(buff[strlen(buff)-1] == '\n')

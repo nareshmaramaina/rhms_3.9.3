@@ -35,9 +35,13 @@ int Get_interface_name(char *interface,char *ip)
 		fprintf(stderr," /proc/net/arp file not found \n");
 		return -1;
 	}
-	fscanf(fp, "%s", interface); 
-
+	fread(interface,99,1,fp);
+	
 	fclose(fp);
+        
+	if(interface[strlen(interface)-1] == '\n')
+                interface[strlen(interface)-1]='\0';
+
 	remove("/tmp/.ip_address");
 	return 0;
 }

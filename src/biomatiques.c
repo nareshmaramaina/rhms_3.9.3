@@ -4,7 +4,7 @@ void Biomatiques_RD_version()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	fp = fopen("/etc/Biomatiques_rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
@@ -17,8 +17,13 @@ void Biomatiques_RD_version()
 	{
 		if( strstr(line,"Biomatiques") != NULL)
 		{
-
-			sscanf(line+16,"%s",module.BiomRDVer);
+			sizeofBuffer = sizeof(module.BiomRDVer);
+			if( strlen(line+16) > sizeofBuffer )
+			{
+				fprintf(stderr,"Invalid: BiomRDVer Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
+			 sscanf(line+16,"%s",module.BiomRDVer);
 		}
 	}
 	if(strlen(module.BiomRDVer) == 0)	
@@ -31,8 +36,8 @@ void Biomatiques_RD_version()
 	return;
 }
 /*int main()
-{
+  {
 
-	RD_version();
+  RD_version();
 
-}*/
+  }*/

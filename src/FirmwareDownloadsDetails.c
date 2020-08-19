@@ -18,7 +18,7 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 	}Firmware[TotalFirmwareDownloads];
 	FILE *fp = NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	int ret,i, DownloadCount=0,TotalFirmwareCount=0;
 	char FirmwareName[128];
 	char Downloaded_DateAndTime[34]; 
@@ -50,6 +50,13 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 				fprintf(stderr,"%s file not found\n",line);
 				continue;
 			}
+			sizeofBuffer = sizeof(FirmwarePatchFileName[DownloadCount]);
+			if( strlen(line) > sizeofBuffer )
+			{
+				fprintf(stderr,"Invalid: FirmwarePatchFileName[%d] Length More than %d bytes \n",DownloadCount,sizeofBuffer);
+				continue;
+			}
+
 			strcpy(FirmwarePatchFileName[DownloadCount],line);
 			DownloadCount++;
 		}
@@ -92,7 +99,7 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 	for(i=0;i< TotalFirmwareCount ;i++)
 	{
 		fprintf(stdout,"Firmware[%d].Name = %s, Firmware[%d].Downloaded_DateAndTime = %s ,Firmware[%d].Version = %s\n",i,Firmware[i].Name,i,Firmware[i].Downloaded_DateAndTime,i,Firmware[i].Version);
-		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "Firmware",NULL);
+		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "FirmwareDownload",NULL);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "FirmwareName", BAD_CAST Firmware[i].Name);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "FirmwareVersion", BAD_CAST Firmware[i].Version);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "Date_Time", BAD_CAST Firmware[i].Downloaded_DateAndTime);

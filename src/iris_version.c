@@ -4,7 +4,7 @@ void Iris_version()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	fp = fopen("/etc/iritech_rd_info.txt","r");
 	if ( fp == NULL ) 
 	{
@@ -17,6 +17,12 @@ void Iris_version()
 	{
 		if( strstr(line,"IRITECH_RD V") != NULL)
 		{
+			sizeofBuffer = sizeof(module.IritechRDVer);
+			if( strlen(line+12) > sizeofBuffer )
+			{
+				fprintf(stderr,"Invalid: IritechRDVer Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
 
 			sscanf(line+12,"%s",module.IritechRDVer);
 		}

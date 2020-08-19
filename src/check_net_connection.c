@@ -16,7 +16,7 @@ static int retrieve_nw_details(void)
 		return -1;
 	}
 
-	fread(buff,1,sizeof(buff),fp);
+	fread(buff,sizeof(buff),1,fp);
 
 
 	fclose(fp);

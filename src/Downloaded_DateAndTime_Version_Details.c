@@ -20,6 +20,12 @@ int Downloaded_DateAndTime_Version_Details(char *DownloadCompletedFile,float *Do
 
 			else if((str = (char *)strstr(line,"Downloaded_DateAndTime=")) != NULL)
 			{
+				if( strlen(str+23) > 30 )
+				{
+					fprintf(stderr,"Invalid: Downloaded_DateAndTime Length More than 30 bytes \n");
+					continue;
+				}
+
 				strcpy(Downloaded_DateAndTime,str+23);
 				if(Downloaded_DateAndTime[strlen(Downloaded_DateAndTime)-1] == '\n')
 					Downloaded_DateAndTime[strlen(Downloaded_DateAndTime)-1]='\0';

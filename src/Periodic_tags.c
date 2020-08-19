@@ -76,7 +76,7 @@ int Update_Simdb_and_Signalmode()
 	{
 		Sig_Strength=atoi(module.Sim1_db);
 		Sig_Strength = (Sig_Strength*2)-113;
-		sprintf(module.Sim1_db,"%dDB",Sig_Strength);
+		sprintf(module.Sim1_db,"%d",Sig_Strength);
 	}
 
 	if(strlen(module.Sim2_db) == 0 )
@@ -85,7 +85,7 @@ int Update_Simdb_and_Signalmode()
 	{
 		Sig_Strength=atoi(module.Sim2_db);
 		Sig_Strength = (Sig_Strength*2)-113;
-		sprintf(module.Sim2_db,"%dDB",Sig_Strength);
+		sprintf(module.Sim2_db,"%d",Sig_Strength);
 	}
 
 	if( strcmp(module.Comm,"GSM") == 0 )
@@ -104,14 +104,14 @@ int Update_Simdb_and_Signalmode()
 		if ( sim_num == 1 )
 		{	
 			memset(module.Sim1_db,0,sizeof(module.Sim1_db));
-			sprintf(module.Sim1_db,"%dDB",Sig_Strength);
+			sprintf(module.Sim1_db,"%d",Sig_Strength);
 			sprintf(module.SIM1SignalMode,"%cG",Sig_status);	
 		//	strcpy(module.SIM2SignalMode,"No");
 		}
 		else if ( sim_num == 2 )
 		{
 			memset(module.Sim2_db,0,sizeof(module.Sim2_db));
-			sprintf(module.Sim2_db,"%dDB",Sig_Strength);
+			sprintf(module.Sim2_db,"%d",Sig_Strength);
 			sprintf(module.SIM2SignalMode,"%cG",Sig_status);	
 		//	strcpy(module.SIM1SignalMode,"No");
 

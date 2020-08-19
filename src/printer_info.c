@@ -15,7 +15,7 @@ void printer_status()
 	else
 	{
 		strcpy(module.Printer,"No");
-		strcpy(module.paper,"No");
+		strcpy(module.paper,"NotPresent");
 	}
 
 	fprintf(stdout,"module.Printer = %s\tmodule.paper = %s\n",module.Printer,module.paper);
@@ -75,7 +75,3 @@ int paper_status(void)
 
 	return 0;
 }
-
-
-
-

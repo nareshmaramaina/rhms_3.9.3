@@ -4,7 +4,7 @@ void AutoapnAppVersionDetails()
 
 	FILE *fp=NULL;
 	char *line=NULL;
-	size_t len=0;
+	size_t len=0,sizeofBuffer=0;
 	fp = fopen("/etc/vision/autoapn/ver.info","r");
 	if ( fp == NULL )
 	{
@@ -17,6 +17,13 @@ void AutoapnAppVersionDetails()
 	{
 		if( strstr(line,"Version:") != NULL)
 		{
+		 sizeofBuffer = sizeof(module.AutoapnAppVersion);
+                        if( strlen(line+8) > sizeofBuffer )
+                        {
+                                fprintf(stderr,"Invalid: AutoapnAppVersion Length More than %d bytes \n",sizeofBuffer);
+                                continue;
+                        }
+		
 			strcpy(module.AutoapnAppVersion,line+8);
 			if(module.AutoapnAppVersion[strlen(module.AutoapnAppVersion)-1] == '\n')
 				module.AutoapnAppVersion[strlen(module.AutoapnAppVersion)-1]='\0';

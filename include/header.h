@@ -129,13 +129,13 @@ struct terminal_status
 	//	char IRIS_ID[16]; 
 	//	char HWChanged[12];
 	char IRIS[32];
-	char IritechRDVer[10];
+	char IritechRDVer[24];
 	char IritechSno[24];
-	char BiomRDVer[10];
+	char BiomRDVer[24];
 	char WSSN[32];
 	char pinpad[32];
 	char PinpadSN[64];
-	char FPSRDVer[10];
+	char FPSRDVer[24];
 	char IFD1[20];
 	char IFD2[20];
 	char SAM1[20];

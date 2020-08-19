@@ -33,8 +33,6 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 	memset(module.SerialNo,0,sizeof(module.SerialNo));
 
 	ret = get_machineid(machineid);
-	strcpy(module.TerminalID,machineid);
-
 	if(ret != 0 )
 	{
 		fprintf(stdout,"MachineID Error\n");
@@ -46,11 +44,13 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 		fprintf(stdout,"MachineID Invalid\n");
 		strcpy(module.SerialNo,"Error");
 		strcpy(module.TerminalIDExists,"Invalid");
+		strcpy(module.TerminalID,machineid);
 	}
 
 	else 
 	{
 		strcpy(module.TerminalIDExists,"Found");
+		strcpy(module.TerminalID,machineid);
 
 		if(machineid[0]=='1' && machineid[1]=='1')
 			sprintf(module.SerialNo,"1%s",machineid);
@@ -71,7 +71,6 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 		memset(module.SerialNo,0,sizeof(module.SerialNo));
 		
 		strcpy(module.SerialNo,module.macid);
-		//sprintf(module.SerialNo,"%c%c%c%c%c%c%c%c%c%c%c%c",module.macid[0],module.macid[1],module.macid[3],module.macid[4],module.macid[6],module.macid[7],module.macid[9],module.macid[10],module.macid[12],module.macid[13],module.macid[15],module.macid[16]);
 
 	}	
 	fprintf(stdout,"module.TerminalIDExists =%s\tmodule.TerminalID = %s\tmodule.SerialNo = %s\n",module.TerminalIDExists,module.TerminalID,module.SerialNo);
@@ -84,15 +83,19 @@ int get_machineid(char *machineid)
 
 	short int ret=0,i;
 	FILE *fp=NULL;
-
+	char Buffer[64]="";
 	for ( i=0; i< 5;i++)
 	{
-		ret = system("fw_printenv  machineid | cut -d '=' -f2 > /tmp/.RHMSmachineid");
-
+		ret = system("fw_printenv  machineid > /tmp/.RHMSmachineid");
 		if ( ret == 0)
 			break;
-
 		sleep(1);
+	}
+
+	if ( ret != 0 )
+	{
+		fprintf(stderr,"Machine ID not Found \n");
+		return ret;
 	}
 
 	fp = fopen("/tmp/.RHMSmachineid", "r");
@@ -104,12 +107,19 @@ int get_machineid(char *machineid)
 		return -1;
 
 	}
-
-	fscanf(fp,"%s",machineid);
+	fread(Buffer,sizeof(Buffer),1,fp);	
 	fclose(fp);
-	remove("/tmp/.RHMSmachineid");
+	if ( strlen(Buffer) > 60 )
+	{
+		fprintf(stdout,"String length of machineid is  more than 50 digits\n");
+		return ret;
+	}
+	strcpy(machineid,Buffer+10);
+	if( machineid[strlen(machineid)-1] == '\n')
+		machineid[strlen(machineid)-1] = '\0';
 
-	return 0;
+	remove("/tmp/.RHMSmachineid");
+	return ret;
 }
 
 void update_macid_details()
