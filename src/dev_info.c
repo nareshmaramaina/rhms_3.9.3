@@ -146,4 +146,48 @@ void update_macid_details()
 	return;
 }
 
+int Get_Wifi_Macid(char *macid)
+{
+        typedef unsigned char UC;
+        struct ifreq ifr;
+        int fd=0;
+        fd = socket(AF_INET, SOCK_DGRAM, 0);
+        ifr.ifr_addr.sa_family = AF_INET;
+        strncpy(ifr.ifr_name,"wlan0", IFNAMSIZ-1);
+        if(ioctl(fd,SIOCGIFHWADDR, &ifr) <0)
+        {
+                fprintf(stdout,"wlan0 interface not found \n");
+                close(fd);
+                return -1;
+        }
+        close(fd);
+
+        sprintf(macid,"%02X:%02X:%02X:%02X:%02X:%02X",(UC)ifr.ifr_hwaddr.sa_data[0], (UC)ifr.ifr_hwaddr.sa_data[1],
+                        (UC)ifr.ifr_hwaddr.sa_data[2], (UC)ifr.ifr_hwaddr.sa_data[3],
+                        (UC)ifr.ifr_hwaddr.sa_data[4], (UC)ifr.ifr_hwaddr.sa_data[5]);
+        return 0;
+}
+void update_Wifi_MACID_details()
+{
+        char mac_buff[30];
+        int ret;
+
+        memset(mac_buff,0x00,sizeof(mac_buff));
+        memset(module.WifiMACID,0,sizeof(module.WifiMACID));
+
+        ret =   Get_Wifi_Macid(mac_buff);
+        if(ret == 0)
+        {
+                strcpy(module.WifiMACID,mac_buff);
+                strcpy(module.WifiMACIDExists,"Yes");
+
+        }
+        else
+                strcpy(module.WifiMACIDExists,"Error");
+
+        fprintf(stdout,"module.WifiMACIDExists, = %s\tmodule.WifiMACID = %s\n",module.WifiMACIDExists,module.WifiMACID);
+
+        return;
+}
+
 

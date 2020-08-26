@@ -104,6 +104,8 @@ struct terminal_status
 	char HardwareIDExists[12];
 	char TerminalIDExists[12];
 	char MacidExists[12];
+	char WifiMACIDExists[12];
+	char WifiMACID[30];
 	char IMEInumberExists[12];
 	char UIDExists[12];
 	char IritechSnoExists[12];
@@ -143,6 +145,7 @@ struct terminal_status
 	char Bluetooth[15];
 	char Printer[10];
 	char paper[15];
+	char PaperUsed[15];
 	char scanner_id[40];
 	char FP_TYPE[20];
 	char Camera[10];
@@ -356,3 +359,5 @@ int Get_Total_Downloaded_Updates(int type);
 int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode);
 int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode);
 void RHMSAppVersionDetails();
+int PaperUsed_Count_Details();
+void update_Wifi_MACID_details();

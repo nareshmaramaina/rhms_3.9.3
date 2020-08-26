@@ -75,3 +75,29 @@ int paper_status(void)
 
 	return 0;
 }
+int PaperUsed_Count_Details(void)
+{
+        FILE *fp;
+        char *filename="/var/log/.PaperUsed.info";
+        short int i;
+        int TotalPaperFeedCount=0;
+     	memset(module.PaperUsed,0,sizeof(module.PaperUsed)); 
+      	for(i=0;i<3;i++)
+        {
+		fp = fopen(filename,"r");
+		if(fp == NULL)
+		{
+			fprintf(stderr,"%s not found\n",filename);
+			sleep(1);
+		}
+		else
+		{
+			fscanf(fp,"%d",&TotalPaperFeedCount);
+			fclose(fp);
+			sprintf(module.PaperUsed,"%d",TotalPaperFeedCount);
+			fprintf(stdout,"module.PaperUsed = %s\n",module.PaperUsed);
+			return TotalPaperFeedCount;
+		}
+	}
+	return -1;
+}

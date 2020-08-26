@@ -47,8 +47,10 @@ void Periodic_tags(void)
 	else 
 	{
 		if( CONFIG.Printer )
-			printer_status();
-		
+		{
+			paper_status();	
+			PaperUsed_Count_Details();
+		}
 		RTC_info();
 		battery_status();
 
@@ -57,10 +59,10 @@ void Periodic_tags(void)
 
 	}
 
-	Update_Current_Date_with_Time();
 	update_internal_memory_info();
 	update_ram_info();
 	FingerRDServiceStatus();
+	Update_Current_Date_with_Time();
 	return;
 }
 int Update_Simdb_and_Signalmode()

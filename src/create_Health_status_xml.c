@@ -108,8 +108,11 @@ int Health_Status_xml_frame()
 	if( CONFIG.Iris_or_Biomat )
 		xmlNewChild(root_node, NULL, BAD_CAST "IRIS", BAD_CAST module.IRIS);
 	if( CONFIG.Printer )
+	{
 		xmlNewChild(root_node, NULL, BAD_CAST "PaperStatus", BAD_CAST module.paper);
-
+		if (strlen(module.PaperUsed) > 0 )
+			xmlNewChild(root_node, NULL, BAD_CAST "PaperUsed", BAD_CAST module.PaperUsed);
+	}
 	xmlNewChild(root_node, NULL, BAD_CAST "RTC", BAD_CAST module.RTC);
 	xmlNewChild(root_node, NULL, BAD_CAST "Adapter", BAD_CAST module.Adapter);
 	xmlNewChild(root_node, NULL, BAD_CAST "Battery", BAD_CAST module.Battery_status);

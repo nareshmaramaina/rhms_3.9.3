@@ -135,7 +135,14 @@ int Hardware_xml_frame()
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", BAD_CAST module.HardwareID);
 	else 
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", NULL );
-	
+	xmlNewChild(node, NULL, BAD_CAST "WifiMACIDExists", BAD_CAST module.WifiMACIDExists);
+	if ( CONFIG.WIFI )
+	{
+		if ( strcmp(module.WifiMACIDExists,"Yes") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "WifiMACID", BAD_CAST module.WifiMACID);
+		else    
+			xmlNewChild(node, NULL, BAD_CAST "WifiMACID", NULL );	
+	}
 	xmlSaveFormatFileEnc(Hardware_Status_file, doc, "UTF-8", 1);
 
 	xmlFreeDoc(doc);

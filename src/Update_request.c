@@ -85,7 +85,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 			break;
 		}
 
-		puts(str);
+	//	puts(str);
 	}
 
 	free(str);

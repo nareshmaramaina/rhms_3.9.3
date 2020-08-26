@@ -65,6 +65,9 @@ void 	DEVICE_DETAILS()
 	Uid_info();
 
 	HardwareID_Details();
+
+	if ( CONFIG.WIFI )
+		update_Wifi_MACID_details();
 	return;
 }
 
@@ -107,16 +110,16 @@ int  PERIPHERALS(void)
 	SerialNo_and_Version_Based_Tags();
 
 	/*if ( strstr(module.USB_memory,"Not" ) != NULL)
-	{
-		fprintf(stdout," module.USB_memory = %s, retrying... \n",module.USB_memory);
+	  {
+	  fprintf(stdout," module.USB_memory = %s, retrying... \n",module.USB_memory);
 
-		sleep(2);
+	  sleep(2);
 
-		update_usb_info();
+	  update_usb_info();
 
-		fprintf(stdout," module.USB_memory = %s \n",module.USB_memory);
+	  fprintf(stdout," module.USB_memory = %s \n",module.USB_memory);
 
-	} */
+	  } */
 
 	if( CONFIG.IFD1 || CONFIG.IFD2 )
 	{
@@ -232,10 +235,10 @@ void SerialNo_and_Version_Based_Tags()
 	AutoapnAppVersionDetails();
 
 	FirmwareDetails();
-        if( CONFIG.Iris_or_Biomat )
-        {
-                iris_status();
-        }
+	if( CONFIG.Iris_or_Biomat )
+	{
+		iris_status();
+	}
 
 
 	if( CONFIG.IrisRDVer_and_SNo ) 

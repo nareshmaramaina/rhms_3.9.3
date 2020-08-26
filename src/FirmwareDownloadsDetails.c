@@ -101,7 +101,7 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 		fprintf(stdout,"Firmware[%d].Name = %s, Firmware[%d].Downloaded_DateAndTime = %s ,Firmware[%d].Version = %s\n",i,Firmware[i].Name,i,Firmware[i].Downloaded_DateAndTime,i,Firmware[i].Version);
 		childofchildnode = xmlNewChild(childnode, NULL, BAD_CAST "FirmwareDownload",NULL);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "FirmwareName", BAD_CAST Firmware[i].Name);
-		xmlNewChild(childofchildnode, NULL, BAD_CAST "FirmwareVersion", BAD_CAST Firmware[i].Version);
+		xmlNewChild(childofchildnode, NULL, BAD_CAST "FirmwareVer", BAD_CAST Firmware[i].Version);
 		xmlNewChild(childofchildnode, NULL, BAD_CAST "Date_Time", BAD_CAST Firmware[i].Downloaded_DateAndTime);
 	}
 
