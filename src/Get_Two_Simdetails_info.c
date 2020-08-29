@@ -5,18 +5,16 @@ int Get_Two_Simdetails_info(void)
 	short int i=0,sim_details_ret=0,gprs_update_ret=0,operator_details_ret=0;
 	char op_buff[80]="";
 	char op1_buff[80]="";
-	int imei_ccid=0;
-	int op_rev=0;
 	char IMEI_NUM[80]="";
 	char gsm_version[50]="";
 	char CCID_NUM[80]="";
 	char CCID1_NUM[80]="";
-
-	for ( i=0 ; i <  2 ; i++ )
+	fprintf(stdout,"Configured Two Sim Details autoapn Mode\n");
+	for ( i=0 ; i <  10 ; i++ )
 	{
-		sim_details_ret=retrieve_two_sim_details(CCID_NUM,IMEI_NUM,CCID1_NUM);
+		sim_details_ret = retrieve_two_sim_details(CCID_NUM,IMEI_NUM,CCID1_NUM);
 		if ( sim_details_ret == -1)
-			sleep(1);
+			sleep(2);
 		else 
 			break;	
 	}	
@@ -34,19 +32,33 @@ int Get_Two_Simdetails_info(void)
 	}
 	else
 	{
-		strcpy(module.IMEInumberExists,"Yes");
-		strcpy(module.SIM1CCIDnumberExists,"Yes");
-		strcpy(module.IMEI_no,IMEI_NUM);
-		strcpy(module.CCID,CCID_NUM);
-		strcpy(module.Sim2CCID,CCID1_NUM);
+		if(strlen(IMEI_NUM) > 0 )
+		{
+			strcpy(module.IMEInumberExists,"Yes");
+			strcpy(module.IMEI_no,IMEI_NUM);
+		}
+		else 
+			strcpy(module.IMEInumberExists,"Error");
+		if(strlen(CCID_NUM) > 0 && strstr(CCID_NUM,"NO_SIM") == NULL )
+		{
+			strcpy(module.SIM1CCIDnumberExists,"Yes");
+			strcpy(module.CCID,CCID_NUM);
+		}
+		else 
+			strcpy(module.SIM1CCIDnumberExists,"NO_SIM");
 
-		printf("module.IMEI_no:%s\n",module.IMEI_no);
-		printf("module.CCID_no:%s\n",module.CCID);
-		printf("module.Sim2CCID_no:%s\n",module.Sim2CCID);
+		if(strlen(CCID1_NUM) > 0 && strstr(CCID1_NUM,"NO_SIM") == NULL  )
+		{
+			strcpy(module.SIM2CCIDnumberExists,"Yes");
+			strcpy(module.Sim2CCID,CCID1_NUM);
+		}
+		else 
+			strcpy(module.SIM2CCIDnumberExists,"NO_SIM");
+
 	}
 
 
-	for ( i=0 ; i <  2 ; i++ )
+	/*for ( i=0 ; i <  2 ; i++ )
 	{
 		gprs_update_ret = retrieve_two_signal_details(module.Sim1_db,module.Sim2_db);
 		if ( gprs_update_ret == -1)
@@ -54,7 +66,7 @@ int Get_Two_Simdetails_info(void)
 		else 
 			break;	
 
-	}
+	}*/
 
 
 	operator_details_ret = read_two_revision_operator_details(op_buff,op1_buff,gsm_version);
@@ -66,31 +78,29 @@ int Get_Two_Simdetails_info(void)
 	if( operator_details_ret != 0)
 	{
 		strcpy(module.operator1_name,"NotFound");
-		printf("Operator1 Name %s\n",module.operator1_name);
 		strcpy(module.operator2_name,"NotFound");
-		printf("Operator2 Name %s\n",module.operator2_name);
 		strcpy(module.GSMVersionExists,"Error");
-		op_rev=1;
 	}
 	else
 	{
 		strcpy(module.GSMVersionExists,"Yes");
+		if(strlen(gsm_version) > 0 )
+		{
+			strcpy(module.GSMVersionExists,"Yes");
+			strcpy(module.GSM_Version,gsm_version);
+		}
+		else 
+			strcpy(module.GSMVersionExists,"Error");
 
 		strcpy(module.operator1_name,op_buff);
 		strcpy(module.operator2_name,op1_buff);
 		strcpy(module.GSM_Version,gsm_version);
-#if DEBUG
-		printf("Operator Names  1) %s  2) %s \n ",module.operator1_name,module.operator2_name);
-		printf("GSM Firmware Version %s\n",module.GSM_Version);
-#endif
-		op_rev=0;
 
 	}
 
-	printf("Flags op_rev **%d**\n,imei_ccid **%d**\n",op_rev,imei_ccid);
 	if( sim_details_ret != 0 || gprs_update_ret != 0 || operator_details_ret != 0)
 	{
-		printf("---> Failed to fetch gprs details\n");
+		printf("---> Failed to fetch Two SIM gprs details\n");
 		return -1;
 	}
 	return 0;
@@ -100,7 +110,7 @@ int Get_Two_Simdetails_info(void)
 
 int read_two_revision_operator_details(char *operator1,char *operator2,char *revision_buff)
 {
-	FILE *fd;
+	FILE *fp;
 	int i=0;
 	int j=0;
 	char tmpbuf[256]="";
@@ -109,18 +119,17 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 	char other_details_buff[150]="";
 	memset(other_details_buff,0,sizeof(other_details_buff));
 
-	fd=fopen("/tmp/revision_operator_details","r");
-	if(fd==NULL)
+	fp=fopen("/tmp/revision_operator_details","r");
+	if(fp==NULL)
 	{
 		fprintf(stderr,"/tmp/revision_operator_details open error\n");
 		return -1;
 	}
 
-	fread(other_details_buff,sizeof(other_details_buff),1,fd);
-#if DEBUG
-	printf("Revision_Operator_Details---->%s\n",other_details_buff);
-#endif
-	fclose(fd);
+	fread(other_details_buff,sizeof(other_details_buff),1,fp);
+	
+	fclose(fp);
+	
 	for(j=0;other_details_buff[j];j++)
 	{
 		if(other_details_buff[j]==' '||other_details_buff[j]=='\n'||other_details_buff[j]=='\t')
@@ -159,13 +168,13 @@ int read_two_revision_operator_details(char *operator1,char *operator2,char *rev
 		else
 			break;
 	}
+
 	Check_and_Set_Operator_name(operator1_buff);
 	Check_and_Set_Operator_name(operator2_buff);
 
-#if DEBUG
+	strcpy(operator1,operator1_buff);
+	strcpy(operator2,operator2_buff);
 
-	printf("Operator1 %s : ****buff = %s**** \t Operator2:%s *****buff= %s ***** Revision:****%s*** \n",operator1,operator1_buff,operator2,operator2_buff,revision_buff);
-#endif
 	return 0;
 }
 
@@ -186,13 +195,8 @@ int retrieve_two_signal_details(char *SIM1,char *SIM2)
 	}
 
 	fread(buff,9,1,fp);
-#if DEBUG 
-	fprintf(stdout,"BUFF:***%s***\n",buff);
-#endif
+	
 	fclose(fp);
-
-	memset(SIM1,0,sizeof(SIM1));
-	memset(SIM2,0,sizeof(SIM2));
 
 	for(i=0;i<12;i++)
 	{
@@ -238,7 +242,6 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 		sim_details_buff[strlen(sim_details_buff)-1]='\0';
 	tmpbuf=sim_details_buff;
 
-	memset(ccid_buff,0,sizeof(ccid_buff));
 	for(i=0;i<40;i++)
 	{
 		if (tmpbuf[i]!=',')
@@ -248,7 +251,6 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 	}
 	i++;
 	strcpy(tmpbuf,tmpbuf+i);
-	memset(ccid1_buff,0,sizeof(ccid1_buff));
 
 	for(i=0;i<40;i++)
 	{
@@ -259,7 +261,6 @@ int retrieve_two_sim_details(char *ccid_buff,char *imei_buff,char *ccid1_buff)
 	}
 	i++;
 	strcpy(tmpbuf,tmpbuf+i);
-	memset(imei_buff,0,sizeof(imei_buff));
 
 	for(i=0;i<40;i++)
 	{

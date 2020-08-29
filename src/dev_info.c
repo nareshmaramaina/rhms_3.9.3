@@ -173,21 +173,19 @@ void update_Wifi_MACID_details()
         int ret;
 
         memset(mac_buff,0x00,sizeof(mac_buff));
-        memset(module.WifiMACID,0,sizeof(module.WifiMACID));
+        memset(module.WiFiMACID,0,sizeof(module.WiFiMACID));
 
         ret =   Get_Wifi_Macid(mac_buff);
         if(ret == 0)
         {
-                strcpy(module.WifiMACID,mac_buff);
-                strcpy(module.WifiMACIDExists,"Yes");
+                strcpy(module.WiFiMACID,mac_buff);
+                strcpy(module.WiFiMACIDExists,"Yes");
 
         }
         else
-                strcpy(module.WifiMACIDExists,"Error");
+                strcpy(module.WiFiMACIDExists,"Error");
 
-        fprintf(stdout,"module.WifiMACIDExists, = %s\tmodule.WifiMACID = %s\n",module.WifiMACIDExists,module.WifiMACID);
+        fprintf(stdout,"module.WiFiMACIDExists, = %s\tmodule.WiFiMACID = %s\n",module.WiFiMACIDExists,module.WiFiMACID);
 
         return;
 }
-
-

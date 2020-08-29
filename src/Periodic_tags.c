@@ -72,7 +72,7 @@ int Update_Simdb_and_Signalmode()
 	memset(module.SIM1SignalMode,0,sizeof(module.SIM1SignalMode));
 	memset(module.SIM2SignalMode,0,sizeof(module.SIM2SignalMode));
 
-	if(strlen(module.Sim1_db) == 0 )
+/*	if(strlen(module.Sim1_db) == 0 )
 		strcpy(module.Sim1_db,"NotFound");
 	else 
 	{
@@ -88,7 +88,7 @@ int Update_Simdb_and_Signalmode()
 		Sig_Strength=atoi(module.Sim2_db);
 		Sig_Strength = (Sig_Strength*2)-113;
 		sprintf(module.Sim2_db,"%d",Sig_Strength);
-	}
+	}*/
 
 	if( strcmp(module.Comm,"GSM") == 0 )
 	{

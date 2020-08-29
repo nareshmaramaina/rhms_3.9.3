@@ -40,14 +40,15 @@ void pinpad_status()
 			else
 			{
 				fprintf(stdout,"Waiting for Pinpad SerialNo ...\n");
-				while( fscanf(fp,"%s",PinpadSno) != EOF )
+				while(  fgets( PinpadSno,sizeof(PinpadSno),fp) != NULL ) 
 				{
 					if ( strstr(PinpadSno,"Pinpad_SerialNo:") != NULL )
 					{
 						strcpy(module.PinpadSNExists,"Found");
-						strcpy(module.PinpadSN,PinpadSno+16);
+						sscanf(PinpadSno+16,"%s",module.PinpadSN);
 						break;
 					}
+					memset(PinpadSno,0,sizeof(PinpadSno));
 				}
 				if ( strlen(module.PinpadSN) == 0 )
 				{
@@ -67,7 +68,7 @@ void pinpad_status()
 		strcpy(module.pinpad,"NotConnected");
 
 		if ( CONFIG.PinpadSN )
-				strcpy(module.PinpadSNExists,"NotFound");
+			strcpy(module.PinpadSNExists,"NotFound");
 		fprintf(stdout,"module.pinpad = %s\n",module.pinpad);
 	}
 	return;

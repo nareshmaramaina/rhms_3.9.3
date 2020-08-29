@@ -111,6 +111,7 @@ int Hardware_xml_frame()
 	}
 	if( CONFIG.WSSN)
 	{
+
 		xmlNewChild(node, NULL, BAD_CAST "WSSNExists", BAD_CAST module.WSSNExists);
 		if( strcmp(module.WSSNExists,"Found") == 0 )
 			xmlNewChild(node, NULL, BAD_CAST "WSSN", BAD_CAST module.WSSN);
@@ -135,13 +136,13 @@ int Hardware_xml_frame()
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", BAD_CAST module.HardwareID);
 	else 
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", NULL );
-	xmlNewChild(node, NULL, BAD_CAST "WifiMACIDExists", BAD_CAST module.WifiMACIDExists);
+	xmlNewChild(node, NULL, BAD_CAST "WiFiMACIDExists", BAD_CAST module.WiFiMACIDExists);
 	if ( CONFIG.WIFI )
 	{
-		if ( strcmp(module.WifiMACIDExists,"Yes") == 0 )
-			xmlNewChild(node, NULL, BAD_CAST "WifiMACID", BAD_CAST module.WifiMACID);
+		if ( strcmp(module.WiFiMACIDExists,"Yes") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "WiFiMACID", BAD_CAST module.WiFiMACID);
 		else    
-			xmlNewChild(node, NULL, BAD_CAST "WifiMACID", NULL );	
+			xmlNewChild(node, NULL, BAD_CAST "WiFiMACID", NULL );	
 	}
 	xmlSaveFormatFileEnc(Hardware_Status_file, doc, "UTF-8", 1);
 

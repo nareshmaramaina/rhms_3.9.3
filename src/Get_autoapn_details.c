@@ -24,15 +24,18 @@ void Get_autoapn_wrote_details()
 		}
 
 
-		sleep(5);
+		sleep(1);
 
 		xml_type_Autoapn_details();
 	}
 
 	else
+	{
+		fprintf(stdout,"/etc/autoapn/autoapn_config.xml file not found\n");
 		Non_xml_type_Autoapn_details();
+	}
 
-
+	fprintf(stdout,"module.GSM_Version= %s\nmodule.IMEI_no= %s\nmodule.CCID= %s\nmodule.Sim2CCID= %s\nmodule.Sim1_db= %s\nmodule.Sim2_db= %s\nmodule.operator1_name= %s\nmodule.operator2_name= %s\nmodule.WIFI= %s\nmodule.ethernet = %s\n",module.GSM_Version,module.IMEI_no,module.CCID,module.Sim2CCID,module.Sim1_db,module.Sim2_db,module.operator1_name,module.operator2_name,module.WIFI,module.ethernet);	
 	return;
 
 }

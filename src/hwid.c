@@ -2,18 +2,11 @@
 void HardwareID_Details()
 {
 
-	short int ret=0,i;
 	FILE *fp=NULL;
+	char Buff[30]="";
 
-	for ( i=0; i< 5;i++)
-	{
-		ret = system("fw_printenv  hwid | cut -d '=' -f2 > /tmp/.RHMSHardwareID");
+	system("fw_printenv  hwid | cut -d '=' -f2 > /tmp/.RHMSHardwareID");
 
-		if ( ret == 0)
-			break;
-
-		sleep(1);
-	}
 
 	fp = fopen("/tmp/.RHMSHardwareID", "r");
 
@@ -24,13 +17,16 @@ void HardwareID_Details()
 		return;
 
 	}
+	fread(Buff,30,1,fp);
+	sscanf(Buff,"%s",module.HardwareID);
 
-	fscanf(fp,"%s",module.HardwareID);
 	fclose(fp);
 	remove("/tmp/.RHMSHardwareID");
+
 	if( strlen(module.HardwareID) == 0 )
 		strcpy(module.HardwareIDExists,"No");
 	else strcpy(module.HardwareIDExists,"Yes");
+
 	fprintf(stdout," module.HardwareIDExists %s module.HardwareID %s \n",module.HardwareIDExists,module.HardwareID);
 	return;
 }

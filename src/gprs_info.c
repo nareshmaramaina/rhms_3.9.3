@@ -1,6 +1,4 @@
 #include <header.h>
-
-
 int gprs_details(void)
 {
 	short int i=0,rev_operator_ret,SimDetails_ret=0,GPRS_update_ret=0;
@@ -9,14 +7,16 @@ int gprs_details(void)
 	char CCID_NUM[60]="";
 	char operator_buff[30]="";
 	int sim=0;
+	
+	fprintf(stdout,"Configured One Sim Details autoapn Mode\n");
 	memset(operator_buff,0,sizeof(operator_buff));
 
-	for ( i=0 ; i <  2 ; i++ )
+	for ( i=0 ; i <  12 ; i++ )
 	{	
 		SimDetails_ret = retrieve_sim_details(CCID_NUM,IMEI_NUM);
 
 		if ( SimDetails_ret == -1)
-			sleep(1);
+			sleep(2);
 		else 
 			break;	
 	}	
@@ -26,20 +26,27 @@ int gprs_details(void)
 
 	if(SimDetails_ret != 0)
 	{
-                strcpy(module.IMEInumberExists,"Error");
+		strcpy(module.IMEInumberExists,"Error");
 		strcpy(module.SIM1CCIDnumberExists,"NO_SIM");
 
 	}
 
 	else
 	{
-                strcpy(module.IMEInumberExists,"Yes");
-		strcpy(module.SIM1CCIDnumberExists,"Yes");
-		strcpy(module.IMEI_no,IMEI_NUM);
-		strcpy(module.CCID,CCID_NUM);
-
-		printf("module.IMEI_no:%s\n",module.IMEI_no);
-		printf("module.CCID_no:%s\n",module.CCID);
+		if(strlen(IMEI_NUM) > 0 )
+		{
+			strcpy(module.IMEInumberExists,"Yes");
+			strcpy(module.IMEI_no,IMEI_NUM);
+		}
+		else 
+			strcpy(module.IMEInumberExists,"Error");
+		if( strlen(CCID_NUM) > 0 && strstr(CCID_NUM,"NO_SIM") == NULL )
+		{
+			strcpy(module.SIM1CCIDnumberExists,"Yes");
+			strcpy(module.CCID,CCID_NUM);
+		}
+		else 
+			strcpy(module.SIM1CCIDnumberExists,"NO_SIM");
 	}
 
 
@@ -54,19 +61,23 @@ int gprs_details(void)
 	else
 	{
 		Check_and_Set_Operator_name(operator_buff);
-       		strcpy(module.GSMVersionExists,"Yes");
-		strcpy(module.GSM_Version,gsm_version);
-		printf("module.GSM_Version:%s\n",module.GSM_Version);
+		if(strlen(gsm_version) > 0 )
+		{
+			strcpy(module.GSMVersionExists,"Yes");
+			strcpy(module.GSM_Version,gsm_version);
+		}
+		else 
+			strcpy(module.GSMVersionExists,"Error");
 
 	}
+	memset(module.operator1_name,0,sizeof(module.operator1_name));
+	memset(module.operator2_name,0,sizeof(module.operator2_name));
 
 	sim = Get_Sim_num();
-	if ( sim == 1)
-		strcpy(module.operator1_name,operator_buff);	
-	else if( sim == 2)
+	if( sim == 2 )
 		strcpy(module.operator2_name,operator_buff);	
-
-
+	else 
+		strcpy(module.operator1_name,operator_buff);
 
 	if((rev_operator_ret != 0) || (GPRS_update_ret != 0 ) || (SimDetails_ret != 0 ))
 	{
@@ -80,8 +91,9 @@ int gprs_details(void)
 
 int read_revision_operator_details(char *operator_buff,char *revision_buff)
 {
+
 	FILE *fp;
-	int i=0;
+	int i=0,j;
 	char *tmpbuf=NULL;
 	char file_buff[50]="";
 	memset(file_buff,0,sizeof(file_buff));
@@ -100,6 +112,15 @@ int read_revision_operator_details(char *operator_buff,char *revision_buff)
 	if( file_buff[strlen(file_buff)-1] == '\n')
 		file_buff[strlen(file_buff)-1] = '\0';
 
+	for(j=0;file_buff[j];j++)
+	{
+		if(file_buff[j]==' '||file_buff[j]=='\n'||file_buff[j]=='\t')
+		{
+			memmove(file_buff+j,file_buff+j+1,strlen(file_buff+j+1)+1);
+			j--;
+		}
+	}
+
 	tmpbuf = file_buff;
 
 	for(i=0;i<25;i++)
@@ -112,7 +133,6 @@ int read_revision_operator_details(char *operator_buff,char *revision_buff)
 	i++;
 	tmpbuf = tmpbuf+i;
 
-	memset(revision_buff,0,sizeof(revision_buff));
 	for(i=0;i<25;i++)
 	{
 		if (tmpbuf[i]!=',')
@@ -151,7 +171,7 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 	char sim_details_buff[128]="";
 
 	memset(sim_details_buff,0,sizeof(sim_details_buff));
-	fp=fopen("/tmp/sim_details","r");
+	fp = fopen("/tmp/sim_details","r");
 
 	if(fp == NULL)
 	{
@@ -168,7 +188,6 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 
 	tmpbuf = sim_details_buff;
 
-	memset(ccid_buff,0,sizeof(ccid_buff));
 
 	for(i=0; i<40 ;i++)
 	{
@@ -181,7 +200,6 @@ int retrieve_sim_details(char *ccid_buff,char *imei_buff)
 
 	tmpbuf=tmpbuf+i;
 
-	memset(imei_buff,0,sizeof(imei_buff));
 
 	for(i=0;i<40;i++)
 	{

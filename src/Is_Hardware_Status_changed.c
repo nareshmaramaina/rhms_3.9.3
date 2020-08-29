@@ -1,7 +1,7 @@
 #include <header.h>
 int parse_device_details (xmlDocPtr doc, xmlNodePtr cur) 
 {
-	short int IrisRDVer_and_SNo=0,PinpadSN=0,BarcodeSno=0,CamType=0,WSSN=0,autoapn_config=0,WifiMACID=0;
+	short int IrisRDVer_and_SNo=0,PinpadSN=0,BarcodeSno=0,CamType=0,WSSN=0,autoapn_config=0,WiFiMACID=0;
 	xmlChar *key = NULL;
 	for ( cur = cur->xmlChildrenNode; cur != NULL;key=NULL, cur = cur->next)
 	{
@@ -350,20 +350,20 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		 else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WifiMACIDExists")))
-                        WifiMACID=1;
-                else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WifiMACID")))
+		 else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACIDExists")))
+                        WiFiMACID=1;
+                else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACID")))
                 {
                         key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-                        if( (key != NULL )  &&  strcmp(module.WifiMACID,(const char *)key) != 0 )
+                        if( (key != NULL )  &&  strcmp(module.WiFiMACID,(const char *)key) != 0 )
                         {
-                                printf("Changed present module.WifiMACID = %s , Last xml WifiMACID %s\n", module.WifiMACID,key);
+                                printf("Changed present module.WiFiMACID = %s , Last xml WiFiMACID %s\n", module.WiFiMACID,key);
                                 xmlFree(key);
                                 return 1;
                         }
-                        else if ( key == NULL && strlen(module.WifiMACID) > 0 )
+                        else if ( key == NULL && strlen(module.WiFiMACID) > 0 )
                         {
-                                fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.WifiMACID = %s\n",module.WifiMACID);
+                                fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.WiFiMACID = %s\n",module.WiFiMACID);
                                 xmlFree(key);
                                 return 1;
                         }
@@ -374,12 +374,12 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
                 }
 
 	}
-	if( (CONFIG.IrisRDVer_and_SNo && IrisRDVer_and_SNo == 0 )|| (CONFIG.PinpadSN &&  PinpadSN == 0 ) || (CONFIG.BarcodeSno && BarcodeSno == 0 ) || (CONFIG.CamType && CamType == 0 ) || ( CONFIG.WSSN && WSSN == 0) || ( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0  && autoapn_config == 0 ) || (CONFIG.WIFI && WifiMACID) )
+	if( (CONFIG.IrisRDVer_and_SNo && IrisRDVer_and_SNo == 0 )|| (CONFIG.PinpadSN &&  PinpadSN == 0 ) || (CONFIG.BarcodeSno && BarcodeSno == 0 ) || (CONFIG.CamType && CamType == 0 ) || ( CONFIG.WSSN && WSSN == 0) || ( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0  && autoapn_config == 0 ) || (CONFIG.WIFI && WiFiMACID == 0 ) )
 	{
-		printf("New Tag Enabled, (IrisRDVer_and_SNo/PinpadSN/BarcodeSno/CamType/WSSN/autoapn_config/WifiMACID) \n");
+		printf("New Tag Enabled, (IrisRDVer_and_SNo/PinpadSN/BarcodeSno/CamType/WSSN/autoapn_config/WiFiMACID) \n");
 		return 1;
 	}
-	printf("IrisRDVer_and_SNo = %d,PinpadSN = %d,BarcodeSno = %d,CamType = %d,WSSN = %d,autoapn_config = %d WifiMACID =%d \n",IrisRDVer_and_SNo,PinpadSN,BarcodeSno,CamType,WSSN,autoapn_config,WifiMACID);
+	printf("IrisRDVer_and_SNo = %d,PinpadSN = %d,BarcodeSno = %d,CamType = %d,WSSN = %d,autoapn_config = %d WiFiMACID =%d \n",IrisRDVer_and_SNo,PinpadSN,BarcodeSno,CamType,WSSN,autoapn_config,WiFiMACID);
 	return 0;
 }
 

@@ -38,7 +38,7 @@ int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_da
 	}
 
 	memset(str,0x00,80);
-	
+
 	fread(str,sizeof(str),1,fp);
 
 	fclose(fp);
@@ -53,7 +53,7 @@ int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_da
 
 	no_days = diff_bw_two_dates(my_date,my_month,my_year, pre_date, pre_month,pre_year);
 
-	fprintf(stdout,"Diffrence between two dates %d\n",no_days);
+	fprintf(stdout,"Diffrence between Last Success Date and Today  Date is %d days\n",no_days);
 
 	return no_days;
 
@@ -80,16 +80,25 @@ int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodi
 
 
 	if ( access(Hardware_filename, F_OK) == 0 )
+	{
+		fprintf(stdout,"Hardware Status, ");
 		*Hardware_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Hardware_filename,CurrentDay, CurrentMonth, CurrentYear);
+	}
 	else *Hardware_run = -1;
 
 
 	if ( access(BootTime_filename, F_OK) == 0 )
+	{
+		fprintf(stdout,"BootTime Status, ");
 		*BootTime_run =	Get_Difference_Days_of_Today_with_Last_updated_day (BootTime_filename,CurrentDay, CurrentMonth, CurrentYear);
+	}
 	else *BootTime_run = -1;
 
 	if ( access(Periodic_filename, F_OK) == 0 )
+	{
+		fprintf(stdout,"Periodic Health Status, ");
 		*Periodic_run =	Get_Difference_Days_of_Today_with_Last_updated_day (Periodic_filename,CurrentDay, CurrentMonth, CurrentYear);
+	}
 	else *Periodic_run = -1;
 
 
@@ -152,8 +161,8 @@ int Can_i_reboot()
 {
 	int DD,MM,YYYY,Hr=9;
 	Update_Current_Date_with_Time();
-	
-        sscanf(module.Date_time,"%04d-%02d-%02dT%02d",&YYYY,&MM,&DD,&Hr);
+
+	sscanf(module.Date_time,"%04d-%02d-%02dT%02d",&YYYY,&MM,&DD,&Hr);
 	fprintf(stdout,"YYYY = %d,MM= %d,DD =%d,Hr= %d",YYYY,MM,DD,Hr);
 	if( YYYY < 2020 )
 		fprintf(stdout," Wrong Date Set, So We Can't decide to reboot\n");

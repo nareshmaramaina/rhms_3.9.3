@@ -104,8 +104,8 @@ struct terminal_status
 	char HardwareIDExists[12];
 	char TerminalIDExists[12];
 	char MacidExists[12];
-	char WifiMACIDExists[12];
-	char WifiMACID[30];
+	char WiFiMACIDExists[12];
+	char WiFiMACID[30];
 	char IMEInumberExists[12];
 	char UIDExists[12];
 	char IritechSnoExists[12];
@@ -361,3 +361,4 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 void RHMSAppVersionDetails();
 int PaperUsed_Count_Details();
 void update_Wifi_MACID_details();
+int Check_Address_Error_and_Update_Server_Addr_If_Error_Present( ); 

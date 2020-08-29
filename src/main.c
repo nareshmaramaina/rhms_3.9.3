@@ -19,7 +19,7 @@ int rhms_lock()
 
 int main()
 {
-	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0,BootTimeSentSuccess=0;
+	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0,BootTimeSentSuccess=0,HardwareRequestFailure=0;
 	int run_time = -1;
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
@@ -85,7 +85,10 @@ int main()
 					fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);
 					return Server_ret;
 				}
+				else if ( Server_ret == -1 )
+					HardwareRequestFailure = 1;
 
+				else HardwareRequestFailure = 0;
 			}
 			else 
 				update_Hardware_status_date_file();
@@ -141,15 +144,24 @@ int main()
 
 			}
 		}
-		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
-		{
-			sleep(3600); // Sleep 1hr
-			continue;
-		}
 
 
 		run_time = is_RHMS_multiple_run();
 		ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
+		if (  ( Server_ret == -1 || ret != 0 || run_time < 0  || BootTimeSentSuccess == 0 || HardwareRequestFailure == 1) ) // If network failure
+		{
+			if (  ( run_time % 60 == 0 ) && run_time < 3600  ) 
+			{
+				fprintf(stdout,"Waiting For %d secs,  Due to Network issue or Hardware/BootTime/PeriodicHealth request Issue\n",run_time);
+				sleep(run_time);
+			}
+			else
+			{
+				fprintf(stdout,"Waiting For 1Hr, Due to Network issue or Hardware/BootTime/PeriodicHealth request Issue\n");
+				sleep(3600); // Sleep 1hr
+			}	 
+			continue;
+		}
 
 		if ( run_time == 100   ||  run_time == 200 )
 		{
@@ -182,7 +194,7 @@ int main()
 
 		else
 		{
-			fprintf(stdout,"Exiting, run_time = %d\n",run_time);
+			fprintf(stderr,"Exiting, Some thing Went wrong ( Unknown Case ) , run_time = %d\n",run_time);
 			break;
 
 		}
