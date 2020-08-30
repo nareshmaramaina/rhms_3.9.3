@@ -6,9 +6,15 @@ void update_fpfile_info(void)
 	char buff[35]={0x00};
 	FILE *fp;
 	int ret=0;
-	fp=popen("dmesg | grep -A 1 'SAGEM SA' | tail -n 1 | sed 's/.*SerialNumber: //'","r");
+	fp = popen("dmesg | grep -A 1 'SAGEM SA' | tail -n 1 | sed 's/.*SerialNumber: //'","r");
+	if(fp == NULL)
+	{
+		fprintf(stdout,"update_fpfile_info function, dmesg error\n");
+		return;
+	}
 	fread(buff,21,1,fp);
-	fclose(fp);
+	pclose(fp);
+
 	printf("scanner id = %s\n",buff);
 	ret = fp_detect_type();
 

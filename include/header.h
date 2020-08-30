@@ -361,4 +361,5 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 void RHMSAppVersionDetails();
 int PaperUsed_Count_Details();
 void update_Wifi_MACID_details();
-int Check_Address_Error_and_Update_Server_Addr_If_Error_Present( ); 
+int Check_Address_Error_and_Update_Server_Addr_If_Error_Present();
+int Get_Current_autoapn_simdetails_mode();

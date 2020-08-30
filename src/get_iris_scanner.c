@@ -19,7 +19,7 @@ void Iris_Scanner_Id(void)
 		fp = popen("tac /var/log/mk2120ul-mgmtserv.log","r");
 		if(fp == NULL)
 		{
-		strcpy(module.IritechSnoExists,"NotFound");
+			strcpy(module.IritechSnoExists,"NotFound");
 			printf("/var/log/mk2120ul-mgmtserv.log Error in open a file\n");
 			return;
 		}
