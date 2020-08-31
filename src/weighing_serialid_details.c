@@ -11,17 +11,22 @@ void weighing_serialid_details()
 	char macid[20] ="";
 	int i;
 	short int  ret;
-
+	static int Only_once=0;
 	memset(module.WSSN,0,sizeof(module.WSSN));
 	memset(module.WSSNExists,0,sizeof(module.WSSNExists));
 
-	ret = system("/etc/rc.d/init.d/bluetooth start &> /dev/null");
-
-	if ( ret != 0 )
+	if ( Only_once == 0 )
 	{
-		fprintf(stderr," /etc/rc.d/init.d/bluetooth start command failed\n");
-		strcpy(module.WSSNExists,"NotFound");
-		return;
+		fprintf(stdout," Running.. /etc/rc.d/init.d/bluetooth start command\n");
+		ret = system("/etc/rc.d/init.d/bluetooth start &> /dev/null");
+
+		if ( ret != 0 )
+		{
+			fprintf(stderr," /etc/rc.d/init.d/bluetooth start command failed\n");
+			strcpy(module.WSSNExists,"NotFound");
+			return;
+		}
+		Only_once=1;
 	}
 
 	for( i = 0 ; i < 3 ; i++ )	
