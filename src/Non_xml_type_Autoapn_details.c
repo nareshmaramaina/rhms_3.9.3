@@ -9,9 +9,8 @@ void Non_xml_type_Autoapn_details()
 		if ( Current_Mode == 1 )
 		{
 			CONFIG.Two_Simdetails_Autoapn=0;
-			fprintf(stdout,"Current Mode is %d SIM details mode, Wrong autoapn mode configured in /etc/.RHMS_config.xml\n",Current_Mode);
-			fprintf(stdout,"Auto Corrected for autoapn sim mode details in /etc/.RHMS_config.xml \n");
 			system("sed 's:<Two_Simdetails_Autoapn>1<:<Two_Simdetails_Autoapn>0<:g' -i /etc/.RHMS_config.xml"); // Auto Correction
+			fprintf(stdout,"Wrong autoapn mode configured in /etc/.RHMS_config.xml\nAuto Corrected ( Disabled Two_Simdetails_Autoapn ) for autoapn sim mode details in /etc/.RHMS_config.xml \n");
 			gprs_details();
 		}
 		else 
@@ -24,9 +23,8 @@ void Non_xml_type_Autoapn_details()
 		if ( Current_Mode == 2 )
 		{
 			CONFIG.Two_Simdetails_Autoapn=1;
-			fprintf(stdout,"Current Mode is %d SIM details mode, Wrong autoapn mode configured in /etc/.RHMS_config.xml\n",Current_Mode);
 			system("sed 's:<Two_Simdetails_Autoapn>0<:<Two_Simdetails_Autoapn>1<:g' -i /etc/.RHMS_config.xml"); // Auto Correction
-			fprintf(stdout,"Auto Corrected for autoapn sim mode details in /etc/.RHMS_config.xml\n");
+			fprintf(stdout,"Wrong autoapn mode configured in /etc/.RHMS_config.xml\nAuto Corrected ( Enabled Two_Simdetails_Autoapn ) for autoapn sim mode details in /etc/.RHMS_config.xml \n");
 			Get_Two_Simdetails_info();	
 		}
 		else
