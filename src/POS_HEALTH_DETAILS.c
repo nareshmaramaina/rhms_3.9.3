@@ -8,58 +8,22 @@ inline void msleep(int arg)
 
 void	POS_HEALTH_DETAILS(void)
 {
-	short int i;
 
-	DEVICE_DETAILS();
-	
-	PERIPHERALS();
+	Hardware_Status_Details();
 
+	BootTime_Status_Details();
 
-	check_net_connection(); //Blocking For autoapn details
-
-	Get_autoapn_wrote_details();		
-
-	if ( strcmp(module.Comm,"ERROR") == 0 || strlen(module.Comm) == 0 ) 
-		check_net_connection(); //Blocking For autoapn details
-
-	if ( CONFIG.geo_location || CONFIG.GPS )
-	{
-		for(i = 0 ; i < 12; i++)
-		{
-
-			if ( CONFIG.GPS &&  ( access("/var/.gps_data.txt",F_OK )== 0 ) ) 
-			{
-				fprintf(stdout,"GPS Found\n");
-				GPS_Success = 1;
-				break;
-			}
-
-			else if ( CONFIG.geo_location && ( access("/var/.geo_cell.txt",F_OK) == 0 ) )
-			{
-				fprintf(stdout,"Geo Found\n");
-				break;
-			}
-			else 
-			{
-				fprintf(stdout,"Location file not found, /var/.gps_data.txt or /var/.geo_cell.txt Waiting for geo cell id locations\n");
-				sleep(5);
-			}
-
-		}
-
-		sleep(1);
-		Location_info();
-	}
+	Periodic_Health_Status_Details();
 
 	return;
 }
 
-void 	DEVICE_DETAILS()
+void 	Hardware_Status_Details()
 {
 	update_macid_details();
 
 	get_device_serialnumber();
-	
+
 	IMAGES();
 
 	Uid_info();
@@ -68,10 +32,30 @@ void 	DEVICE_DETAILS()
 
 	if ( CONFIG.WIFI )
 		update_Wifi_MACID_details();
+
+	External_Devices_SerialNo_info();
+
 	return;
 }
 
+void  External_Devices_SerialNo_info()
+{
 
+	if( CONFIG.IrisRDVer_and_SNo ) 
+		Iris_Scanner_Id();
+
+	if( CONFIG.CamType )
+		Camera_info();
+
+	if( CONFIG.WSSN )
+		weighing_serialid_details();
+
+	if(  CONFIG.BarcodeSno )
+		barcode_SerialNo();
+
+	if( CONFIG.PinpadSN )
+		pinpad_status();
+}
 
 void *sam_thread_function( void *ptr )
 {
@@ -85,10 +69,10 @@ void *sam_thread_function( void *ptr )
 }
 
 
-int  PERIPHERALS(void)
+int  BootTime_Status_Details(void)
 {
 
-	int ret=0;
+	short int i=0,pwron = 1,ret=0;
 
 	fprintf(stdout,"\n\nRunning... io module health status\n\n");
 
@@ -105,9 +89,10 @@ int  PERIPHERALS(void)
 	sleep(6); 
 
 	update_usb_info();
+
 	update_sdcard_info();
 
-	SerialNo_and_Version_Based_Tags();
+	Version_Based_Tags();
 
 	/*if ( strstr(module.USB_memory,"Not" ) != NULL)
 	  {
@@ -175,7 +160,6 @@ int  PERIPHERALS(void)
 	if( CONFIG.Printer )
 		printer_status();
 
-	short int i=0,pwron = 1;
 
 	for(i=0;i<5;i++)
 	{
@@ -219,52 +203,73 @@ int  PERIPHERALS(void)
 	if( CONFIG.Camera )
 		camera_status();
 
+	if( CONFIG.Pinpad )
+		pinpad_status(); 
+
 	fprintf(stdout,"\n\nSuccess: io module health status details\n\n");
 
 
 
 	gl11_iodev_close();
 
+	check_net_connection(); //Blocking For autoapn details
+
+	Get_autoapn_wrote_details();		
+
+	if ( strcmp(module.Comm,"ERROR") == 0 || strlen(module.Comm) == 0 ) 
+		check_net_connection(); //Blocking For autoapn details
+
+	if ( CONFIG.geo_location || CONFIG.GPS )
+	{
+		for(i = 0 ; i < 12; i++)
+		{
+
+			if ( CONFIG.GPS &&  ( access("/var/.gps_data.txt",F_OK )== 0 ) ) 
+			{
+				fprintf(stdout,"GPS Found\n");
+				GPS_Success = 1;
+				break;
+			}
+
+			else if ( CONFIG.geo_location && ( access("/var/.geo_cell.txt",F_OK) == 0 ) )
+			{
+				fprintf(stdout,"Geo Found\n");
+				break;
+			}
+			else 
+			{
+				fprintf(stdout,"Location file not found, /var/.gps_data.txt or /var/.geo_cell.txt Waiting for geo cell id locations\n");
+				sleep(5);
+			}
+
+		}
+
+		sleep(1);
+		Location_info();
+	}
+
 	return 0;
 }
 
 
-void SerialNo_and_Version_Based_Tags()
+void Version_Based_Tags()
 {
 	RHMSAppVersionDetails();
+
 	AutoapnAppVersionDetails();
 
 	FirmwareDetails();
-	if( CONFIG.Iris_or_Biomat )
-	{
-		iris_status();
-	}
 
 
 	if( CONFIG.IrisRDVer_and_SNo ) 
-	{
 		Iris_version();
-
-		Iris_Scanner_Id();
-	}
-	if( CONFIG.BiomRDVer ) 
-		Biomatiques_RD_version();
-
-	if( CONFIG.CamType )
-		Camera_info();
-
-	if( CONFIG.WSSN )
-		weighing_serialid_details();
-
-
-	if( CONFIG.Pinpad )
-		pinpad_status();
 
 	if( CONFIG.FPSRDVer )
 		FPS_RD_version();
 
-	if(  CONFIG.BarcodeSno )
-		barcode_SerialNo();
+	if( CONFIG.BiomRDVer ) 
+		Biomatiques_RD_version();
+
 
 	if( CONFIG.DOT )
 		Device_work_records();

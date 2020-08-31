@@ -13,6 +13,7 @@ void weighing_serialid_details()
 	short int  ret;
 
 	memset(module.WSSN,0,sizeof(module.WSSN));
+	memset(module.WSSNExists,0,sizeof(module.WSSNExists));
 
 	ret = system("/etc/rc.d/init.d/bluetooth start &> /dev/null");
 
@@ -31,21 +32,20 @@ void weighing_serialid_details()
 
 		if( strlen(macid) != 0)
 		{
-			strcpy(module.WSSN,macid);
 			strcpy(module.WSSNExists,"Found");
+			strcpy(module.WSSN,macid);
 			fprintf(stdout,"Macid of APPDS_VNTK@2015 BT device  = %s\nmodule.WSSN = %s\n",macid,module.WSSN);
-			break;
+			return;
 		}
 
 		else 
 		{
-			strcpy(module.WSSNExists,"NotFound");
 			sleep(30);	
-
 			fprintf(stderr,"%d Macid of APPDS_VNTK@2015 BT device  = %s\nmodule.WSSN = %s\n",i,macid,module.WSSN);
 		}
 
 	}
+	strcpy(module.WSSNExists,"NotFound");
 	return;
 }
 void get_bluetooth_macid(char *macid)
@@ -66,13 +66,13 @@ void get_bluetooth_macid(char *macid)
 		return ;
 	}
 
-	
+
 	fread(Buff,20,1,fp);
-	
+
 	sscanf(Buff,"%s",macid);	
 
 	fclose(fp);
-        
+
 	remove("/tmp/BT_MACID.txt");
 
 	return;

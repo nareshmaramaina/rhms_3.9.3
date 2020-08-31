@@ -1,10 +1,14 @@
 #include<header.h>
 void  barcode_SerialNo()
 {
-	short int ret=-1, tries = 5;
+	short int ret=-1, tries = 3;
 	char serialno[32];
 
 	//idVendor=2010, idProduct=7638
+
+	memset(module.BarcodeSno,0,sizeof(module.BarcodeSno));
+	memset(module.BarcodeSnoExists,0,sizeof(module.BarcodeSnoExists));
+
 	while( tries-- )
 	{
 		memset(serialno,0,sizeof(serialno));
@@ -19,12 +23,12 @@ void  barcode_SerialNo()
 			return;
 		}
 
-		else strcpy(module.BarcodeSnoExists,"NotFound");
-	
-		sleep(2);
+
+		sleep(1);
 		fprintf(stdout,"Barcode not found, retrying\n");
 
 	}
+	strcpy(module.BarcodeSnoExists,"NotFound");
 	return;
 
 }

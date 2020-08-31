@@ -4,6 +4,11 @@ int Send_Periodic_Health_status_to_server (void)
 	int ret = 0;
 	int i=0;
 
+	ret = create_Health_Status_xml_file();
+
+	if ( ret != 0 )
+		return ret;	
+
 	for (i=0; i<8; i++)
 	{
 		check_net_connection(); //Blocking For autoapn details

@@ -8,7 +8,8 @@ void Camera_info(void)
 	char VendorID[5]="", ProductID[5]="";
 	
 	
-
+	memset(module.CamTypeExists,0,sizeof(module.CamTypeExists));
+	memset(module.CamType,0,sizeof(module.CamType));
 	fp = popen("udevadm info --name=/dev/video2 --attribute-walk | grep ATTRS{id | head -2","r");
 	if(fp == NULL)
 	{
@@ -47,6 +48,7 @@ void Camera_info(void)
 	}
 	else
 		strcpy(module.CamTypeExists,"NotFound");
+
 	fprintf(stdout," ,module.CamType %s \n",module.CamType);
 	free(line);
 	line=NULL;

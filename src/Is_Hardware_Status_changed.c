@@ -167,7 +167,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
-			if( (key != NULL )  && strcmp(module.IritechSno,(const char *)key) != 0 )
+			if( ( key != NULL )  && strcmp(module.IritechSno,(const char *)key) != 0 )
 			{
 				printf("Changed present module.IritechSno = %s , Last xml IritechSno %s\n", module.IritechSno,key);
 				xmlFree(key);
@@ -290,7 +290,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 
 		}
 
-		else if (CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSNExists")))
+		else if ( CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSNExists")) )
 			WSSN=1;
 		else if (CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSN")))
 		{

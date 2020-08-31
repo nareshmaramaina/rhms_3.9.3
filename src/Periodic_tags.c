@@ -1,6 +1,6 @@
 #include<header.h>
 extern char var_gprs[30];
-extern int GPS_Success;
+extern short int GPS_Success;
 void Second_Time_Health_Info_sending_for_GPS()
 {
 	fprintf(stdout,"Second Time Running For GPS Value \n");
@@ -26,7 +26,7 @@ void Second_Time_Health_Info_sending_for_GPS()
 
 	return;
 }
-void Periodic_tags(void)
+void Periodic_Health_Status_Details(void)
 {
 	short int ret;
 
@@ -52,6 +52,7 @@ void Periodic_tags(void)
 			PaperUsed_Count_Details();
 		}
 		RTC_info();
+		
 		battery_status();
 
 

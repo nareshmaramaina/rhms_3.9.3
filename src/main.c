@@ -1,5 +1,5 @@
 #include <header.h>
-int GPS_Success;
+short int GPS_Success,Second_Time_For_GPS;
 int rhms_lock()
 {
 	int fd,ret=0;
@@ -19,7 +19,7 @@ int rhms_lock()
 
 int main()
 {
-	short int Server_ret=0,ret=0,Second_Time_For_GPS = 0,BootTimeSentSuccess=0,HardwareRequestFailure=0;
+	short int Server_ret=0,ret=0,BootTimeSentSuccess=0,HardwareRequestFailure=0;
 	int run_time = -1;
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
@@ -36,7 +36,6 @@ int main()
 
 	memset(&module,0x00,sizeof(struct terminal_status));
 	memset(&CONFIG,0x00,sizeof(struct rhms));
-	memset(machineid, 0 ,sizeof(machineid));
 
 	fprintf(stdout,"\n****************************\n");
 	fprintf(stdout,"Application	: %s\n", "RHMS Client");
@@ -60,6 +59,7 @@ int main()
 	if ( ret ==  0 && run_time == 100 ) // Updated for the day when 100 ( Run every day ince flag)
 	{
 		fprintf(stderr,"RHMS Details are Updated for the Day\n");
+		memset(machineid, 0 ,sizeof(machineid));
 		get_machineid(machineid);
 		reboot_device(machineid[9]);
 		return 0;
@@ -74,8 +74,6 @@ int main()
 		if ( Hardware_run != 0 || run_time != 100 )
 		{	
 			ret = 	Is_Hardware_Status_changed();
-			Update_Current_Date_with_Time();
-			create_Hardware_status_xml_file();
 
 			if ( ret != 0) // on return 0 No Change, return non zero  Changes happened
 			{
@@ -96,10 +94,6 @@ int main()
 
 		if ( ( BootTime_run != 0 || run_time != 100 ) && BootTimeSentSuccess == 0 )
 		{
-			Update_Current_Date_with_Time();
-			ret = create_BootTime_Status_xml_file();
-			if ( ret != 0 )
-				return -1;
 
 			Server_ret =  Send_BootTime_status_to_server();
 			if ( Server_ret == -2 )
@@ -113,20 +107,9 @@ int main()
 		}
 		else fprintf(stdout," Boot Time request Already Success \n");
 
-		/*		if ( Server_ret == -1 && (run_time == 100 || run_time == 200) ) // If network failure
-				{
-				sleep(3600); // Sleep 1hr
-				continue;
-				}*/
 		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
 		{
-			check_net_connection(); //Blocking For autoapn details
 
-			Periodic_tags();
-
-			ret = create_Health_Status_xml_file();
-			if ( ret != 0 )
-				return ret;	
 			Server_ret =  Send_Periodic_Health_status_to_server();
 			if ( Server_ret == -2 )
 			{
@@ -162,43 +145,11 @@ int main()
 			}	 
 			continue;
 		}
-
-		if ( run_time == 100   ||  run_time == 200 )
-		{
-			if ( CONFIG.GPS && GPS_Success == 0 )
-			{
-				Second_Time_Health_Info_sending_for_GPS();
-				if( GPS_Success == 1 )
-				{
-					Second_Time_For_GPS = 1;
-					continue;
-				}
-			}
-
-			if ( ret == 0)
-			{
-				get_machineid(machineid);
-				reboot_device(machineid[9]);
-			}
-			return 0;
-		}
-
-
-		else	if ( ret == 0 && run_time % 60 == 0)
-		{
-			fprintf(stdout,"RHMS: Next Health request run_time = %d\n",run_time);
-			sleep(run_time);
-			ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
-			printf("Posting the Health updation details again\n");
-		}
-
-		else
-		{
-			fprintf(stderr,"Exiting, Some thing Went wrong ( Unknown Case ) , run_time = %d\n",run_time);
+		
+		ret = Run_Loop(ret,run_time);
+		
+		if ( ret != 1)
 			break;
-
-		}
-
 	}
 
 	return ret;

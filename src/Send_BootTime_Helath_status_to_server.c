@@ -4,6 +4,13 @@ int Send_BootTime_status_to_server (void)
 	int ret = 0;
 	int i=0;
 
+	Update_Current_Date_with_Time();
+
+	ret = create_BootTime_Status_xml_file();
+
+	if ( ret != 0 )
+		return -1;
+
 	for (i=0; i<5; i++)
 	{
 		check_net_connection(); //Blocking For autoapn details

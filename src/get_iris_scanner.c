@@ -12,6 +12,9 @@ void Iris_Scanner_Id(void)
 	size_t len = 0;
 	char *data=NULL;
 	char *scanner_id=NULL;
+	
+	memset(module.IritechSnoExists,0,sizeof(module.IritechSnoExists));
+	memset(module.IritechSno,0,sizeof(module.IritechSno));
 
 	ret = system("cat /proc/bus/usb/devices | grep IriShield >> /dev/null");
 	if(ret == 0)

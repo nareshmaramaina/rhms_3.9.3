@@ -4,6 +4,7 @@ void pinpad_status()
 	short int i,ret;
 	memset(module.pinpad,0x00,sizeof(module.pinpad));
 	memset(module.PinpadSN,0x00,sizeof(module.PinpadSN));
+	memset(module.PinpadSNExists,0x00,sizeof(module.PinpadSNExists));
 
 	char PinpadSno[80]="";
 

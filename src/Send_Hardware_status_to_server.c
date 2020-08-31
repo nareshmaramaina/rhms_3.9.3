@@ -4,6 +4,9 @@ int Send_Hardware_status_to_server (void)
 	int ret = 0;
 	int i=0;
 
+	Update_Current_Date_with_Time();
+	create_Hardware_status_xml_file();
+
 	for (i=0; i<5; i++)
 	{
 		check_net_connection(); //Blocking For autoapn details
