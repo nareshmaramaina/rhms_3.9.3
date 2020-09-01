@@ -26,7 +26,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"Hardware Status requesting\n");
 		strcpy(Response_xml_file,Hardware_response_xml_file);
 		strcpy(Upload_Status_file,Hardware_Status_file);
-		sprintf(cmd,"curl  --cacert /vision/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"curl  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 
 	}
@@ -35,7 +35,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"BootTime Status requesting\n");
 		strcpy(Response_xml_file,BootTime_response_xml_file);
 		strcpy(Upload_Status_file,BootTime_Status_file);
-		sprintf(cmd,"curl --cacert /vision/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/BootTimeStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"curl --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/BootTimeStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 	}
 	else if ( request == 3)
@@ -43,7 +43,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"Periodic Health Status requesting\n");
 		strcpy(Response_xml_file,Health_response_xml_file);
 		strcpy(Upload_Status_file,Health_Status_file);
-		sprintf(cmd,"curl  --cacert /vision/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s 1>%s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"curl  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s 1>%s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 	}
 	else 

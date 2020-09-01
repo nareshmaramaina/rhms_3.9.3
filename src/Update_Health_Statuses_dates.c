@@ -17,8 +17,7 @@ void update_Hardware_status_date_file(void) //after rhms successfull update ,upd
 
 	mkdir_p("/var/log/Health/");
 
-	copy_file("/var/log/Health/Last_Hardware_Status.xml",Hardware_Status_file);//des,src
-
+//	copy_file("/var/log/Health/Last_Hardware_Status.xml",Hardware_Status_file); Commented for External Pheripharals
 
 	memset(remote_xml_bkp_file,0,sizeof(remote_xml_bkp_file));
 

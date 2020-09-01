@@ -1,4 +1,5 @@
 #include <header.h>
+extern char *Hardware_Status_file;
 int Send_Hardware_status_to_server (void)
 {
 	int ret = 0;
@@ -16,6 +17,8 @@ int Send_Hardware_status_to_server (void)
 		if(ret == 0)
 		{
 			fprintf(stderr,"Hardware Updation Success\n");
+			mkdir_p("/var/log/Health/");
+			copy_file("/var/log/Health/Last_Hardware_Status.xml",Hardware_Status_file);//des,src
 			update_Hardware_status_date_file();
 			break;
 		}

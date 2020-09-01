@@ -69,7 +69,6 @@ int Check_RHMS_All_requests_run(int *Hardware_run,int *BootTime_run,int *Periodi
 	Get_Current_Date(CurrentDate);
 
 	sscanf(CurrentDate,"%02d%02d%4d",&CurrentDay, &CurrentMonth, &CurrentYear);
-	fprintf(stdout,"Curernt = %02d%02d%4d\n",CurrentDay, CurrentMonth, CurrentYear);
 
 	if ( CurrentYear < 2020 )
 	{

@@ -49,7 +49,7 @@ void Camera_info(void)
 	else
 		strcpy(module.CamTypeExists,"NotFound");
 
-	fprintf(stdout," ,module.CamType %s \n",module.CamType);
+	fprintf(stdout,"module.CamType  =  %s \n",module.CamType);
 	free(line);
 	line=NULL;
 	pclose(fp);

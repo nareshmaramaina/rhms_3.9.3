@@ -44,7 +44,7 @@ int Hardware_xml_frame()
 	xmlNewChild(node, NULL, BAD_CAST "Date_Time", BAD_CAST module.Date_time);
 
 	xmlNewChild(node, NULL, BAD_CAST "TerminalIDExists",BAD_CAST module.TerminalIDExists);
-	if( strcmp(module.TerminalIDExists,"Found") == 0 )
+	if( strcmp(module.TerminalIDExists,"Error") != 0 )
 		xmlNewChild(node, NULL, BAD_CAST "TerminalID",BAD_CAST module.TerminalID);
 	else 
 		xmlNewChild(node, NULL, BAD_CAST "TerminalID",NULL);
