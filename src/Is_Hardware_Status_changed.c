@@ -5,7 +5,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 	xmlChar *key = NULL;
 	for ( cur = cur->xmlChildrenNode; cur != NULL;key=NULL, cur = cur->next)
 	{
-		if ((!xmlStrcmp(cur->name, (const xmlChar *)"SerialNo")))
+		if ( (!xmlStrcmp(cur->name, (const xmlChar *)"SerialNo"))  ) 
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
@@ -16,7 +16,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.SerialNo) > 0 )
+			else if ( key == NULL &&  ( strlen(module.SerialNo) > 0 ) )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.SerialNo = %s\n",module.SerialNo);
 				xmlFree(key);
@@ -24,7 +24,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			}
 			xmlFree(key);
 		}
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"TerminalID")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"TerminalID")) )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
@@ -34,7 +34,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.TerminalID) > 0 )
+			else if ( key == NULL && ( strlen(module.TerminalID) > 0 ) )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.TerminalID = %s\n",module.TerminalID);
 				xmlFree(key);
@@ -42,7 +42,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			}
 			xmlFree(key);
 		}
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"Macid")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"Macid")) && ( strlen(module.macid) > 0 ) )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  && strcmp(module.macid,(const char *)key) != 0 )
@@ -51,7 +51,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.macid) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.macid = %s\n",module.macid);
 				xmlFree(key);
@@ -62,7 +62,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"UbootImageName")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"UbootImageName")) && ( strlen(module.UbootVersion) > 0 ) )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  && strcmp(module.UbootVersion,(const char *)key) != 0 )
@@ -71,7 +71,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.UbootVersion) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.UbootVersion = %s\n",module.UbootVersion);
 				xmlFree(key);
@@ -80,7 +80,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"KernelImageName")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"KernelImageName")) &&  ( strlen(module.KernelVersion) > 0 ) )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  && strcmp(module.KernelVersion,(const char *)key) != 0 )
@@ -89,7 +89,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.KernelVersion) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.KernelVersion = %s\n",module.KernelVersion);
 				xmlFree(key);
@@ -98,7 +98,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"RootfsImageName")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"RootfsImageName")) &&  (strlen(module.rootfs_details) > 0 ) )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  && strcmp(module.rootfs_details,(const char *)key) != 0 )
@@ -107,7 +107,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.rootfs_details) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.rootfs_details = %s\n",module.rootfs_details);
 				xmlFree(key);
@@ -118,7 +118,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 		}
 
 
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"IMEInumber")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"IMEInumber")) && strlen(module.IMEI_no) > 0 ) 
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
@@ -128,7 +128,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.IMEI_no) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.IMEI_no = %s\n",module.IMEI_no);
 				xmlFree(key);
@@ -138,7 +138,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 
 		}
 
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"UID")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"UID")) && strlen(module.Uid_no) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
@@ -148,7 +148,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.Uid_no) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.Uid_no = %s\n",module.Uid_no);
 				xmlFree(key);
@@ -162,7 +162,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 		else if (CONFIG.IrisRDVer_and_SNo && (!xmlStrcmp(cur->name, (const xmlChar *)"IritechSnoExists")))
 			IrisRDVer_and_SNo=1;
 
-		else if (CONFIG.IrisRDVer_and_SNo && (!xmlStrcmp(cur->name, (const xmlChar *)"IritechSno")))
+		else if (CONFIG.IrisRDVer_and_SNo && (!xmlStrcmp(cur->name, (const xmlChar *)"IritechSno")) && strlen(module.IritechSno) > 0 )
 		{
 
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -173,7 +173,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.IritechSno) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.IritechSno = %s\n",module.IritechSno);
 				xmlFree(key);
@@ -185,7 +185,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 		}
 		else if (CONFIG.PinpadSN && (!xmlStrcmp(cur->name, (const xmlChar *)"PinpadSNExists")))
 			PinpadSN=1;
-		else if (CONFIG.PinpadSN && (!xmlStrcmp(cur->name, (const xmlChar *)"PinpadSN")))
+		else if (CONFIG.PinpadSN && (!xmlStrcmp(cur->name, (const xmlChar *)"PinpadSN")) && strlen(module.PinpadSN) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.PinpadSN,(const char *)key) != 0 )
@@ -194,7 +194,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.PinpadSN) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.PinpadSN = %s\n",module.PinpadSN);
 				xmlFree(key);
@@ -207,7 +207,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 		}
 		else if (CONFIG.BarcodeSno && (!xmlStrcmp(cur->name, (const xmlChar *)"BarcodeSnoExists")))
 			BarcodeSno = 1;
-		else if (CONFIG.BarcodeSno && (!xmlStrcmp(cur->name, (const xmlChar *)"BarcodeSno")))
+		else if (CONFIG.BarcodeSno && (!xmlStrcmp(cur->name, (const xmlChar *)"BarcodeSno")) && strlen(module.BarcodeSno) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.BarcodeSno,(const char *)key) != 0 )
@@ -216,7 +216,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.BarcodeSno) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.BarcodeSno = %s\n",module.BarcodeSno);
 				xmlFree(key);
@@ -227,7 +227,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		else if ( (!xmlStrcmp(cur->name, (const xmlChar *)"GSMVersion")))
+		else if ( (!xmlStrcmp(cur->name, (const xmlChar *)"GSMVersion")) && strlen(module.GSM_Version) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.GSM_Version,(const char *)key) != 0 )
@@ -236,7 +236,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.GSM_Version) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.GSM_Version = %s\n",module.GSM_Version);
 				xmlFree(key);
@@ -249,7 +249,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 		}
 		else if (access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 && (!xmlStrcmp(cur->name, (const xmlChar *)"GSM_ModuleExists")))
 			autoapn_config =1;
-		else if (access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 && (!xmlStrcmp(cur->name, (const xmlChar *)"GSM_Module")))
+		else if (access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 && (!xmlStrcmp(cur->name, (const xmlChar *)"GSM_Module")) 	&& strlen(module.GSM_Module) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.GSM_Module,(const char *)key) != 0 )
@@ -258,7 +258,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.GSM_Module) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.GSM_Module = %s\n",module.GSM_Module);
 				xmlFree(key);
@@ -270,7 +270,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 
 		else if (CONFIG.CamType && (!xmlStrcmp(cur->name, (const xmlChar *)"CamTypeExists")))
 			CamType=1;
-		else if (CONFIG.CamType && (!xmlStrcmp(cur->name, (const xmlChar *)"CamType")))
+		else if (CONFIG.CamType && (!xmlStrcmp(cur->name, (const xmlChar *)"CamType")) && strlen(module.CamType) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.CamType,(const char *)key) != 0 )
@@ -279,7 +279,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.CamType) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.CamType = %s\n",module.CamType);
 				xmlFree(key);
@@ -292,7 +292,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 
 		else if ( CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSNExists")) )
 			WSSN=1;
-		else if (CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSN")))
+		else if (CONFIG.WSSN && (!xmlStrcmp(cur->name, (const xmlChar *)"WSSN")) && strlen(module.WSSN) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 			if( (key != NULL )  &&  strcmp(module.WSSN,(const char *)key) != 0 )
@@ -301,7 +301,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.WSSN) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.WSSN = %s\n",module.WSSN);
 				xmlFree(key);
@@ -312,7 +312,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		else if (   (!xmlStrcmp(cur->name, (const xmlChar *)"FPScannerid")) )
+		else if (   (!xmlStrcmp(cur->name, (const xmlChar *)"FPScannerid")) && strlen(module.scanner_id) > 0 )
 		{
 			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
 
@@ -322,7 +322,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.scanner_id) > 0 )
+			else if ( key == NULL )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.scanner_id = %s\n",module.scanner_id);
 				xmlFree(key);
@@ -341,7 +341,7 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 				xmlFree(key);
 				return 1;
 			}
-			else if ( key == NULL && strlen(module.HardwareID) > 0 )
+			else if ( key == NULL  && strlen(module.HardwareID) > 0 )
 			{
 				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.HardwareID = %s\n",module.HardwareID);
 				xmlFree(key);
@@ -350,28 +350,28 @@ int parse_device_details (xmlDocPtr doc, xmlNodePtr cur)
 			xmlFree(key);
 
 		}
-		 else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACIDExists")))
-                        WiFiMACID=1;
-                else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACID")))
-                {
-                        key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-                        if( (key != NULL )  &&  strcmp(module.WiFiMACID,(const char *)key) != 0 )
-                        {
-                                printf("Changed present module.WiFiMACID = %s , Last xml WiFiMACID %s\n", module.WiFiMACID,key);
-                                xmlFree(key);
-                                return 1;
-                        }
-                        else if ( key == NULL && strlen(module.WiFiMACID) > 0 )
-                        {
-                                fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.WiFiMACID = %s\n",module.WiFiMACID);
-                                xmlFree(key);
-                                return 1;
-                        }
+		else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACIDExists")))
+			WiFiMACID=1;
+		else if (CONFIG.WIFI && (!xmlStrcmp(cur->name, (const xmlChar *)"WiFiMACID")) && strlen(module.WiFiMACID) > 0 )
+		{
+			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+			if( (key != NULL )  &&  strcmp(module.WiFiMACID,(const char *)key) != 0 )
+			{
+				printf("Changed present module.WiFiMACID = %s , Last xml WiFiMACID %s\n", module.WiFiMACID,key);
+				xmlFree(key);
+				return 1;
+			}
+			else if ( key == NULL )
+			{
+				fprintf(stdout,"Last_Hardware xml has NULL, But current value having module.WiFiMACID = %s\n",module.WiFiMACID);
+				xmlFree(key);
+				return 1;
+			}
 
 
-                        xmlFree(key);
+			xmlFree(key);
 
-                }
+		}
 
 	}
 	if( (CONFIG.IrisRDVer_and_SNo && IrisRDVer_and_SNo == 0 )|| (CONFIG.PinpadSN &&  PinpadSN == 0 ) || (CONFIG.BarcodeSno && BarcodeSno == 0 ) || (CONFIG.CamType && CamType == 0 ) || ( CONFIG.WSSN && WSSN == 0) || ( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0  && autoapn_config == 0 ) || (CONFIG.WIFI && WiFiMACID == 0 ) )
@@ -425,8 +425,8 @@ int Is_Hardware_Status_changed()
 	//	printf("module.SerialNo= %s, module.TerminalID= %s, module.macid= %s, module.UbootVersion= %s, module.KernelVersion= %s, module.rootfs_details= %s, module.IMEI_no= %s, module.Uid_no= %s, module.IritechSno= %s, module.PinpadSN= %s, module.BarcodeSno= %s, module.GSM_Version= %s, module.GSM_Module= %s, module.CamType= %s, module.WSSN= %s, module.scanner_id= %s, module.HardwareID= %s\n", module.SerialNo, module.TerminalID, module.macid, module.UbootVersion, module.KernelVersion, module.rootfs_details, module.IMEI_no, module.Uid_no, module.IritechSno, module.PinpadSN, module.BarcodeSno, module.GSM_Version, module.GSM_Module, module.CamType, module.WSSN, module.scanner_id, module.HardwareID);
 
 	if ( ret == 0 )
-		fprintf(stdout,"No changes in Hardware info \n");
+		fprintf(stdout,"\n\nNo changes in Hardware info \n\n");
 	else 
-		fprintf(stdout,"changed in Hardware info\n");
+		fprintf(stdout,"\n\nchanged in Hardware info\n");
 	return ret;
 }

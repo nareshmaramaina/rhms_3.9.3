@@ -134,7 +134,6 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	}
 
 	Total_Server_Apps = i;
-	fprintf(stdout," Total_Server_Apps = %d\n", Total_Server_Apps);
 	free(line);
 	line=NULL;
 	fclose(fp);

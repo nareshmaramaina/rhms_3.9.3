@@ -360,7 +360,7 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode);
 int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode);
 void RHMSAppVersionDetails();
 int PaperUsed_Count_Details();
-void update_Wifi_MACID_details();
+int update_Wifi_MACID_details();
 int Check_Address_Error_and_Update_Server_Addr_If_Error_Present();
 int Get_Current_autoapn_simdetails_mode();
 void  External_Devices_SerialNo_info();

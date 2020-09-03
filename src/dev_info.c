@@ -167,11 +167,11 @@ int Get_Wifi_Macid(char *macid)
                         (UC)ifr.ifr_hwaddr.sa_data[4], (UC)ifr.ifr_hwaddr.sa_data[5]);
         return 0;
 }
-void update_Wifi_MACID_details()
+int update_Wifi_MACID_details()
 {
         char mac_buff[30];
         int ret;
-
+	memset(module.WiFiMACIDExists,0,sizeof(module.WiFiMACIDExists));
         memset(mac_buff,0x00,sizeof(mac_buff));
         memset(module.WiFiMACID,0,sizeof(module.WiFiMACID));
 
@@ -187,5 +187,5 @@ void update_Wifi_MACID_details()
 
         fprintf(stdout,"module.WiFiMACIDExists, = %s\tmodule.WiFiMACID = %s\n",module.WiFiMACIDExists,module.WiFiMACID);
 
-        return;
+        return ret;
 }

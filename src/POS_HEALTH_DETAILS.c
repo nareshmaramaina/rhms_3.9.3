@@ -30,8 +30,6 @@ void 	Hardware_Status_Details()
 
 	HardwareID_Details();
 
-	if ( CONFIG.WIFI )
-		update_Wifi_MACID_details();
 
 	External_Devices_SerialNo_info();
 
@@ -40,7 +38,11 @@ void 	Hardware_Status_Details()
 
 void  External_Devices_SerialNo_info()
 {
-
+	if ( CONFIG.WIFI &&  ( strcmp(module.WiFiMACIDExists,"Yes") != 0 ) )
+	{
+		fprintf(stdout,"Taking Wifi MACID Details At External Devices details\n");
+		update_Wifi_MACID_details();
+	}
 	if( CONFIG.IrisRDVer_and_SNo ) 
 		Iris_Scanner_Id();
 
@@ -219,6 +221,17 @@ int  BootTime_Status_Details(void)
 	if ( strcmp(module.Comm,"ERROR") == 0 || strlen(module.Comm) == 0 ) 
 		check_net_connection(); //Blocking For autoapn details
 
+	if ( CONFIG.WIFI &&  ( strcmp(module.WiFiMACIDExists,"Yes") != 0 ) )
+	{
+		fprintf(stdout,"module.WiFiMACIDExists Error, So Taking Wifi MACID Details After autoapn details\n");
+		ret = update_Wifi_MACID_details();
+		if ( ret != 0 )
+		{
+			system("ifconfig wlan0 up &");
+			sleep(1);
+			update_Wifi_MACID_details();
+		}
+	}
 	if ( CONFIG.geo_location || CONFIG.GPS )
 	{
 		for(i = 0 ; i < 12; i++)
