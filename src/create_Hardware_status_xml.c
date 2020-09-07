@@ -136,9 +136,9 @@ int Hardware_xml_frame()
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", BAD_CAST module.HardwareID);
 	else 
 		xmlNewChild(node, NULL, BAD_CAST "HardwareID", NULL );
-	xmlNewChild(node, NULL, BAD_CAST "WiFiMACIDExists", BAD_CAST module.WiFiMACIDExists);
 	if ( CONFIG.WIFI )
 	{
+		xmlNewChild(node, NULL, BAD_CAST "WiFiMACIDExists", BAD_CAST module.WiFiMACIDExists);
 		if ( strcmp(module.WiFiMACIDExists,"Yes") == 0 )
 			xmlNewChild(node, NULL, BAD_CAST "WiFiMACID", BAD_CAST module.WiFiMACID);
 		else    
