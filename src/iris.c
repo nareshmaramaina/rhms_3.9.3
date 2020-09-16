@@ -12,20 +12,20 @@ int iris_status(void)
 
 		if( iris_check == 0)
 		{
-			strcpy(module.IRIS,"BIOMATIQUES");
-			printf("BIOMATIQUES  FOUND\n");
+			strcpy(module.IRIS,"Biomatiques");
+			printf("Biomatiques  FOUND\n");
 			return 0;
 		}
 		else if( ( iris_check =  usb_device_presence("1f63","f001") ) == 0)  //iritek
 		{
-			strcpy(module.IRIS,"IRITECH");
-			printf("IRITECH  FOUND\n");
+			strcpy(module.IRIS,"Iritech");
+			printf("Iritech  FOUND\n");
 			return 0;
 		}
 
 		else
 		{ 
-			fprintf(stderr,"%d IRITECH/BIOMATIQUES not found usb_device_presence = %d\n",i,iris_check);	
+			fprintf(stderr,"%d Iritech/Biomatiques not found usb_device_presence = %d\n",i,iris_check);	
 			strcpy(module.IRIS,"NotConnected");
 		}
 		sleep(1);

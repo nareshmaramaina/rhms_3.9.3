@@ -105,7 +105,11 @@ int main()
 				BootTimeSentSuccess = 1;
 
 		}
-		else fprintf(stdout," Boot Time request Already Success \n");
+		else 
+		{
+				BootTimeSentSuccess = 1;
+			fprintf(stdout," Boot Time request Already Success \n");
+		}
 
 		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
 		{
