@@ -49,8 +49,10 @@ void xml_type_Autoapn_details()
 	if(strlen(module.ethernet) == 0 )
 		strcpy(module.ethernet,"NotConnected");   
 
-
-
+	if ( strlen(module.WiFiMACID) == 0 )
+		strcpy(module.WiFiMACIDExists,"Error");
+	else 
+		strcpy(module.WiFiMACIDExists,"Yes");
 
 	return;
 

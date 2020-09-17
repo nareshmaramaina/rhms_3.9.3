@@ -125,6 +125,14 @@ void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur)
 			fprintf(stdout,"ETHERNET : %s\n", key);
 			xmlFree(key);
 		}
+		else  if ((!xmlStrcmp(cur->name, (const xmlChar *)"WIFI_MAC"))) 
+		{
+			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+			if(key)
+				strcpy(module.WiFiMACID,(const char *)key);
+			fprintf(stdout,"WIFI_MAC = %s , module.WiFiMACID : %s\n", key,module.WiFiMACID);
+			xmlFree(key);
+		}
 		cur = cur->next;
 	}
 
@@ -159,9 +167,9 @@ int Autoapn_xmlparse( char *docname )
 	}
 
 	Autoapn_xmlparseStory (doc, cur);
-	
+
 	xmlFreeDoc(doc);
-	
+
 	return 0;
 }
 
