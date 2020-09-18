@@ -3,41 +3,36 @@ void FPS_RD_version()
 {
 
 	FILE *fp=NULL;
-	char *line=NULL;
-	size_t len=0,sizeofBuffer=0;
-	fp = fopen("/etc/rd_info.txt","r");
+	char Buff[24]="";
+	memset(module.FPSRDVer,0x00,sizeof(module.FPSRDVer));
+
+	system("cat /home/rdservice/config/config.ini  | grep rd_ver | cut -d '=' -f2 > /tmp/.RHMSRDVersion.info");
+
+	fp = fopen("/tmp/.RHMSRDVersion.info","r");
 	if ( fp == NULL ) 
 	{
 		strcpy(module.FPSRDVer,"NotFound");
-		fprintf(stderr,"/etc/rd_info.txt file not found\n");
+		fprintf(stderr,"/tmp/.RHMSRDVersion.info file not found\n");
 		return;
 	}
-	memset(module.FPSRDVer,0x00,sizeof(module.FPSRDVer));
-	while( getline(&line,&len,fp) != -1 )
-	{
-		if( strstr(line,"RD-SDK") != NULL)
-		{
-			sizeofBuffer = sizeof(module.FPSRDVer); 
-			if( strlen(line+8) > sizeofBuffer ) 
-			{
-				fprintf(stderr,"Invalid: FPSRDVer Length More than %d bytes \n",sizeofBuffer);
-				continue;
-			}
-			 sscanf(line+8,"%s",module.FPSRDVer);
-		}
-	}
+
+	fread(Buff,24,1,fp);
+
+	sscanf(Buff,"%s",module.FPSRDVer);
+
+	fclose(fp);
+
+	remove("/tmp/.RHMSRDVersion.info");
+
 	if(strlen(module.FPSRDVer) == 0)	
 		strcpy(module.FPSRDVer,"NotFound");
 
-	fprintf(stdout," FPSRDVer_BUFF = %s\tmodule.FPSRDVer = %s \n",line,module.FPSRDVer);
-	free(line);
-	fclose(fp);
-	line=NULL;
+	fprintf(stdout," FPSRDVer_BUFF = %s\tmodule.FPSRDVer = %s\n",Buff,module.FPSRDVer);
 	return;
 }
 /*int main()
 {
 
-	RD_version();
+	FPS_RD_version();
 
 }*/
