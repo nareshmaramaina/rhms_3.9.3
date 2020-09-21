@@ -27,7 +27,7 @@ void FPS_RD_version()
 	if(strlen(module.FPSRDVer) == 0)	
 		strcpy(module.FPSRDVer,"NotFound");
 
-	fprintf(stdout," FPSRDVer_BUFF = %s\tmodule.FPSRDVer = %s\n",Buff,module.FPSRDVer);
+	fprintf(stdout," FPSRDVer_Buff = %s\tmodule.FPSRDVer = %s\n",Buff,module.FPSRDVer);
 	return;
 }
 /*int main()
