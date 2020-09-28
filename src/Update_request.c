@@ -12,6 +12,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 {
 	char Response_xml_file[128];
 	int ret=-1;
+	short int Env_flag=0;
 	short int FramingError=0;
 	FILE    *fp;
 	char    cmd[1024];
@@ -21,12 +22,25 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 	memset(Response_xml_file,0,sizeof(Response_xml_file));	
 	memset(Upload_Status_file,0,sizeof(Upload_Status_file));	
 	memset(cmd,0,sizeof(cmd));
+	char curl_name[64]="/vision/DeviceManagement/system/usr/bin/DM_curl";
+	if ( access(curl_name,F_OK) != 0 )
+	{
+	fprintf(stdout,"%s not found \n",curl_name);
+	memset(curl_name,0,sizeof(curl_name));
+	strcpy(curl_name,"curl");
+	}
+	else 
+	{
+		setenv("LD_LIBRARY_PATH","/vision/DeviceManagement/system/usr/lib/",1);
+		Env_flag=1;
+
+	}
 	if ( request == 1)
 	{
 		fprintf(stdout,"Hardware Status requesting\n");
 		strcpy(Response_xml_file,Hardware_response_xml_file);
 		strcpy(Upload_Status_file,Hardware_Status_file);
-		sprintf(cmd,"curl  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"%s  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt  -XPOST -H \"content-type: application/xml\" %s/api/HardwareStatus -d @%s 1> %s 2>%s",curl_name,Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 
 	}
@@ -35,7 +49,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"BootTime Status requesting\n");
 		strcpy(Response_xml_file,BootTime_response_xml_file);
 		strcpy(Upload_Status_file,BootTime_Status_file);
-		sprintf(cmd,"curl --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/BootTimeStatus -d @%s 1> %s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"%s  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/BootTimeStatus -d @%s 1> %s 2>%s",curl_name,Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 	}
 	else if ( request == 3)
@@ -43,7 +57,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		fprintf(stdout,"Periodic Health Status requesting\n");
 		strcpy(Response_xml_file,Health_response_xml_file);
 		strcpy(Upload_Status_file,Health_Status_file);
-		sprintf(cmd,"curl  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s 1>%s 2>%s",Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
+		sprintf(cmd,"%s  --cacert /vision/DeviceManagement/certs/curl-ca-bundle.crt -XPOST -H \"content-type: application/xml\" %s/api/HealthStatus -d @%s 1>%s 2>%s",curl_name,Server_Addr,Upload_Status_file,Response_xml_file,Error_log_filename);
 
 	}
 	else 
@@ -64,7 +78,9 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 	sprintf(cmd,"dos2unix %s",Response_xml_file);
 
 	system(cmd);
-
+		
+	if ( Env_flag == 1 )
+		unsetenv("LD_LIBRARY_PATH");
 
 	fp = fopen(Response_xml_file,"r");
 
@@ -135,7 +151,7 @@ int Check_Address_Error_and_Update_Server_Addr_If_Error_Present()
 			fprintf(stderr,"ServerAddress Error: %s so Proceeding with Default Server Address = %s\n",str,Server_Addr);
 			break;
 		}
-		
+
 		fprintf(stderr,"Curl Commad Error Log: %s\n",str);
 	}
 	if ( strstr(str,"curl") != NULL )

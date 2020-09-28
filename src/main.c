@@ -24,6 +24,7 @@ int main()
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
+	int RHMS_Current_Version=2;
 
 	if(ret < 0)    /* Case is Not To run Twice*/
 	{
@@ -39,10 +40,10 @@ int main()
 
 	fprintf(stdout,"\n****************************\n");
 	fprintf(stdout,"Application	: %s\n", "RHMS Client");
-	fprintf(stdout,"Version 	: 1.0\n");
+	fprintf(stdout,"Version 	: %d\n",RHMS_Current_Version);
 	fprintf(stdout,"***************************\n");
 
-
+	Write_Current_Version(RHMS_Current_Version); // Integer Version Only Have to write, because of Package version
 	Get_Config_Settings(); // Get Settings for enble or disable each Tag 
 
 	Update_Configured_Server_Addr();
@@ -107,7 +108,7 @@ int main()
 		}
 		else 
 		{
-				BootTimeSentSuccess = 1;
+			BootTimeSentSuccess = 1;
 			fprintf(stdout," Boot Time request Already Success \n");
 		}
 
@@ -149,9 +150,9 @@ int main()
 			}	 
 			continue;
 		}
-		
+
 		ret = Run_Loop(ret,run_time);
-		
+
 		if ( ret != 1)
 			break;
 	}

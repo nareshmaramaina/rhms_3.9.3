@@ -3,8 +3,7 @@ void RHMSAppVersionDetails()
 {
 
 	FILE *fp=NULL;
-	char *line=NULL;
-	size_t len=0,sizeofBuffer=0;
+	char line[32]="";
 	fp = fopen("/etc/vision/RHMS/RHMSClientversion.info","r");
 	if ( fp == NULL )
 	{
@@ -13,30 +12,17 @@ void RHMSAppVersionDetails()
 		return;
 	}
 	memset(module.RHMSClientVersion,0x00,sizeof(module.RHMSClientVersion));
-	while( getline(&line,&len,fp) != -1 )
-	{
-		if( strstr(line,"Version:") != NULL)
-		{
-			 sizeofBuffer = sizeof(module.RHMSClientVersion);
-                        if( strlen(line+8) > sizeofBuffer )
-                        {
-                                fprintf(stderr,"Invalid: RHMSClientVersion Length More than %d bytes \n",sizeofBuffer);
-                                continue;
-                        }
 
-			strcpy(module.RHMSClientVersion,line+8);
-			if(module.RHMSClientVersion[strlen(module.RHMSClientVersion)-1] == '\n')
-				module.RHMSClientVersion[strlen(module.RHMSClientVersion)-1]='\0';
+	fread(line,sizeof(line),1,fp);
 
-			break;
-		}
-	}
+	fclose(fp);
+
+	if( strstr(line,"Version:") != NULL)
+		sscanf(line+8,"%s",module.RHMSClientVersion);
+
 	if(strlen(module.RHMSClientVersion) == 0)
 		strcpy(module.RHMSClientVersion,"NotFound");
 
-	fprintf(stdout," FPSRDVer_BUFF = %s\tmodule.RHMSClientVersion = %s \n",line,module.RHMSClientVersion);
-	free(line);
-	fclose(fp);
-	line=NULL;
+	fprintf(stdout,"line = %s\tmodule.RHMSClientVersion = %s \n",line,module.RHMSClientVersion);
 	return;
 }

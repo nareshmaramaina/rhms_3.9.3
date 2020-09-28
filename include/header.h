@@ -118,8 +118,8 @@ struct terminal_status
 	char FPScanneridExists[12];
 	char SIM1CCIDnumberExists[12];
 	char SIM2CCIDnumberExists[12];
-	char RHMSClientVersion[22];
-	char AutoapnAppVersion[12];
+	char RHMSClientVersion[24];
+	char AutoapnAppVersion[24];
 	char FingerRDServiceStatus[12];
 
 	char BarcodeSno[32];
@@ -138,6 +138,7 @@ struct terminal_status
 	char pinpad[32];
 	char PinpadSN[64];
 	char FPSRDVer[24];
+	char FPS_RD_SDK_Ver[24];
 	char IFD1[20];
 	char IFD2[20];
 	char SAM1[20];
@@ -365,3 +366,5 @@ int Check_Address_Error_and_Update_Server_Addr_If_Error_Present();
 int Get_Current_autoapn_simdetails_mode();
 void  External_Devices_SerialNo_info();
 int Run_Loop(short int ret, int run_time);
+void Write_Current_Version(int Version);
+void FPS_RD_SDK_version();

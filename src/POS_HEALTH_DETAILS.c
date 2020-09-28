@@ -232,6 +232,10 @@ int  BootTime_Status_Details(void)
 			update_Wifi_MACID_details();
 		}
 	}
+	
+	if(strlen(module.AutoapnAppVersion) == 0)
+		strcpy(module.AutoapnAppVersion,"NotFound");
+	
 	if ( CONFIG.geo_location || CONFIG.GPS )
 	{
 		for(i = 0 ; i < 12; i++)
@@ -269,8 +273,6 @@ void Version_Based_Tags()
 {
 	RHMSAppVersionDetails();
 
-	AutoapnAppVersionDetails();
-
 	FirmwareDetails();
 
 
@@ -278,8 +280,10 @@ void Version_Based_Tags()
 		Iris_version();
 
 	if( CONFIG.FPSRDVer )
+	{
 		FPS_RD_version();
-
+		FPS_RD_SDK_version();
+	}
 	if( CONFIG.BiomRDVer ) 
 		Biomatiques_RD_version();
 

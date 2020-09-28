@@ -58,7 +58,7 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 		else if (machineid[0]=='1' && machineid[1]>'4')
 			sprintf(module.SerialNo,"11%s",machineid);
 
-		else if(machineid[1] == '0')
+		else if(machineid[1] == '0' || machineid[0]=='2')
 			sprintf(module.SerialNo,"111%s",machineid);
 
 		else

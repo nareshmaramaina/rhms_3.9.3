@@ -133,6 +133,15 @@ void Autoapn_xmlparseStory (xmlDocPtr doc, xmlNodePtr cur)
 			fprintf(stdout,"WIFI_MAC = %s , module.WiFiMACID : %s\n", key,module.WiFiMACID);
 			xmlFree(key);
 		}
+		else  if ((!xmlStrcmp(cur->name, (const xmlChar *)"Version")))
+                {
+                        key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+                        if(key)
+                                strcpy(module.AutoapnAppVersion,(const char *)key);
+		       	fprintf(stdout,"AutoapnAppVersion : %s\n", key);
+                        xmlFree(key);
+                }
+
 		cur = cur->next;
 	}
 

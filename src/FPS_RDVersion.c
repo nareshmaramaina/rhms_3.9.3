@@ -36,3 +36,42 @@ void FPS_RD_version()
 	FPS_RD_version();
 
 }*/
+void FPS_RD_SDK_version()
+{
+
+	FILE *fp=NULL;
+	char line[80]="",*str=NULL;
+	size_t sizeofBuffer=0;
+	fp = fopen("/etc/rd_info.txt","r");
+	if ( fp == NULL ) 
+	{
+		strcpy(module.FPS_RD_SDK_Ver,"NotFound");
+		fprintf(stderr,"/etc/rd_info.txt file not found\n");
+		return;
+	}
+	memset(module.FPS_RD_SDK_Ver,0x00,sizeof(module.FPS_RD_SDK_Ver));
+	while( fgets(line,sizeof(line),fp) != NULL )
+	{
+		if(  ( str =  strstr(line,"RD-SDK")  ) != NULL)
+		{
+			sizeofBuffer = sizeof(module.FPS_RD_SDK_Ver); 
+			if( strlen(str+8) > sizeofBuffer ) 
+				fprintf(stderr,"Invalid: FPS_RD_SDK_Ver Length More than %d bytes \n",sizeofBuffer);
+			else 
+				sscanf(str+8,"%s",module.FPS_RD_SDK_Ver);
+			break;
+
+		}
+		memset(line,0,sizeof(line));
+	}
+	if(strlen(module.FPS_RD_SDK_Ver) == 0)	
+		strcpy(module.FPS_RD_SDK_Ver,"NotFound");
+
+	fprintf(stdout," FPS_RD_SDK_Ver_BUFF = %s\tmodule.FPS_RD_SDK_Ver = %s\n",line,module.FPS_RD_SDK_Ver);
+	fclose(fp);
+	return;
+}
+/*int main()
+{
+	FPS_RD_SDK_version();
+}*/

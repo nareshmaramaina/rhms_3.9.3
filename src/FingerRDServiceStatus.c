@@ -10,6 +10,7 @@ void FingerRDServiceStatus()
 		strcpy(module.FingerRDServiceStatus,"Red");
 		return;
 	}
+	closedir(dp);
 
 	ret = system("pidof rds > /dev/null");
 	if(ret == 0)
