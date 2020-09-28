@@ -13,7 +13,7 @@
   else fprintf(stdout," No Server Apps Found, Apps request/response not happened    \n");	
   return 0;
   }*/
-
+extern char ServerProjectName[128];
 char *Server_Application_release_file="/etc/vision/RHMS/Apps/ServerApplicationsRelease.info";
 int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 {
@@ -39,7 +39,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	};
 	struct Device RunningApplication[Total_Current_Server_Apps];
 	struct Device Application[Total_Current_Server_Apps];
-	char Device_Application_release_file[300];
+	char Device_Application_release_file[456];
 	FILE *fp = NULL;
 	char *line=NULL,*str=NULL;
 	size_t len=20,sizeofBuffer=0;
@@ -56,7 +56,25 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 
 	for(i=0,j=0,check=0;getline(&line, &len, fp) > 0;)
 	{
-		if((str = (char *)strstr(line,"ApplicationType:")) != NULL)
+		if((str = (char *)strstr(line,"ProjectName:")) != NULL)
+		{
+			if ( strlen(ServerProjectName) == 0 )
+			{
+				memset(ServerProjectName,0,sizeof(ServerProjectName));
+				sizeofBuffer = sizeof(ServerProjectName);
+				if( strlen(str+12) > sizeofBuffer )
+				{
+					fprintf(stderr,"Invalid: ServerProjectName Length More than %d bytes \n",sizeofBuffer);
+					continue;
+				}
+				strcpy(ServerProjectName,str+12);
+				if(ServerProjectName[strlen(ServerProjectName)-1] == '\n')
+					ServerProjectName[strlen(ServerProjectName)-1]='\0';
+			}
+
+		}
+
+		else if((str = (char *)strstr(line,"ApplicationType:")) != NULL)
 		{
 			if( check == 0 || check == 2 || check == 4 )
 			{
@@ -151,7 +169,7 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	{
 
 		memset(Device_Application_release_file,0,sizeof(Device_Application_release_file));
-		sprintf(Device_Application_release_file,"/etc/vision/RHMS/Apps/%s/%s/AppUpdated.info",ServerApplication[i].Type,ServerApplication[i].Name);
+		sprintf(Device_Application_release_file,"/etc/vision/RHMS/Apps/%s/%s/%s/AppUpdated.info",ServerProjectName,ServerApplication[i].Type,ServerApplication[i].Name);
 		memset(&DeviceApplication,0,sizeof(struct POSApplication));
 		ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,&DeviceApplication.Version );
 		if ( ret == 0 )

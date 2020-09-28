@@ -7,9 +7,10 @@ extern char *Standard_Firmwares_path;
 
 int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 {
-	char FirmwareDownloadCompletedFile[356];
+	char ProjectName[128];
+	char FirmwareDownloadCompletedFile[456];
 	xmlNodePtr childofchildnode = NULL;
-	char FirmwarePatchFileName[TotalFirmwareDownloads][340];	
+	char FirmwarePatchFileName[TotalFirmwareDownloads][440];	
 	struct Firmwares
 	{
 		char Name[128];
@@ -71,14 +72,15 @@ int FirmwareDownloadsDetails(int TotalFirmwareDownloads,xmlNodePtr childnode)
 	for(i=0,TotalFirmwareCount=0;i < DownloadCount;i++)
 	{
 		memset(FirmwareName,0,sizeof(FirmwareName));
+		memset(ProjectName,0,sizeof(ProjectName));
 		Version=0;
-		ret = Get_Tokens_of_FirmwarePatchfile(FirmwarePatchFileName[i],FirmwareName,&Version);
-		printf("S.No %d, FirmwareName = %s  Version= %.1f\n" ,i+1,FirmwareName,Version);
+		ret = Get_Tokens_of_FirmwarePatchfile(FirmwarePatchFileName[i],FirmwareName,&Version,ProjectName);
+		printf("S.No %d, FirmwareName = %s  Version= %.1f ProjectName = %s\n" ,i+1,FirmwareName,Version,ProjectName);
 		if( ret  != 0 )
 			continue;
 
 		memset(FirmwareDownloadCompletedFile,0,sizeof(FirmwareDownloadCompletedFile));
-		sprintf(FirmwareDownloadCompletedFile,"%s/%s/%.1f_DownloadCompleted", Standard_Firmwares_path,FirmwareName,Version);
+		sprintf(FirmwareDownloadCompletedFile,"%s/%s/%s/%.1f_DownloadCompleted", Standard_Firmwares_path,ProjectName,FirmwareName,Version);
 		memset(Downloaded_DateAndTime,0,sizeof(Downloaded_DateAndTime));
 		DownloadedVersion=0;
 		ret =  Downloaded_DateAndTime_Version_Details(FirmwareDownloadCompletedFile,&DownloadedVersion, Downloaded_DateAndTime);

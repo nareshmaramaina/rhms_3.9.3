@@ -1,10 +1,13 @@
 #include<header.h>
-char *path="/etc/vision/RHMS/Apps/";
+extern char ServerProjectName[128];
+char path[160];
 int Get_Total_Device_Apps()
 {
 	int ret,count=0;
 	DIR *dp;
 	struct dirent *dirp;
+	
+	sprintf(path,"/etc/vision/RHMS/Apps/%s/",ServerProjectName);
 	dp = opendir(path);
 	if( dp == NULL )
 		fprintf(stdout,"%s directory not found\n",path);
@@ -43,7 +46,7 @@ int Get_Total_Device_Apps()
 int Check_apps(const char *file)
 {
 	int count=0;
-	char Extend_path[300];
+	char Extend_path[440];
 	DIR *dp;
 	struct dirent *dirp;
 	memset(Extend_path,0,sizeof(Extend_path));
@@ -76,7 +79,7 @@ int Check_apps(const char *file)
 }
 void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchildnode)
 {
-	char Device_Application_release_file[360];
+	char Device_Application_release_file[488];
 	xmlNodePtr Runningchildofchildnode = NULL;/* node pointers */
 	struct Device
 	{
@@ -92,7 +95,7 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 		float Version;
 	}DeviceApplication;
 	int i,ret,Running_apps=0;
-	char Extend_path[300];
+	char Extend_path[400];
 	DIR *dp,*Inner_dp;
 	struct dirent *dirp,*Inner_dirp;
 	dp = opendir(path);

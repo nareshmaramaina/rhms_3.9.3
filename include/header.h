@@ -352,8 +352,8 @@ int Check_apps(const char *file);
 void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchildnode);
 int Get_Total_Device_Apps();
 void HardwareID_Details();
-int Get_Tokens_of_FirmwarePatchfile(char *file,char *FirmwareName,float *Version);
-int Get_Tokens_of_ApplicationPatchfile(char *file,char *ApplicationType,char *ApplicationName,float *Version);
+int Get_Tokens_of_FirmwarePatchfile(char *file,char *FirmwareName,float *Version,char *);
+int Get_Tokens_of_ApplicationPatchfile(char *file,char *ApplicationType,char *ApplicationName,float *Version,char *);
 
 int Downloaded_DateAndTime_Version_Details(char *DownloadCompletedFile,float *DownloadedVersion,char *Downloaded_DateAndTime);
 int Get_Total_Downloaded_Updates(int type);

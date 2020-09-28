@@ -7,9 +7,10 @@ extern char *Install_Applications_file;
 
 int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childnode)
 {
-	char ApplicationDownloadCompletedFile[356];
+	char ProjectName[128];
+	char ApplicationDownloadCompletedFile[488];
 	xmlNodePtr childofchildnode = NULL;
-	char ApplicationPatchFileName[TotalApplicationDownloads][340];	
+	char ApplicationPatchFileName[TotalApplicationDownloads][460];	
 	struct Applications
 	{
 		char Type[128];
@@ -74,13 +75,14 @@ int ApplicationDownloadsDetails(int TotalApplicationDownloads,xmlNodePtr childno
 	{
 		memset(ApplicationName,0,sizeof(ApplicationName));
 		memset(ApplicationType,0,sizeof(ApplicationType));
+		memset(ProjectName,0,sizeof(ProjectName));
 		Version=0;
-		ret = Get_Tokens_of_ApplicationPatchfile(ApplicationPatchFileName[i],ApplicationType,ApplicationName,&Version);
-		printf("S.No %d, ApplicationName = %s  Version= %.1f\n" ,i+1,ApplicationName,Version);
+		ret = Get_Tokens_of_ApplicationPatchfile(ApplicationPatchFileName[i],ApplicationType,ApplicationName,&Version,ProjectName);
+		printf("S.No %d, ApplicationName = %s  Version= %.1f ProjectName = %s\n" ,i+1,ApplicationName,Version,ProjectName);
 		if( ret  != 0 )
 			continue;
 		memset(ApplicationDownloadCompletedFile,0,sizeof(ApplicationDownloadCompletedFile));
-		sprintf(ApplicationDownloadCompletedFile,"%s/%s/%s/DownloadCompleted",Standard_Apps_path,ApplicationType,ApplicationName);
+		sprintf(ApplicationDownloadCompletedFile,"%s/%s/%s/%s/DownloadCompleted",Standard_Apps_path,ProjectName,ApplicationType,ApplicationName);
 		memset(Downloaded_DateAndTime,0,sizeof(Downloaded_DateAndTime));
 		DownloadedVersion=0;
 		ret =  Downloaded_DateAndTime_Version_Details(ApplicationDownloadCompletedFile,&DownloadedVersion, Downloaded_DateAndTime);
