@@ -3,6 +3,7 @@ void FingerRDServiceStatus()
 {
 	DIR *dp;
 	int ret = 0;
+	memset(module.FingerRDServiceStatus,0,sizeof(module.FingerRDServiceStatus));
 	dp=opendir("/home/rdservice/");
 	if(dp == NULL)
 	{

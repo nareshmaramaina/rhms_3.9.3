@@ -110,6 +110,7 @@ void RTC_info()
 {
 	struct tm my_tm;
 	struct tm *intim;
+	memset(module.RTC,0,sizeof(module.RTC));
 	memset(&my_tm,0,sizeof(struct tm));
 
 	intim = &my_tm;

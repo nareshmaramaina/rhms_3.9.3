@@ -45,7 +45,8 @@ int main()
 
 	Write_Current_Version(RHMS_Current_Version); // Integer Version Only Have to write, because of Package version
 	Get_Config_Settings(); // Get Settings for enble or disable each Tag 
-
+	fprintf(stdout,"RHMS: Sleep 6 secs\n");
+	sleep(6); // For Startx Purpose 
 	Update_Configured_Server_Addr();
 
 	if ( CONFIG.DOT )

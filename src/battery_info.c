@@ -17,6 +17,7 @@ int battery_status(void)
 
 	memset(module.Battery_status,0,sizeof(module.Battery_status));
 
+	memset(module.BatteryVoltage,0,sizeof(module.BatteryVoltage));
 	for (i=0;i<5;i++)
 	{
 		ret = gl11_GetBatteryInfo( &adapter_status, &battery_status, &battery_ADC ); // Getting Battery information
