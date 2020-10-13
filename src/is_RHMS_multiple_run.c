@@ -1,9 +1,8 @@
 #include<header.h>
-extern char ServerProjectName[128];
 int is_RHMS_multiple_run()
 {
 	FILE *fp = NULL;
-	size_t len=0,sizeofBuffer=0;
+	size_t len=0;
 	char *str=NULL; 
 	int time = 0;
 
@@ -18,26 +17,7 @@ int is_RHMS_multiple_run()
 
 	while((getline(&str,&len,fp)) != -1)
 	{
-		if ( strstr(str,"ProjectName:") != NULL )
-		{
-
-			if ( strlen(ServerProjectName) == 0 )
-			{
-				memset(ServerProjectName,0,sizeof(ServerProjectName));
-				sizeofBuffer = sizeof(ServerProjectName);
-				if( strlen(str+12) > sizeofBuffer )
-				{
-					fprintf(stderr,"Invalid: ServerProjectName Length More than %d bytes \n",sizeofBuffer);
-					continue;
-				}
-				strcpy(ServerProjectName,str+12);
-				if(ServerProjectName[strlen(ServerProjectName)-1] == '\n')
-					ServerProjectName[strlen(ServerProjectName)-1]='\0';
-			}
-
-
-		}
-		else if  (strstr(str,"UpdateFrequency:") != NULL )
+		if  (strstr(str,"UpdateFrequency:") != NULL )
 			time = atoi(str+16);
 		else if (      strstr(str,"Units:DailyOnce") != NULL )
 			time = 100;

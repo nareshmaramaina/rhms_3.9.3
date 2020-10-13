@@ -29,24 +29,25 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 	{
 		char Type[128];
 		char Name[128];
-		float Version;
+		char Version[24];
 	}DeviceApplication;
 	struct Device
 	{
-		char Version[12];
+		char Version[24];
 		char Type[128];
 		char Name[128];
 	};
-	struct Device RunningApplication[Total_Current_Server_Apps];
+//	struct Device RunningApplication[Total_Current_Server_Apps];
 	struct Device Application[Total_Current_Server_Apps];
 	char Device_Application_release_file[456];
+	float DeviceVersion=0.0;
 	FILE *fp = NULL;
 	char *line=NULL,*str=NULL;
 	size_t len=20,sizeofBuffer=0;
 	int ret, i,j,check=0,  Total_Server_Apps=0;
 	memset(ServerApplication,0,sizeof(ServerApplication));
 	memset(Application,0,sizeof(Application));
-	memset(RunningApplication,0,sizeof(RunningApplication));
+//	memset(RunningApplication,0,sizeof(RunningApplication));
 	fp = fopen(Server_Application_release_file,"r");
 	if(fp == NULL)
 	{
@@ -171,12 +172,13 @@ int Applications_Details(int Total_Current_Server_Apps,xmlNodePtr childnode)
 		memset(Device_Application_release_file,0,sizeof(Device_Application_release_file));
 		sprintf(Device_Application_release_file,"/etc/vision/RHMS/Apps/%s/%s/%s/AppUpdated.info",ServerProjectName,ServerApplication[i].Type,ServerApplication[i].Name);
 		memset(&DeviceApplication,0,sizeof(struct POSApplication));
-		ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,&DeviceApplication.Version );
+		ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,DeviceApplication.Version );
 		if ( ret == 0 )
 		{
 			strcpy(Application[DeviceApps].Type,DeviceApplication.Type);
 			strcpy(Application[DeviceApps].Name,DeviceApplication.Name);
-			sprintf(Application[DeviceApps].Version,"%.1f",DeviceApplication.Version);
+			DeviceVersion=atof(DeviceApplication.Version);
+			sprintf(Application[DeviceApps].Version,"%.1f",DeviceVersion);
 			DeviceApps++;
 		}
 		else
@@ -227,7 +229,7 @@ int Get_Total_Server_Apps()
 	return Total_Server_apps;
 }
 
-int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,float *DeviceApplicationVersion )
+int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,char *DeviceApplicationVersion )
 {
 	FILE *fp = NULL;
 	char *line=NULL,*str=NULL;
@@ -270,7 +272,16 @@ int Device_App_info_Details(char *Device_Application_release_file,char *DeviceAp
 			else if((str = (char *)strstr(line,"Version:")) != NULL)
 			{
 				flag=1;
-				*DeviceApplicationVersion  = atof(str+8);
+				if ( strlen(str+8) > 24)
+					fprintf(stderr,"Invalid: DeviceApplicationVersion Length More than 128 bytes \n");
+				else
+				{	
+					strcpy(DeviceApplicationVersion,str+8);
+					if(DeviceApplicationVersion[ strlen(DeviceApplicationVersion) -1 ] == '\n')
+						DeviceApplicationVersion[ strlen(DeviceApplicationVersion) - 1 ]='\0';
+
+
+				}
 				break;
 			}
 

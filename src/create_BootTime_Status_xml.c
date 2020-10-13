@@ -147,7 +147,7 @@ int BootTime_Status_xml_frame()
 	if( CONFIG.FPSRDVer )
 	{
 		xmlNewChild(root_node, NULL, BAD_CAST "FPSRDVer", BAD_CAST module.FPSRDVer);
-		xmlNewChild(root_node, NULL, BAD_CAST "FPSSDKRDVer", BAD_CAST module.FPS_RD_SDK_Ver);
+		xmlNewChild(root_node, NULL, BAD_CAST "FPSRDSDKVer", BAD_CAST module.FPS_RD_SDK_Ver);
 	}
 
 	xmlNewChild(root_node, NULL, BAD_CAST "ExternalMemExists", BAD_CAST module.ExternalMemExists);

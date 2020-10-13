@@ -69,7 +69,7 @@ void get_device_serialnumber(void)  // Updating Device serial number in RHMS hea
 	if ( (strcmp(module.SerialNo,"Error") ) == 0 || strlen(module.SerialNo) == 0 )
 	{
 		memset(module.SerialNo,0,sizeof(module.SerialNo));
-		
+
 		strcpy(module.SerialNo,module.macid);
 
 	}	
@@ -84,6 +84,13 @@ int get_machineid(char *machineid)
 	short int ret=0,i;
 	FILE *fp=NULL;
 	char Buffer[64]="";
+	
+	
+	
+	
+	
+	
+	
 	for ( i=0; i< 5;i++)
 	{
 		ret = system("fw_printenv  machineid > /tmp/.RHMSmachineid");
@@ -92,23 +99,24 @@ int get_machineid(char *machineid)
 		sleep(1);
 	}
 
-	if ( ret != 0 )
-	{
-		fprintf(stderr,"Machine ID not Found \n");
-		return ret;
-	}
-
 	fp = fopen("/tmp/.RHMSmachineid", "r");
 
 	if(fp ==NULL)
 	{
 
-		fprintf(stderr,"LIB#Unable To Open The /tmp/.RHMSmachineid\n");
+		fprintf(stderr,"/tmp/.RHMSmachineid file not found\n");
 		return -1;
 
 	}
 	fread(Buffer,sizeof(Buffer),1,fp);	
 	fclose(fp);
+	remove("/tmp/.RHMSmachineid");
+
+	if (strlen(Buffer) == 0 )
+	{
+		fprintf(stderr,"Machine ID not Found \nString length of machineid is zero \n");
+		return -1;
+	}		
 	if ( strlen(Buffer) > 60 )
 	{
 		fprintf(stdout,"String length of machineid is  more than 50 digits\n");
@@ -118,7 +126,6 @@ int get_machineid(char *machineid)
 	if( machineid[strlen(machineid)-1] == '\n')
 		machineid[strlen(machineid)-1] = '\0';
 
-	remove("/tmp/.RHMSmachineid");
 	return ret;
 }
 
@@ -148,44 +155,44 @@ void update_macid_details()
 
 int Get_Wifi_Macid(char *macid)
 {
-        typedef unsigned char UC;
-        struct ifreq ifr;
-        int fd=0;
-        fd = socket(AF_INET, SOCK_DGRAM, 0);
-        ifr.ifr_addr.sa_family = AF_INET;
-        strncpy(ifr.ifr_name,"wlan0", IFNAMSIZ-1);
-        if(ioctl(fd,SIOCGIFHWADDR, &ifr) <0)
-        {
-                fprintf(stdout,"wlan0 interface not found \n");
-                close(fd);
-                return -1;
-        }
-        close(fd);
+	typedef unsigned char UC;
+	struct ifreq ifr;
+	int fd=0;
+	fd = socket(AF_INET, SOCK_DGRAM, 0);
+	ifr.ifr_addr.sa_family = AF_INET;
+	strncpy(ifr.ifr_name,"wlan0", IFNAMSIZ-1);
+	if(ioctl(fd,SIOCGIFHWADDR, &ifr) <0)
+	{
+		fprintf(stdout,"wlan0 interface not found \n");
+		close(fd);
+		return -1;
+	}
+	close(fd);
 
-        sprintf(macid,"%02X:%02X:%02X:%02X:%02X:%02X",(UC)ifr.ifr_hwaddr.sa_data[0], (UC)ifr.ifr_hwaddr.sa_data[1],
-                        (UC)ifr.ifr_hwaddr.sa_data[2], (UC)ifr.ifr_hwaddr.sa_data[3],
-                        (UC)ifr.ifr_hwaddr.sa_data[4], (UC)ifr.ifr_hwaddr.sa_data[5]);
-        return 0;
+	sprintf(macid,"%02X:%02X:%02X:%02X:%02X:%02X",(UC)ifr.ifr_hwaddr.sa_data[0], (UC)ifr.ifr_hwaddr.sa_data[1],
+			(UC)ifr.ifr_hwaddr.sa_data[2], (UC)ifr.ifr_hwaddr.sa_data[3],
+			(UC)ifr.ifr_hwaddr.sa_data[4], (UC)ifr.ifr_hwaddr.sa_data[5]);
+	return 0;
 }
 int update_Wifi_MACID_details()
 {
-        char mac_buff[30];
-        int ret;
+	char mac_buff[30];
+	int ret;
 	memset(module.WiFiMACIDExists,0,sizeof(module.WiFiMACIDExists));
-        memset(mac_buff,0x00,sizeof(mac_buff));
-        memset(module.WiFiMACID,0,sizeof(module.WiFiMACID));
+	memset(mac_buff,0x00,sizeof(mac_buff));
+	memset(module.WiFiMACID,0,sizeof(module.WiFiMACID));
 
-        ret =   Get_Wifi_Macid(mac_buff);
-        if(ret == 0)
-        {
-                strcpy(module.WiFiMACID,mac_buff);
-                strcpy(module.WiFiMACIDExists,"Yes");
+	ret =   Get_Wifi_Macid(mac_buff);
+	if(ret == 0)
+	{
+		strcpy(module.WiFiMACID,mac_buff);
+		strcpy(module.WiFiMACIDExists,"Yes");
 
-        }
-        else
-                strcpy(module.WiFiMACIDExists,"Error");
+	}
+	else
+		strcpy(module.WiFiMACIDExists,"Error");
 
-        fprintf(stdout,"module.WiFiMACIDExists, = %s\tmodule.WiFiMACID = %s\n",module.WiFiMACIDExists,module.WiFiMACID);
+	fprintf(stdout,"module.WiFiMACIDExists, = %s\tmodule.WiFiMACID = %s\n",module.WiFiMACIDExists,module.WiFiMACID);
 
-        return ret;
+	return ret;
 }

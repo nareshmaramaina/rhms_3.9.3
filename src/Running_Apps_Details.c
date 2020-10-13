@@ -1,13 +1,12 @@
 #include<header.h>
-extern char ServerProjectName[128];
-char path[160];
+char *path="/etc/vision/RHMS/RunningApps/";
 int Get_Total_Device_Apps()
 {
 	int ret,count=0;
 	DIR *dp;
 	struct dirent *dirp;
 	
-	sprintf(path,"/etc/vision/RHMS/Apps/%s/",ServerProjectName);
+//	sprintf(path,"/etc/vision/RHMS/Apps/%s/",ServerProjectName);
 	dp = opendir(path);
 	if( dp == NULL )
 		fprintf(stdout,"%s directory not found\n",path);
@@ -83,7 +82,7 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 	xmlNodePtr Runningchildofchildnode = NULL;/* node pointers */
 	struct Device
 	{
-		char Version[12];
+		char Version[24];
 		char Type[128];
 		char Name[128];
 	};
@@ -92,7 +91,7 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 	{
 		char Type[128];
 		char Name[128];
-		float Version;
+		char Version[24];
 	}DeviceApplication;
 	int i,ret,Running_apps=0;
 	char Extend_path[400];
@@ -128,7 +127,7 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 				if ( access(Device_Application_release_file,F_OK) == 0 )
 				{
 					memset(&DeviceApplication,0,sizeof(struct POSApplication));
-					ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,&DeviceApplication.Version );
+					ret = Device_App_info_Details(Device_Application_release_file,DeviceApplication.Type,DeviceApplication.Name,DeviceApplication.Version );
 					if ( ret == 0 )
 					{
 						if ( strlen(DeviceApplication.Type) == 0 && strlen(DeviceApplication.Name) )
@@ -138,7 +137,7 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 						}
 						strcpy(RunningApplication[Running_apps].Type,DeviceApplication.Type);
 						strcpy(RunningApplication[Running_apps].Name,DeviceApplication.Name);
-						sprintf(RunningApplication[Running_apps].Version,"%.1f",DeviceApplication.Version);
+						strcpy(RunningApplication[Running_apps].Version,DeviceApplication.Version);
 						Running_apps++;
 					}
 
@@ -162,5 +161,5 @@ void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchild
 		xmlNewChild(Runningchildofchildnode, NULL, BAD_CAST "ApplicationVer", BAD_CAST RunningApplication[i].Version);
 	} 
 
-
+	return;
 }

@@ -347,7 +347,7 @@ int Can_i_reboot();
 void FingerRDServiceStatus();
 void AutoapnAppVersionDetails();
 int Get_Total_Server_Apps();
-int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,float *DeviceApplicationVersion );
+int Device_App_info_Details(char *Device_Application_release_file,char *DeviceApplicationType,char *DeviceApplicationName,char *DeviceApplicationVersion );
 int Check_apps(const char *file);
 void Running_Apps_Details(int Total_Device_Running_Apps, xmlNodePtr Runningchildnode);
 int Get_Total_Device_Apps();
