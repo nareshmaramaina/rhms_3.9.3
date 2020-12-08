@@ -24,7 +24,7 @@ int main()
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
-	int RHMS_Current_Version=4;
+	int RHMS_Current_Version=5;
 
 	if(ret < 0)    /* Case is Not To run Twice*/
 	{

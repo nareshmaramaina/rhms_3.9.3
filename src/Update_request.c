@@ -25,9 +25,9 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 	char curl_name[64]="/vision/DeviceManagement/system/usr/bin/DM_curl";
 	if ( access(curl_name,F_OK) != 0 )
 	{
-	fprintf(stdout,"%s not found \n",curl_name);
-	memset(curl_name,0,sizeof(curl_name));
-	strcpy(curl_name,"curl");
+		fprintf(stdout,"%s not found \n",curl_name);
+		memset(curl_name,0,sizeof(curl_name));
+		strcpy(curl_name,"curl");
 	}
 	else 
 	{
@@ -68,6 +68,8 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 
 	remove(Response_xml_file);
 	remove(Error_log_filename);
+	
+	Check_date_set_if_wrong(0);
 
 	system(cmd);
 
@@ -78,7 +80,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 	sprintf(cmd,"dos2unix %s",Response_xml_file);
 
 	system(cmd);
-		
+
 	if ( Env_flag == 1 )
 		unsetenv("LD_LIBRARY_PATH");
 
@@ -149,6 +151,12 @@ int Check_Address_Error_and_Update_Server_Addr_If_Error_Present()
 			memset(Server_Addr,0,sizeof(Server_Addr));
 			strcpy(Server_Addr,Default_RHMS_Server_Address);
 			fprintf(stderr,"ServerAddress Error: %s so Proceeding with Default Server Address = %s\n",str,Server_Addr);
+			break;
+		}
+		if ( strstr(str,"expired") != NULL )
+		{
+			fprintf(stderr,"curl request Error :  %s\nMay be device has wrong date and time, Updating date and time..\n",str);
+			Check_date_set_if_wrong(1);
 			break;
 		}
 

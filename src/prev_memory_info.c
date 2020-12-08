@@ -1,6 +1,6 @@
 #include <header.h>
 
-int sdcard_test(int ,int);
+int sdcard_test(int );
 
 int update_sd_details(void);
 
@@ -9,13 +9,11 @@ int update_sdcard_info(void)
 	FILE *fpr;
 
 	char str[100]="";
-	char MainBlock[20];
-	char ChildBlock[20];
-	int flag=0,ret =-1,blocknum;
+
+	int flag=0,ret =-1;
 
 	memset(str,0x00,100);
-	memset(MainBlock,0,sizeof(MainBlock));
-	memset(ChildBlock,0,sizeof(ChildBlock));
+
 	fpr=fopen("/proc/partitions","r");
 	if ( fpr == NULL)
 	{	
@@ -23,29 +21,16 @@ int update_sdcard_info(void)
 		return -1;
 
 	}
-	ret  = system("grep Hardware /proc/cpuinfo  |grep MX25 -q");
-	if ( ret == 0 )
-	{
-		blocknum=0;
-		strcpy(MainBlock,"mmcblk0");
-		strcpy(ChildBlock,"mmcblk0p1");
-	}
-	else 
-	{
-		blocknum=1;
-		strcpy(MainBlock,"mmcblk1");
-		strcpy(ChildBlock,"mmcblk1p1");
-	}
 
 	while((fgets(str,80,fpr))!=NULL)
 	{
-		if(strstr(str,ChildBlock) != NULL)
+		if(strstr(str,"mmcblk1p1") != NULL)
 		{
-			printf("%s found\n",ChildBlock);
+			printf("mmcblk1p1 found\n");
 			flag=2;
 			break;
 		}
-		else if((strstr(str,MainBlock)) != NULL)
+		else if((strstr(str,"mmcblk1")) != NULL)
 			flag=1;
 
 	}
@@ -56,7 +41,7 @@ int update_sdcard_info(void)
 		strcpy(module.ExternalMemExists,"No");
 	else
 	{
-		ret = sdcard_test(flag,blocknum);
+		ret = sdcard_test(flag);
 		if( ret == 0 )
 			strcpy(module.ExternalMemExists,"Yes");
 		else 
@@ -69,7 +54,7 @@ int update_sdcard_info(void)
 
 }
 
-int sdcard_test(int partition_flag,int blocknum)
+int sdcard_test(int partition_flag)
 {
 	int ret=0;
 
@@ -78,8 +63,6 @@ int sdcard_test(int partition_flag,int blocknum)
 	char str[100]="";
 
 	int flag=0;
-
-	char cmd[64]="";
 
 	fp3 = fopen("/etc/mtab","r");
 
@@ -104,12 +87,12 @@ int sdcard_test(int partition_flag,int blocknum)
 	if (flag == 0)
 	{
 		if(partition_flag == 1)
-			sprintf(cmd,"mount  /dev/mmcblk%d  /mnt/microsd",blocknum);
+			ret=system("mount  /dev/mmcbkl1  /mnt/microsd");
 
 		else if(partition_flag == 2)
-			sprintf(cmd,"mount  /dev/mmcblk%dp1  /mnt/microsd",blocknum);
+			ret=system("mount  /dev/mmcblk1p1  /mnt/microsd");
 
-		ret=system(cmd);
+
 		if(ret!=0)
 		{
 			fprintf(stdout," /mnt/microsd mounting failed \n");
@@ -139,7 +122,7 @@ int update_sd_details(void)
 	int success_flag=0;
 
 
-	system("df  -h | grep /dev/mmcblk > /tmp/.sd_details");
+	system("df  -h | grep /dev/mmcblk1 > /tmp/.sd_details");
 
 	fp = fopen("/tmp/.sd_details","r");
 	if( fp == NULL )
@@ -277,5 +260,5 @@ int update_internal_memory_info(void)
   update_sdcard_info();
   update_ram_info();
   return;
-  }*/
+  } */
 

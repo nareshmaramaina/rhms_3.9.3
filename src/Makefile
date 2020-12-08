@@ -2,7 +2,7 @@ CC =arm-none-linux-gnueabi-gcc -Wall
 
 CFLAGS = -I ../include 
 
-OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o FingerRDServiceStatus.o Running_Apps_Details.o hwid.o ApplicationDownloadsDetails.o FirmwareDownloadsDetails.o  Get_Total_Downloaded_count.o Downloaded_DateAndTime_Version_Details.o Get_Tokens_of_Patchfile.o RHMSAppversionDetails.o Run_Loop.o Write_Current_Version.o
+OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o FingerRDServiceStatus.o Running_Apps_Details.o hwid.o ApplicationDownloadsDetails.o FirmwareDownloadsDetails.o  Get_Total_Downloaded_count.o Downloaded_DateAndTime_Version_Details.o Get_Tokens_of_Patchfile.o RHMSAppversionDetails.o Run_Loop.o Write_Current_Version.o Check_date_set_if_wrong.o imx25_related_info.o
 
 app:$(OBJS)
 	$(CC) -g -o RHMSClientApp  $(OBJS) -L ../lib/ -lgl11pos -ltfm -lpcsclite -lxml2 -lz -lpthread   $(CFLAGS) 
@@ -174,5 +174,9 @@ Run_Loop.o:Run_Loop.c
 	$(CC) -c Run_Loop.c $(CFLAGS)
 Write_Current_Version.o:Write_Current_Version.c
 	$(CC) -c Write_Current_Version.c $(CFLAGS)
+Check_date_set_if_wrong.o:Check_date_set_if_wrong.c
+	$(CC) -c Check_date_set_if_wrong.c $(CFLAGS)
+imx25_related_info.o:imx25_related_info.c
+	$(CC) -c imx25_related_info.c $(CFLAGS)
 clean:
 	rm -rf *.o RHMSClientApp

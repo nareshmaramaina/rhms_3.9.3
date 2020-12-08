@@ -20,16 +20,26 @@ void	POS_HEALTH_DETAILS(void)
 
 void 	Hardware_Status_Details()
 {
+	int ret;
 	update_macid_details();
 
 	get_device_serialnumber();
 
-	IMAGES();
 
-	Uid_info();
+	ret  = system("grep Hardware /proc/cpuinfo  |grep MX25 -q");
+	if ( ret == 0 )
+	{
+		imx25_IMAGES();
+		imx25_Uid_info();
+		fprintf(stdout,"This is Imx25 device\n");
+	}
+	else 
+	{	
+		IMAGES();
+		Uid_info();
+	}
 
 	HardwareID_Details();
-
 
 	External_Devices_SerialNo_info();
 
@@ -232,10 +242,10 @@ int  BootTime_Status_Details(void)
 			update_Wifi_MACID_details();
 		}
 	}
-	
+
 	if(strlen(module.AutoapnAppVersion) == 0)
 		strcpy(module.AutoapnAppVersion,"NotFound");
-	
+
 	if ( CONFIG.geo_location || CONFIG.GPS )
 	{
 		for(i = 0 ; i < 12; i++)

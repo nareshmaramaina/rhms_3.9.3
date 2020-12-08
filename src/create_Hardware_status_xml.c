@@ -96,11 +96,19 @@ int Hardware_xml_frame()
 		else 
 			xmlNewChild(node, NULL, BAD_CAST "BarcodeSno", NULL);
 	}
-	xmlNewChild(node, NULL, BAD_CAST "GSMVersionExists",BAD_CAST module.GSMVersionExists);
-	if( strcmp(module.GSMVersionExists,"Yes") == 0 )
-		xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
+	if ( strstr(module.GSM_Version,".") == NULL )
+	{
+		xmlNewChild(node, NULL, BAD_CAST "GSMVersionExists",BAD_CAST module.GSMVersionExists);
+		if( strcmp(module.GSMVersionExists,"Yes") == 0 )
+			xmlNewChild(node, NULL, BAD_CAST "GSMVersion",BAD_CAST module.GSM_Version);
+		else 
+			xmlNewChild(node, NULL, BAD_CAST "GSMVersion",NULL );
+	}
 	else 
+	{		
+		xmlNewChild(node, NULL, BAD_CAST "GSMVersionExists",BAD_CAST "Error");
 		xmlNewChild(node, NULL, BAD_CAST "GSMVersion",NULL );
+	}
 	if( access("/etc/autoapn/autoapn_config.xml",F_OK) == 0 )
 	{
 		xmlNewChild(node, NULL, BAD_CAST "GSM_ModuleExists",BAD_CAST module.GSM_ModuleExists);
