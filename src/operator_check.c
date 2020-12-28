@@ -2,7 +2,7 @@
 void Check_and_Set_Operator_name(char *operator_buff)
 {
 	int i;
-	char operator[20];
+	char operator[20],buff[20];
 	memset(operator,0,sizeof(operator));
 
 	for(i=0;operator_buff[i];i++)
@@ -30,9 +30,16 @@ void Check_and_Set_Operator_name(char *operator_buff)
 	else if(strstr(operator_buff,"jio")!=0)
 		strcpy(operator,"jio");
 
+	else if ( strlen(operator_buff) > 0 ) 
+	{
+		memset(buff,0,sizeof(buff));
+		strncpy(buff,operator_buff,19);
+		sscanf(buff,"%s",operator);
+	}
+
 	else strcpy(operator,"NotFound");
-	
+
 	strcpy(operator_buff,operator);
-		
+
 	return ;
 }

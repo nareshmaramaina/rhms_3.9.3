@@ -110,10 +110,11 @@ Iris_version	iris_version.c	/^void Iris_version()$/;"	f
 Is_Hardware_Status_changed	Is_Hardware_Status_changed.c	/^int Is_Hardware_Status_changed()$/;"	f
 Location_info	Location_info.c	/^int  Location_info()$/;"	f
 Non_xml_type_Autoapn_details	Non_xml_type_Autoapn_details.c	/^void Non_xml_type_Autoapn_details()$/;"	f
-OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o FingerRDServiceStatus.o Running_Apps_Details.o hwid.o ApplicationDownloadsDetails.o FirmwareDownloadsDetails.o  Get_Total_Downloaded_count.o Downloaded_DateAndTime_Version_Details.o Get_Tokens_of_Patchfile.o RHMSAppversionDetails.o Run_Loop.o Write_Current_Version.o Check_date_set_if_wrong.o$/;"	m
+OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o  patch_info.o printer_info.o Update_Configured_Server_Addr.o usb_info.o dev_info.o xmlparser.o get_app_info.o POS_HEALTH_DETAILS.o fp_info.o sam_info.o audio_info.o   rtc_functions.o bt_info.o  ifd.o camera.o fpfile.o  iris.o pinpad_status.o FPS_RDVersion.o Device_work_records.o  iris_version.o get_iris_scanner.o weighing_serialid_details.o  Camera_type.o  Update_request.o  mkdir_p.o  operator_check.o  parse_rhms_config.o check_net_connection.o Get_autoapn_details.o check_internet_by_hostname.o autoapn_xmlparser.o is_RHMS_multiple_run.o barcode_SerialNo.o get_usbdevice_serialno.o Get_Two_Simdetails_info.o gprs_info.o Non_xml_type_Autoapn_details.o xml_type_Autoapn_details.o ethernet_info.o wifi_info.o gl11_bluetooth_control_dlopen.o Update_Comm_media.o biomatiques.o Location_info.o FPS_Id_and_version.o reboot_device.o Periodic_tags.o create_BootTime_Status_xml.o  create_Hardware_status_xml.o  create_Health_status_xml.o Send_Hardware_status_to_server.o Send_BootTime_Helath_status_to_server.o   Send_Periodic_Helath_status_to_server.o Update_Health_Statuses_dates.o Is_Hardware_Status_changed.o FingerRDServiceStatus.o Running_Apps_Details.o hwid.o ApplicationDownloadsDetails.o FirmwareDownloadsDetails.o  Get_Total_Downloaded_count.o Downloaded_DateAndTime_Version_Details.o Get_Tokens_of_Patchfile.o RHMSAppversionDetails.o Run_Loop.o Write_Current_Version.o Check_date_set_if_wrong.o imx25_related_info.o$/;"	m
 PINPAD_Modemclose	Pinpad/header.h	/^int  (*PINPAD_Modemclose) (void);$/;"	v
 POS_HEALTH_DETAILS	POS_HEALTH_DETAILS.c	/^void	POS_HEALTH_DETAILS(void)$/;"	f
 PaperUsed_Count_Details	printer_info.c	/^int PaperUsed_Count_Details(void)$/;"	f
+PaperUsed_Count_Details	printer_info_imx6.c	/^int PaperUsed_Count_Details(void)$/;"	f
 Periodic_Health_Status_Details	Periodic_tags.c	/^void Periodic_Health_Status_Details(void)$/;"	f
 Periodic_filename	rtc_functions.c	/^char *Periodic_filename = "\/opt\/.rhms_Periodic_Health_status_date_update";$/;"	v
 PinpadSerialNo_info_by_dev_name	Pinpad/Last_Found_PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f
@@ -160,7 +161,7 @@ cap_scanner_id	fp_info.c	/^int cap_scanner_id(char *cap_id)$/;"	f
 capacitive_scanner_id	fp_info.c	/^void capacitive_scanner_id(void)$/;"	f
 check_net_connection	check_net_connection.c	/^void check_net_connection()$/;"	f
 check_presence	bt_info.c	/^int  check_presence(int times)$/;"	f
-check_status	printer_info.c	/^int check_status()$/;"	f
+check_status	printer_info_imx6.c	/^int check_status()$/;"	f
 config_file	Generate_rhms_config/Generate_config.c	/^char *config_file=".RHMS_config.xml";$/;"	v
 copy_file	copy_file.c	/^int copy_file (char *dest,char *src)$/;"	f
 create_BootTime_Status_xml_file	create_BootTime_Status_xml.c	/^int  create_BootTime_Status_xml_file(void)$/;"	f
@@ -181,6 +182,11 @@ gl11_bluetooth_control_dlopen	gl11_bluetooth_control_dlopen.c	/^int gl11_bluetoo
 gprs_details	gprs_info.c	/^int gprs_details(void)$/;"	f
 handshake	Pinpad/header.h	/^int (*handshake)(void);$/;"	v
 ifd_status	ifd.c	/^int ifd_status(int card_select)$/;"	f
+imx25_IMAGES	os_info.c	/^void imx25_IMAGES()$/;"	f
+imx25_Uid_info	imx25_related_info.c	/^void imx25_Uid_info()$/;"	f
+imx25_bootloader_details	imx25_related_info.c	/^int imx25_bootloader_details( char *buff)$/;"	f
+imx25_kernel_details	imx25_related_info.c	/^int imx25_kernel_details (char *buff)$/;"	f
+imx25_uid	imx25_related_info.c	/^int imx25_uid(char *buff)$/;"	f
 iris_status	iris.c	/^int iris_status(void)$/;"	f
 is_RHMS_multiple_run	is_RHMS_multiple_run.c	/^int is_RHMS_multiple_run()$/;"	f
 main	DOT_1.1/main.c	/^int main(int argc,char *argv[])$/;"	f
@@ -198,6 +204,7 @@ net_time_t	Check_date_set_if_wrong.c	/^}net_time_t;$/;"	v	typeref:struct:net_tim
 opt_scanner_id	fp_info.c	/^int opt_scanner_id(char *opt_id)$/;"	f
 optical_scanner_id	fp_info.c	/^void optical_scanner_id(void)$/;"	f
 paper_status	printer_info.c	/^int paper_status(void)$/;"	f
+paper_status	printer_info_imx6.c	/^int paper_status(void)$/;"	f
 parseDoc	xmlparser.c	/^int parseDoc(char *docname) {$/;"	f
 parseStory	xmlparser.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f
 parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
@@ -207,6 +214,7 @@ pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f
 pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f
 print_error_resp	Pinpad/header.h	/^int (*print_error_resp) (int );$/;"	v
 printer_status	printer_info.c	/^void printer_status()$/;"	f
+printer_status	printer_info_imx6.c	/^void printer_status()$/;"	f
 read_revision_operator_details	gprs_info.c	/^int read_revision_operator_details(char *operator_buff,char *revision_buff)$/;"	f
 read_two_revision_operator_details	Get_Two_Simdetails_info.c	/^int read_two_revision_operator_details(char *operator1,char *operator2,char *revision_buff)$/;"	f
 reboot_device	reboot_device.c	/^void reboot_device(char last_digit) $/;"	f
@@ -217,7 +225,8 @@ retrieve_two_sim_details	Get_Two_Simdetails_info.c	/^int retrieve_two_sim_detail
 rhms_lock	main.c	/^int rhms_lock()$/;"	f
 sam_status	sam_info.c	/^int sam_status(int card_select)$/;"	f
 sam_thread_function	POS_HEALTH_DETAILS.c	/^void *sam_thread_function( void *ptr )$/;"	f
-sdcard_test	memory_info.c	/^int sdcard_test(int partition_flag)$/;"	f
+sdcard_test	memory_info.c	/^int sdcard_test(int partition_flag,int blocknum)$/;"	f
+sdcard_test	prev_memory_info.c	/^int sdcard_test(int partition_flag)$/;"	f
 time	Check_date_set_if_wrong.c	/^	char time[50];$/;"	m	struct:net_time	file:
 update_BootTime_status_date_file	Update_Health_Statuses_dates.c	/^void update_BootTime_status_date_file(void) $/;"	f
 update_Hardware_status_date_file	Update_Health_Statuses_dates.c	/^void update_Hardware_status_date_file(void) \/\/after rhms successfull update ,updating time stamp to $/;"	f
@@ -226,11 +235,15 @@ update_Wifi_MACID_details	dev_info.c	/^int update_Wifi_MACID_details()$/;"	f
 update_fp_scanner_info	fp_info.c	/^int  update_fp_scanner_info(void)$/;"	f
 update_fpfile_info	fpfile.c	/^void update_fpfile_info(void)$/;"	f
 update_internal_memory_info	memory_info.c	/^int update_internal_memory_info(void)$/;"	f
+update_internal_memory_info	prev_memory_info.c	/^int update_internal_memory_info(void)$/;"	f
 update_macid_details	dev_info.c	/^void update_macid_details()$/;"	f
 update_pendrive_details	usb_info.c	/^int update_pendrive_details(void)$/;"	f
 update_ram_info	memory_info.c	/^int update_ram_info(void)$/;"	f
+update_ram_info	prev_memory_info.c	/^int update_ram_info(void)$/;"	f
 update_sd_details	memory_info.c	/^int update_sd_details(void)$/;"	f
+update_sd_details	prev_memory_info.c	/^int update_sd_details(void)$/;"	f
 update_sdcard_info	memory_info.c	/^int update_sdcard_info(void)$/;"	f
+update_sdcard_info	prev_memory_info.c	/^int update_sdcard_info(void)$/;"	f
 update_usb_info	usb_info.c	/^int update_usb_info()$/;"	f
 usb_device_presence	usb_info.c	/^int usb_device_presence (char *vendor_id, char *product_id)$/;"	f
 var_gprs	check_net_connection.c	/^char var_gprs[30];$/;"	v

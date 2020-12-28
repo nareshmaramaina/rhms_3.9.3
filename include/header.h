@@ -368,10 +368,10 @@ void  External_Devices_SerialNo_info();
 int Run_Loop(short int ret, int run_time);
 void Write_Current_Version(int Version);
 void FPS_RD_SDK_version();
-int Check_date_set_if_wrong();
+int Check_date_set_if_wrong(int ); // ) 1 for forcefully set date, 0 for just cheking if wrong it wil set date 
 void imx25_Uid_info();
 int imx25_uid(char *buff);
 int imx25_kernel_details (char *buff);
 int imx25_bootloader_details( char *buff);
 void imx25_IMAGES();
-
+void imx25_printer_status();

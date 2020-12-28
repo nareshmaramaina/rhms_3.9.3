@@ -72,6 +72,8 @@ int Check_date_set_if_wrong(int Set_direct)
 	sscanf(module.Date_time,"%04d-",&YYYY);
 	if( Set_direct == 1 || YYYY < 2020 ||  YYYY > 2030 )
 	{
+		system("cp /usr/share/zoneinfo/Asia/Calcutta /etc/localtime");
+
 		fprintf(stdout,"Year = %d, Wrong Date, need to update\n",YYYY);
 		if ( system("rdate -s time-a.nist.gov") == 0 || system("rdate -s time-b.nist.gov")  == 0 || system("rdate -s time-c.nist.gov") == 0 || system("rdate -s time-d.nist.gov") == 0 || curl_date() == 0)
 		{
@@ -91,7 +93,7 @@ int Check_date_set_if_wrong(int Set_direct)
 
 }
 /*int main()
-{
-	Check_date_set_if_wrong();
-	return -1;
-}*/
+  {
+  Check_date_set_if_wrong();
+  return -1;
+  }*/

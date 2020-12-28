@@ -390,6 +390,7 @@ int Is_Hardware_Status_changed()
 	short int ret=0;
 	char *docname="/var/log/Health/Last_Hardware_Status.xml";
 
+
 	ret = access(docname,F_OK);
 	if ( ret != 0 )
 	{
@@ -417,16 +418,16 @@ int Is_Hardware_Status_changed()
 		xmlFreeDoc(doc);
 		return -1;
 	}
+	
 
+	 ret = parse_device_details(doc,cur); 
 
-	ret = parse_device_details(doc,cur); 
+	 xmlFreeDoc(doc);
+	 //	printf("module.SerialNo= %s, module.TerminalID= %s, module.macid= %s, module.UbootVersion= %s, module.KernelVersion= %s, module.rootfs_details= %s, module.IMEI_no= %s, module.Uid_no= %s, module.IritechSno= %s, module.PinpadSN= %s, module.BarcodeSno= %s, module.GSM_Version= %s, module.GSM_Module= %s, module.CamType= %s, module.WSSN= %s, module.scanner_id= %s, module.HardwareID= %s\n", module.SerialNo, module.TerminalID, module.macid, module.UbootVersion, module.KernelVersion, module.rootfs_details, module.IMEI_no, module.Uid_no, module.IritechSno, module.PinpadSN, module.BarcodeSno, module.GSM_Version, module.GSM_Module, module.CamType, module.WSSN, module.scanner_id, module.HardwareID);
 
-	xmlFreeDoc(doc);
-	//	printf("module.SerialNo= %s, module.TerminalID= %s, module.macid= %s, module.UbootVersion= %s, module.KernelVersion= %s, module.rootfs_details= %s, module.IMEI_no= %s, module.Uid_no= %s, module.IritechSno= %s, module.PinpadSN= %s, module.BarcodeSno= %s, module.GSM_Version= %s, module.GSM_Module= %s, module.CamType= %s, module.WSSN= %s, module.scanner_id= %s, module.HardwareID= %s\n", module.SerialNo, module.TerminalID, module.macid, module.UbootVersion, module.KernelVersion, module.rootfs_details, module.IMEI_no, module.Uid_no, module.IritechSno, module.PinpadSN, module.BarcodeSno, module.GSM_Version, module.GSM_Module, module.CamType, module.WSSN, module.scanner_id, module.HardwareID);
-
-	if ( ret == 0 )
-		fprintf(stdout,"\n\nNo changes in Hardware info \n\n");
-	else 
-		fprintf(stdout,"\n\nchanged in Hardware info\n");
-	return ret;
+	 if ( ret == 0 )
+		 fprintf(stdout,"\n\nNo changes in Hardware info \n\n");
+	 else 
+		 fprintf(stdout,"\n\nchanged in Hardware info\n");
+	 return ret;
 }

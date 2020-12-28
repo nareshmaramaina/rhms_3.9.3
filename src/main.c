@@ -20,7 +20,7 @@ int rhms_lock()
 int main()
 {
 	short int Server_ret=0,ret=0,BootTimeSentSuccess=0,HardwareRequestFailure=0;
-	int run_time = -1;
+	int run_time = -1,imx_ret;
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
@@ -49,10 +49,47 @@ int main()
 	sleep(6); // For Startx Purpose 
 	Update_Configured_Server_Addr();
 
+	imx_ret  = system("grep Hardware /proc/cpuinfo  |grep MX25 -q");
+	if ( imx_ret == 0 )
+		fprintf(stdout,"This is Imx25 device\n");
+
+
+	ret = system("test -L /var/log/Health"); // testing for symbolic link present or not For Imx25 devices /var is erasing every boot so we are changing 
+
+	if( imx_ret == 0 && ret != 0 )
+	{
+		remove("/var/log/Health");
+
+		system("mkdir -p /mnt/jffs2/Health/");
+
+		ret = symlink("/mnt/jffs2/Health/","/var/log/Health");
+		if ( ret == 0 )
+			fprintf(stdout," /mnt/jffs2/Health/ /var/log/Health Symbolic Link created Successfully\n");
+		else    
+			fprintf(stdout," /mnt/jffs2/Health/ /var/log/Health Symbolic Link creation Failed \n");
+	}
+
+
 	if ( CONFIG.DOT )
+	{
+		ret = system("test -L /var/log/DOT"); // testing for symbolic link present or not
+
+		if( imx_ret == 0 && ret != 0 )
+		{               
+			remove("/var/log/DOT");
+
+			system("mkdir -p /mnt/jffs2/DOT/");
+
+			ret = symlink("/mnt/jffs2/DOT/","/var/log/DOT");
+			if ( ret == 0 )
+				fprintf(stdout," /mnt/jffs2/DOT/ /var/log/DOT Symbolic Link created Successfully\n");               
+			else
+				fprintf(stdout," /mnt/jffs2/DOT/ /var/log/DOT Symbolic Link creation Failed \n");
+		}       
+
 		system("/vision/DOT &> /dev/null &"); // If DOT tag enble, it should run all boot times
 
-
+	}
 
 	ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 

@@ -170,8 +170,17 @@ int  BootTime_Status_Details(void)
 
 
 	if( CONFIG.Printer )
-		printer_status();
+	{
+		ret  = system("grep Hardware /proc/cpuinfo  |grep MX25 -q");
+		if ( ret == 0 )
+		{
+			fprintf(stdout,"Updating Imx25 printer status \n");
+			imx25_printer_status();
+		}
+		else
 
+			printer_status();
+	}
 
 	for(i=0;i<5;i++)
 	{
@@ -246,6 +255,14 @@ int  BootTime_Status_Details(void)
 	if(strlen(module.AutoapnAppVersion) == 0)
 		strcpy(module.AutoapnAppVersion,"NotFound");
 
+	if ( strstr(module.GSM_Version,".") != NULL )
+	{
+
+		printf("Wrong Data, unknown '.' operator found present in module.GSM_Version, So GSM version treated as Error, module.GSM_Version = %s \n",module.GSM_Version);
+		memset(module.GSM_Version,0,sizeof(module.GSM_Version));
+		memset(module.GSMVersionExists,0,sizeof(module.GSMVersionExists));
+		strcpy(module.GSMVersionExists,"Error");
+	}
 	if ( CONFIG.geo_location || CONFIG.GPS )
 	{
 		for(i = 0 ; i < 12; i++)

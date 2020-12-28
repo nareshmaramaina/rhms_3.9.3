@@ -142,11 +142,15 @@ int Health_Status_xml_frame()
 	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.System_memory.Use);
 	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.System_memory.Free);
 
-	childnode = xmlNewChild(root_node, NULL, BAD_CAST "InternalMem_Sysuser",NULL);
-	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.InternalMem_Sysuser.Total);
-	xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.InternalMem_Sysuser.Use);
-	xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.InternalMem_Sysuser.Free);
+	if ( strstr( module.InternalMem_Sysuser.Total,"NotFound") == NULL )
+	{	
+		childnode = xmlNewChild(root_node, NULL, BAD_CAST "InternalMem_Sysuser",NULL);
+		xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.InternalMem_Sysuser.Total);
+		xmlNewChild(childnode, NULL, BAD_CAST "Use", BAD_CAST module.InternalMem_Sysuser.Use);
+		xmlNewChild(childnode, NULL, BAD_CAST "Free", BAD_CAST module.InternalMem_Sysuser.Free);
 
+	}
+	else fprintf(stdout,"InternalMem_Sysuser Not Found in Device \n");
 
 	childnode = xmlNewChild(root_node, NULL, BAD_CAST "InternalMem_Jffs2",NULL);
 	xmlNewChild(childnode, NULL, BAD_CAST "Total", BAD_CAST module.InternalMem_Jffs2.Total);
