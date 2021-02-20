@@ -26,4 +26,57 @@ void FingerRDServiceStatus()
 	}
 	return ;
 }
+int Wait_If_RD_Is_Blue()
+{
+	static int In=0,Blue=0;
+	int i;
 
+	if (  In == 0 )
+	{
+		In++;
+		for ( i=0;i<6;i++)
+		{
+			FingerRDServiceStatus();
+			if ( strcmp(module.FingerRDServiceStatus,"Blue") == 0)
+			{
+				Blue=1;
+				fprintf(stderr,"Very First Time, RD is not Running, Waiting for 30secs\n");
+				sleep(30);	
+			}
+			else 
+				break;
+		}
+	}
+
+	else if ( In == 1 && Blue == 1 )
+	{
+
+		In++;
+		for ( i=0;i<60;i++)
+		{
+			FingerRDServiceStatus();
+			if ( strcmp(module.FingerRDServiceStatus,"Blue") == 0)
+			{
+				fprintf(stderr,"Second Time, RD is not Running, Waiting for 30secs\n");
+				sleep(30);
+			}
+			else if ( strcmp(module.FingerRDServiceStatus,"Green") == 0)
+			{
+				check_net_connection(); //Blocking For autoapn details
+
+				Periodic_Health_Status_Details();
+
+				External_Devices_SerialNo_info();
+
+				printf("RD Is Green So, Send the Health updation details again\n");
+
+				return 1;
+
+			}
+			else break;
+		}
+
+
+	}
+	return 0;
+}

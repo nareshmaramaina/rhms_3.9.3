@@ -114,7 +114,6 @@ OBJS	Makefile	/^OBJS = main.o copy_file.o battery_info.o memory_info.o os_info.o
 PINPAD_Modemclose	Pinpad/header.h	/^int  (*PINPAD_Modemclose) (void);$/;"	v
 POS_HEALTH_DETAILS	POS_HEALTH_DETAILS.c	/^void	POS_HEALTH_DETAILS(void)$/;"	f
 PaperUsed_Count_Details	printer_info.c	/^int PaperUsed_Count_Details(void)$/;"	f
-PaperUsed_Count_Details	printer_info_imx6.c	/^int PaperUsed_Count_Details(void)$/;"	f
 Periodic_Health_Status_Details	Periodic_tags.c	/^void Periodic_Health_Status_Details(void)$/;"	f
 Periodic_filename	rtc_functions.c	/^char *Periodic_filename = "\/opt\/.rhms_Periodic_Health_status_date_update";$/;"	v
 PinpadSerialNo_info_by_dev_name	Pinpad/Last_Found_PinpadSerialno.c	/^int PinpadSerialNo_info_by_dev_name(char *port)$/;"	f
@@ -150,6 +149,7 @@ Update_Current_Date_with_Time	rtc_functions.c	/^void Update_Current_Date_with_Ti
 Update_Simdb_and_Signalmode	Periodic_tags.c	/^int Update_Simdb_and_Signalmode()$/;"	f
 Update_request	Update_request.c	/^int Update_request(int request) \/\/ arg 1 For Hardware request,arg 2 For BootTime request, arg 3 For Periodic Health request $/;"	f
 Version_Based_Tags	POS_HEALTH_DETAILS.c	/^void Version_Based_Tags()$/;"	f
+Wait_If_RD_Is_Blue	FingerRDServiceStatus.c	/^int Wait_If_RD_Is_Blue()$/;"	f
 Wifi_Status	wifi_info.c	/^int Wifi_Status()$/;"	f
 Write_Current_Version	Write_Current_Version.c	/^void Write_Current_Version(int Version)$/;"	f
 audio_test	audio_info.c	/^int audio_test(void)$/;"	f
@@ -161,7 +161,7 @@ cap_scanner_id	fp_info.c	/^int cap_scanner_id(char *cap_id)$/;"	f
 capacitive_scanner_id	fp_info.c	/^void capacitive_scanner_id(void)$/;"	f
 check_net_connection	check_net_connection.c	/^void check_net_connection()$/;"	f
 check_presence	bt_info.c	/^int  check_presence(int times)$/;"	f
-check_status	printer_info_imx6.c	/^int check_status()$/;"	f
+check_status	printer_info.c	/^int check_status()$/;"	f
 config_file	Generate_rhms_config/Generate_config.c	/^char *config_file=".RHMS_config.xml";$/;"	v
 copy_file	copy_file.c	/^int copy_file (char *dest,char *src)$/;"	f
 create_BootTime_Status_xml_file	create_BootTime_Status_xml.c	/^int  create_BootTime_Status_xml_file(void)$/;"	f
@@ -186,6 +186,7 @@ imx25_IMAGES	os_info.c	/^void imx25_IMAGES()$/;"	f
 imx25_Uid_info	imx25_related_info.c	/^void imx25_Uid_info()$/;"	f
 imx25_bootloader_details	imx25_related_info.c	/^int imx25_bootloader_details( char *buff)$/;"	f
 imx25_kernel_details	imx25_related_info.c	/^int imx25_kernel_details (char *buff)$/;"	f
+imx25_printer_status	printer_info.c	/^void imx25_printer_status()$/;"	f
 imx25_uid	imx25_related_info.c	/^int imx25_uid(char *buff)$/;"	f
 iris_status	iris.c	/^int iris_status(void)$/;"	f
 is_RHMS_multiple_run	is_RHMS_multiple_run.c	/^int is_RHMS_multiple_run()$/;"	f
@@ -204,7 +205,6 @@ net_time_t	Check_date_set_if_wrong.c	/^}net_time_t;$/;"	v	typeref:struct:net_tim
 opt_scanner_id	fp_info.c	/^int opt_scanner_id(char *opt_id)$/;"	f
 optical_scanner_id	fp_info.c	/^void optical_scanner_id(void)$/;"	f
 paper_status	printer_info.c	/^int paper_status(void)$/;"	f
-paper_status	printer_info_imx6.c	/^int paper_status(void)$/;"	f
 parseDoc	xmlparser.c	/^int parseDoc(char *docname) {$/;"	f
 parseStory	xmlparser.c	/^int parseStory (xmlDocPtr doc, xmlNodePtr cur)$/;"	f
 parse_config_file	parse_rhms_config.c	/^int parse_config_file (xmlDocPtr doc, xmlNodePtr cur) $/;"	f
@@ -214,7 +214,6 @@ pendrive_test	usb_info.c	/^int pendrive_test(int partition_flag)$/;"	f
 pinpad_status	pinpad_status.c	/^void pinpad_status()$/;"	f
 print_error_resp	Pinpad/header.h	/^int (*print_error_resp) (int );$/;"	v
 printer_status	printer_info.c	/^void printer_status()$/;"	f
-printer_status	printer_info_imx6.c	/^void printer_status()$/;"	f
 read_revision_operator_details	gprs_info.c	/^int read_revision_operator_details(char *operator_buff,char *revision_buff)$/;"	f
 read_two_revision_operator_details	Get_Two_Simdetails_info.c	/^int read_two_revision_operator_details(char *operator1,char *operator2,char *revision_buff)$/;"	f
 reboot_device	reboot_device.c	/^void reboot_device(char last_digit) $/;"	f

@@ -41,7 +41,7 @@ void 	Hardware_Status_Details()
 
 	HardwareID_Details();
 
-	External_Devices_SerialNo_info();
+//	External_Devices_SerialNo_info(); // We are Running The same at Boottime And Peridoic Health Status Due to Late USB power on  
 
 	return;
 }
@@ -102,6 +102,8 @@ int  BootTime_Status_Details(void)
 
 	update_usb_info();
 
+	External_Devices_SerialNo_info(); // Hardware Status Info Changed To Here
+	
 	update_sdcard_info();
 
 	Version_Based_Tags();

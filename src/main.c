@@ -24,7 +24,7 @@ int main()
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
-	int RHMS_Current_Version=5;
+	int RHMS_Current_Version=6;
 
 	if(ret < 0)    /* Case is Not To run Twice*/
 	{
@@ -152,8 +152,15 @@ int main()
 
 		if (  Periodic_run != 0 || Second_Time_For_GPS == 1 || run_time % 60 == 0 )
 		{
+			if( CONFIG.FPSRDVer )
+				Wait_If_RD_Is_Blue();
 
 			Server_ret =  Send_Periodic_Health_status_to_server();
+
+			if ( CONFIG.FPSRDVer && Server_ret == 0 &&  Wait_If_RD_Is_Blue()  == 1 )
+				Server_ret =  Send_Periodic_Health_status_to_server();
+
+
 			if ( Server_ret == -2 )
 			{
 				fprintf(stderr," Please Do Register Serial Number = %s, Macid = %s in RHMS\n",module.SerialNo,module.macid);	

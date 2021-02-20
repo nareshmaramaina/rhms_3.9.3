@@ -62,7 +62,8 @@ void Periodic_Health_Status_Details(void)
 
 	update_internal_memory_info();
 	update_ram_info();
-	FingerRDServiceStatus();
+	if( CONFIG.FPSRDVer )
+		FingerRDServiceStatus();
 	Update_Current_Date_with_Time();
 	return;
 }
@@ -73,23 +74,23 @@ int Update_Simdb_and_Signalmode()
 	memset(module.SIM1SignalMode,0,sizeof(module.SIM1SignalMode));
 	memset(module.SIM2SignalMode,0,sizeof(module.SIM2SignalMode));
 
-/*	if(strlen(module.Sim1_db) == 0 )
+	/*	if(strlen(module.Sim1_db) == 0 )
 		strcpy(module.Sim1_db,"NotFound");
-	else 
-	{
+		else 
+		{
 		Sig_Strength=atoi(module.Sim1_db);
 		Sig_Strength = (Sig_Strength*2)-113;
 		sprintf(module.Sim1_db,"%d",Sig_Strength);
-	}
+		}
 
-	if(strlen(module.Sim2_db) == 0 )
+		if(strlen(module.Sim2_db) == 0 )
 		strcpy(module.Sim2_db,"NotFound");
-	else 
-	{
+		else 
+		{
 		Sig_Strength=atoi(module.Sim2_db);
 		Sig_Strength = (Sig_Strength*2)-113;
 		sprintf(module.Sim2_db,"%d",Sig_Strength);
-	}*/
+		}*/
 
 	if( strcmp(module.Comm,"GSM") == 0 )
 	{
@@ -109,14 +110,14 @@ int Update_Simdb_and_Signalmode()
 			memset(module.Sim1_db,0,sizeof(module.Sim1_db));
 			sprintf(module.Sim1_db,"%d",Sig_Strength);
 			sprintf(module.SIM1SignalMode,"%cG",Sig_status);	
-		//	strcpy(module.SIM2SignalMode,"No");
+			//	strcpy(module.SIM2SignalMode,"No");
 		}
 		else if ( sim_num == 2 )
 		{
 			memset(module.Sim2_db,0,sizeof(module.Sim2_db));
 			sprintf(module.Sim2_db,"%d",Sig_Strength);
 			sprintf(module.SIM2SignalMode,"%cG",Sig_status);	
-		//	strcpy(module.SIM1SignalMode,"No");
+			//	strcpy(module.SIM1SignalMode,"No");
 
 		}
 		else fprintf(stderr," var_gprs data error %s\n",var_gprs);
