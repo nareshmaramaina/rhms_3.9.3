@@ -102,6 +102,7 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 		}
 		else if  (strstr(str,"Device is not registered") != NULL )
 		{
+			remove("/var/log/Health/Last_Hardware_Status.xml");	
 			ret = -2;
 			break;
 		}
@@ -118,8 +119,11 @@ int Update_request(int request) // arg 1 For Hardware request,arg 2 For BootTime
 	fclose(fp);
 
 
-	if ( ret == 0 )	
+	if ( ret == 0 )
+	{	
 		ret = parseDoc(Response_xml_file);
+		Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange();
+	}
 	else if (  ret != -2 && FramingError != 1 )
 		Check_Address_Error_and_Update_Server_Addr_If_Error_Present();
 

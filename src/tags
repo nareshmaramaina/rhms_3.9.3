@@ -82,6 +82,7 @@ Get_Current_autoapn_simdetails_mode	Non_xml_type_Autoapn_details.c	/^int Get_Cur
 Get_Difference_Days_of_Today_with_Last_updated_day	rtc_functions.c	/^int Get_Difference_Days_of_Today_with_Last_updated_day (char *filename,int my_date,int my_month,int my_year)$/;"	f
 Get_Ethernet_Status	ethernet_info.c	/^int Get_Ethernet_Status(void)$/;"	f
 Get_Pinpad_Serial_No	Pinpad/header.h	/^int (*Get_Pinpad_Serial_No)(unsigned char *);$/;"	v
+Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange	is_RHMS_multiple_run.c	/^int Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange()$/;"	f
 Get_Sim_num	gprs_info.c	/^int Get_Sim_num()$/;"	f
 Get_Tokens_of_ApplicationPatchfile	Get_Tokens_of_Patchfile.c	/^int Get_Tokens_of_ApplicationPatchfile(char *file,char *ApplicationType,char *ApplicationName,float *Version,char *ProjectName)$/;"	f
 Get_Tokens_of_FirmwarePatchfile	Get_Tokens_of_Patchfile.c	/^int Get_Tokens_of_FirmwarePatchfile(char *file,char *FirmwareName,float *Version,char *ProjectName)$/;"	f
@@ -189,7 +190,6 @@ imx25_kernel_details	imx25_related_info.c	/^int imx25_kernel_details (char *buff
 imx25_printer_status	printer_info.c	/^void imx25_printer_status()$/;"	f
 imx25_uid	imx25_related_info.c	/^int imx25_uid(char *buff)$/;"	f
 iris_status	iris.c	/^int iris_status(void)$/;"	f
-is_RHMS_multiple_run	is_RHMS_multiple_run.c	/^int is_RHMS_multiple_run()$/;"	f
 main	DOT_1.1/main.c	/^int main(int argc,char *argv[])$/;"	f
 main	Generate_rhms_config/Generate_config.c	/^int main()$/;"	f
 main	Pinpad/PinpadSerialno.c	/^int main()$/;"	f

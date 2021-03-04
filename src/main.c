@@ -24,8 +24,10 @@ int main()
 	char machineid[64];
 	int Hardware_run=0,BootTime_run=0,Periodic_run=0;
 	ret = rhms_lock();
-	int RHMS_Current_Version=6;
-
+	int RHMS_Current_Version=7;
+	char LastProject[128],LatestProject[128];
+	memset(LastProject,0,sizeof(LastProject));
+	memset(LatestProject,0,sizeof(LatestProject));
 	if(ret < 0)    /* Case is Not To run Twice*/
 	{
 		fprintf(stderr,"RHMS Application is already Running\n");
@@ -93,7 +95,7 @@ int main()
 
 	ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 
-	run_time = is_RHMS_multiple_run();
+	run_time = Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange();
 
 	if ( ret ==  0 && run_time == 100 ) // Updated for the day when 100 ( Run every day ince flag)
 	{
@@ -179,7 +181,7 @@ int main()
 		}
 
 
-		run_time = is_RHMS_multiple_run();
+		run_time = Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange();
 		ret = Check_RHMS_All_requests_run(&Hardware_run,&BootTime_run,&Periodic_run); // Check Today With Last RHMS Success Date 
 		if (  ( Server_ret == -1 || ret != 0 || run_time < 0  || BootTimeSentSuccess == 0 || HardwareRequestFailure == 1) ) // If network failure
 		{
@@ -190,7 +192,7 @@ int main()
 			}
 			else
 			{
-				fprintf(stdout,"Waiting For 1Hr, Due to Network issue or Hardware/BootTime/PeriodicHealth request Issue\n");
+				fprintf(stdout,"Waiting For 1Hr, Due to Network issue or Hardware/BootTime/PeriodicHealth request Issue or Project Changes Hardware\n");
 				sleep(3600); // Sleep 1hr
 			}	 
 			continue;

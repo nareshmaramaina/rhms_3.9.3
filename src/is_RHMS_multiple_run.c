@@ -1,11 +1,14 @@
 #include<header.h>
-int is_RHMS_multiple_run()
+//char LatestProjectName[128];
+int Get_RHMS_runtime_and_Delete_Hw_Info_On_ProjectChange()
 {
 	FILE *fp = NULL;
 	size_t len=0;
 	char *str=NULL; 
 	int time = 0;
-
+	char LatestProjectName[128];
+	static char LastProjectName[128];
+	int sizeofBuffer;
 
 	fp = fopen("/etc/Health_response","r");
 
@@ -17,7 +20,23 @@ int is_RHMS_multiple_run()
 
 	while((getline(&str,&len,fp)) != -1)
 	{
-		if  (strstr(str,"UpdateFrequency:") != NULL )
+
+		if((strstr(str,"ProjectName:")) != NULL)
+		{
+			memset(LatestProjectName,0,sizeof(LatestProjectName));
+			sizeofBuffer = sizeof(LatestProjectName);
+			if( strlen(str+12) > sizeofBuffer )
+			{
+				fprintf(stderr,"Invalid: LatestProjectName Length More than %d bytes \n",sizeofBuffer);
+				continue;
+			}
+			strcpy(LatestProjectName,str+12);
+			if(LatestProjectName[strlen(LatestProjectName)-1] == '\n')
+				LatestProjectName[strlen(LatestProjectName)-1]='\0';
+
+		}
+
+		else if  (strstr(str,"UpdateFrequency:") != NULL )
 			time = atoi(str+16);
 		else if (      strstr(str,"Units:DailyOnce") != NULL )
 			time = 100;
@@ -34,10 +53,20 @@ int is_RHMS_multiple_run()
 	str=NULL;	
 	fclose(fp);
 
+	if ( strlen(LastProjectName) > 0  && strcmp(LastProjectName,LatestProjectName) != 0 )
+	{
+		fprintf(stdout," Project Changed LastProjectName = %s ,LatestProjectName = %s\n So Deleting Last Hardware Info Details\n",LastProjectName,LatestProjectName);
+		remove("/opt/.rhms_Hardware_status_date_update");	
+		remove("/var/log/Health/Last_Hardware_Status.xml");
+	}
+
+
 	if ( time < 60 || time  > 82800)
 		time =-1;
 
-	fprintf(stdout,"Final UpdateFrequency in secs = %d\n",time);
+	memset(LastProjectName,0,sizeof(LastProjectName));
+	strcpy(LastProjectName,LatestProjectName);
+	fprintf(stdout,"Final UpdateFrequency in secs = %d, Project Name = %s \n",time,LastProjectName);
 
 	return time;
 }
